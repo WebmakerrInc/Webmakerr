@@ -142,9 +142,18 @@ if (! function_exists('webmakerr_fetch_license_dataset')) {
         }
 
         $licenses = null;
-        $response = null;
+        $response = wp_remote_get(WEBMAKERR_LICENSE_DATA_URL);
 
-        if (defined('WEBMAKERR_LICENSE_DATA_PATH') && WEBMAKERR_LICENSE_DATA_PATH !== '') {
+        if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+            $body = wp_remote_retrieve_body($response);
+            $decoded = json_decode($body, true);
+
+            if (is_array($decoded)) {
+                $licenses = $decoded;
+            }
+        }
+
+        if ($licenses === null && defined('WEBMAKERR_LICENSE_DATA_PATH') && WEBMAKERR_LICENSE_DATA_PATH !== '') {
             $fileContents = file_get_contents(WEBMAKERR_LICENSE_DATA_PATH);
 
             if ($fileContents !== false) {
@@ -152,19 +161,7 @@ if (! function_exists('webmakerr_fetch_license_dataset')) {
 
                 if (is_array($decoded)) {
                     $licenses = $decoded;
-                }
-            }
-        }
-
-        if ($licenses === null) {
-            $response = wp_remote_get(WEBMAKERR_LICENSE_DATA_URL);
-
-            if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
-                $body = wp_remote_retrieve_body($response);
-                $decoded = json_decode($body, true);
-
-                if (is_array($decoded)) {
-                    $licenses = $decoded;
+                    $fallbackMessage = __('Using bundled license data until the license server can be reached.', 'webmakerr');
                 }
             }
         }
@@ -178,7 +175,7 @@ if (! function_exists('webmakerr_fetch_license_dataset')) {
             } else {
                 $errorMessage = __('License data is unavailable.', 'webmakerr');
 
-                if ($response !== null && is_wp_error($response)) {
+                if (is_wp_error($response)) {
                     $errorMessage = __('Unable to validate license right now.', 'webmakerr');
                 }
 
