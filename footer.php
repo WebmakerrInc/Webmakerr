@@ -12,14 +12,14 @@
 
     <?php do_action('webmakerr_content_after'); ?>
 
-    <footer id="colophon" class="bg-light/50 mt-12" role="contentinfo">
-        <div class="container mx-auto py-12">
+    <footer id="colophon" class="mt-48 border-t border-border/60 bg-light/80 backdrop-blur" role="contentinfo">
+        <div class="container py-32">
             <?php do_action('webmakerr_footer'); ?>
-            <div class="text-center text-sm text-zinc-500 space-y-2">
-                <p class="text-zinc-600">
+            <div class="space-y-16 text-center text-sm text-muted-text">
+                <p class="text-text">
                     &copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?>
                     <a
-                        class="font-medium text-zinc-700 hover:text-zinc-900 transition"
+                        class="font-medium text-dark transition hover:opacity-90"
                         href="<?php echo esc_url( home_url( '/' ) ); ?>"
                         rel="home"
                     >
@@ -29,7 +29,7 @@
                 </p>
                 <p>
                     <a
-                        class="text-zinc-500 hover:text-zinc-700 transition"
+                        class="font-medium text-muted-text transition hover:text-dark"
                         href="<?php echo esc_url( 'https://webmakerr.com' ); ?>"
                         target="_blank"
                         rel="noopener"

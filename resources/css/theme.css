@@ -10,6 +10,25 @@
     --color-secondary: var(--wp--preset--color--secondary);
     --color-dark: var(--wp--preset--color--dark);
     --color-light: var(--wp--preset--color--light);
+    --color-border: #E4E4E7;
+    --color-text: #111827;
+    --color-muted-text: #6B7280;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --shadow-subtle: 0 12px 30px rgba(24, 24, 28, 0.08);
+    --shadow-elevated: 0 20px 45px rgba(24, 24, 28, 0.12);
+
+    --space-4: 0.25rem;
+    --space-8: 0.5rem;
+    --space-16: 1rem;
+    --space-24: 1.5rem;
+    --space-32: 2rem;
+    --space-48: 3rem;
+    --space-64: 4rem;
 
     --text-xs: var(--wp--preset--font-size--xs, 0.75rem);
     --text-sm: var(--wp--preset--font-size--sm, 0.875rem);

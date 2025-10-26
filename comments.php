@@ -10,9 +10,9 @@ if (post_password_required()) {
 }
 ?>
 
-<div id="comments" class="comments-area my-10 sm:my-20 mx-auto max-w-3xl">
+<div id="comments" class="comments-area mx-auto my-32 max-w-3xl">
     <?php if (have_comments()): ?>
-        <h2 class="comments-title text-3xl font-medium text-zinc-900 mb-8">
+        <h2 class="comments-title mb-24 text-dark">
             <?php
             printf(
                 esc_html(_nx(
@@ -27,7 +27,7 @@ if (post_password_required()) {
             ?>
         </h2>
 
-        <ol class="comment-list [&_.children]:ml-20 [&_.children_>_li]:mt-8 mb-12">
+        <ol class="comment-list mb-24 [&_.children]:ml-24 [&_.children_>_li]:mt-16">
             <?php
             wp_list_comments([
                 'format'      => 'html5',
@@ -52,7 +52,7 @@ if (post_password_required()) {
     <?php endif; ?>
 
     <?php if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')): ?>
-        <p class="no-comments text-zinc-600"><?php esc_html_e('Comments are closed.', 'webmakerr'); ?></p>
+        <p class="no-comments text-muted-text"><?php esc_html_e('Comments are closed.', 'webmakerr'); ?></p>
     <?php endif; ?>
 
     <?php
@@ -65,23 +65,23 @@ if (post_password_required()) {
             'fields' => apply_filters('comment_form_default_fields', [
                 'author' =>
                     '<p class="comment-form-author">' .
-                    '<input id="author" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your Name*', 'webmakerr') . '" name="author" type="text" value="' . esc_attr($commenter['comment_author']) .
+                    '<input id="author" class="mb-16 w-full rounded-lg border border-border bg-white px-24 py-16 text-sm text-text shadow-subtle focus:border-primary focus:outline-none" placeholder="' . esc_attr__('Your Name*', 'webmakerr') . '" name="author" type="text" value="' . esc_attr($commenter['comment_author']) .
                     '" size="30"' . $aria_req . ' /></p>',
 
                 'email' =>
                     '<p class="comment-form-email">' .
-                    '<input id="email" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your Email Address*', 'webmakerr') . '" name="email" type="text" value="' . esc_attr($commenter['comment_author_email']) .
+                    '<input id="email" class="mb-16 w-full rounded-lg border border-border bg-white px-24 py-16 text-sm text-text shadow-subtle focus:border-primary focus:outline-none" placeholder="' . esc_attr__('Your Email Address*', 'webmakerr') . '" name="email" type="text" value="' . esc_attr($commenter['comment_author_email']) .
                     '" size="30"' . $aria_req . ' /></p>',
 
                 'url' =>
                     '<p class="comment-form-url">' .
-                    '<input id="url" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your Website URL', 'webmakerr') . '" name="url" type="text" value="' . esc_attr($commenter['comment_author_url']) .
+                    '<input id="url" class="mb-16 w-full rounded-lg border border-border bg-white px-24 py-16 text-sm text-text shadow-subtle focus:border-primary focus:outline-none" placeholder="' . esc_attr__('Your Website URL', 'webmakerr') . '" name="url" type="text" value="' . esc_attr($commenter['comment_author_url']) .
                     '" size="30" /></p>'
             ]),
-            'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title text-2xl font-bold mb-2">',
-            'class_submit'      => 'bg-dark rounded-full px-4 py-1.5 text-sm font-semibold text-light my-4',
-            'comment_field'     => '<textarea id="comment" name="comment" class="bg-light w-full px-4 py-3 my-2 rounded-xl text-sm" aria-required="true" placeholder="' . esc_attr__('Your comment', 'webmakerr') . '"></textarea>',
-            'logged_in_as'      => '<p class="logged-in-as mb-4">',
+            'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title mb-16 text-dark">',
+            'class_submit'      => 'btn-primary mt-16',
+            'comment_field'     => '<textarea id="comment" name="comment" class="mb-16 w-full rounded-lg border border-border bg-white px-24 py-24 text-sm text-text shadow-subtle focus:border-primary focus:outline-none" aria-required="true" placeholder="' . esc_attr__('Your comment', 'webmakerr') . '"></textarea>',
+            'logged_in_as'      => '<p class="logged-in-as mb-16">',
         ]);
     ?>
 </div>

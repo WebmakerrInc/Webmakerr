@@ -2,30 +2,39 @@
 @import './theme.css';
 @import './custom.css';
 
-h1 {
-    @apply text-3xl mb-8;
-    font-family: var(--font-sans);
-}
-
-.entry-content,
-.block-editor-block-list__layout {
-    font-family: var(--font-sans);
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
-  ::after,
   ::before,
+  ::after,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-border, currentColor);
+    transition-duration: theme('transitionDuration.DEFAULT');
+    transition-timing-function: theme('transitionTimingFunction.DEFAULT');
+  }
+
+  body,
+  .editor-styles-wrapper {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+  }
+
+  .editor-post-title__block .editor-post-title__input,
+  h1 {
+    font-family: var(--font-sans);
+    font-size: clamp(2.75rem, 2.1rem + 1.8vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-size: clamp(2.125rem, 1.75rem + 1.2vw, 3rem);
+  }
+
+  h3 {
+    font-size: clamp(1.75rem, 1.45rem + 0.8vw, 2.25rem);
+  }
+
+  a {
+    color: var(--color-primary);
   }
 }

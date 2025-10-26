@@ -7,19 +7,16 @@
 
 	<?php wp_head(); ?>
 </head>
-<body class="antialiased">
-	<div class="md:flex min-h-screen">
-		<div class="w-full md:w-1/2 flex items-center justify-center">
-			<div class="max-w-sm m-8">
-				<div class="text-5xl md:text-15xl text-dark border-light border-b">404</div>
-				<div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
-                                <p class="text-dark/90 text-2xl md:text-3xl font-light leading-relaxed mb-8"><?php esc_html_e( 'Sorry, the page you are looking for could not be found.', 'webmakerr' ); ?></p>
-                                <a href="<?php echo esc_url(home_url('/')); ?>" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
-                                        <?php esc_html_e( 'Go Home', 'webmakerr' ); ?>
-				</a>
-			</div>
-		</div>
-	</div>
+<body class="bg-light text-text antialiased">
+        <div class="flex min-h-screen items-center justify-center">
+                <div class="container flex flex-col items-center gap-24 text-center">
+                        <h1 class="text-dark">404</h1>
+                        <p class="max-w-xl text-dark"><?php esc_html_e( 'Sorry, the page you are looking for could not be found.', 'webmakerr' ); ?></p>
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="btn-primary !no-underline">
+                                <?php esc_html_e( 'Go Home', 'webmakerr' ); ?>
+                        </a>
+                </div>
+        </div>
 
     <?php wp_footer(); ?>
 </body>

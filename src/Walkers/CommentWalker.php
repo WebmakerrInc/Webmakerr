@@ -18,16 +18,15 @@ class CommentWalker extends \Walker_Comment
                 }
                 ?>
                 <<?php echo tag_escape( $tag ); ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
-			<article id="div-comment-<?php comment_ID(); ?>" class="comment-body flex gap-8">
+                        <article id="div-comment-<?php comment_ID(); ?>" class="comment-body flex gap-16">
 
-				<footer class="comment-meta flex">
-                    <dd class="flex items-start gap-x-4">
-                        <div class="flex-none overflow-hidden rounded-xl bg-neutral-100">
+                                <footer class="comment-meta flex">
+                    <dd class="flex items-start gap-16">
+                        <div class="flex-none overflow-hidden rounded-lg border border-border bg-light shadow-subtle">
                             <?php
                                 if ( 0 !== $args['avatar_size'] ) {
-                                    echo get_avatar( $comment, 32, '', '', [
-                                        'class' => 'h-12 w-12 object-cover grayscale hover:grayscale-0 transition',
-                                        'style' => 'style="color: transparent;"'
+                                    echo get_avatar( $comment, 48, '', '', [
+                                        'class' => 'size-48 object-cover',
                                     ]);
                                 }
                             ?>
@@ -37,8 +36,8 @@ class CommentWalker extends \Walker_Comment
 				</footer><!-- .comment-meta -->
 
                 <div class="w-full grow">
-                    <div class="comment-metadata flex gap-4 items-center">
-                        <div class="font-semibold">
+                    <div class="comment-metadata flex items-center gap-16">
+                        <div class="font-medium text-text">
                             <?php
                             $comment_author = get_comment_author_link( $comment );
 
@@ -50,7 +49,7 @@ class CommentWalker extends \Walker_Comment
                             ?>
                         </div>
 
-                                                <div class="text-zinc-500 text-sm flex gap-4">
+                                                <div class="flex gap-16 text-sm text-muted-text">
                             <?php
                             printf(
                                 '<a href="%s"><time datetime="%s">%s</time></a>',
@@ -72,7 +71,7 @@ class CommentWalker extends \Walker_Comment
                                         <em class="comment-awaiting-moderation"><?php echo esc_html( $moderation_note ); ?></em>
                                         <?php endif; ?>
 
-                    <div class="comment-content my-6">
+                    <div class="comment-content mt-16 text-muted-text">
                         <?php comment_text(); ?>
                     </div><!-- .comment-content -->
 

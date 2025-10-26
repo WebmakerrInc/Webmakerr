@@ -1,21 +1,25 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <header class="mx-auto flex max-w-5xl flex-col text-center">
-        <h1 class="mt-6 text-5xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-6xl"><?php echo esc_html(get_the_title()); ?></h1>
+<article id="post-<?php the_ID(); ?>" <?php post_class('mx-auto flex max-w-4xl flex-col gap-32'); ?>>
+    <header class="flex flex-col items-center text-center gap-16">
+        <?php if(! is_page()): ?>
+            <time datetime="<?php echo esc_attr(get_the_date('c')); ?>" itemprop="datePublished" class="text-sm font-medium text-muted-text"><?php echo esc_html(get_the_date()); ?></time>
+        <?php endif; ?>
+
+        <h1 class="text-dark">
+            <?php echo esc_html(get_the_title()); ?>
+        </h1>
 
         <?php if(! is_page()): ?>
-            <time datetime="<?php echo esc_attr(get_the_date('c')); ?>" itemprop="datePublished" class="order-first text-sm text-zinc-950"><?php echo esc_html(get_the_date()); ?></time>
-
-            <p class="mt-6 text-sm font-semibold text-zinc-950"><?php printf(esc_html__('by %s', 'webmakerr'), esc_html(get_the_author())); ?></p>
+            <p class="text-sm font-medium text-muted-text"><?php printf(esc_html__('by %s', 'webmakerr'), esc_html(get_the_author())); ?></p>
         <?php endif; ?>
     </header>
 
     <?php if(has_post_thumbnail()): ?>
-        <div class="mt-10 sm:mt-20 mx-auto max-w-4xl rounded-4xl bg-light overflow-hidden">
-            <?php the_post_thumbnail('large', ['class' => 'aspect-16/10 w-full object-cover']); ?>
+        <div class="overflow-hidden rounded-xl border border-border bg-light shadow-subtle">
+            <?php the_post_thumbnail('large', ['class' => 'aspect-[16/10] w-full object-cover']); ?>
         </div>
     <?php endif; ?>
 
-    <div class="entry-content mx-auto max-w-3xl mt-10 sm:mt-20">
+    <div class="entry-content space-y-24">
         <?php the_content(); ?>
     </div>
 </article>
