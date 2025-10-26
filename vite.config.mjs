@@ -5,7 +5,7 @@ export default defineConfig(({ command }) => {
     const isBuild = command === 'build';
 
     return {
-        base: isBuild ? '/wp-content/themes/webmakerr/dist/' : '/',
+        base: isBuild ? '/wp-content/themes/Webmakerr/build/' : '/',
         server: {
             port: 3000,
             cors: true,
@@ -13,13 +13,18 @@ export default defineConfig(({ command }) => {
         },
         build: {
             manifest: true,
-            outDir: 'dist',
+            outDir: 'build',
             rollupOptions: {
                 input: [
                     'resources/js/app.js',
                     'resources/css/app.css',
                     'resources/css/editor-style.css'
                 ],
+                output: {
+                    entryFileNames: 'assets/[name].js',
+                    chunkFileNames: 'assets/[name].js',
+                    assetFileNames: 'assets/[name].[ext]',
+                },
             },
         },
         plugins: [
