@@ -1,6 +1,6 @@
 <?php
 
-namespace TailPress;
+namespace Webmakerr;
 
 use WP_Query;
 

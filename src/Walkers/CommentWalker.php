@@ -1,6 +1,6 @@
 <?php
 
-namespace TailPress\Walkers;
+namespace Webmakerr\Walkers;
 
 class CommentWalker extends \Walker_Comment
 {

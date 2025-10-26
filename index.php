@@ -2,7 +2,7 @@
 /**
  * Main template file for displaying posts.
  *
- * @package TailPress
+ * @package Webmakerr
  */
 
 get_header();
@@ -72,7 +72,7 @@ get_header();
             <?php get_template_part('template-parts/content', is_singular() ? 'single' : ''); ?>
         <?php endwhile; ?>
 
-        <?php TailPress\Pagination::render(); ?>
+        <?php Webmakerr\Pagination::render(); ?>
     <?php endif; ?>
 </div>
 

@@ -798,7 +798,7 @@
                     "src/helpers.php"
                 ],
                 "psr-4": {
-                    "TailPress\\Framework\\": "src/"
+                    "Webmakerr\\Framework\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -811,7 +811,7 @@
                     "email": "jeffrey@vanrossum.dev"
                 }
             ],
-            "description": "The framework package for TailPress.",
+            "description": "The framework package for Webmakerr.",
             "support": {
                 "issues": "https://github.com/tailpress/framework/issues",
                 "source": "https://github.com/tailpress/framework/tree/5.0.4"
@@ -913,13 +913,13 @@
             "extra": {
                 "tailpress": {
                     "providers": [
-                        "TailPress\\Cli\\CliServiceProvider"
+                        "Webmakerr\\Cli\\CliServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "TailPress\\Cli\\": "src/"
+                    "Webmakerr\\Cli\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -932,7 +932,7 @@
                     "email": "jeffrey@vanrossum.dev"
                 }
             ],
-            "description": "The TailPress command line interface",
+            "description": "The Webmakerr command line interface",
             "support": {
                 "issues": "https://github.com/tailpress/cli/issues",
                 "source": "https://github.com/tailpress/cli/tree/5.0.1"

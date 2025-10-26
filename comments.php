@@ -2,7 +2,7 @@
 /**
  * Comments template.
  *
- * @package TailPress
+ * @package Webmakerr
  */
 
 if (post_password_required()) {
@@ -34,7 +34,7 @@ if (post_password_required()) {
                 'style'       => 'ol',
                 'short_ping'  => true,
                 'avatar_size' => 56,
-                'walker'      => new \TailPress\Walkers\CommentWalker(),
+                'walker'      => new \Webmakerr\Walkers\CommentWalker(),
             ]);
             ?>
         </ol>

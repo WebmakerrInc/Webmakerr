@@ -2,7 +2,7 @@
 /**
  * Single post template file.
  *
- * @package TailPress
+ * @package Webmakerr
  */
 
 get_header();
