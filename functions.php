@@ -32,6 +32,7 @@ if (! function_exists('webmakerr_setup')) {
         register_nav_menus(
             [
                 'primary' => esc_html__('Primary Menu', 'webmakerr'),
+                'footer'  => esc_html__('Footer Menu', 'webmakerr'),
             ]
         );
 
@@ -87,13 +88,75 @@ function webmakerr(): Theme
             ->enqueueAssets()
         )
         ->features(static fn ($manager) => $manager->add(MenuOptions::class))
-        ->menus(static fn ($manager) => $manager->add('primary', __('Primary Menu', 'webmakerr')))
+        ->menus(static fn ($manager) => $manager
+            ->add('primary', __('Primary Menu', 'webmakerr'))
+            ->add('footer', __('Footer Menu', 'webmakerr'))
+        )
         ->themeSupport(static fn ($manager) => $manager->add([
             'align-wide',
             'wp-block-styles',
             'responsive-embeds',
         ]));
 }
+
+add_filter(
+    'nav_menu_css_class',
+    static function (array $classes, $item, $args, int $depth): array {
+        if (($args->theme_location ?? null) !== 'footer') {
+            return $classes;
+        }
+
+        if ($depth === 0) {
+            $classes[] = 'space-y-4';
+        }
+
+        $classes[] = 'list-none';
+
+        return array_values(array_unique(array_filter($classes)));
+    },
+    10,
+    4
+);
+
+add_filter(
+    'nav_menu_submenu_css_class',
+    static function (array $classes, $args, int $depth): array {
+        if (($args->theme_location ?? null) !== 'footer') {
+            return $classes;
+        }
+
+        $classes[] = 'space-y-3';
+        $classes[] = 'list-none';
+        $classes[] = 'pl-0';
+
+        return array_values(array_unique(array_filter($classes)));
+    },
+    10,
+    3
+);
+
+add_filter(
+    'nav_menu_link_attributes',
+    static function (array $atts, $item, $args, int $depth): array {
+        if (($args->theme_location ?? null) !== 'footer') {
+            return $atts;
+        }
+
+        $baseClasses = 'transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
+
+        if ($depth === 0) {
+            $linkClasses = 'block text-xs font-semibold uppercase tracking-[0.16em] text-slate-200 hover:text-white';
+        } else {
+            $linkClasses = 'block text-sm text-slate-400 hover:text-slate-50';
+        }
+
+        $atts['class'] = trim(($atts['class'] ?? '').' '.$linkClasses.' '.$baseClasses);
+
+        return $atts;
+    },
+    10,
+    4
+);
 
 add_action(
     'after_setup_theme',
