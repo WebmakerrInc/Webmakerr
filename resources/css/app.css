@@ -82,17 +82,17 @@
     --code-paragraph-line-height: 1.2rem;
     --code-paragraph-weight: 400;
 
-    --heading-h1-size: 4rem;
-    --heading-h1-line-height: 4.4rem;
+    --heading-h1-size: clamp(2.25rem, 3vw + 1.5rem, 3.5rem);
+    --heading-h1-line-height: clamp(2.75rem, 3vw + 2rem, 4rem);
     --heading-h1-weight: 500;
-    --heading-h2-size: 3.5rem;
-    --heading-h2-line-height: 3.85rem;
+    --heading-h2-size: clamp(1.875rem, 2.6vw + 1rem, 2.75rem);
+    --heading-h2-line-height: clamp(2.25rem, 2.6vw + 1.5rem, 3.25rem);
     --heading-h2-weight: 500;
-    --heading-h3-size: 2.5rem;
-    --heading-h3-line-height: 2.75rem;
+    --heading-h3-size: clamp(1.5rem, 1.8vw + 1rem, 2rem);
+    --heading-h3-line-height: clamp(1.9rem, 1.8vw + 1.25rem, 2.5rem);
     --heading-h3-weight: 500;
-    --heading-h4-size: 1.5rem;
-    --heading-h4-line-height: 1.875rem;
+    --heading-h4-size: clamp(1.25rem, 1.3vw + 0.9rem, 1.5rem);
+    --heading-h4-line-height: clamp(1.6rem, 1.3vw + 1.1rem, 1.9rem);
     --heading-h4-weight: 500;
     --heading-core-h1-size: 1.125rem;
     --heading-core-h1-line-height: 1.75rem;
@@ -304,6 +304,79 @@
     font-size: var(--heading-h4-size);
     line-height: var(--heading-h4-line-height);
     font-weight: var(--heading-h4-weight);
+  }
+
+  button,
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'],
+  .button,
+  .wp-element-button,
+  .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid #000;
+    background-color: #000;
+    color: #fff;
+    font-family: var(--font-family-sans);
+    font-size: var(--txt-medium-plus-size);
+    line-height: var(--txt-medium-plus-line-height);
+    font-weight: 600;
+    text-decoration: none;
+    transition-property: var(--transition-property-fg);
+    transition-duration: var(--transition-duration-default);
+    transition-timing-function: var(--transition-timing-function);
+    cursor: pointer;
+  }
+
+  button:hover,
+  button:focus,
+  input[type='button']:hover,
+  input[type='button']:focus,
+  input[type='reset']:hover,
+  input[type='reset']:focus,
+  input[type='submit']:hover,
+  input[type='submit']:focus,
+  .button:hover,
+  .button:focus,
+  .wp-element-button:hover,
+  .wp-element-button:focus,
+  .wp-block-button__link:hover,
+  .wp-block-button__link:focus {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 0 2px #0000000d, 0 0 0 4px #00000014;
+  }
+
+  button:focus-visible,
+  input[type='button']:focus-visible,
+  input[type='reset']:focus-visible,
+  input[type='submit']:focus-visible,
+  .button:focus-visible,
+  .wp-element-button:focus-visible,
+  .wp-block-button__link:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }
+
+  button:disabled,
+  input[type='button']:disabled,
+  input[type='reset']:disabled,
+  input[type='submit']:disabled,
+  .button:disabled,
+  .wp-element-button:disabled,
+  .wp-block-button__link:disabled,
+  .wp-element-button[aria-disabled='true'],
+  .wp-block-button__link[aria-disabled='true'] {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: not-allowed;
+    box-shadow: none;
   }
 }
 
