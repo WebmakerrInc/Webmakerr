@@ -42,12 +42,20 @@
 
             <div class="flex items-center gap-4">
                 <?php if (has_nav_menu('primary')): ?>
-                    <div class="md:hidden">
+                    <div class="flex items-center gap-3 md:hidden">
                         <button type="button" aria-label="Toggle navigation" id="primary-menu-toggle">
                             <svg xmlns="https://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </button>
+
+                        <a
+                            class="inline-flex items-center justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"
+                            href="<?php echo esc_url(home_url('/contact')); ?>"
+                            aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
+                        >
+                            <?php esc_html_e('Contact Us', 'webmakerr'); ?>
+                        </a>
                     </div>
                 <?php endif; ?>
 
@@ -72,7 +80,7 @@
                     <div class="inline-block mt-4 md:mt-0"><?php get_search_form(); ?></div>
 
                     <a
-                        class="inline-flex w-full justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline md:w-auto"
+                        class="hidden md:inline-flex md:w-auto justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"
                         href="<?php echo esc_url(home_url('/contact')); ?>"
                         aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
                     >
