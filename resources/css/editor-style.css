@@ -68,7 +68,7 @@
     border-radius: 5px;
     border: 1px solid var(--wp--preset--color--primary, #000);
     background-color: var(--wp--preset--color--primary, #000);
-    color: #fff;
+    color: #FFF;
     font-family: var(--font-sans);
     font-size: 16px;
     line-height: 24px;
@@ -78,6 +78,25 @@
     transition-duration: 150ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+  }
+}
+
+@layer base {
+  section,
+  article,
+  aside,
+  .card,
+  .wp-block-group,
+  .wp-block-cover,
+  .wp-block-columns,
+  .wp-block-column,
+  .wp-block-post,
+  .wp-block-template-part,
+  .wp-block-query .wp-block-post,
+  .wp-block-media-text,
+  .wp-block-search,
+  .widget {
+    border-radius: 5px;
   }
 }
 
