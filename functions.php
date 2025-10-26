@@ -64,10 +64,10 @@ if (! function_exists('webmakerr_setup')) {
         add_theme_support(
             'custom-logo',
             [
-                'height'      => 250,
-                'width'       => 250,
-                'flex-width'  => true,
-                'flex-height' => true,
+                'height'      => 37,
+                'width'       => 142,
+                'flex-width'  => false,
+                'flex-height' => false,
             ]
         );
     }
