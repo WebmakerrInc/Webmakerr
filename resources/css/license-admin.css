@@ -115,6 +115,25 @@
     color: #6b7280;
 }
 
+#webmakerr-license-status-text.status-expired {
+    color: #b91c1c;
+}
+
+.webmakerr-license-expiry {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.webmakerr-license-expiry.is-active {
+    color: #047857;
+}
+
+.webmakerr-license-expiry.is-expired {
+    color: #b91c1c;
+}
+
 .webmakerr-license-feedback {
     margin-top: 1rem;
     font-size: 0.95rem;
