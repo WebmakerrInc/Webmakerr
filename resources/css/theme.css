@@ -1,27 +1,62 @@
 @theme {
-    --breakpoint-xs: 480px;
-    --breakpoint-sm: 600px;
-    --breakpoint-md: 782px;
-    --breakpoint-lg: 960px;
+    --breakpoint-xs: 568px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
     --breakpoint-xl: 1280px;
-    --breakpoint-2xl: 1440px;
+    --breakpoint-2xl: 1536px;
+    --breakpoint-3xl: 1800px;
+    --breakpoint-4xl: 3840px;
 
-    --color-primary: var(--wp--preset--color--primary);
-    --color-secondary: var(--wp--preset--color--secondary);
-    --color-dark: var(--wp--preset--color--dark);
-    --color-light: var(--wp--preset--color--light);
+    --color-primary: var(--wp--preset--color--primary, rgba(59, 130, 246, 1));
+    --color-secondary: var(--wp--preset--color--secondary, rgba(37, 99, 235, 1));
+    --color-dark: var(--wp--preset--color--dark, rgba(24, 24, 27, 1));
+    --color-light: var(--wp--preset--color--light, rgba(244, 244, 245, 1));
+
+    --color-zinc-50: rgba(250, 250, 250, 1);
+    --color-zinc-100: rgba(244, 244, 245, 1);
+    --color-zinc-200: rgba(228, 228, 231, 1);
+    --color-zinc-300: rgba(212, 212, 216, 1);
+    --color-zinc-500: rgba(113, 113, 122, 1);
+    --color-zinc-600: rgba(82, 82, 91, 1);
+    --color-zinc-700: rgba(63, 63, 70, 1);
+    --color-zinc-800: rgba(39, 39, 42, 1);
+    --color-zinc-900: rgba(30, 30, 34, 1);
+    --color-zinc-950: rgba(24, 24, 27, 1);
 
     --text-xs: var(--wp--preset--font-size--xs, 0.75rem);
-    --text-sm: var(--wp--preset--font-size--sm, 0.875rem);
-    --text-base: var(--wp--preset--font-size--base, 1rem);
-    --text-lg: var(--wp--preset--font-size--lg, 1.125rem);
-    --text-xl: var(--wp--preset--font-size--xl, 1.25rem);
+    --text-xs--line-height: 1.2rem;
+    --text-sm: var(--wp--preset--font-size--sm, 0.8125rem);
+    --text-sm--line-height: 1.3rem;
+    --text-base: var(--wp--preset--font-size--base, 0.875rem);
+    --text-base--line-height: 1.4rem;
+    --text-lg: var(--wp--preset--font-size--lg, 1rem);
+    --text-lg--line-height: 1.6rem;
+    --text-xl: var(--wp--preset--font-size--xl, 1.125rem);
+    --text-xl--line-height: 1.8rem;
     --text-2xl: var(--wp--preset--font-size--2-xl, 1.5rem);
-    --text-3xl: var(--wp--preset--font-size--3-xl, 1.875rem);
-    --text-4xl: var(--wp--preset--font-size--4-xl, 2.25rem);
-    --text-5xl: var(--wp--preset--font-size--5-xl, 3rem);
-    --text-6xl: var(--wp--preset--font-size--6-xl, 3.75rem);
-    --text-7xl: var(--wp--preset--font-size--7-xl, 4.5rem);
-    --text-8xl: var(--wp--preset--font-size--8-xl, 6rem);
-    --text-9xl: var(--wp--preset--font-size--9-xl, 8rem);
+    --text-2xl--line-height: 1.875rem;
+    --text-3xl: var(--wp--preset--font-size--3-xl, 2.5rem);
+    --text-3xl--line-height: 2.75rem;
+    --text-4xl: var(--wp--preset--font-size--4-xl, 3.5rem);
+    --text-4xl--line-height: 3.85rem;
+    --text-5xl: var(--wp--preset--font-size--5-xl, 4rem);
+    --text-5xl--line-height: 4.4rem;
+
+    --font-sans: var(--font-family-sans, 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+            'Noto Color Emoji');
+    --font-serif: var(--font-sans);
+    --font-mono: var(--font-family-mono, 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            'Liberation Mono', 'Courier New', monospace);
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    --shadow-sm: var(--shadow-elevation-card-rest);
+    --shadow-md: var(--shadow-elevation-card-hover);
+    --shadow-lg: var(--shadow-elevation-flyout);
+    --shadow-xl: var(--shadow-elevation-modal);
 }
