@@ -294,6 +294,7 @@
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-dark/5"></div>
         <button
             id="closePromo"
+            data-promo-close
             class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/80 text-lg text-neutral-500 transition hover:scale-105 hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
             type="button"
             aria-label="<?php esc_attr_e('Close promotion popup', 'webmakerr'); ?>"
@@ -518,7 +519,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const promo = document.getElementById('promo-popup');
     if (promo) {
-        const closePromo = document.getElementById('closePromo');
         const promoForm = document.getElementById('promoForm');
         const promoDismiss = document.getElementById('promoDismiss');
         const promoContent = document.getElementById('promoContent');
@@ -634,12 +634,6 @@ document.addEventListener('DOMContentLoaded', () => {
             handleScroll();
         }
 
-        if (closePromo) {
-            closePromo.addEventListener('click', () => {
-                hidePromo(true);
-            });
-        }
-
         if (promoDismiss) {
             promoDismiss.addEventListener('click', () => {
                 hidePromo(true);
@@ -648,6 +642,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         promo.addEventListener('click', (event) => {
             if (event.target === promo) {
+                hidePromo(true);
+                return;
+            }
+
+            if (event.target.closest('[data-promo-close]')) {
+                event.preventDefault();
                 hidePromo(true);
             }
         });
