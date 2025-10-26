@@ -2,14 +2,92 @@
 @import './theme.css';
 @import './custom.css';
 
-h1 {
-    @apply text-3xl mb-8;
+@layer base {
+  :root {
+    --heading-h1-size: 30px;
+    --heading-h1-line-height: 36px;
+    --heading-h2-size: 24px;
+    --heading-h2-line-height: 32px;
+    --heading-h3-size: 16px;
+    --heading-h3-line-height: 24px;
+  }
+
+  @media (min-width: 769px) {
+    :root {
+      --heading-h1-size: 40px;
+      --heading-h1-line-height: 48px;
+      --heading-h2-size: 30px;
+      --heading-h2-line-height: 38px;
+      --heading-h3-size: 20px;
+      --heading-h3-line-height: 28px;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--color-zinc-900);
+  }
+
+  h1 {
+    font-size: var(--heading-h1-size);
+    line-height: var(--heading-h1-line-height);
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: var(--heading-h2-size);
+    line-height: var(--heading-h2-line-height);
+  }
+
+  h3 {
+    font-size: var(--heading-h3-size);
+    line-height: var(--heading-h3-line-height);
+  }
+
+  .entry-content,
+  .block-editor-block-list__layout {
+    font-family: var(--font-sans);
+  }
+
+  button:not(.search-form__submit),
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'],
+  .button,
+  .wp-element-button,
+  .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 5px;
+    border: 1px solid var(--wp--preset--color--primary, #000);
+    background-color: var(--wp--preset--color--primary, #000);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    transition-property: color, background-color, border-color;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
 }
 
-.entry-content,
-.block-editor-block-list__layout {
-    font-family: var(--font-sans);
+@layer utilities {
+  @media (max-width: 768px) {
+    .text-lg {
+      font-size: 16px !important;
+      line-height: 24px !important;
+    }
+  }
 }
 
 /*
