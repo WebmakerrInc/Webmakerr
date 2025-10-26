@@ -64,10 +64,10 @@ get_header();
           <p class="max-w-xl text-base leading-7 text-zinc-600 sm:text-lg"><?php esc_html_e('Ready to build with Webmakerr? Tell us a bit about your team and how we can help streamline your next launch.', 'webmakerr'); ?></p>
         </div>
 
-        <ul class="flex list-disc flex-col gap-3 pl-5 text-sm font-medium text-zinc-900">
-          <li><a class="text-primary transition hover:text-primary/80" href="mailto:hello@example.com"><?php esc_html_e('Email us directly at hello@example.com', 'webmakerr'); ?></a></li>
-          <li><a class="text-primary transition hover:text-primary/80" href="<?php echo esc_url(home_url('/pricing')); ?>"><?php esc_html_e('View pricing and plans', 'webmakerr'); ?></a></li>
-          <li><a class="text-primary transition hover:text-primary/80" href="<?php echo esc_url(home_url('/support')); ?>"><?php esc_html_e('Visit our support center', 'webmakerr'); ?></a></li>
+        <ul class="flex list-disc flex-col gap-3 pl-5 text-sm font-semibold text-zinc-900">
+          <li><a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="mailto:hello@example.com"><?php esc_html_e('Email us directly at hello@example.com', 'webmakerr'); ?></a></li>
+          <li><a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url(home_url('/pricing')); ?>"><?php esc_html_e('View pricing and plans', 'webmakerr'); ?></a></li>
+          <li><a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url(home_url('/support')); ?>"><?php esc_html_e('Visit our support center', 'webmakerr'); ?></a></li>
         </ul>
 
         <div class="rounded-3xl border border-zinc-200 bg-zinc-50 p-6 shadow-sm sm:p-8">
@@ -113,23 +113,23 @@ get_header();
 
             <div class="grid gap-6 sm:grid-cols-2">
               <div class="flex flex-col gap-2">
-                <label class="text-xs font-semibold uppercase tracking-[0.2em] text-[#71717A]" for="full_name"><?php esc_html_e('Full name', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-                <input class="w-full rounded-md border border-[#E4E4E7] bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" type="text" id="full_name" name="full_name" required />
+                <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="full_name"><?php esc_html_e('Full name', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
+                <input class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="text" id="full_name" name="full_name" required />
               </div>
               <div class="flex flex-col gap-2">
-                <label class="text-xs font-semibold uppercase tracking-[0.2em] text-[#71717A]" for="company_name"><?php esc_html_e('Company name', 'webmakerr'); ?></label>
-                <input class="w-full rounded-md border border-[#E4E4E7] bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" type="text" id="company_name" name="company_name" />
+                <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="company_name"><?php esc_html_e('Company name', 'webmakerr'); ?></label>
+                <input class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="text" id="company_name" name="company_name" />
               </div>
             </div>
 
             <div class="flex flex-col gap-2">
-              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-[#71717A]" for="company_email"><?php esc_html_e('Company email', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-              <input class="w-full rounded-md border border-[#E4E4E7] bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" type="email" id="company_email" name="company_email" required />
+              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="company_email"><?php esc_html_e('Company email', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
+              <input class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="email" id="company_email" name="company_email" required />
             </div>
 
             <div class="flex flex-col gap-2">
-              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-[#71717A]" for="use_case"><?php esc_html_e('Use case', 'webmakerr'); ?></label>
-              <select class="w-full rounded-md border border-[#E4E4E7] bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" id="use_case" name="use_case">
+              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="use_case"><?php esc_html_e('Use case', 'webmakerr'); ?></label>
+              <select class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" id="use_case" name="use_case">
                 <option value="" disabled selected><?php esc_html_e('Select an option', 'webmakerr'); ?></option>
                 <option value="launch"><?php esc_html_e('Launching a new product', 'webmakerr'); ?></option>
                 <option value="migration"><?php esc_html_e('Migrating an existing site', 'webmakerr'); ?></option>
@@ -139,17 +139,17 @@ get_header();
             </div>
 
             <div class="flex flex-col gap-2">
-              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-[#71717A]" for="description"><?php esc_html_e('Project description', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-              <textarea class="min-h-[160px] w-full rounded-md border border-[#E4E4E7] bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" id="description" name="description" required></textarea>
+              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="description"><?php esc_html_e('Project description', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
+              <textarea class="min-h-[160px] w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" id="description" name="description" required></textarea>
             </div>
 
             <div class="flex items-start gap-3">
-              <input class="mt-1 h-4 w-4 rounded border border-[#E4E4E7] text-zinc-900 focus:ring-zinc-900/40" type="checkbox" id="newsletter" name="newsletter" />
+              <input class="mt-1 h-4 w-4 rounded border border-zinc-200 text-dark focus:ring-dark/40" type="checkbox" id="newsletter" name="newsletter" />
               <label class="text-sm leading-6 text-zinc-600" for="newsletter"><?php esc_html_e('Keep me up to date with product updates, tips, and launches.', 'webmakerr'); ?></label>
             </div>
 
             <div class="pt-2">
-              <button class="inline-flex w-full justify-center rounded-md bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-black/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" type="submit">
+              <button class="inline-flex w-full justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" type="submit">
                 <?php esc_html_e('Submit form', 'webmakerr'); ?>
               </button>
             </div>
