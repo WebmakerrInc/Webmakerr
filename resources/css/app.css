@@ -29,6 +29,13 @@
   }
 }
 
+@layer base {
+  /* Gradually scale typography down by ~10% below the md breakpoint */
+  html {
+    font-size: clamp(0.9rem, 0.8rem + 0.4167vw, 1rem);
+  }
+}
+
 @layer components {
   .site-logo {
     width: 142px;
