@@ -18,6 +18,7 @@
         storedStatus,
         expiration,
         expirationMessages,
+        licenseMessages,
     } = window.webmakerrLicenseData;
 
     const updateStatus = (status) => {
@@ -130,8 +131,39 @@
         return formatTemplate(template, days);
     };
 
-    const updateExpiry = (status, expiresAt, daysRemaining) => {
+    const updateExpiry = (status, expiresAt, daysRemaining, message = '', licenseType = '') => {
         if (!expiryContainer) {
+            return;
+        }
+
+        const normalizedStatus = typeof status === 'string' ? status : 'inactive';
+        const normalizedMessage = typeof message === 'string' ? message.trim() : '';
+        const normalizedType = typeof licenseType === 'string' ? licenseType.toLowerCase() : '';
+
+        expiryContainer.classList.remove('is-active', 'is-expired');
+        expiryContainer.hidden = true;
+
+        if (normalizedMessage) {
+            expiryContainer.textContent = normalizedMessage;
+            expiryContainer.hidden = false;
+
+            if (normalizedStatus === 'expired') {
+                expiryContainer.classList.add('is-expired');
+            } else {
+                expiryContainer.classList.add('is-active');
+            }
+
+            return;
+        }
+
+        if (normalizedStatus === 'active' && normalizedType === 'lifetime') {
+            const lifetimeMessage = (licenseMessages && licenseMessages.lifetime)
+                || (expirationMessages && expirationMessages.lifetime)
+                || '✅ License active – lifetime access';
+
+            expiryContainer.textContent = lifetimeMessage;
+            expiryContainer.hidden = false;
+            expiryContainer.classList.add('is-active');
             return;
         }
 
@@ -144,8 +176,6 @@
             expiryContainer.hidden = true;
             return;
         }
-
-        const normalizedStatus = typeof status === 'string' ? status : 'inactive';
 
         if (normalizedStatus === 'expired') {
             const template = expirationMessages?.expired || '❌ License expired on %s';
@@ -184,7 +214,14 @@
             : null;
 
         updateStatus(storedStatus);
-        updateExpiry(storedStatus, initialExpiresAt, initialDays);
+        const initialMessage = (expiration && typeof expiration.message === 'string')
+            ? expiration.message
+            : (expiryContainer ? expiryContainer.textContent.trim() : '');
+        const initialType = (expiration && typeof expiration.license_type === 'string')
+            ? expiration.license_type
+            : (expiryContainer ? (expiryContainer.dataset.licenseType || '') : '');
+
+        updateExpiry(storedStatus, initialExpiresAt, initialDays, initialMessage, initialType);
     }
 
     activateButton.addEventListener('click', () => {
@@ -229,8 +266,19 @@
                     setFeedback(customMessage, 'error');
                 }
 
+                if (expiryContainer) {
+                    expiryContainer.dataset.expiresAt = typeof data.expires_at === 'string' ? data.expires_at : '';
+                    expiryContainer.dataset.licenseType = typeof data.license_type === 'string' ? data.license_type : '';
+                }
+
                 updateStatus(status);
-                updateExpiry(status, typeof data.expires_at === 'string' ? data.expires_at : '', data.days_remaining ?? null);
+                updateExpiry(
+                    status,
+                    typeof data.expires_at === 'string' ? data.expires_at : '',
+                    data.days_remaining ?? null,
+                    typeof data.license_message === 'string' ? data.license_message : '',
+                    typeof data.license_type === 'string' ? data.license_type : ''
+                );
             })
             .catch(() => {
                 setFeedback(messages.error, 'error');

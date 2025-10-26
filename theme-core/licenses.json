@@ -1,4 +1,18 @@
 [
-  { "key": "LIC-ABC-123", "status": "active" },
-  { "key": "LIC-XYZ-999", "status": "revoked" }
+  {
+    "key": "LIC-ABC-123",
+    "status": "pending",
+    "license_type": "1year"
+  },
+  {
+    "key": "LIC-XYZ-999",
+    "status": "revoked",
+    "license_type": "1month"
+  },
+  {
+    "key": "LIC-LIFE-555",
+    "status": "active",
+    "license_type": "lifetime",
+    "activation_date": "2023-01-01T00:00:00+00:00"
+  }
 ]
