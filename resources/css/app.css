@@ -330,17 +330,20 @@
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
     border-radius: 5px;
-    border: 1px solid var(--wp--preset--color--primary, #000);
-    background-color: var(--wp--preset--color--primary, #000);
-    color: #FFF;
+    border: 1px solid transparent;
+    background: linear-gradient(
+      135deg,
+      var(--bg-interactive, #2563eb) 0%,
+      var(--fg-interactive-hover, #1d4ed8) 100%
+    );
+    color: #fff;
     font-family: var(--font-family-sans);
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
     text-decoration: none;
-    transition-property: var(--transition-property-fg);
-    transition-duration: var(--transition-duration-default);
-    transition-timing-function: var(--transition-timing-function);
+    box-shadow: 0 12px 24px -12px rgba(37, 99, 235, 0.65);
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     cursor: pointer;
   }
 
@@ -370,10 +373,15 @@
   .wp-block-button__link:hover,
   .wp-block-button__link:focus,
   .wp-block-button__link:active {
-    background-color: var(--wp--preset--color--primary-hover, #000);
-    border-color: var(--wp--preset--color--primary-hover, #000);
-    color: #FFF;
-    box-shadow: 0 0 0 2px #0000000d, 0 0 0 4px #00000014;
+    background: linear-gradient(
+      135deg,
+      var(--fg-interactive-hover, #1d4ed8) 0%,
+      #1e3a8a 100%
+    );
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 18px 30px -15px rgba(30, 64, 175, 0.7);
+    transform: translateY(-1px);
   }
 
   button:not(.search-form__submit):focus-visible,
@@ -383,8 +391,8 @@
   .button:focus-visible,
   .wp-element-button:focus-visible,
   .wp-block-button__link:focus-visible {
-    outline: 2px solid var(--wp--preset--color--primary, #000);
-    outline-offset: 2px;
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
   }
 
   button:disabled,
@@ -396,11 +404,12 @@
   .wp-block-button__link:disabled,
   .wp-element-button[aria-disabled='true'],
   .wp-block-button__link[aria-disabled='true'] {
-    background-color: rgba(0, 0, 0, 0.4);
-    border-color: rgba(0, 0, 0, 0.4);
-    color: rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(30, 64, 175, 0.35));
+    border-color: transparent;
+    color: rgba(255, 255, 255, 0.82);
     cursor: not-allowed;
     box-shadow: none;
+    transform: none;
   }
 
   section,
@@ -425,7 +434,7 @@
     border: none;
     background: transparent;
     color: inherit;
-    border-radius: 9999px;
+    border-radius: 5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
