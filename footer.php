@@ -5,7 +5,6 @@
  * @package Webmakerr
  */
 
-use Webmakerr\Walkers\FooterMenuWalker;
 ?>
         </main>
 
@@ -16,135 +15,502 @@ use Webmakerr\Walkers\FooterMenuWalker;
 
     <footer
         id="colophon"
-        class="mt-16 border-t border-neutral-200 bg-white text-neutral-900"
+        class="mt-16 border-t border-neutral-200 bg-neutral-50 text-neutral-900"
         role="contentinfo"
     >
-        <div class="mx-auto w-full max-w-6xl px-6 py-16 lg:px-8 lg:py-20">
+        <div class="mx-auto w-full max-w-6xl px-6 py-12 lg:px-8 lg:py-16">
             <?php do_action('webmakerr_footer'); ?>
 
-            <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
-                <div class="max-w-md space-y-6">
-                    <div class="flex flex-col gap-4 text-neutral-600">
-                        <?php if (has_custom_logo()) : ?>
-                            <div class="flex items-center gap-4">
-                                <div class="footer-logo flex items-center">
-                                    <?php the_custom_logo(); ?>
-                                </div>
-                                <?php if (display_header_text()) : ?>
-                                    <a
-                                        class="text-base font-semibold text-neutral-900 no-underline transition hover:opacity-70"
-                                        href="<?php echo esc_url(home_url('/')); ?>"
-                                        rel="home"
-                                    >
-                                        <?php echo esc_html(get_bloginfo('name')); ?>
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-                        <?php else : ?>
-                            <a
-                                class="text-lg font-semibold text-neutral-900 no-underline transition hover:opacity-70"
-                                href="<?php echo esc_url(home_url('/')); ?>"
-                                rel="home"
-                            >
-                                <?php echo esc_html(get_bloginfo('name')); ?>
-                            </a>
-                        <?php endif; ?>
-
-                        <?php if (get_bloginfo('description')) : ?>
-                            <p class="text-sm leading-relaxed text-neutral-500">
-                                <?php echo esc_html(get_bloginfo('description')); ?>
-                            </p>
-                        <?php endif; ?>
+            <div class="mb-12 hidden gap-8 border-b border-neutral-200 pb-8 text-center text-sm text-neutral-600 md:grid md:grid-cols-4 md:text-left">
+                <div class="flex flex-col items-center gap-2 md:items-start">
+                    <div class="flex items-center gap-2 text-neutral-900">
+                        <img src="/wp-content/uploads/icons/delivery.svg" alt="<?php esc_attr_e('Delivery icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Free delivery', 'webmakerr'); ?></span>
                     </div>
-
-                    <?php
-                    $cta_label = get_theme_mod('footer_primary_link_label');
-                    $cta_url   = get_theme_mod('footer_primary_link_url');
-                    $cta_target = get_theme_mod('footer_primary_link_target', '_self');
-                    $cta_rel = get_theme_mod('footer_primary_link_rel');
-
-                    if (! $cta_rel && '_self' !== $cta_target) {
-                        $cta_rel = 'noopener';
-                    }
-
-                    if ($cta_label && $cta_url) :
-                        ?>
-                        <div>
-                            <a
-                                class="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 no-underline transition-colors duration-200 hover:opacity-70"
-                                href="<?php echo esc_url($cta_url); ?>"
-                                target="<?php echo esc_attr($cta_target); ?>"
-                                <?php echo $cta_rel ? 'rel="'.esc_attr($cta_rel).'"' : ''; ?>
-                            >
-                                <span><?php echo esc_html($cta_label); ?></span>
-                                <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path d="M3.75 12.25L12.25 3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4.5 3.75H12.25V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php
-                    $contact_label = get_theme_mod('footer_contact_label');
-                    $contact_email = get_theme_mod('footer_contact_email', get_bloginfo('admin_email'));
-
-                    if ($contact_label && $contact_email) :
-                        ?>
-                        <div>
-                            <a
-                                class="inline-flex items-center gap-2 text-sm text-neutral-600 no-underline transition hover:text-neutral-900"
-                                href="mailto:<?php echo esc_attr($contact_email); ?>"
-                            >
-                                <span class="font-medium text-neutral-900">
-                                    <?php echo esc_html($contact_label); ?>
-                                </span>
-                                <span class="text-neutral-500">
-                                    <?php echo esc_html($contact_email); ?>
-                                </span>
-                            </a>
-                        </div>
-                    <?php endif; ?>
+                    <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('On all orders', 'webmakerr'); ?></p>
                 </div>
-
-                <?php if (has_nav_menu('footer')) : ?>
-                    <nav aria-label="<?php esc_attr_e('Footer', 'webmakerr'); ?>" class="w-full lg:max-w-3xl">
-                        <?php
-                        echo wp_nav_menu([
-                            'theme_location' => 'footer',
-                            'container'      => '',
-                            'menu_class'     => 'grid gap-0 md:grid-cols-2 md:gap-10 lg:grid-cols-3',
-                            'items_wrap'     => '<ul id="%1$s" class="%2$s" role="list">%3$s</ul>',
-                            'depth'          => 2,
-                            'fallback_cb'    => '__return_empty_string',
-                            'walker'         => new FooterMenuWalker(),
-                        ]);
-                        ?>
-                    </nav>
-                <?php endif; ?>
+                <div class="flex flex-col items-center gap-2 md:items-start">
+                    <div class="flex items-center gap-2 text-neutral-900">
+                        <img src="/wp-content/uploads/icons/returns.svg" alt="<?php esc_attr_e('Returns icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Free returns', 'webmakerr'); ?></span>
+                    </div>
+                    <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('No questions asked return policy', 'webmakerr'); ?></p>
+                </div>
+                <div class="flex flex-col items-center gap-2 md:items-start">
+                    <div class="flex items-center gap-2 text-neutral-900">
+                        <img src="/wp-content/uploads/icons/help.svg" alt="<?php esc_attr_e('Help icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Need help? +123 456 7890', 'webmakerr'); ?></span>
+                    </div>
+                    <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('Call us on a toll-free phone number', 'webmakerr'); ?></p>
+                </div>
+                <div class="flex flex-col items-center gap-2 md:items-start">
+                    <div class="flex items-center gap-2 text-neutral-900">
+                        <img src="/wp-content/uploads/icons/guarantee.svg" alt="<?php esc_attr_e('Guarantee icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Money back guarantee', 'webmakerr'); ?></span>
+                    </div>
+                    <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('Worry-free shopping', 'webmakerr'); ?></p>
+                </div>
             </div>
 
-            <div class="mt-16 flex flex-col gap-4 border-t border-neutral-200 pt-6 text-sm text-neutral-500 md:flex-row md:items-center md:justify-between">
-                <p class="text-center md:text-left">
+            <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
+                <div class="hidden text-sm text-neutral-600 md:block">
+                    <h3 class="text-base font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Contact', 'webmakerr'); ?></h3>
+                    <ul class="mt-4 space-y-2 leading-relaxed">
+                        <li><span class="font-medium text-neutral-900"><?php esc_html_e('Phone:', 'webmakerr'); ?></span> <span class="text-neutral-600">(888) 888 88 88</span></li>
+                        <li>
+                            <span class="font-medium text-neutral-900"><?php esc_html_e('Email:', 'webmakerr'); ?></span>
+                            <a class="ml-1 inline-flex items-center text-primary transition hover:text-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="mailto:support@webmakerr.com">support@webmakerr.com</a>
+                        </li>
+                        <li class="text-neutral-600"><?php esc_html_e('101 California Street, Suite 2710, San Francisco, CA 94111', 'webmakerr'); ?></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <button
+                        type="button"
+                        class="footer-toggle flex w-full items-center justify-between border-b border-neutral-200 pb-3 text-left text-base font-semibold uppercase tracking-[0.18em] text-neutral-900 transition md:cursor-default md:border-none md:pb-0"
+                        data-footer-toggle
+                        aria-expanded="false"
+                        aria-controls="footer-company"
+                    >
+                        <span><?php esc_html_e('Company info', 'webmakerr'); ?></span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 transition-transform duration-200 md:hidden"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            data-footer-toggle-icon
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <ul
+                        id="footer-company"
+                        class="hidden flex flex-col gap-2 pt-4 text-sm text-neutral-600 md:pt-5 md:text-base md:text-neutral-600 md:flex"
+                        data-footer-panel
+                    >
+                        <li><a href="/about" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('About us', 'webmakerr'); ?></a></li>
+                        <li><a href="/contact" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Contact us', 'webmakerr'); ?></a></li>
+                        <li><a href="/blog" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Blog', 'webmakerr'); ?></a></li>
+                        <li><a href="/privacy-policy" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Privacy policy', 'webmakerr'); ?></a></li>
+                        <li><a href="/terms" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Terms &amp; conditions', 'webmakerr'); ?></a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <button
+                        type="button"
+                        class="footer-toggle flex w-full items-center justify-between border-b border-neutral-200 pb-3 text-left text-base font-semibold uppercase tracking-[0.18em] text-neutral-900 transition md:cursor-default md:border-none md:pb-0"
+                        data-footer-toggle
+                        aria-expanded="false"
+                        aria-controls="footer-purchase"
+                    >
+                        <span><?php esc_html_e('Purchase info', 'webmakerr'); ?></span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 transition-transform duration-200 md:hidden"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            data-footer-toggle-icon
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <ul
+                        id="footer-purchase"
+                        class="hidden flex flex-col gap-2 pt-4 text-sm text-neutral-600 md:pt-5 md:text-base md:text-neutral-600 md:flex"
+                        data-footer-panel
+                    >
+                        <li><a href="/faq" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Frequently asked questions', 'webmakerr'); ?></a></li>
+                        <li><a href="/payment-methods" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Payment methods', 'webmakerr'); ?></a></li>
+                        <li><a href="/shipping" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Shipping &amp; delivery', 'webmakerr'); ?></a></li>
+                        <li><a href="/refunds" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Refunds &amp; returns policy', 'webmakerr'); ?></a></li>
+                        <li><a href="/tracking" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Tracking', 'webmakerr'); ?></a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <button
+                        type="button"
+                        class="footer-toggle flex w-full items-center justify-between border-b border-neutral-200 pb-3 text-left text-base font-semibold uppercase tracking-[0.18em] text-neutral-900 transition md:cursor-default md:border-none md:pb-0"
+                        data-footer-toggle
+                        aria-expanded="false"
+                        aria-controls="footer-follow"
+                    >
+                        <span><?php esc_html_e('Follow us', 'webmakerr'); ?></span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 transition-transform duration-200 md:hidden"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            data-footer-toggle-icon
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <ul
+                        id="footer-follow"
+                        class="hidden flex flex-col gap-2 pt-4 text-sm text-neutral-600 md:pt-5 md:text-base md:text-neutral-600 md:flex"
+                        data-footer-panel
+                    >
+                        <li><a href="#" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Facebook', 'webmakerr'); ?></a></li>
+                        <li><a href="#" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Instagram', 'webmakerr'); ?></a></li>
+                        <li><a href="#" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Twitter', 'webmakerr'); ?></a></li>
+                        <li><a href="#" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('Pinterest', 'webmakerr'); ?></a></li>
+                        <li><a href="#" class="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"><?php esc_html_e('YouTube', 'webmakerr'); ?></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 flex flex-col gap-6 border-t border-neutral-200 pt-6 text-xs text-neutral-500 md:flex-row md:items-center md:justify-between md:text-sm">
+                <div class="flex flex-col items-center gap-2 text-center md:flex-row md:gap-3 md:text-left">
+                    <span class="font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Payment methods:', 'webmakerr'); ?></span>
+                    <img src="/wp-content/uploads/payment-icons.png" alt="<?php esc_attr_e('Payment icons', 'webmakerr'); ?>" class="h-6 w-auto md:h-7" />
+                </div>
+                <div class="flex flex-col items-center gap-2 text-center md:flex-row md:gap-3 md:text-left">
+                    <span class="font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Buy with confidence:', 'webmakerr'); ?></span>
+                    <img src="/wp-content/uploads/trust-badges.png" alt="<?php esc_attr_e('Trust badges', 'webmakerr'); ?>" class="h-6 w-auto md:h-7" />
+                </div>
+            </div>
+
+            <div class="mt-8 space-y-2 text-center text-xs text-neutral-500 md:text-sm">
+                <p>
                     &copy; <?php echo esc_html(date_i18n('Y')); ?>
-                    <span class="font-medium text-neutral-900">
-                        <?php echo esc_html(get_bloginfo('name')); ?>
-                    </span>
+                    <span class="font-medium text-neutral-900"><?php echo esc_html(get_bloginfo('name')); ?></span>.
+                    <?php esc_html_e('All rights reserved.', 'webmakerr'); ?>
                 </p>
-
-                <?php
-                $footer_note = get_theme_mod('footer_additional_note');
-
-                if ($footer_note) :
-                    ?>
-                    <p class="text-center text-neutral-500 md:text-right">
-                        <?php echo wp_kses_post($footer_note); ?>
-                    </p>
-                <?php endif; ?>
+                <p class="text-neutral-500">www.webmakerr.com</p>
             </div>
         </div>
     </footer>
 </div>
+
+<!-- ================= Cookie Banner + Modal ================= -->
+<div
+    id="cookie-banner"
+    class="fixed bottom-0 left-0 right-0 z-50 hidden border-t border-neutral-200 bg-neutral-50 shadow-lg shadow-black/5"
+>
+    <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-4 text-sm text-neutral-700 md:flex-row md:items-center md:justify-between">
+        <div class="flex-1 text-center leading-relaxed md:text-left">
+            <p>
+                <?php esc_html_e('We use cookies to improve your browsing experience, analyze traffic, and serve personalized content.', 'webmakerr'); ?>
+                <?php esc_html_e('By clicking “Accept,” you consent to our use of cookies.', 'webmakerr'); ?>
+                <?php esc_html_e('Read more in our', 'webmakerr'); ?>
+                <a href="/privacy-policy" class="text-primary underline-offset-2 transition hover:text-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"><?php esc_html_e('Privacy Policy', 'webmakerr'); ?></a>.
+            </p>
+        </div>
+        <div class="flex flex-col justify-center gap-3 md:flex-row md:justify-end">
+            <button
+                id="moreCookies"
+                class="rounded-md border border-neutral-300 px-5 py-2 text-sm font-medium text-neutral-700 transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                type="button"
+            >
+                <?php esc_html_e('More', 'webmakerr'); ?>
+            </button>
+            <button
+                id="declineCookies"
+                class="rounded-md border border-neutral-300 px-5 py-2 text-sm font-medium text-neutral-700 transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                type="button"
+            >
+                <?php esc_html_e('Decline', 'webmakerr'); ?>
+            </button>
+            <button
+                id="acceptCookies"
+                class="rounded-md bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                type="button"
+            >
+                <?php esc_html_e('Accept', 'webmakerr'); ?>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Cookie Modal -->
+<div id="cookie-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-neutral-950/60 px-4">
+    <div class="relative w-full max-w-xl rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-xl">
+        <button
+            id="closeModal"
+            class="absolute right-4 top-4 text-lg text-neutral-500 transition hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+            type="button"
+        >
+            &times;
+        </button>
+        <h2 class="text-lg font-semibold text-neutral-900"><?php esc_html_e('Cookie preferences', 'webmakerr'); ?></h2>
+        <p class="mt-3 text-sm text-neutral-600 leading-relaxed">
+            <?php esc_html_e('Cookies help us enhance your experience and improve our website’s performance. Below is a quick overview of the cookie categories we use:', 'webmakerr'); ?>
+        </p>
+        <ul class="mt-4 space-y-3 text-sm text-neutral-600">
+            <li>
+                <strong class="text-neutral-900"><?php esc_html_e('Necessary cookies:', 'webmakerr'); ?></strong>
+                <?php esc_html_e('Enable core functionality such as security, network management, and accessibility.', 'webmakerr'); ?>
+            </li>
+            <li>
+                <strong class="text-neutral-900"><?php esc_html_e('Analytics cookies:', 'webmakerr'); ?></strong>
+                <?php esc_html_e('Help us understand how visitors interact with our website, allowing us to improve content and usability.', 'webmakerr'); ?>
+            </li>
+            <li>
+                <strong class="text-neutral-900"><?php esc_html_e('Marketing cookies:', 'webmakerr'); ?></strong>
+                <?php esc_html_e('Used to deliver relevant ads and measure the effectiveness of our campaigns.', 'webmakerr'); ?>
+            </li>
+            <li>
+                <strong class="text-neutral-900"><?php esc_html_e('Functional cookies:', 'webmakerr'); ?></strong>
+                <?php esc_html_e('Remember your preferences and settings for a personalized experience.', 'webmakerr'); ?>
+            </li>
+        </ul>
+        <div class="mt-6 flex flex-col justify-end gap-3 md:flex-row">
+            <button
+                id="modalDecline"
+                class="rounded-md border border-neutral-300 px-5 py-2 text-sm font-medium text-neutral-700 transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                type="button"
+            >
+                <?php esc_html_e('Decline all', 'webmakerr'); ?>
+            </button>
+            <button
+                id="modalAccept"
+                class="rounded-md bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                type="button"
+            >
+                <?php esc_html_e('Accept all', 'webmakerr'); ?>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Promo Popup -->
+<div id="promo-popup" class="fixed inset-0 z-[70] hidden flex items-center justify-center bg-neutral-950/60 px-4 md:hidden">
+    <div class="relative w-full max-w-md rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-xl">
+        <button
+            id="closePromo"
+            class="absolute right-4 top-4 text-xl text-neutral-500 transition hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+            type="button"
+        >
+            &times;
+        </button>
+
+        <h2 class="text-center text-lg font-semibold text-neutral-900">
+            <?php esc_html_e('🎉 Special offer just for you!', 'webmakerr'); ?>
+        </h2>
+        <p class="mt-3 text-center text-sm text-neutral-600">
+            <?php esc_html_e('Subscribe now and get 20% off your first order. Don’t miss this limited-time deal.', 'webmakerr'); ?>
+        </p>
+
+        <form id="promoForm" class="mt-5 flex flex-col gap-3">
+            <label class="sr-only" for="promoEmail"><?php esc_html_e('Email address', 'webmakerr'); ?></label>
+            <input
+                id="promoEmail"
+                type="email"
+                required
+                placeholder="<?php esc_attr_e('Your email address', 'webmakerr'); ?>"
+                class="w-full rounded-md border border-neutral-300 px-4 py-2 text-sm text-neutral-900 focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/30"
+            />
+            <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-md bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+            >
+                <?php esc_html_e('Get offer', 'webmakerr'); ?>
+            </button>
+        </form>
+        <p class="mt-3 text-center text-xs text-neutral-500"><?php esc_html_e('We respect your privacy. Unsubscribe anytime.', 'webmakerr'); ?></p>
+    </div>
+</div>
+
+<!-- ================= Scripts ================= -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const footerToggles = document.querySelectorAll('[data-footer-toggle]');
+
+    if (footerToggles.length) {
+        const updateFooterToggles = () => {
+            footerToggles.forEach((toggle) => {
+                const panel = toggle.nextElementSibling;
+                if (!panel) {
+                    return;
+                }
+
+                if (!panel.dataset.mobileOpen) {
+                    panel.dataset.mobileOpen = (!panel.classList.contains('hidden')).toString();
+                }
+
+                const icon = toggle.querySelector('[data-footer-toggle-icon]');
+
+                if (window.innerWidth >= 768) {
+                    panel.classList.remove('hidden');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    if (icon) {
+                        icon.classList.remove('rotate-180');
+                    }
+                } else {
+                    const isOpen = panel.dataset.mobileOpen === 'true';
+                    panel.classList.toggle('hidden', !isOpen);
+                    toggle.setAttribute('aria-expanded', isOpen.toString());
+                    if (icon) {
+                        icon.classList.toggle('rotate-180', isOpen);
+                    }
+                }
+            });
+        };
+
+        footerToggles.forEach((toggle) => {
+            toggle.addEventListener('click', () => {
+                if (window.innerWidth >= 768) {
+                    return;
+                }
+
+                const panel = toggle.nextElementSibling;
+                if (!panel) {
+                    return;
+                }
+
+                panel.classList.toggle('hidden');
+                const isHidden = panel.classList.contains('hidden');
+                const isOpen = !isHidden;
+                panel.dataset.mobileOpen = isOpen.toString();
+                toggle.setAttribute('aria-expanded', isOpen.toString());
+
+                const icon = toggle.querySelector('[data-footer-toggle-icon]');
+                if (icon) {
+                    icon.classList.toggle('rotate-180', isOpen);
+                }
+            });
+        });
+
+        updateFooterToggles();
+        window.addEventListener('resize', updateFooterToggles);
+    }
+
+    const storage = (() => {
+        try {
+            const key = '__webmakerr_storage_test__';
+            window.localStorage.setItem(key, '1');
+            window.localStorage.removeItem(key);
+            return window.localStorage;
+        } catch (error) {
+            return null;
+        }
+    })();
+
+    const banner = document.getElementById('cookie-banner');
+    const modal = document.getElementById('cookie-modal');
+
+    const handleConsent = (value) => {
+        if (storage) {
+            storage.setItem('cookieConsent', value);
+        }
+        if (banner) {
+            banner.classList.add('hidden');
+        }
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    };
+
+    if (banner) {
+        const acceptBtn = document.getElementById('acceptCookies');
+        const declineBtn = document.getElementById('declineCookies');
+        const moreBtn = document.getElementById('moreCookies');
+        const closeModalBtn = document.getElementById('closeModal');
+        const modalAccept = document.getElementById('modalAccept');
+        const modalDecline = document.getElementById('modalDecline');
+
+        const consent = storage ? storage.getItem('cookieConsent') : null;
+        if (!consent) {
+            banner.classList.remove('hidden');
+        }
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => handleConsent('accepted'));
+        }
+        if (declineBtn) {
+            declineBtn.addEventListener('click', () => handleConsent('declined'));
+        }
+        if (modalAccept) {
+            modalAccept.addEventListener('click', () => handleConsent('accepted'));
+        }
+        if (modalDecline) {
+            modalDecline.addEventListener('click', () => handleConsent('declined'));
+        }
+        if (moreBtn && modal) {
+            moreBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+        }
+        if (closeModalBtn && modal) {
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+        }
+        if (modal) {
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+    }
+
+    const promo = document.getElementById('promo-popup');
+    if (promo) {
+        const closePromo = document.getElementById('closePromo');
+        const promoForm = document.getElementById('promoForm');
+        const storageKey = 'promoShown';
+        let promoShown = storage ? Boolean(storage.getItem(storageKey)) : false;
+
+        const showPromo = () => {
+            if (promoShown || window.innerWidth >= 768) {
+                return;
+            }
+
+            promo.classList.remove('hidden');
+            promoShown = true;
+            if (storage) {
+                storage.setItem(storageKey, 'true');
+            }
+        };
+
+        window.addEventListener(
+            'scroll',
+            () => {
+                if (promoShown) {
+                    return;
+                }
+
+                const scrollPosition = window.scrollY + window.innerHeight;
+                const threshold = document.body.offsetHeight * 0.7;
+
+                if (scrollPosition >= threshold) {
+                    showPromo();
+                }
+            },
+            { passive: true }
+        );
+
+        if (closePromo) {
+            closePromo.addEventListener('click', () => {
+                promo.classList.add('hidden');
+                promoShown = true;
+            });
+        }
+
+        promo.addEventListener('click', (event) => {
+            if (event.target === promo) {
+                promo.classList.add('hidden');
+                promoShown = true;
+            }
+        });
+
+        if (promoForm) {
+            promoForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                promo.classList.add('hidden');
+                promoShown = true;
+            });
+        }
+    }
+});
+</script>
 
 <?php wp_footer(); ?>
 </body>
