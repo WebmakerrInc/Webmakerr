@@ -89,12 +89,12 @@
                             Rapidly build your next WordPress theme with Tailwind CSS
                         </h1>
                         <p class="my-6 text-lg md:text-xl text-zinc-600 leading-8">
-                            <a href="https://webmakerr.io">Webmakerr</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
+                            <a href="https://webmakerr.com/">Webmakerr</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
                             boilerplate theme. It's your go-to starting point for building custom WordPress themes with modern tools and practices.
                         </p>
                     </div>
                     <div>
-                        <a href="https://webmakerr.io" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
+                        <a href="https://webmakerr.com/" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
                             Documentation
                         </a>
                     </div>
