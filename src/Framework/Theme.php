@@ -35,22 +35,26 @@ class Theme
         $this->menuManager = new MenuManager($this);
         $this->featureManager = new FeatureManager($this);
 
-        $this->themeSupportManager->add([
-            'title-tag',
-            'post-thumbnails',
-            'custom-logo',
-            'html5' => [
-                'search-form',
-                'comment-form',
-                'comment-list',
-                'gallery',
-                'caption',
-            ],
-        ]);
-
+        add_action('after_setup_theme', [$this, 'setup']);
         add_action('after_setup_theme', [$this, 'registerThemeSupport']);
         add_action('after_setup_theme', [$this, 'registerMenus']);
         add_action('after_setup_theme', [$this, 'bootFeatures']);
+    }
+
+    public function setup(): void
+    {
+        load_theme_textdomain('webmakerr', get_template_directory().'/languages');
+
+        add_theme_support('title-tag');
+        add_theme_support('post-thumbnails');
+        add_theme_support('custom-logo');
+        add_theme_support('html5', [
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+        ]);
     }
 
     public static function instance(): self
