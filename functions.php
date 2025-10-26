@@ -8,6 +8,11 @@ if (! defined('WEBMAKERR_LICENSE_DATA_URL')) {
     define('WEBMAKERR_LICENSE_DATA_URL', 'https://webmakerr.com/api/licenses.json');
 }
 
+if (! defined('WEBMAKERR_LICENSE_DATA_PATH')) {
+    $defaultLicensePath = trailingslashit(get_template_directory()).'theme-core/licenses.json';
+    define('WEBMAKERR_LICENSE_DATA_PATH', is_readable($defaultLicensePath) ? $defaultLicensePath : '');
+}
+
 if (! function_exists('webmakerr_parse_license_datetime')) {
     function webmakerr_parse_license_datetime($date): ?\DateTimeImmutable
     {
@@ -24,11 +29,20 @@ if (! function_exists('webmakerr_parse_license_datetime')) {
 }
 
 if (! function_exists('webmakerr_calculate_license_expiry_details')) {
-    function webmakerr_calculate_license_expiry_details(string $status, ?\DateTimeImmutable $expiresAt): array
+    function webmakerr_calculate_license_expiry_details(string $status, ?\DateTimeImmutable $expiresAt, ?string $licenseType = null): array
     {
         $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
         $isExpired = $status === 'expired';
         $daysRemaining = null;
+        $normalizedType = is_string($licenseType) ? strtolower(trim($licenseType)) : null;
+
+        if ($status === 'active' && $normalizedType === 'lifetime') {
+            return [
+                'message'        => __('✅ License active – lifetime access', 'webmakerr'),
+                'is_expired'     => false,
+                'days_remaining' => null,
+            ];
+        }
 
         if ($expiresAt instanceof \DateTimeImmutable) {
             if ($status === 'active') {
@@ -81,6 +95,71 @@ if (! function_exists('webmakerr_calculate_license_expiry_details')) {
             'is_expired'     => $isExpired,
             'days_remaining' => $daysRemaining,
         ];
+    }
+}
+
+if (! function_exists('webmakerr_normalize_license_type')) {
+    function webmakerr_normalize_license_type($licenseType): string
+    {
+        $normalized = is_string($licenseType) ? strtolower(trim($licenseType)) : '';
+
+        if (in_array($normalized, ['1month', '1year', 'lifetime'], true)) {
+            return $normalized;
+        }
+
+        return '1year';
+    }
+}
+
+if (! function_exists('webmakerr_resolve_license_duration')) {
+    function webmakerr_resolve_license_duration(string $licenseType): ?\DateInterval
+    {
+        return match ($licenseType) {
+            '1month'   => new \DateInterval('P30D'),
+            '1year'    => new \DateInterval('P365D'),
+            default    => null,
+        };
+    }
+}
+
+if (! function_exists('webmakerr_store_license_dataset')) {
+    function webmakerr_store_license_dataset(array $licenses, string $transientKey, string $cacheOptionKey): void
+    {
+        set_transient($transientKey, $licenses, 12 * HOUR_IN_SECONDS);
+        update_option($cacheOptionKey, $licenses);
+
+        if (! defined('WEBMAKERR_LICENSE_DATA_PATH')) {
+            return;
+        }
+
+        $path = WEBMAKERR_LICENSE_DATA_PATH;
+
+        if ($path === '') {
+            return;
+        }
+
+        $directory = dirname($path);
+        $pathWritable = false;
+
+        if (function_exists('wp_is_writable')) {
+            $pathWritable = (file_exists($path) && wp_is_writable($path))
+                || (! file_exists($path) && wp_is_writable($directory));
+        } else {
+            $pathWritable = (file_exists($path) && is_writable($path))
+                || (! file_exists($path) && is_writable($directory));
+        }
+
+        if (! $pathWritable) {
+            return;
+        }
+
+        $encoded = wp_json_encode($licenses, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+        if ($encoded === false) {
+            return;
+        }
+
+        file_put_contents($path, $encoded."\n");
     }
 }
 
@@ -162,6 +241,12 @@ add_action(
         $status = get_option('webmakerr_theme_license_status', 'inactive');
 
         if ($status !== 'active') {
+            return;
+        }
+
+        $licenseType = webmakerr_normalize_license_type(get_option('webmakerr_theme_license_type', ''));
+
+        if ($licenseType === 'lifetime') {
             return;
         }
 
@@ -291,15 +376,19 @@ if (! function_exists('webmakerr_render_license_settings_page')) {
 
         $savedKey = get_option('webmakerr_theme_license_key', '');
         $savedStatus = get_option('webmakerr_theme_license_status', 'inactive');
-        $storedIssuedAt = get_option('webmakerr_theme_license_issued_at', '');
+        $storedActivationDate = get_option('webmakerr_theme_license_activation_date', '');
+        if ($storedActivationDate === '') {
+            $storedActivationDate = get_option('webmakerr_theme_license_issued_at', '');
+        }
+        $storedLicenseType = webmakerr_normalize_license_type(get_option('webmakerr_theme_license_type', ''));
         $storedExpiresAt = get_option('webmakerr_theme_license_expires_at', '');
         $expiresAt = webmakerr_parse_license_datetime($storedExpiresAt);
-        $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt);
+        $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt, $storedLicenseType);
 
         if ($expiryDetails['is_expired'] && $savedStatus !== 'expired') {
             $savedStatus = 'expired';
             update_option('webmakerr_theme_license_status', 'expired');
-            $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt);
+            $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt, $storedLicenseType);
         }
 
         $statuses = [
@@ -335,8 +424,9 @@ if (! function_exists('webmakerr_render_license_settings_page')) {
                     id="webmakerr-license-expiry"
                     class="webmakerr-license-expiry<?php echo $expiryDetails['message'] === '' ? '' : ($expiryDetails['is_expired'] ? ' is-expired' : ' is-active'); ?>"
                     <?php echo $expiryDetails['message'] === '' ? ' hidden' : ''; ?>
-                    data-issued-at="<?php echo esc_attr($storedIssuedAt); ?>"
+                    data-activation-date="<?php echo esc_attr($storedActivationDate); ?>"
                     data-expires-at="<?php echo esc_attr($storedExpiresAt); ?>"
+                    data-license-type="<?php echo esc_attr($storedLicenseType); ?>"
                 >
                     <?php echo esc_html($expiryDetails['message']); ?>
                 </div>
@@ -356,15 +446,19 @@ add_action(
         }
 
         $savedStatus = get_option('webmakerr_theme_license_status', 'inactive');
-        $storedIssuedAt = get_option('webmakerr_theme_license_issued_at', '');
+        $storedActivationDate = get_option('webmakerr_theme_license_activation_date', '');
+        if ($storedActivationDate === '') {
+            $storedActivationDate = get_option('webmakerr_theme_license_issued_at', '');
+        }
+        $storedLicenseType = webmakerr_normalize_license_type(get_option('webmakerr_theme_license_type', ''));
         $storedExpiresAt = get_option('webmakerr_theme_license_expires_at', '');
         $expiresAt = webmakerr_parse_license_datetime($storedExpiresAt);
-        $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt);
+        $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt, $storedLicenseType);
 
         if ($expiryDetails['is_expired'] && $savedStatus !== 'expired') {
             $savedStatus = 'expired';
             update_option('webmakerr_theme_license_status', 'expired');
-            $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt);
+            $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt, $storedLicenseType);
         }
 
         wp_enqueue_style(
@@ -406,12 +500,18 @@ add_action(
                     'lessThanDay'    => __('less than 1 day', 'webmakerr'),
                     'singleDay'      => __('1 day', 'webmakerr'),
                     'multipleDays'   => __('%d days', 'webmakerr'),
+                    'lifetime'       => __('✅ License active – lifetime access', 'webmakerr'),
+                ],
+                'licenseMessages' => [
+                    'lifetime' => __('✅ License active – lifetime access', 'webmakerr'),
                 ],
                 'storedStatus' => $savedStatus,
                 'expiration'   => [
-                    'issued_at'      => $storedIssuedAt,
+                    'activation_date' => $storedActivationDate,
                     'expires_at'     => $storedExpiresAt,
                     'days_remaining' => $expiryDetails['days_remaining'],
+                    'message'        => $expiryDetails['message'],
+                    'license_type'   => $storedLicenseType,
                 ],
             ]
         );
@@ -455,16 +555,29 @@ if (! function_exists('webmakerr_rest_check_license')) {
 
         if (! is_array($licenses)) {
             $licenses = null;
-            $response = wp_remote_get(WEBMAKERR_LICENSE_DATA_URL);
 
-            if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
-                $body = wp_remote_retrieve_body($response);
-                $decoded = json_decode($body, true);
+            if (defined('WEBMAKERR_LICENSE_DATA_PATH') && WEBMAKERR_LICENSE_DATA_PATH !== '') {
+                $fileContents = file_get_contents(WEBMAKERR_LICENSE_DATA_PATH);
 
-                if (is_array($decoded)) {
-                    $licenses = $decoded;
-                    set_transient($transientKey, $licenses, 12 * HOUR_IN_SECONDS);
-                    update_option($cacheOptionKey, $licenses);
+                if ($fileContents !== false) {
+                    $decoded = json_decode($fileContents, true);
+
+                    if (is_array($decoded)) {
+                        $licenses = $decoded;
+                    }
+                }
+            }
+
+            if ($licenses === null) {
+                $response = wp_remote_get(WEBMAKERR_LICENSE_DATA_URL);
+
+                if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                    $body = wp_remote_retrieve_body($response);
+                    $decoded = json_decode($body, true);
+
+                    if (is_array($decoded)) {
+                        $licenses = $decoded;
+                    }
                 }
             }
 
@@ -483,51 +596,139 @@ if (! function_exists('webmakerr_rest_check_license')) {
 
                     return new WP_REST_Response(
                         [
-                            'valid'  => false,
-                            'status' => 'unavailable',
+                            'valid'   => false,
+                            'status'  => 'unavailable',
                             'message' => $errorMessage,
                         ],
                         500
                     );
                 }
             }
+
+            if (is_array($licenses)) {
+                set_transient($transientKey, $licenses, 12 * HOUR_IN_SECONDS);
+                update_option($cacheOptionKey, $licenses);
+            }
         }
 
         $status = 'invalid';
         $matchedLicense = null;
+        $matchedLicenseIndex = null;
 
-        foreach ($licenses as $license) {
+        foreach ($licenses as $index => $license) {
             if (! isset($license['key'])) {
                 continue;
             }
 
             if (hash_equals($license['key'], $licenseKey)) {
                 $matchedLicense = $license;
+                $matchedLicenseIndex = $index;
                 break;
             }
         }
 
-        $issuedAtIso = null;
+        $activationDateIso = null;
         $expiresAtIso = null;
         $daysRemaining = null;
+        $licenseType = null;
+        $licenseMessage = '';
+        $licensesUpdated = false;
 
         if ($matchedLicense !== null) {
             $status = $matchedLicense['status'] ?? 'invalid';
-            $issuedAtIso = isset($matchedLicense['issued_at']) && is_string($matchedLicense['issued_at'])
-                ? $matchedLicense['issued_at']
+            $licenseType = webmakerr_normalize_license_type($matchedLicense['license_type'] ?? null);
+
+            if (($matchedLicense['license_type'] ?? null) !== $licenseType) {
+                $matchedLicense['license_type'] = $licenseType;
+                $licensesUpdated = true;
+            }
+
+            $activationDateIso = isset($matchedLicense['activation_date']) && is_string($matchedLicense['activation_date'])
+                ? $matchedLicense['activation_date']
                 : null;
+
+            if ($activationDateIso === null && isset($matchedLicense['issued_at']) && is_string($matchedLicense['issued_at'])) {
+                $activationDateIso = $matchedLicense['issued_at'];
+                $matchedLicense['activation_date'] = $activationDateIso;
+                $licensesUpdated = true;
+            }
+
+            $activationDate = webmakerr_parse_license_datetime($activationDateIso);
+
             $expiresAtIso = isset($matchedLicense['expires_at']) && is_string($matchedLicense['expires_at'])
                 ? $matchedLicense['expires_at']
                 : null;
-
             $expiresAt = webmakerr_parse_license_datetime($expiresAtIso);
-            $expiryDetails = webmakerr_calculate_license_expiry_details($status, $expiresAt);
 
-            if ($expiryDetails['is_expired']) {
+            $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+
+            if ($status === 'pending') {
+                $status = 'active';
+                $matchedLicense['status'] = 'active';
+                $activationDate = $now;
+                $activationDateIso = $activationDate->format(DATE_ATOM);
+                $matchedLicense['activation_date'] = $activationDateIso;
+
+                $duration = webmakerr_resolve_license_duration($licenseType);
+
+                if ($duration !== null) {
+                    $expiresAt = $activationDate->add($duration);
+                    $expiresAtIso = $expiresAt->format(DATE_ATOM);
+                    $matchedLicense['expires_at'] = $expiresAtIso;
+                } else {
+                    $expiresAt = null;
+                    $expiresAtIso = null;
+                    unset($matchedLicense['expires_at']);
+                }
+
+                $licensesUpdated = true;
+            } elseif ($status === 'active') {
+                if ($licenseType === 'lifetime') {
+                    $expiresAt = null;
+                    $expiresAtIso = null;
+
+                    if (isset($matchedLicense['expires_at'])) {
+                        unset($matchedLicense['expires_at']);
+                        $licensesUpdated = true;
+                    }
+                } elseif ($expiresAt instanceof \DateTimeImmutable) {
+                    if ($expiresAt <= $now) {
+                        $status = 'expired';
+                        $matchedLicense['status'] = 'expired';
+                        $licensesUpdated = true;
+                    }
+                } elseif ($activationDate instanceof \DateTimeImmutable) {
+                    $duration = webmakerr_resolve_license_duration($licenseType);
+
+                    if ($duration !== null) {
+                        $expiresAt = $activationDate->add($duration);
+                        $expiresAtIso = $expiresAt->format(DATE_ATOM);
+                        $matchedLicense['expires_at'] = $expiresAtIso;
+                        $licensesUpdated = true;
+                    }
+                }
+            }
+
+            if ($licenseType === 'lifetime') {
+                $expiresAt = null;
+                $expiresAtIso = null;
+            }
+
+            $expiryDetails = webmakerr_calculate_license_expiry_details($status, $expiresAt, $licenseType);
+
+            if ($expiryDetails['is_expired'] && $status !== 'expired') {
                 $status = 'expired';
+                $matchedLicense['status'] = 'expired';
+                $licensesUpdated = true;
             }
 
             $daysRemaining = $expiryDetails['days_remaining'];
+            $licenseMessage = $expiryDetails['message'];
+
+            if ($licensesUpdated && $matchedLicenseIndex !== null) {
+                $licenses[$matchedLicenseIndex] = $matchedLicense;
+                webmakerr_store_license_dataset($licenses, $transientKey, $cacheOptionKey);
+            }
         }
 
         $isValid = $status === 'active';
@@ -537,15 +738,19 @@ if (! function_exists('webmakerr_rest_check_license')) {
         }
 
         update_option('webmakerr_theme_license_status', $status);
-        update_option('webmakerr_theme_license_issued_at', $issuedAtIso ?? '');
+        update_option('webmakerr_theme_license_activation_date', $activationDateIso ?? '');
+        update_option('webmakerr_theme_license_issued_at', $activationDateIso ?? '');
         update_option('webmakerr_theme_license_expires_at', $expiresAtIso ?? '');
+        update_option('webmakerr_theme_license_type', $licenseType ?? '');
 
         $responseData = [
             'valid'  => $isValid,
             'status' => $status,
-            'issued_at' => $issuedAtIso,
+            'activation_date' => $activationDateIso,
             'expires_at' => $expiresAtIso,
             'days_remaining' => $daysRemaining,
+            'license_type' => $licenseType,
+            'license_message' => $licenseMessage,
         ];
 
         if ($fallbackMessage !== null) {
