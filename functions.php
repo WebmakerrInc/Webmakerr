@@ -355,6 +355,18 @@ add_action(
             return;
         }
 
+        $savedStatus = get_option('webmakerr_theme_license_status', 'inactive');
+        $storedIssuedAt = get_option('webmakerr_theme_license_issued_at', '');
+        $storedExpiresAt = get_option('webmakerr_theme_license_expires_at', '');
+        $expiresAt = webmakerr_parse_license_datetime($storedExpiresAt);
+        $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt);
+
+        if ($expiryDetails['is_expired'] && $savedStatus !== 'expired') {
+            $savedStatus = 'expired';
+            update_option('webmakerr_theme_license_status', 'expired');
+            $expiryDetails = webmakerr_calculate_license_expiry_details($savedStatus, $expiresAt);
+        }
+
         wp_enqueue_style(
             'webmakerr-license-admin',
             get_template_directory_uri().'/resources/css/license-admin.css',
