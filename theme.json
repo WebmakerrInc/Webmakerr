@@ -97,7 +97,7 @@
         {
           "name": "Base",
           "slug": "base",
-          "size": "1rem"
+          "size": "15px"
         },
         {
           "name": "Large",
@@ -154,8 +154,8 @@
     },
     "typography": {
       "fontFamily": "var(--wp--preset--font-family--sans)",
-      "fontSize": "var(--wp--preset--font-size--base)",
-      "lineHeight": "1.6"
+      "fontSize": "15px",
+      "lineHeight": "24px"
     },
     "elements": {
       "heading": {
@@ -169,15 +169,15 @@
       },
       "h1": {
         "typography": {
-          "fontSize": "4rem",
-          "lineHeight": "4.4rem",
+          "fontSize": "40px",
+          "lineHeight": "48px",
           "fontWeight": "500"
         }
       },
       "h2": {
         "typography": {
-          "fontSize": "3.5rem",
-          "lineHeight": "3.85rem",
+          "fontSize": "34px",
+          "lineHeight": "42px",
           "fontWeight": "500"
         }
       },
