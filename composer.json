@@ -1,7 +1,7 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "tailpress/tailpress",
-    "description": "The Tailwind CSS powered WordPress boilerplate theme.",
+    "name": "webmakerr/webmakerr",
+    "description": "A fast, modern Tailwind WordPress theme by Webmakerr.",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "TailPress\\": "src/"
+            "Webmakerr\\": "src/"
         }
     },
     "require": {

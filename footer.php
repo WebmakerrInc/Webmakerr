@@ -2,7 +2,7 @@
 /**
  * Theme footer template.
  *
- * @package TailPress
+ * @package Webmakerr
  */
 ?>
         </main>

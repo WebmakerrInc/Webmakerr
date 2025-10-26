@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to TailPress will be documented in this file.
+All notable changes to Webmakerr will be documented in this file.
 
 ## Unreleased
 
@@ -31,7 +31,7 @@ All notable changes to TailPress will be documented in this file.
 ## 3.3.0
 
 - Update to Tailwind 3.3.0
-- Laravel Mix is now the default compiler (with the TailPress installer (^v2.0.0), use `compiler="esbuild"` if you want to keep using esbuild)
+- Laravel Mix is now the default compiler (with the Webmakerr installer (^v2.0.0), use `compiler="esbuild"` if you want to keep using esbuild)
 
 ## 3.2.0
 
@@ -50,16 +50,16 @@ All notable changes to TailPress will be documented in this file.
 
 - Updating Tailwind to 3.0.0.
 
-### TailPress installer
+### Webmakerr installer
 
-- The TailPress installer (^0.2.0) now allows you to use Laravel Mix instead of esbuild by setting --compiler=mix.
+- The Webmakerr installer (^0.2.0) now allows you to use Laravel Mix instead of esbuild by setting --compiler=mix.
 - You may now also set dbname, dbuser, dbpass and dbhost.
 
 ## 2.0.0 - 2021-09-03
 
 - Switching to Tailwind CLI and esbuild instead of LaraveL Mix.
 - Removing `theme` subdirectory setup as it is no longer needed with the new build setup.
-- Removing `TailPress` class and it's functions (`tailpress()->get_header()` etc.) throughout the theme.
+- Removing `Webmakerr` class and it's functions (`tailpress()->get_header()` etc.) throughout the theme.
 - New `tailpress_asset` function to get the URL of an asset (previously `tailpress_mix`).
 - `tailpress_asset` function thaty appends a `time` parameter if [wp_get_environment_type()](https://developer.wordpress.org/reference/functions/wp_get_environment_type/) does not return `production` for cache busting (instead of the previously used versioned assets through `mix-manifest.json`).
 - Update screenshot.png.
@@ -116,7 +116,7 @@ All notable changes to TailPress will be documented in this file.
 - Update Laravel Mix from version 5^ to 6^.
 - Removing Laravel Mix Tailwind, defining plugins within webpack.mix.js instead.
 - Switching from Sass to PostCSS for faster compiling.
-- Moved TailPress colors and font size settings to tailpress.json file.
+- Moved Webmakerr colors and font size settings to tailpress.json file.
 - Use tailpress.json to populate editor-color-palette and editor-font-sizes theme support automatically.
 - New screenshot.
 - Update readme.

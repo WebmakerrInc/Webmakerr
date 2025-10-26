@@ -3,8 +3,8 @@
 @import './utilities.css';
 @import './custom.css' layer(utilities);
 
-@source '../../vendor/tailpress/framework/**/*.php';
-@source '../../vendor/tailpress/framework/**/**/*.php';
+@source '../../vendor/webmakerr/framework/**/*.php';
+@source '../../vendor/webmakerr/framework/**/**/*.php';
 
 @utility container {
     margin-inline: auto;

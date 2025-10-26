@@ -2,7 +2,7 @@
 /**
  * Theme header template.
  *
- * @package TailPress
+ * @package Webmakerr
  */
 ?>
 <!DOCTYPE html>
@@ -87,7 +87,7 @@
                             Rapidly build your next WordPress theme with Tailwind CSS
                         </h1>
                         <p class="my-6 text-lg md:text-xl text-zinc-600 leading-8">
-                            <a href="https://webmakerr.io">TailPress</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
+                            <a href="https://webmakerr.io">Webmakerr</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
                             boilerplate theme. It's your go-to starting point for building custom WordPress themes with modern tools and practices.
                         </p>
                     </div>
