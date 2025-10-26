@@ -165,3 +165,191 @@ add_action(
     },
     11
 );
+
+add_action(
+    'admin_menu',
+    static function (): void {
+        add_theme_page(
+            __('Theme License', 'webmakerr'),
+            __('Theme License', 'webmakerr'),
+            'manage_options',
+            'webmakerr-theme-license',
+            'webmakerr_render_license_settings_page'
+        );
+    }
+);
+
+if (! function_exists('webmakerr_render_license_settings_page')) {
+    function webmakerr_render_license_settings_page(): void
+    {
+        if (! current_user_can('manage_options')) {
+            return;
+        }
+
+        $savedKey = get_option('webmakerr_theme_license_key', '');
+        $savedStatus = get_option('webmakerr_theme_license_status', 'inactive');
+        $statuses = [
+            'active'   => __('Active', 'webmakerr'),
+            'revoked'  => __('Revoked', 'webmakerr'),
+            'invalid'  => __('Invalid', 'webmakerr'),
+            'inactive' => __('Inactive', 'webmakerr'),
+        ];
+        $statusLabel = $statuses[$savedStatus] ?? $statuses['inactive'];
+        ?>
+        <div class="wrap webmakerr-license-page">
+            <h1 class="webmakerr-license-title"><?php esc_html_e('Theme License', 'webmakerr'); ?></h1>
+            <p class="webmakerr-license-description"><?php esc_html_e('Activate your Webmakerr theme license to unlock updates and premium support.', 'webmakerr'); ?></p>
+
+            <div class="webmakerr-license-card">
+                <label for="webmakerr-license-key" class="webmakerr-license-label"><?php esc_html_e('License Key', 'webmakerr'); ?></label>
+                <input type="text" id="webmakerr-license-key" class="webmakerr-license-input" value="<?php echo esc_attr($savedKey); ?>" placeholder="<?php esc_attr_e('Enter your license key', 'webmakerr'); ?>" />
+
+                <div class="webmakerr-license-actions">
+                    <button type="button" class="button button-primary webmakerr-license-button" id="webmakerr-activate-license">
+                        <?php esc_html_e('Activate License', 'webmakerr'); ?>
+                    </button>
+                    <span class="webmakerr-license-spinner" hidden></span>
+                </div>
+
+                <div class="webmakerr-license-status" data-stored-status="<?php echo esc_attr($savedStatus); ?>">
+                    <strong><?php esc_html_e('Current Status:', 'webmakerr'); ?></strong>
+                    <span id="webmakerr-license-status-text" class="status-<?php echo esc_attr($savedStatus); ?>"><?php echo esc_html($statusLabel); ?></span>
+                </div>
+
+                <div id="webmakerr-license-feedback" class="webmakerr-license-feedback" aria-live="polite"></div>
+            </div>
+        </div>
+        <?php
+    }
+}
+
+add_action(
+    'admin_enqueue_scripts',
+    static function (string $hook): void {
+        if ($hook !== 'appearance_page_webmakerr-theme-license') {
+            return;
+        }
+
+        wp_enqueue_style(
+            'webmakerr-license-admin',
+            get_template_directory_uri().'/resources/css/license-admin.css',
+            [],
+            wp_get_theme()->get('Version')
+        );
+
+        wp_enqueue_script(
+            'webmakerr-license-admin',
+            get_template_directory_uri().'/resources/js/license-admin.js',
+            [],
+            wp_get_theme()->get('Version'),
+            true
+        );
+
+        wp_localize_script(
+            'webmakerr-license-admin',
+            'webmakerrLicenseData',
+            [
+                'endpoint'   => esc_url_raw(rest_url('webmakerr/v1/check-license')),
+                'nonce'      => wp_create_nonce('wp_rest'),
+                'messages'   => [
+                    'empty'   => __('Please enter a license key before activating.', 'webmakerr'),
+                    'success' => __('✅ License Activated Successfully', 'webmakerr'),
+                    'error'   => __('❌ Invalid or Revoked License Key.', 'webmakerr'),
+                ],
+                'labels'     => [
+                    'active'   => __('Active', 'webmakerr'),
+                    'revoked'  => __('Revoked', 'webmakerr'),
+                    'invalid'  => __('Invalid', 'webmakerr'),
+                    'inactive' => __('Inactive', 'webmakerr'),
+                ],
+                'storedStatus' => get_option('webmakerr_theme_license_status', 'inactive'),
+            ]
+        );
+    }
+);
+
+add_action(
+    'rest_api_init',
+    static function (): void {
+        register_rest_route(
+            'webmakerr/v1',
+            '/check-license',
+            [
+                'methods'             => 'GET',
+                'callback'            => 'webmakerr_rest_check_license',
+                'permission_callback' => static function (): bool {
+                    return current_user_can('manage_options');
+                },
+                'args'                => [
+                    'key' => [
+                        'required'          => true,
+                        'sanitize_callback' => static function ($value) {
+                            return sanitize_text_field(wp_unslash($value));
+                        },
+                    ],
+                ],
+            ]
+        );
+    }
+);
+
+if (! function_exists('webmakerr_rest_check_license')) {
+    function webmakerr_rest_check_license(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $licenseKey = $request->get_param('key');
+        $licenseFile = get_template_directory().'/theme-core/licenses.json';
+
+        if (! is_readable($licenseFile)) {
+            return new WP_REST_Response(
+                [
+                    'valid'  => false,
+                    'status' => 'unavailable',
+                    'message' => __('License data is unavailable.', 'webmakerr'),
+                ],
+                500
+            );
+        }
+
+        $fileContents = file_get_contents($licenseFile);
+        $licenses = json_decode($fileContents, true);
+
+        if (! is_array($licenses)) {
+            return new WP_REST_Response(
+                [
+                    'valid'  => false,
+                    'status' => 'invalid',
+                    'message' => __('Unable to read license data.', 'webmakerr'),
+                ],
+                500
+            );
+        }
+
+        $status = 'invalid';
+
+        foreach ($licenses as $license) {
+            if (! isset($license['key'])) {
+                continue;
+            }
+
+            if (hash_equals($license['key'], $licenseKey)) {
+                $status = $license['status'] ?? 'invalid';
+                break;
+            }
+        }
+
+        $isValid = $status === 'active';
+
+        if ($isValid) {
+            update_option('webmakerr_theme_license_key', $licenseKey);
+        }
+
+        update_option('webmakerr_theme_license_status', $status);
+
+        return new WP_REST_Response(
+            [
+                'valid'  => $isValid,
+                'status' => $status,
+            ]
+        );
+    }
+}
