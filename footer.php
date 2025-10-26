@@ -282,12 +282,15 @@
 <!-- Promotional Popup -->
 <div
     id="promo-popup"
-    class="fixed inset-0 z-[70] hidden items-center justify-center bg-neutral-950/70 px-4"
+    class="fixed inset-0 z-[70] hidden flex items-center justify-center bg-neutral-950/70 px-4 opacity-0 transition-opacity duration-300 ease-out"
     role="dialog"
     aria-modal="true"
     aria-hidden="true"
 >
-    <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 shadow-[0_40px_80px_-40px_rgba(24,24,27,0.35)]">
+    <div
+        id="promoContent"
+        class="relative w-full max-w-2xl transform overflow-hidden rounded-[5px] border border-neutral-200 bg-neutral-50 shadow-[0_40px_80px_-40px_rgba(24,24,27,0.35)] translate-y-4 scale-95 opacity-0 transition-all duration-300 ease-out"
+    >
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-dark/5"></div>
         <button
             id="closePromo"
@@ -518,13 +521,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const closePromo = document.getElementById('closePromo');
         const promoForm = document.getElementById('promoForm');
         const promoDismiss = document.getElementById('promoDismiss');
+        const promoContent = document.getElementById('promoContent');
         const persistentKey = 'promoDismissed';
         const sessionKey = 'promoShownSession';
 
         let promoDismissed = storage ? storage.getItem(persistentKey) === 'true' : false;
         let promoShownThisSession = sessionStore ? sessionStore.getItem(sessionKey) === 'true' : false;
+        let isPromoAnimating = false;
 
-        const hidePromo = (persist = false) => {
+        const completePromoHide = (persist) => {
             promo.classList.add('hidden');
             promo.setAttribute('aria-hidden', 'true');
             promoShownThisSession = true;
@@ -537,6 +542,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStore.setItem(sessionKey, 'true');
             }
             window.removeEventListener('scroll', handleScroll);
+            isPromoAnimating = false;
+        };
+
+        const hidePromo = (persist = false) => {
+            if (promo.classList.contains('hidden')) {
+                if (persist) {
+                    promoDismissed = true;
+                    if (storage) {
+                        storage.setItem(persistentKey, 'true');
+                    }
+                    if (sessionStore) {
+                        sessionStore.setItem(sessionKey, 'true');
+                    }
+                }
+                return;
+            }
+
+            if (isPromoAnimating) {
+                return;
+            }
+
+            isPromoAnimating = true;
+
+            const handleTransitionEnd = (event) => {
+                if (event.target !== promo) {
+                    return;
+                }
+                promo.removeEventListener('transitionend', handleTransitionEnd);
+                completePromoHide(persist);
+            };
+
+            promo.addEventListener('transitionend', handleTransitionEnd);
+
+            promo.classList.add('opacity-0');
+            if (promoContent) {
+                promoContent.classList.add('translate-y-4', 'scale-95', 'opacity-0');
+            }
+
+            window.setTimeout(() => {
+                if (!isPromoAnimating) {
+                    return;
+                }
+                promo.removeEventListener('transitionend', handleTransitionEnd);
+                completePromoHide(persist);
+            }, 350);
         };
 
         const showPromo = () => {
@@ -550,6 +600,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (sessionStore) {
                 sessionStore.setItem(sessionKey, 'true');
             }
+
+            promo.classList.add('opacity-0');
+            if (promoContent) {
+                promoContent.classList.add('translate-y-4', 'scale-95', 'opacity-0');
+            }
+
+            requestAnimationFrame(() => {
+                promo.classList.remove('opacity-0');
+                if (promoContent) {
+                    promoContent.classList.remove('translate-y-4', 'scale-95', 'opacity-0');
+                }
+            });
         };
 
         const handleScroll = () => {
