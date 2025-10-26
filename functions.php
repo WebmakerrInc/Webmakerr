@@ -4,7 +4,7 @@ if (is_file(__DIR__.'/vendor/autoload_packages.php')) {
     require_once __DIR__.'/vendor/autoload_packages.php';
 }
 
-function tailpress(): TailPress\Framework\Theme
+function webmakerr(): TailPress\Framework\Theme
 {
     return TailPress\Framework\Theme::instance()
         ->assets(fn($manager) => $manager
@@ -16,7 +16,7 @@ function tailpress(): TailPress\Framework\Theme
             ->enqueueAssets()
         )
         ->features(fn($manager) => $manager->add(TailPress\Framework\Features\MenuOptions::class))
-        ->menus(fn($manager) => $manager->add('primary', __( 'Primary Menu', 'tailpress')))
+        ->menus(fn($manager) => $manager->add('primary', __( 'Primary Menu', 'webmakerr')))
         ->themeSupport(fn($manager) => $manager->add([
             'title-tag',
             'custom-logo',
@@ -34,4 +34,4 @@ function tailpress(): TailPress\Framework\Theme
         ]));
 }
 
-tailpress();
+webmakerr();
