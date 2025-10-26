@@ -51,7 +51,7 @@
                     </div>
                 <?php endif; ?>
 
-                <div id="primary-navigation" class="hidden md:flex md:bg-transparent gap-6 items-center border border-light md:border-none rounded-xl p-4 md:p-0">
+                <div id="primary-navigation" class="hidden flex flex-col gap-6 items-stretch border border-light rounded-xl p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0">
                     <nav>
                         <?php if (current_user_can('administrator') && !has_nav_menu('primary')): ?>
                             <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>" class="text-sm text-zinc-600"><?php esc_html_e('Edit Menus', 'webmakerr'); ?></a>
@@ -70,6 +70,14 @@
                     </nav>
 
                     <div class="inline-block mt-4 md:mt-0"><?php get_search_form(); ?></div>
+
+                    <a
+                        class="inline-flex w-full justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline md:w-auto"
+                        href="<?php echo esc_url(home_url('/contact')); ?>"
+                        aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
+                    >
+                        <?php esc_html_e('Contact Us', 'webmakerr'); ?>
+                    </a>
                 </div>
             </div>
         </div>
