@@ -1,7 +1,7 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "webmakerr/webmakerr",
-    "description": "A fast, modern Tailwind WordPress theme by Webmakerr.",
+    "name": "webmakerr/theme",
+    "description": "Webmakerr WordPress theme framework",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -15,14 +15,8 @@
             "Webmakerr\\": "src/"
         }
     },
-    "require": {
-        "php": ">=8.0.2",
-        "tailpress/framework": "^5.0.4",
-        "automattic/jetpack-autoloader": "^2.10"
-    },
-    "require-dev": {
-        "tailpress/cli": "^5.0"
-    },
+    "require": {},
+    "require-dev": {},
     "config": {
         "allow-plugins": {
             "automattic/jetpack-autoloader": true
