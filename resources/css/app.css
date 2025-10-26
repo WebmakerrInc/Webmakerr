@@ -50,4 +50,22 @@
     object-fit: contain;
     display: block;
   }
+
+  .footer-logo {
+    line-height: 0;
+  }
+
+  .footer-logo .custom-logo-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-logo .custom-logo,
+  .footer-logo img {
+    max-width: 120px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
 }

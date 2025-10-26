@@ -4,6 +4,8 @@
  *
  * @package Webmakerr
  */
+
+use Webmakerr\Walkers\FooterMenuWalker;
 ?>
         </main>
 
@@ -14,22 +16,23 @@
 
     <footer
         id="colophon"
-        class="relative isolate mt-16 bg-slate-950 text-slate-100"
+        class="mt-16 border-t border-neutral-200 bg-white text-neutral-900"
         role="contentinfo"
     >
-        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(79,70,229,0.2),_transparent_55%)]"></div>
         <div class="mx-auto w-full max-w-6xl px-6 py-16 lg:px-8 lg:py-20">
             <?php do_action('webmakerr_footer'); ?>
 
-            <div class="flex flex-col gap-12 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-                <div class="max-w-xl space-y-8">
-                    <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
+                <div class="max-w-md space-y-6">
+                    <div class="flex flex-col gap-4 text-neutral-600">
                         <?php if (has_custom_logo()) : ?>
                             <div class="flex items-center gap-4">
-                                <?php the_custom_logo(); ?>
+                                <div class="footer-logo flex items-center">
+                                    <?php the_custom_logo(); ?>
+                                </div>
                                 <?php if (display_header_text()) : ?>
                                     <a
-                                        class="text-lg font-semibold tracking-tight text-slate-100"
+                                        class="text-base font-semibold text-neutral-900 no-underline transition hover:opacity-70"
                                         href="<?php echo esc_url(home_url('/')); ?>"
                                         rel="home"
                                     >
@@ -39,7 +42,7 @@
                             </div>
                         <?php else : ?>
                             <a
-                                class="text-xl font-semibold tracking-tight text-slate-100"
+                                class="text-lg font-semibold text-neutral-900 no-underline transition hover:opacity-70"
                                 href="<?php echo esc_url(home_url('/')); ?>"
                                 rel="home"
                             >
@@ -48,7 +51,7 @@
                         <?php endif; ?>
 
                         <?php if (get_bloginfo('description')) : ?>
-                            <p class="text-base leading-relaxed text-slate-300">
+                            <p class="text-sm leading-relaxed text-neutral-500">
                                 <?php echo esc_html(get_bloginfo('description')); ?>
                             </p>
                         <?php endif; ?>
@@ -68,12 +71,16 @@
                         ?>
                         <div>
                             <a
-                                class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:shadow-purple-500/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                class="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 no-underline transition-colors duration-200 hover:opacity-70"
                                 href="<?php echo esc_url($cta_url); ?>"
                                 target="<?php echo esc_attr($cta_target); ?>"
                                 <?php echo $cta_rel ? 'rel="'.esc_attr($cta_rel).'"' : ''; ?>
                             >
-                                <?php echo esc_html($cta_label); ?>
+                                <span><?php echo esc_html($cta_label); ?></span>
+                                <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M3.75 12.25L12.25 3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M4.5 3.75H12.25V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
                             </a>
                         </div>
                     <?php endif; ?>
@@ -84,15 +91,15 @@
 
                     if ($contact_label && $contact_email) :
                         ?>
-                        <div class="text-sm text-slate-400">
+                        <div>
                             <a
-                                class="inline-flex items-center gap-2 text-slate-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                class="inline-flex items-center gap-2 text-sm text-neutral-600 no-underline transition hover:text-neutral-900"
                                 href="mailto:<?php echo esc_attr($contact_email); ?>"
                             >
-                                <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+                                <span class="font-medium text-neutral-900">
                                     <?php echo esc_html($contact_label); ?>
                                 </span>
-                                <span class="text-sm font-medium text-slate-100">
+                                <span class="text-neutral-500">
                                     <?php echo esc_html($contact_email); ?>
                                 </span>
                             </a>
@@ -101,26 +108,26 @@
                 </div>
 
                 <?php if (has_nav_menu('footer')) : ?>
-                    <nav aria-label="<?php esc_attr_e('Footer', 'webmakerr'); ?>">
+                    <nav aria-label="<?php esc_attr_e('Footer', 'webmakerr'); ?>" class="w-full lg:max-w-3xl">
                         <?php
                         echo wp_nav_menu([
                             'theme_location' => 'footer',
                             'container'      => '',
-                            'menu_class'     => 'grid list-none gap-10 sm:grid-cols-2 lg:grid-cols-3',
+                            'menu_class'     => 'grid gap-0 md:grid-cols-2 md:gap-10 lg:grid-cols-3',
                             'items_wrap'     => '<ul id="%1$s" class="%2$s" role="list">%3$s</ul>',
                             'depth'          => 2,
                             'fallback_cb'    => '__return_empty_string',
-                            'echo'           => false,
+                            'walker'         => new FooterMenuWalker(),
                         ]);
                         ?>
                     </nav>
                 <?php endif; ?>
             </div>
 
-            <div class="mt-16 flex flex-col gap-6 border-t border-white/10 pt-8 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between">
-                <p class="text-center sm:text-left">
+            <div class="mt-16 flex flex-col gap-4 border-t border-neutral-200 pt-6 text-sm text-neutral-500 md:flex-row md:items-center md:justify-between">
+                <p class="text-center md:text-left">
                     &copy; <?php echo esc_html(date_i18n('Y')); ?>
-                    <span class="font-medium text-slate-200">
+                    <span class="font-medium text-neutral-900">
                         <?php echo esc_html(get_bloginfo('name')); ?>
                     </span>
                 </p>
@@ -130,7 +137,7 @@
 
                 if ($footer_note) :
                     ?>
-                    <p class="text-center sm:text-right text-slate-400">
+                    <p class="text-center text-neutral-500 md:text-right">
                         <?php echo wp_kses_post($footer_note); ?>
                     </p>
                 <?php endif; ?>

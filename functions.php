@@ -106,13 +106,15 @@ add_filter(
             return $classes;
         }
 
+        $normalized = ['menu-item', 'list-none'];
+
         if ($depth === 0) {
-            $classes[] = 'space-y-4';
+            $normalized[] = 'footer-menu-item';
+        } else {
+            $normalized[] = 'footer-submenu-item';
         }
 
-        $classes[] = 'list-none';
-
-        return array_values(array_unique(array_filter($classes)));
+        return array_values(array_unique($normalized));
     },
     10,
     4
@@ -125,9 +127,7 @@ add_filter(
             return $classes;
         }
 
-        $classes[] = 'space-y-3';
         $classes[] = 'list-none';
-        $classes[] = 'pl-0';
 
         return array_values(array_unique(array_filter($classes)));
     },
@@ -142,15 +142,15 @@ add_filter(
             return $atts;
         }
 
-        $baseClasses = 'transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
+        $baseClasses = 'transition-colors duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900';
 
         if ($depth === 0) {
-            $linkClasses = 'block text-xs font-semibold uppercase tracking-[0.16em] text-slate-200 hover:text-white';
+            $linkClasses = 'no-underline text-sm font-semibold text-neutral-900 hover:opacity-70 md:text-base';
         } else {
-            $linkClasses = 'block text-sm text-slate-400 hover:text-slate-50';
+            $linkClasses = 'block no-underline text-sm text-neutral-500 hover:text-neutral-900';
         }
 
-        $atts['class'] = trim(($atts['class'] ?? '').' '.$linkClasses.' '.$baseClasses);
+        $atts['class'] = trim($linkClasses.' '.$baseClasses);
 
         return $atts;
     },
