@@ -15,10 +15,10 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class('bg-white text-zinc-900 antialiased'); ?>>
-<?php do_action('tailpress_site_before'); ?>
+<?php do_action('webmakerr_site_before'); ?>
 
 <div id="page" class="min-h-screen flex flex-col">
-    <?php do_action('tailpress_header'); ?>
+    <?php do_action('webmakerr_header'); ?>
 
     <header class="container mx-auto py-6">
         <div class="md:flex md:justify-between md:items-center">
@@ -53,7 +53,7 @@
             <div id="primary-navigation" class="hidden md:flex md:bg-transparent gap-6 items-center border border-light md:border-none rounded-xl p-4 md:p-0">
                 <nav>
                     <?php if (current_user_can('administrator') && !has_nav_menu('primary')): ?>
-                        <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>" class="text-sm text-zinc-600"><?php esc_html_e('Edit Menus', 'tailpress'); ?></a>
+                        <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>" class="text-sm text-zinc-600"><?php esc_html_e('Edit Menus', 'webmakerr'); ?></a>
                     <?php else: ?>
                         <?php
                         wp_nav_menu([
@@ -87,12 +87,12 @@
                             Rapidly build your next WordPress theme with Tailwind CSS
                         </h1>
                         <p class="my-6 text-lg md:text-xl text-zinc-600 leading-8">
-                            <a href="https://tailpress.io">TailPress</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
+                            <a href="https://webmakerr.io">TailPress</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
                             boilerplate theme. It's your go-to starting point for building custom WordPress themes with modern tools and practices.
                         </p>
                     </div>
                     <div>
-                        <a href="https://tailpress.io" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
+                        <a href="https://webmakerr.io" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
                             Documentation
                         </a>
                     </div>
@@ -100,5 +100,5 @@
             </section>
         <?php endif; ?>
 
-        <?php do_action('tailpress_content_start'); ?>
+        <?php do_action('webmakerr_content_start'); ?>
         <main>

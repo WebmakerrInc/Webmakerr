@@ -20,7 +20,7 @@ if (post_password_required()) {
                     '%1$s comments',
                     get_comments_number(),
                     'comments title',
-                    'tailpress'
+                    'webmakerr'
                 )),
                 esc_html(number_format_i18n(get_comments_number()))
             );
@@ -40,19 +40,19 @@ if (post_password_required()) {
         </ol>
 
         <?php if (get_comment_pages_count() > 1 && get_option('page_comments')): ?>
-            <nav class="comment-navigation flex justify-between" id="comment-nav-above" aria-label="<?php esc_attr_e('Comment navigation', 'tailpress'); ?>">
+            <nav class="comment-navigation flex justify-between" id="comment-nav-above" aria-label="<?php esc_attr_e('Comment navigation', 'webmakerr'); ?>">
                 <div class="nav-previous">
-                    <?php previous_comments_link(esc_html__('Older Comments &larr;', 'tailpress')); ?>
+                    <?php previous_comments_link(esc_html__('Older Comments &larr;', 'webmakerr')); ?>
                 </div>
                 <div class="nav-next">
-                    <?php next_comments_link(esc_html__('Newer Comments &rarr;', 'tailpress')); ?>
+                    <?php next_comments_link(esc_html__('Newer Comments &rarr;', 'webmakerr')); ?>
                 </div>
             </nav>
         <?php endif; ?>
     <?php endif; ?>
 
     <?php if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')): ?>
-        <p class="no-comments text-zinc-600"><?php esc_html_e('Comments are closed.', 'tailpress'); ?></p>
+        <p class="no-comments text-zinc-600"><?php esc_html_e('Comments are closed.', 'webmakerr'); ?></p>
     <?php endif; ?>
 
     <?php
