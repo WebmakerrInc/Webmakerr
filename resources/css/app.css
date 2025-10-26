@@ -44,11 +44,11 @@
     --txt-xlarge-size: 1.125rem;
     --txt-xlarge-line-height: 1.8rem;
     --txt-xlarge-weight: 400;
-    --txt-large-plus-size: 1rem;
-    --txt-large-plus-line-height: 1.6rem;
+    --txt-large-plus-size: 15px;
+    --txt-large-plus-line-height: 24px;
     --txt-large-plus-weight: 500;
-    --txt-large-size: 1rem;
-    --txt-large-line-height: 1.6rem;
+    --txt-large-size: 15px;
+    --txt-large-line-height: 24px;
     --txt-large-weight: 400;
     --txt-medium-plus-size: 0.875rem;
     --txt-medium-plus-line-height: 1.4rem;
@@ -82,11 +82,11 @@
     --code-paragraph-line-height: 1.2rem;
     --code-paragraph-weight: 400;
 
-    --heading-h1-size: clamp(2rem, 3vw + 1.25rem, 3rem);
-    --heading-h1-line-height: clamp(2.4rem, 3vw + 1.75rem, 3.5rem);
+    --heading-h1-size: 40px;
+    --heading-h1-line-height: 48px;
     --heading-h1-weight: 500;
-    --heading-h2-size: clamp(1.625rem, 2.4vw + 0.95rem, 2.4rem);
-    --heading-h2-line-height: clamp(2rem, 2.4vw + 1.3rem, 2.9rem);
+    --heading-h2-size: 34px;
+    --heading-h2-line-height: 42px;
     --heading-h2-weight: 500;
     --heading-h3-size: clamp(1.375rem, 1.8vw + 0.9rem, 1.85rem);
     --heading-h3-line-height: clamp(1.75rem, 1.8vw + 1.1rem, 2.3rem);
@@ -189,7 +189,7 @@
 
     --container-component-background: rgba(255, 255, 255, 1);
     --container-component-padding: 16px 24px;
-    --container-component-radius: 8px;
+    --container-component-radius: 5px;
 
     --switch-track-base-size: 18px 32px;
     --switch-track-small-size: 16px 28px;
@@ -202,9 +202,9 @@
 
     --radius-xxs: 2px;
     --radius-xs: 4px;
-    --radius-sm: 6px;
-    --radius-default: 8px;
-    --radius-md: 8px;
+    --radius-sm: 5px;
+    --radius-default: 5px;
+    --radius-md: 5px;
     --radius-lg: 12px;
     --radius-xl: 16px;
 
@@ -306,7 +306,7 @@
     font-weight: var(--heading-h4-weight);
   }
 
-  button,
+  button:not(.search-form__submit),
   input[type='button'],
   input[type='reset'],
   input[type='submit'],
@@ -318,13 +318,13 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid #000;
-    background-color: #000;
+    border-radius: 5px;
+    border: 1px solid var(--wp--preset--color--primary, #000);
+    background-color: var(--wp--preset--color--primary, #000);
     color: #fff;
     font-family: var(--font-family-sans);
-    font-size: var(--txt-medium-plus-size);
-    line-height: var(--txt-medium-plus-line-height);
+    font-size: 16px;
+    line-height: 24px;
     font-weight: 600;
     text-decoration: none;
     transition-property: var(--transition-property-fg);
@@ -338,9 +338,9 @@
     color: #fff;
   }
 
-  button:hover,
-  button:focus,
-  button:active,
+  button:not(.search-form__submit):hover,
+  button:not(.search-form__submit):focus,
+  button:not(.search-form__submit):active,
   input[type='button']:hover,
   input[type='button']:focus,
   input[type='button']:active,
@@ -359,19 +359,20 @@
   .wp-block-button__link:hover,
   .wp-block-button__link:focus,
   .wp-block-button__link:active {
-    background-color: #000;
+    background-color: var(--wp--preset--color--primary-hover, #000);
+    border-color: var(--wp--preset--color--primary-hover, #000);
     color: #fff;
     box-shadow: 0 0 0 2px #0000000d, 0 0 0 4px #00000014;
   }
 
-  button:focus-visible,
+  button:not(.search-form__submit):focus-visible,
   input[type='button']:focus-visible,
   input[type='reset']:focus-visible,
   input[type='submit']:focus-visible,
   .button:focus-visible,
   .wp-element-button:focus-visible,
   .wp-block-button__link:focus-visible {
-    outline: 2px solid #000;
+    outline: 2px solid var(--wp--preset--color--primary, #000);
     outline-offset: 2px;
   }
 
@@ -389,6 +390,69 @@
     color: rgba(255, 255, 255, 0.8);
     cursor: not-allowed;
     box-shadow: none;
+  }
+
+  section,
+  article,
+  aside,
+  .card,
+  .wp-block-group,
+  .wp-block-cover,
+  .wp-block-columns,
+  .wp-block-column,
+  .wp-block-post,
+  .wp-block-template-part,
+  .wp-block-query .wp-block-post,
+  .wp-block-media-text,
+  .wp-block-search,
+  .widget {
+    border-radius: 5px;
+  }
+
+  .search-form__submit {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .search-form__submit:focus-visible {
+    outline: 2px solid var(--wp--preset--color--primary, #000);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 13.5px;
+      line-height: 21.6px;
+    }
+
+    h1 {
+      font-size: 36px;
+      line-height: 43.2px;
+    }
+
+    h2 {
+      font-size: 30.6px;
+      line-height: 37.8px;
+    }
+
+    button:not(.search-form__submit),
+    input[type='button'],
+    input[type='reset'],
+    input[type='submit'],
+    .button,
+    .wp-element-button,
+    .wp-block-button__link {
+      font-size: 14.4px;
+      line-height: 21.6px;
+      padding: 0.7rem 1.5rem;
+    }
   }
 }
 
