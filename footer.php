@@ -16,7 +16,7 @@
         <div class="container mx-auto py-12">
             <?php do_action('webmakerr_footer'); ?>
             <div class="text-sm text-zinc-700">
-                &copy; <?php echo esc_html(date_i18n('Y')); ?> - <?php bloginfo('name'); ?>
+                &copy; <?php echo esc_html(date_i18n('Y')); ?> - <?php echo esc_html(get_bloginfo('name')); ?>
             </div>
         </div>
     </footer>
