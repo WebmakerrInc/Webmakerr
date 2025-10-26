@@ -9,9 +9,21 @@
         <?php endif; ?>
     </header>
 
-    <?php if(has_post_thumbnail()): ?>
-        <div class="mt-10 sm:mt-20 mx-auto max-w-4xl rounded-4xl bg-light overflow-hidden">
-            <?php the_post_thumbnail('large', ['class' => 'aspect-16/10 w-full object-cover']); ?>
+    <?php if (has_post_thumbnail()): ?>
+        <div class="mt-10 sm:mt-20 mx-auto max-w-4xl rounded-4xl bg-light overflow-hidden single-featured-media">
+            <?php
+            echo wp_get_attachment_image(
+                get_post_thumbnail_id(),
+                'large',
+                false,
+                [
+                    'class'    => 'aspect-16/10 w-full object-cover single-featured-media__image',
+                    'loading'  => 'lazy',
+                    'decoding' => 'async',
+                    'style'    => 'aspect-ratio: 16 / 10; width: 100%; height: auto; display: block;',
+                ]
+            );
+            ?>
         </div>
     <?php endif; ?>
 
