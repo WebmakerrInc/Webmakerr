@@ -94,4 +94,10 @@ function webmakerr(): Theme
         ]));
 }
 
-webmakerr();
+add_action(
+    'after_setup_theme',
+    static function (): void {
+        webmakerr();
+    },
+    11
+);
