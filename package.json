@@ -5,11 +5,11 @@
         "author": "Webmakerr",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tailpress/tailpress"
+		"url": "https://github.com/WebmakerrInc/Webmakerr"
 	},
-	"theme_uri": "https://github.com/tailpress/tailpress",
-	"author_uri": "https://tailpress.io",
-	"text_domain": "tailpress",
+	"theme_uri": "https://github.com/WebmakerrInc/Webmakerr",
+	"author_uri": "https://webmakerr.com",
+	"text_domain": "webmakerr",
 	"license": "MIT",
 	"scripts": {
 		"dev": "vite",
