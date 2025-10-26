@@ -1,8 +1,8 @@
 {
-	"name": "tailpress",
+        "name": "webmakerr-theme",
 	"version": "5.0.0",
-	"description": "Boilerplate WordPress theme with Tailwind CSS.",
-	"author": "Jeffrey van Rossum",
+        "description": "A modern Tailwind WordPress theme by Webmakerr.",
+        "author": "Webmakerr",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/tailpress/tailpress"
