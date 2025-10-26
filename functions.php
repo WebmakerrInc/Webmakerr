@@ -6,6 +6,18 @@ use Webmakerr\Framework\Theme;
 
 if (is_file(__DIR__.'/vendor/autoload_packages.php')) {
     require_once __DIR__.'/vendor/autoload_packages.php';
+} else {
+    spl_autoload_register(function (string $class): void {
+        if (str_starts_with($class, 'Webmakerr\\')) {
+            $baseDir = __DIR__.'/src/';
+            $relativeClass = substr($class, strlen('Webmakerr\\'));
+            $file = $baseDir.str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass).'.php';
+
+            if (is_file($file)) {
+                require_once $file;
+            }
+        }
+    });
 }
 
 function webmakerr(): Theme
