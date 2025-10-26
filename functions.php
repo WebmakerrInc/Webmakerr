@@ -28,6 +28,127 @@ if (! function_exists('webmakerr_parse_license_datetime')) {
     }
 }
 
+if (! function_exists('webmakerr_is_list_array')) {
+    function webmakerr_is_list_array(array $value): bool
+    {
+        if (function_exists('array_is_list')) {
+            return array_is_list($value);
+        }
+
+        $expectedKey = 0;
+
+        foreach ($value as $key => $_) {
+            if ($key !== $expectedKey) {
+                return false;
+            }
+
+            ++$expectedKey;
+        }
+
+        return true;
+    }
+}
+
+if (! function_exists('webmakerr_extract_license_entries')) {
+    function webmakerr_extract_license_entries($data): array
+    {
+        if (! is_array($data)) {
+            return [];
+        }
+
+        if (isset($data['licenses']) && is_array($data['licenses'])) {
+            return webmakerr_extract_license_entries($data['licenses']);
+        }
+
+        $licenses = [];
+
+        if (webmakerr_is_list_array($data)) {
+            foreach ($data as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                if (isset($item['key']) && is_string($item['key']) && trim($item['key']) !== '') {
+                    $licenses[] = $item;
+                    continue;
+                }
+
+                foreach (webmakerr_extract_license_entries($item) as $nested) {
+                    $licenses[] = $nested;
+                }
+            }
+
+            return $licenses;
+        }
+
+        if (isset($data['key']) && is_string($data['key']) && trim($data['key']) !== '') {
+            $licenses[] = $data;
+        }
+
+        foreach ($data as $key => $value) {
+            if (! is_array($value)) {
+                continue;
+            }
+
+            if (
+                ! isset($value['key'])
+                && is_string($key)
+                && trim($key) !== ''
+                && (isset($value['status']) || isset($value['license_type']) || isset($value['activation_date']) || isset($value['issued_at']) || isset($value['expires_at']))
+            ) {
+                $value['key'] = $key;
+                $licenses[] = $value;
+                continue;
+            }
+
+            foreach (webmakerr_extract_license_entries($value) as $nested) {
+                $licenses[] = $nested;
+            }
+        }
+
+        return $licenses;
+    }
+}
+
+if (! function_exists('webmakerr_merge_license_lists')) {
+    function webmakerr_merge_license_lists(array $primary, array $secondary): array
+    {
+        $merged = [];
+
+        foreach ($primary as $license) {
+            if (! isset($license['key']) || ! is_string($license['key'])) {
+                continue;
+            }
+
+            $normalizedKey = trim($license['key']);
+
+            if ($normalizedKey === '') {
+                continue;
+            }
+
+            $license['key'] = $normalizedKey;
+            $merged[$normalizedKey] = $license;
+        }
+
+        foreach ($secondary as $license) {
+            if (! isset($license['key']) || ! is_string($license['key'])) {
+                continue;
+            }
+
+            $normalizedKey = trim($license['key']);
+
+            if ($normalizedKey === '' || isset($merged[$normalizedKey])) {
+                continue;
+            }
+
+            $license['key'] = $normalizedKey;
+            $merged[$normalizedKey] = $license;
+        }
+
+        return array_values($merged);
+    }
+}
+
 if (! function_exists('webmakerr_calculate_license_expiry_details')) {
     function webmakerr_calculate_license_expiry_details(string $status, ?\DateTimeImmutable $expiresAt, ?string $licenseType = null): array
     {
@@ -142,28 +263,40 @@ if (! function_exists('webmakerr_fetch_license_dataset')) {
         }
 
         $licenses = null;
+        $primaryLicenses = [];
+        $bundledLicenses = [];
         $response = wp_remote_get(WEBMAKERR_LICENSE_DATA_URL);
 
         if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
             $body = wp_remote_retrieve_body($response);
             $decoded = json_decode($body, true);
+            $primaryLicenses = webmakerr_extract_license_entries($decoded);
 
-            if (is_array($decoded)) {
-                $licenses = $decoded;
+            if ($primaryLicenses !== []) {
+                $licenses = $primaryLicenses;
             }
         }
 
-        if ($licenses === null && defined('WEBMAKERR_LICENSE_DATA_PATH') && WEBMAKERR_LICENSE_DATA_PATH !== '') {
+        if (defined('WEBMAKERR_LICENSE_DATA_PATH') && WEBMAKERR_LICENSE_DATA_PATH !== '') {
             $fileContents = file_get_contents(WEBMAKERR_LICENSE_DATA_PATH);
 
             if ($fileContents !== false) {
                 $decoded = json_decode($fileContents, true);
+                $bundledLicenses = webmakerr_extract_license_entries($decoded);
 
-                if (is_array($decoded)) {
-                    $licenses = $decoded;
+                if ($licenses === null && $bundledLicenses !== []) {
+                    $licenses = $bundledLicenses;
                     $fallbackMessage = __('Using bundled license data until the license server can be reached.', 'webmakerr');
                 }
             }
+        }
+
+        if ($licenses !== null && $bundledLicenses !== [] && $primaryLicenses !== []) {
+            $licenses = webmakerr_merge_license_lists($primaryLicenses, $bundledLicenses);
+        }
+
+        if ($licenses === null && $bundledLicenses !== [] && $primaryLicenses === []) {
+            $licenses = $bundledLicenses;
         }
 
         if ($licenses === null) {
