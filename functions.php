@@ -80,9 +80,13 @@ function webmakerr(): Theme
     return Theme::instance()
         ->assets(static fn ($manager) => $manager
             ->withCompiler(new ViteCompiler(), static fn ($compiler) => $compiler
-                ->registerAsset('build/assets/app.css')
-                ->registerAsset('build/assets/app.js')
-                ->editorStyleFile('build/assets/editor-style.css')
+                ->registerAsset('resources/css/app.css', ['load' => 'async'])
+                ->registerAsset('resources/js/app.js', [
+                    'strategy'    => 'defer',
+                    'in_footer'   => true,
+                    'include_css' => false,
+                ])
+                ->editorStyleFile('resources/css/editor-style.css')
             )
             ->enqueueAssets()
         )
@@ -101,4 +105,30 @@ add_action(
         webmakerr();
     },
     11
+);
+
+add_action(
+    'wp_head',
+    static function (): void {
+        $criticalCssPath = get_theme_file_path('resources/css/critical.css');
+
+        if (!file_exists($criticalCssPath)) {
+            return;
+        }
+
+        $criticalCss = file_get_contents($criticalCssPath);
+
+        if (false === $criticalCss) {
+            return;
+        }
+
+        $criticalCss = trim($criticalCss);
+
+        if ($criticalCss === '') {
+            return;
+        }
+
+        echo '<style id="webmakerr-critical-css">'.wp_strip_all_tags($criticalCss).'</style>';
+    },
+    5
 );
