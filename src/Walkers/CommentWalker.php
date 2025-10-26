@@ -6,18 +6,18 @@ class CommentWalker extends \Walker_Comment
 {
     protected function html5_comment($comment, $depth, $args)
     {
-		$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
+                $tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 
 		$commenter          = wp_get_current_commenter();
 		$show_pending_links = ! empty( $commenter['comment_author'] );
 
-		if ( $commenter['comment_author_email'] ) {
-			$moderation_note = __( 'Your comment is awaiting moderation.' );
-		} else {
-			$moderation_note = __( 'Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.' );
-		}
-		?>
-		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
+                if ( $commenter['comment_author_email'] ) {
+                        $moderation_note = __( 'Your comment is awaiting moderation.', 'webmakerr' );
+                } else {
+                        $moderation_note = __( 'Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.', 'webmakerr' );
+                }
+                ?>
+                <<?php echo tag_escape( $tag ); ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
 			<article id="div-comment-<?php comment_ID(); ?>" class="comment-body flex gap-8">
 
 				<footer class="comment-meta flex">
@@ -46,31 +46,31 @@ class CommentWalker extends \Walker_Comment
                                 $comment_author = get_comment_author( $comment );
                             }
 
-                            echo $comment_author;
+                            echo wp_kses_post( $comment_author );
                             ?>
                         </div>
 
-						<div class="text-zinc-500 text-sm flex gap-4">
+                                                <div class="text-zinc-500 text-sm flex gap-4">
                             <?php
                             printf(
                                 '<a href="%s"><time datetime="%s">%s</time></a>',
                                 esc_url( get_comment_link( $comment, $args ) ),
-                                get_comment_time( 'c' ),
+                                esc_attr( get_comment_time( 'c' ) ),
                                 sprintf(
                                     /* translators: 1: Comment date, 2: Comment time. */
-                                    __( '%1$s at %2$s' ),
-                                    get_comment_date( '', $comment ),
-                                    get_comment_time()
+                                    esc_html__( '%1$s at %2$s', 'webmakerr' ),
+                                    esc_html( get_comment_date( '', $comment ) ),
+                                    esc_html( get_comment_time() )
                                 )
                             );
-                            edit_comment_link( __( 'Edit' ), ' <span class="edit-link">', '</span>' );
+                            edit_comment_link( esc_html__( 'Edit', 'webmakerr' ), ' <span class="edit-link">', '</span>' );
                             ?>
                         </div>
-					</div><!-- .comment-metadata -->
+                                        </div><!-- .comment-metadata -->
 
-					<?php if ( '0' === $comment->comment_approved ) : ?>
-					<em class="comment-awaiting-moderation"><?php echo $moderation_note; ?></em>
-					<?php endif; ?>
+                                        <?php if ( '0' === $comment->comment_approved ) : ?>
+                                        <em class="comment-awaiting-moderation"><?php echo esc_html( $moderation_note ); ?></em>
+                                        <?php endif; ?>
 
                     <div class="comment-content my-6">
                         <?php comment_text(); ?>
