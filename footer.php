@@ -279,41 +279,92 @@
     </div>
 </div>
 
-<!-- Mobile Promo Popup -->
-<div id="promo-popup" class="fixed inset-0 z-[70] hidden flex items-center justify-center bg-neutral-950/60 px-4 md:hidden">
-    <div class="relative w-full max-w-md rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-xl">
+<!-- Promotional Popup -->
+<div
+    id="promo-popup"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-neutral-950/70 px-4"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+>
+    <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 shadow-[0_40px_80px_-40px_rgba(24,24,27,0.35)]">
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-dark/5"></div>
         <button
             id="closePromo"
-            class="absolute right-4 top-4 text-xl text-neutral-500 transition hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+            class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/80 text-lg text-neutral-500 transition hover:scale-105 hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
             type="button"
+            aria-label="<?php esc_attr_e('Close promotion popup', 'webmakerr'); ?>"
         >
             &times;
         </button>
 
-        <h2 class="text-center text-lg font-semibold text-neutral-900">
-            <?php esc_html_e('🎉 Special offer just for you!', 'webmakerr'); ?>
-        </h2>
-        <p class="mt-3 text-center text-sm text-neutral-600">
-            <?php esc_html_e('Subscribe now and get 20% off your first order. Don’t miss this limited-time deal.', 'webmakerr'); ?>
-        </p>
-
-        <form id="promoForm" class="mt-5 flex flex-col gap-3">
-            <label class="sr-only" for="promoEmail"><?php esc_html_e('Email address', 'webmakerr'); ?></label>
-            <input
-                id="promoEmail"
-                type="email"
-                required
-                placeholder="<?php esc_attr_e('Your email address', 'webmakerr'); ?>"
-                class="w-full rounded-md border border-neutral-300 px-4 py-2 text-sm text-neutral-900 focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/30"
-            />
-            <button
-                type="submit"
-                class="inline-flex items-center justify-center rounded-md bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
-            >
-                <?php esc_html_e('Get offer', 'webmakerr'); ?>
-            </button>
-        </form>
-        <p class="mt-3 text-center text-xs text-neutral-500"><?php esc_html_e('We respect your privacy. Unsubscribe anytime.', 'webmakerr'); ?></p>
+        <div class="relative grid gap-8 p-6 md:grid-cols-[1.15fr,0.85fr] md:p-10">
+            <div class="flex flex-col justify-center">
+                <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
+                    <?php esc_html_e('Webmakerr Exclusive', 'webmakerr'); ?>
+                </span>
+                <h2 class="mt-4 text-2xl font-semibold text-neutral-900 md:text-3xl">
+                    <?php esc_html_e('Unlock 20% off your first order today', 'webmakerr'); ?>
+                </h2>
+                <p class="mt-3 text-sm leading-relaxed text-neutral-600 md:text-base">
+                    <?php esc_html_e('Join the Webmakerr insider list for curated trends, early product drops, and members-only rewards crafted to elevate your everyday moments.', 'webmakerr'); ?>
+                </p>
+                <ul class="mt-5 space-y-3 text-sm text-neutral-700 md:text-base">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-7.25 7.25a1 1 0 0 1-1.414 0l-3-3a1 1 0 1 1 1.414-1.414L8.5 11.586l6.543-6.543a1 1 0 0 1 1.414 0Z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span><?php esc_html_e('Instant 20% welcome voucher on your first purchase.', 'webmakerr'); ?></span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-7.25 7.25a1 1 0 0 1-1.414 0l-3-3a1 1 0 1 1 1.414-1.414L8.5 11.586l6.543-6.543a1 1 0 0 1 1.414 0Z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span><?php esc_html_e('VIP previews of drops, restocks, and seasonal collections.', 'webmakerr'); ?></span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-7.25 7.25a1 1 0 0 1-1.414 0l-3-3a1 1 0 1 1 1.414-1.414L8.5 11.586l6.543-6.543a1 1 0 0 1 1.414 0Z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span><?php esc_html_e('Priority access to tailored offers that match your lifestyle.', 'webmakerr'); ?></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex flex-col justify-center rounded-xl border border-neutral-200 bg-white/90 p-6 shadow-inner">
+                <form id="promoForm" class="flex flex-col gap-4">
+                    <label class="text-sm font-medium text-neutral-900" for="promoEmail"><?php esc_html_e('Email address', 'webmakerr'); ?></label>
+                    <input
+                        id="promoEmail"
+                        type="email"
+                        required
+                        placeholder="<?php esc_attr_e('you@example.com', 'webmakerr'); ?>"
+                        class="w-full rounded-md border border-neutral-300 px-4 py-3 text-sm text-neutral-900 transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/20"
+                    />
+                    <button
+                        type="submit"
+                        class="inline-flex items-center justify-center rounded-md bg-dark px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                    >
+                        <?php esc_html_e('Claim my 20% off', 'webmakerr'); ?>
+                    </button>
+                </form>
+                <button
+                    id="promoDismiss"
+                    type="button"
+                    class="mt-4 text-center text-sm font-medium text-neutral-500 underline-offset-2 transition hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                >
+                    <?php esc_html_e('No thanks, maybe later', 'webmakerr'); ?>
+                </button>
+                <p class="mt-5 text-center text-xs leading-relaxed text-neutral-500">
+                    <?php esc_html_e('We respect your privacy and only send thoughtfully curated updates. Unsubscribe with one click at any time.', 'webmakerr'); ?>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -392,6 +443,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
 
+    const sessionStore = (() => {
+        try {
+            const key = '__webmakerr_session_test__';
+            window.sessionStorage.setItem(key, '1');
+            window.sessionStorage.removeItem(key);
+            return window.sessionStorage;
+        } catch (error) {
+            return null;
+        }
+    })();
+
     const banner = document.getElementById('cookie-banner');
     const modal = document.getElementById('cookie-modal');
 
@@ -455,57 +517,89 @@ document.addEventListener('DOMContentLoaded', () => {
     if (promo) {
         const closePromo = document.getElementById('closePromo');
         const promoForm = document.getElementById('promoForm');
-        const storageKey = 'promoShown';
-        let promoShown = storage ? Boolean(storage.getItem(storageKey)) : false;
+        const promoDismiss = document.getElementById('promoDismiss');
+        const persistentKey = 'promoDismissed';
+        const sessionKey = 'promoShownSession';
+
+        let promoDismissed = storage ? storage.getItem(persistentKey) === 'true' : false;
+        let promoShownThisSession = sessionStore ? sessionStore.getItem(sessionKey) === 'true' : false;
+
+        const hidePromo = (persist = false) => {
+            promo.classList.add('hidden');
+            promo.setAttribute('aria-hidden', 'true');
+            promoShownThisSession = true;
+            promoDismissed = promoDismissed || persist;
+
+            if (persist && storage) {
+                storage.setItem(persistentKey, 'true');
+            }
+            if (sessionStore) {
+                sessionStore.setItem(sessionKey, 'true');
+            }
+            window.removeEventListener('scroll', handleScroll);
+        };
 
         const showPromo = () => {
-            if (promoShown || window.innerWidth >= 768) {
+            if (promoDismissed || promoShownThisSession) {
                 return;
             }
 
             promo.classList.remove('hidden');
-            promoShown = true;
-            if (storage) {
-                storage.setItem(storageKey, 'true');
+            promo.setAttribute('aria-hidden', 'false');
+            promoShownThisSession = true;
+            if (sessionStore) {
+                sessionStore.setItem(sessionKey, 'true');
             }
         };
 
-        window.addEventListener(
-            'scroll',
-            () => {
-                if (promoShown) {
-                    return;
-                }
+        const handleScroll = () => {
+            if (promoDismissed || promoShownThisSession) {
+                window.removeEventListener('scroll', handleScroll);
+                return;
+            }
 
-                const scrollPosition = window.scrollY + window.innerHeight;
-                const threshold = document.body.offsetHeight * 0.7;
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const threshold = document.body.offsetHeight * 0.7;
 
-                if (scrollPosition >= threshold) {
-                    showPromo();
-                }
-            },
-            { passive: true }
-        );
+            if (scrollPosition >= threshold) {
+                showPromo();
+                window.removeEventListener('scroll', handleScroll);
+            }
+        };
+
+        if (!promoDismissed && !promoShownThisSession) {
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+        }
 
         if (closePromo) {
             closePromo.addEventListener('click', () => {
-                promo.classList.add('hidden');
-                promoShown = true;
+                hidePromo(true);
+            });
+        }
+
+        if (promoDismiss) {
+            promoDismiss.addEventListener('click', () => {
+                hidePromo(true);
             });
         }
 
         promo.addEventListener('click', (event) => {
             if (event.target === promo) {
-                promo.classList.add('hidden');
-                promoShown = true;
+                hidePromo(true);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !promo.classList.contains('hidden')) {
+                hidePromo(true);
             }
         });
 
         if (promoForm) {
             promoForm.addEventListener('submit', (event) => {
                 event.preventDefault();
-                promo.classList.add('hidden');
-                promoShown = true;
+                hidePromo(true);
             });
         }
     }
