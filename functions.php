@@ -474,13 +474,14 @@ if (! function_exists('webmakerr_rest_check_license')) {
     }
 }
 
-if (! function_exists('webmakerr_admin_enqueue_styles')) {
-    function webmakerr_admin_enqueue_styles(): void
+if (! function_exists('tailpress_custom_admin_interface')) {
+    function tailpress_custom_admin_interface(): void
     {
-        $tailwind_version = '3.4.13';
+        $tailwind_handle = 'tailpress-admin-tailwind';
+        $tailwind_version = '3.4.3';
 
         wp_enqueue_style(
-            'webmakerr-admin-tailwind',
+            $tailwind_handle,
             'https://cdn.jsdelivr.net/npm/tailwindcss@'.$tailwind_version.'/dist/tailwind.min.css',
             [],
             $tailwind_version
@@ -490,11 +491,22 @@ if (! function_exists('webmakerr_admin_enqueue_styles')) {
         $admin_version = file_exists($admin_stylesheet) ? (string) filemtime($admin_stylesheet) : null;
 
         wp_enqueue_style(
-            'webmakerr-admin-dashboard',
+            'tailpress-admin-style',
             get_template_directory_uri().'/admin/admin.css',
-            ['webmakerr-admin-tailwind'],
+            [$tailwind_handle],
             $admin_version
+        );
+
+        $admin_script = get_template_directory().'/admin/admin.js';
+        $admin_script_version = file_exists($admin_script) ? (string) filemtime($admin_script) : null;
+
+        wp_enqueue_script(
+            'tailpress-admin-js',
+            get_template_directory_uri().'/admin/admin.js',
+            [],
+            $admin_script_version,
+            true
         );
     }
 }
-add_action('admin_enqueue_scripts', 'webmakerr_admin_enqueue_styles');
+add_action('admin_enqueue_scripts', 'tailpress_custom_admin_interface');
