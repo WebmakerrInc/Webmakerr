@@ -473,3 +473,28 @@ if (! function_exists('webmakerr_rest_check_license')) {
         );
     }
 }
+
+if (! function_exists('webmakerr_admin_enqueue_styles')) {
+    function webmakerr_admin_enqueue_styles(): void
+    {
+        $tailwind_version = '3.4.13';
+
+        wp_enqueue_style(
+            'webmakerr-admin-tailwind',
+            'https://cdn.jsdelivr.net/npm/tailwindcss@'.$tailwind_version.'/dist/tailwind.min.css',
+            [],
+            $tailwind_version
+        );
+
+        $admin_stylesheet = get_template_directory().'/admin/admin.css';
+        $admin_version = file_exists($admin_stylesheet) ? (string) filemtime($admin_stylesheet) : null;
+
+        wp_enqueue_style(
+            'webmakerr-admin-dashboard',
+            get_template_directory_uri().'/admin/admin.css',
+            ['webmakerr-admin-tailwind'],
+            $admin_version
+        );
+    }
+}
+add_action('admin_enqueue_scripts', 'webmakerr_admin_enqueue_styles');
