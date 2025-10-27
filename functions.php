@@ -80,8 +80,6 @@ if (! function_exists('webmakerr_setup')) {
 
 add_action('after_setup_theme', 'webmakerr_setup');
 
-require_once get_template_directory().'/src/PluginCompatibility/FluentCart.php';
-
 function webmakerr(): Theme
 {
     return Theme::instance()
