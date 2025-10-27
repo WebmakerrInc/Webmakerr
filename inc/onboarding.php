@@ -178,15 +178,16 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
             <style>
                 :root {
                     --wm-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-                    --wm-bg: #ffffff;
-                    --wm-text: #18181b;
+                    --wm-surface: #ffffff;
+                    --wm-background: #f9fafb;
+                    --wm-text: #09090b;
                     --wm-muted: #52525b;
                     --wm-border: #e4e4e7;
-                    --wm-primary: #2563eb;
-                    --wm-primary-hover: #1d4ed8;
-                    --wm-card-shadow: 0 24px 48px rgba(15, 23, 42, 0.08), 0 8px 16px rgba(15, 23, 42, 0.08);
-                    --wm-radius: 18px;
-                    --wm-transition: 280ms ease;
+                    --wm-border-strong: #d4d4d8;
+                    --wm-primary: #18181b;
+                    --wm-primary-hover: #111827;
+                    --wm-radius: 16px;
+                    --wm-transition: 220ms ease;
                 }
 
                 * {
@@ -196,8 +197,10 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
                 body {
                     margin: 0;
                     font-family: var(--wm-font-family);
-                    background: var(--wm-bg);
+                    font-size: 1rem;
+                    line-height: 1.5;
                     color: var(--wm-text);
+                    background: var(--wm-background);
                 }
 
                 .wm-onboarding {
@@ -206,167 +209,146 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
                     align-items: center;
                     justify-content: center;
                     padding: 32px 16px;
-                    background: linear-gradient(135deg, rgba(37, 99, 235, 0.04), rgba(59, 130, 246, 0.02));
                 }
 
                 .wm-card {
                     width: min(100%, 520px);
-                    background: #fff;
+                    background: var(--wm-surface);
+                    border: 1px solid var(--wm-border);
                     border-radius: var(--wm-radius);
-                    box-shadow: var(--wm-card-shadow);
-                    padding: 48px;
+                    padding: 36px 40px;
                     display: flex;
                     flex-direction: column;
-                    gap: 32px;
-                    position: relative;
-                    overflow: hidden;
+                    gap: 28px;
                 }
 
                 .wm-brand {
                     display: flex;
-                    align-items: center;
-                    gap: 12px;
-                }
-
-                .wm-brand svg {
-                    width: 36px;
-                    height: 36px;
+                    flex-direction: column;
+                    gap: 4px;
                 }
 
                 .wm-brand span {
+                    font-size: 0.875rem;
+                    letter-spacing: 0.04em;
+                    text-transform: uppercase;
+                    color: var(--wm-muted);
+                }
+
+                .wm-brand strong {
                     font-size: 1.125rem;
                     font-weight: 600;
-                    letter-spacing: -0.02em;
+                    color: var(--wm-text);
                 }
 
                 .wm-progress {
-                    height: 4px;
-                    background: rgba(37, 99, 235, 0.12);
+                    height: 2px;
+                    background: var(--wm-border);
                     border-radius: 999px;
                     overflow: hidden;
-                    position: relative;
                 }
 
                 .wm-progress-bar {
                     height: 100%;
                     width: 33.33%;
-                    background: var(--wm-primary);
+                    background: var(--wm-text);
                     transition: width var(--wm-transition);
                 }
 
                 .wm-step {
-                    opacity: 0;
-                    transform: translateY(16px);
-                    transition: opacity var(--wm-transition), transform var(--wm-transition);
                     display: none;
+                    opacity: 0;
+                    transform: translateY(8px);
+                    transition: opacity var(--wm-transition), transform var(--wm-transition);
                 }
 
                 .wm-step.is-active {
+                    display: block;
                     opacity: 1;
                     transform: translateY(0);
-                    display: block;
                 }
 
                 .wm-step h1 {
-                    margin: 0 0 12px;
-                    font-size: 1.75rem;
+                    margin: 0 0 10px;
+                    font-size: 1.25rem;
                     font-weight: 600;
+                    color: var(--wm-text);
                 }
 
                 .wm-step p {
                     margin: 0;
                     color: var(--wm-muted);
-                    font-size: 0.95rem;
-                    line-height: 1.6;
+                    font-size: 0.875rem;
                 }
 
-                .wm-options {
-                    display: grid;
-                    gap: 12px;
-                    margin-top: 24px;
-                }
-
-                .wm-option {
-                    border: 1px solid var(--wm-border);
-                    border-radius: 14px;
-                    padding: 16px 20px;
-                    background: #fff;
-                    cursor: pointer;
-                    transition: border-color var(--wm-transition), box-shadow var(--wm-transition), transform var(--wm-transition);
-                    position: relative;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-
-                .wm-option input {
-                    position: absolute;
-                    opacity: 0;
-                    pointer-events: none;
-                }
-
-                .wm-option span {
-                    font-size: 1rem;
-                    font-weight: 500;
-                }
-
-                .wm-option.is-selected {
-                    border-color: var(--wm-primary);
-                    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
-                    transform: translateY(-2px);
-                }
-
+                .wm-options,
                 .wm-tools {
                     display: grid;
                     gap: 12px;
-                    margin-top: 24px;
+                    margin-top: 20px;
                 }
 
+                .wm-option,
                 .wm-tool {
+                    position: relative;
                     border: 1px solid var(--wm-border);
                     border-radius: 12px;
                     padding: 14px 18px;
+                    background: var(--wm-surface);
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     cursor: pointer;
-                    transition: border-color var(--wm-transition), background var(--wm-transition), box-shadow var(--wm-transition);
-                    position: relative;
+                    transition: border-color var(--wm-transition), background var(--wm-transition);
                 }
 
+                .wm-option input,
                 .wm-tool input {
                     position: absolute;
+                    inset: 0;
                     opacity: 0;
                     pointer-events: none;
                 }
 
+                .wm-option span,
                 .wm-tool span {
-                    font-size: 0.95rem;
+                    font-size: 0.9375rem;
                     font-weight: 500;
+                    color: var(--wm-text);
                 }
 
+                .wm-option svg,
+                .wm-tool svg {
+                    color: var(--wm-border-strong);
+                    transition: color var(--wm-transition);
+                }
+
+                .wm-option.is-selected,
                 .wm-tool.is-selected {
-                    border-color: var(--wm-primary);
-                    background: rgba(37, 99, 235, 0.06);
-                    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+                    border-color: var(--wm-text);
+                    background: #f4f4f5;
+                }
+
+                .wm-option.is-selected svg,
+                .wm-tool.is-selected svg {
+                    color: var(--wm-text);
                 }
 
                 .wm-actions {
                     display: flex;
                     justify-content: flex-end;
                     gap: 12px;
-                    margin-top: 32px;
+                    margin-top: 28px;
                 }
 
                 .wm-button {
                     appearance: none;
-                    border: none;
                     border-radius: 999px;
-                    padding: 12px 24px;
-                    font-size: 0.95rem;
+                    padding: 10px 22px;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     cursor: pointer;
-                    transition: background var(--wm-transition), box-shadow var(--wm-transition), transform var(--wm-transition);
+                    transition: background var(--wm-transition), color var(--wm-transition), border-color var(--wm-transition);
                 }
 
                 .wm-button:disabled {
@@ -375,58 +357,69 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
                 }
 
                 .wm-button--primary {
-                    background: var(--wm-primary);
-                    color: #fff;
-                    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+                    border: 1px solid var(--wm-text);
+                    background: var(--wm-text);
+                    color: #ffffff;
                 }
 
                 .wm-button--primary:not(:disabled):hover {
                     background: var(--wm-primary-hover);
-                    transform: translateY(-1px);
+                    border-color: var(--wm-primary-hover);
+                }
+
+                .wm-button--secondary {
+                    border: 1px solid var(--wm-border);
+                    background: transparent;
+                    color: var(--wm-text);
+                }
+
+                .wm-button--secondary:hover {
+                    border-color: var(--wm-border-strong);
                 }
 
                 .wm-license-input {
                     width: 100%;
                     border: 1px solid var(--wm-border);
-                    border-radius: 12px;
-                    padding: 14px 16px;
-                    font-size: 1rem;
-                    transition: border-color var(--wm-transition), box-shadow var(--wm-transition);
-                    outline: none;
+                    border-radius: 10px;
+                    padding: 12px 14px;
+                    font-size: 0.9375rem;
                     font-family: var(--wm-font-family);
+                    color: var(--wm-text);
+                    background: var(--wm-surface);
+                    transition: border-color var(--wm-transition);
                 }
 
                 .wm-license-input:focus {
-                    border-color: var(--wm-primary);
-                    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+                    border-color: var(--wm-text);
+                    outline: none;
                 }
 
                 .wm-error {
+                    margin: 8px 0 0;
+                    font-size: 0.8125rem;
                     color: #dc2626;
-                    font-size: 0.9rem;
-                    margin-top: -12px;
                 }
 
                 .wm-step-footer {
                     display: flex;
                     flex-direction: column;
-                    gap: 16px;
-                    margin-top: 32px;
+                    gap: 14px;
+                    margin-top: 24px;
                 }
 
                 .wm-hint {
                     color: var(--wm-muted);
-                    font-size: 0.85rem;
+                    font-size: 0.8125rem;
                     text-align: center;
                 }
 
-                @media (max-width: 600px) {
+                @media (max-width: 640px) {
                     .wm-card {
-                        padding: 32px 24px;
+                        padding: 28px 24px;
                     }
 
                     .wm-step h1 {
-                        font-size: 1.5rem;
+                        font-size: 1.125rem;
                     }
                 }
             </style>
@@ -434,14 +427,10 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
         <body <?php body_class('wm-onboarding-body'); ?>>
             <main class="wm-onboarding" aria-live="polite">
                 <section class="wm-card" role="dialog" aria-modal="true">
-                    <div class="wm-brand" aria-label="Webmakerr">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <rect x="2" y="2" width="44" height="44" rx="12" fill="#2563EB" opacity="0.08" />
-                            <path d="M16 16L24 32L32 16" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M14 24H34" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span><?php esc_html_e('Webmakerr Theme', 'webmakerr'); ?></span>
-                    </div>
+                    <header class="wm-brand" aria-label="Webmakerr">
+                        <span><?php esc_html_e('Theme Onboarding', 'webmakerr'); ?></span>
+                        <strong><?php esc_html_e('Webmakerr', 'webmakerr'); ?></strong>
+                    </header>
 
                     <div class="wm-progress" aria-hidden="true">
                         <div class="wm-progress-bar" data-progress></div>
@@ -515,7 +504,7 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
                         <div class="wm-step-footer">
                             <p class="wm-hint"><?php esc_html_e('Select everything that applies—we’ll use this to personalize recommendations.', 'webmakerr'); ?></p>
                             <div class="wm-actions">
-                                <button type="button" class="wm-button" data-action="back" data-prev-step="1">
+                                <button type="button" class="wm-button wm-button--secondary" data-action="back" data-prev-step="1">
                                     <?php esc_html_e('Back', 'webmakerr'); ?>
                                 </button>
                                 <button type="button" class="wm-button wm-button--primary" data-action="next" data-next-step="3">
@@ -546,7 +535,7 @@ if (defined('WEBMAKERR_ONBOARDING_RENDER') && WEBMAKERR_ONBOARDING_RENDER) {
                             <div class="wm-step-footer">
                                 <p class="wm-hint"><?php esc_html_e('Need help? Reach out to support and we’ll get you activated in minutes.', 'webmakerr'); ?></p>
                                 <div class="wm-actions">
-                                    <button type="button" class="wm-button" data-action="back" data-prev-step="2">
+                                    <button type="button" class="wm-button wm-button--secondary" data-action="back" data-prev-step="2">
                                         <?php esc_html_e('Back', 'webmakerr'); ?>
                                     </button>
                                     <button type="submit" class="wm-button wm-button--primary" data-activate-button>
