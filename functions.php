@@ -80,6 +80,8 @@ if (! function_exists('webmakerr_setup')) {
 
 add_action('after_setup_theme', 'webmakerr_setup');
 
+require_once __DIR__.'/inc/onboarding.php';
+
 function webmakerr(): Theme
 {
     return Theme::instance()
