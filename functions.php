@@ -4,8 +4,8 @@ use Webmakerr\Framework\Assets\ViteCompiler;
 use Webmakerr\Framework\Features\MenuOptions;
 use Webmakerr\Framework\Theme;
 
-if (! defined('WEBMAKERR_LICENSE_DATA_URL')) {
-    define('WEBMAKERR_LICENSE_DATA_URL', 'https://webmakerr.com/api/licenses.json');
+if (! defined('WEBMAKERR_LICENSE_SERVER_URL')) {
+    define('WEBMAKERR_LICENSE_SERVER_URL', 'https://yourlicenseserver.com/validate-license.php');
 }
 
 if (is_file(__DIR__.'/vendor/autoload_packages.php')) {
@@ -279,13 +279,13 @@ add_action(
             'webmakerr/v1',
             '/check-license',
             [
-                'methods'             => 'GET',
+                'methods'             => 'POST',
                 'callback'            => 'webmakerr_rest_check_license',
                 'permission_callback' => static function (): bool {
                     return current_user_can('manage_options');
                 },
                 'args'                => [
-                    'key' => [
+                    'license_key' => [
                         'required'          => true,
                         'sanitize_callback' => static function ($value) {
                             return sanitize_text_field(wp_unslash($value));
@@ -300,83 +300,94 @@ add_action(
 if (! function_exists('webmakerr_rest_check_license')) {
     function webmakerr_rest_check_license(\WP_REST_Request $request): \WP_REST_Response
     {
-        $licenseKey = $request->get_param('key');
-        $transientKey = 'webmakerr_license_data';
-        $cacheOptionKey = 'webmakerr_license_data_cache';
-        $licenses = get_transient($transientKey);
-        $fallbackMessage = null;
-        $response = null;
+        $licenseKey = (string) $request->get_param('license_key');
 
-        if (! is_array($licenses)) {
-            $licenses = null;
-            $response = wp_remote_get(WEBMAKERR_LICENSE_DATA_URL);
+        if ($licenseKey === '') {
+            update_option('webmakerr_theme_license_status', 'inactive');
 
-            if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
-                $body = wp_remote_retrieve_body($response);
-                $decoded = json_decode($body, true);
-
-                if (is_array($decoded)) {
-                    $licenses = $decoded;
-                    set_transient($transientKey, $licenses, 12 * HOUR_IN_SECONDS);
-                    update_option($cacheOptionKey, $licenses);
-                }
-            }
-
-            if ($licenses === null) {
-                $cachedLicenses = get_option($cacheOptionKey);
-
-                if (is_array($cachedLicenses)) {
-                    $licenses = $cachedLicenses;
-                    $fallbackMessage = __('Unable to validate license right now. Using last cached result.', 'webmakerr');
-                } else {
-                    $errorMessage = __('License data is unavailable.', 'webmakerr');
-
-                    if ($response !== null && is_wp_error($response)) {
-                        $errorMessage = __('Unable to validate license right now.', 'webmakerr');
-                    }
-
-                    return new WP_REST_Response(
-                        [
-                            'valid'  => false,
-                            'status' => 'unavailable',
-                            'message' => $errorMessage,
-                        ],
-                        500
-                    );
-                }
-            }
+            return new WP_REST_Response(
+                [
+                    'valid'   => false,
+                    'status'  => 'inactive',
+                    'message' => __('Please provide a license key.', 'webmakerr'),
+                ],
+                400
+            );
         }
 
-        $status = 'invalid';
+        $remoteResponse = wp_remote_post(
+            WEBMAKERR_LICENSE_SERVER_URL,
+            [
+                'timeout' => 15,
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'body'    => [
+                    'license_key' => $licenseKey,
+                    'site_url'    => home_url(),
+                ],
+            ]
+        );
 
-        foreach ($licenses as $license) {
-            if (! isset($license['key'])) {
-                continue;
-            }
+        if (is_wp_error($remoteResponse)) {
+            update_option('webmakerr_theme_license_status', 'invalid');
 
-            if (hash_equals($license['key'], $licenseKey)) {
-                $status = $license['status'] ?? 'invalid';
-                break;
-            }
+            return new WP_REST_Response(
+                [
+                    'valid'   => false,
+                    'status'  => 'invalid',
+                    'message' => __('Unable to reach the license server. Please try again shortly.', 'webmakerr'),
+                ],
+                500
+            );
         }
 
-        $isValid = $status === 'active';
+        $statusCode = wp_remote_retrieve_response_code($remoteResponse);
+        $body = wp_remote_retrieve_body($remoteResponse);
+        $decoded = json_decode($body, true);
+
+        if (! is_array($decoded)) {
+            update_option('webmakerr_theme_license_status', 'invalid');
+
+            return new WP_REST_Response(
+                [
+                    'valid'   => false,
+                    'status'  => 'invalid',
+                    'message' => __('Unexpected response from the license server.', 'webmakerr'),
+                ],
+                $statusCode >= 400 ? $statusCode : 500
+            );
+        }
+
+        $serverStatus = strtolower((string) ($decoded['status'] ?? 'error'));
+        $serverMessage = is_string($decoded['message'] ?? null) ? $decoded['message'] : '';
+        $licenseStatus = is_string($decoded['license_status'] ?? null) ? $decoded['license_status'] : ($serverStatus === 'success' ? 'active' : 'invalid');
+
+        $isValid = $serverStatus === 'success';
 
         if ($isValid) {
             update_option('webmakerr_theme_license_key', $licenseKey);
         }
 
-        update_option('webmakerr_theme_license_status', $status);
+        update_option('webmakerr_theme_license_status', $licenseStatus);
 
-        $responseData = [
-            'valid'  => $isValid,
-            'status' => $status,
-        ];
+        $message = $serverMessage;
 
-        if ($fallbackMessage !== null) {
-            $responseData['message'] = $fallbackMessage;
+        if ($message === '') {
+            $message = $isValid
+                ? __('License activated successfully.', 'webmakerr')
+                : __('Invalid license key.', 'webmakerr');
         }
 
-        return new WP_REST_Response($responseData);
+        $responseCode = $isValid ? 200 : ($statusCode >= 400 ? $statusCode : 400);
+
+        return new WP_REST_Response(
+            [
+                'valid'   => $isValid,
+                'status'  => $licenseStatus,
+                'message' => $message,
+            ],
+            $responseCode
+        );
     }
 }
