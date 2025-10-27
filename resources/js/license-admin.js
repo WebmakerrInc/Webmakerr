@@ -60,35 +60,51 @@
         toggleLoading(true);
         setFeedback('', '');
 
-        const url = `${endpoint}?key=${encodeURIComponent(key)}`;
-
-        fetch(url, {
-            method: 'GET',
+        fetch(endpoint, {
+            method: 'POST',
             headers: {
                 'X-WP-Nonce': nonce,
+                'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            credentials: 'same-origin'
+            credentials: 'same-origin',
+            body: JSON.stringify({ license_key: key })
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Request failed');
+            .then(async (response) => {
+                const payload = await response.json().catch(() => null);
+
+                if (!payload) {
+                    throw new Error(messages.error);
                 }
-                return response.json();
+
+                if (!response.ok) {
+                    const error = new Error(payload.message || messages.error);
+                    error.payload = payload;
+                    throw error;
+                }
+
+                return payload;
             })
             .then((data) => {
+                const status = typeof data.status === 'string' ? data.status : 'active';
+                const message = typeof data.message === 'string' && data.message ? data.message : messages.success;
+
                 if (data.valid) {
-                    setFeedback(messages.success, 'success');
-                    updateStatus('active');
+                    setFeedback(message, 'success');
+                    updateStatus(status);
                 } else {
-                    const status = typeof data.status === 'string' ? data.status : 'invalid';
-                    setFeedback(messages.error, 'error');
+                    setFeedback(message, 'error');
                     updateStatus(status);
                 }
             })
-            .catch(() => {
-                setFeedback(messages.error, 'error');
-                updateStatus('invalid');
+            .catch((error) => {
+                const status = error?.payload?.status && typeof error.payload.status === 'string'
+                    ? error.payload.status
+                    : 'invalid';
+                const message = error?.message || messages.error;
+
+                setFeedback(message, 'error');
+                updateStatus(status);
             })
             .finally(() => {
                 toggleLoading(false);
