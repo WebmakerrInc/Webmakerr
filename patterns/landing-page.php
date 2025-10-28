@@ -10,6 +10,7 @@ if (! defined('ABSPATH')) {
 }
 
 return [
+    'slug'       => 'webmakerr/landing-page',
     'title'      => __('Landing Page', 'webmakerr'),
     'description'=> __('A minimalist landing page layout with hero, features, and call to action sections.', 'webmakerr'),
     'categories' => ['webmakerr-pages'],
