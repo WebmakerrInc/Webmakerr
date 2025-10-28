@@ -81,6 +81,118 @@
             menuBack.classList.add('wm-admin-sidebar', 'wm-admin-sidebar-backdrop');
         }
 
+        var submenuItems = menuWrap.querySelectorAll('#adminmenu > li.wp-has-submenu');
+
+        submenuItems.forEach(function (item) {
+            var trigger = item.querySelector(':scope > a');
+            var submenu = item.querySelector(':scope > .wp-submenu');
+
+            if (!trigger || !submenu) {
+                return;
+            }
+
+            item.classList.remove('opensub');
+
+            function isExpanded() {
+                return item.classList.contains('wm-submenu-open') && !item.classList.contains('wm-submenu-closing');
+            }
+
+            submenu.addEventListener('transitionend', function (event) {
+                if (event.propertyName !== 'max-height') {
+                    return;
+                }
+
+                if (item.classList.contains('wm-submenu-open') && !item.classList.contains('wm-submenu-closing')) {
+                    submenu.style.maxHeight = 'none';
+                } else {
+                    item.classList.remove('wm-submenu-open');
+                    item.classList.remove('wm-submenu-closing');
+                    submenu.style.maxHeight = '';
+                }
+            });
+
+            function openSubmenu(animate) {
+                item.classList.remove('wm-submenu-closing');
+                item.classList.add('wm-submenu-open');
+                item.classList.remove('opensub');
+                trigger.setAttribute('aria-expanded', 'true');
+
+                if (!animate) {
+                    submenu.style.transition = 'none';
+                    submenu.style.maxHeight = 'none';
+                    requestAnimationFrame(function () {
+                        submenu.style.transition = '';
+                    });
+                    return;
+                }
+
+                submenu.style.maxHeight = '0px';
+                submenu.offsetHeight;
+                submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            }
+
+            function closeSubmenu(animate) {
+                trigger.setAttribute('aria-expanded', 'false');
+                item.classList.remove('opensub');
+
+                if (!animate) {
+                    item.classList.remove('wm-submenu-open');
+                    item.classList.remove('wm-submenu-closing');
+                    submenu.style.transition = 'none';
+                    submenu.style.maxHeight = '';
+                    requestAnimationFrame(function () {
+                        submenu.style.transition = '';
+                    });
+                    return;
+                }
+
+                if (submenu.style.maxHeight === 'none' || submenu.style.maxHeight === '' || submenu.style.maxHeight === 'auto') {
+                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                }
+
+                item.classList.add('wm-submenu-closing');
+                submenu.offsetHeight;
+                submenu.style.maxHeight = '0px';
+            }
+
+            var shouldOpen = item.classList.contains('wp-has-current-submenu') || item.classList.contains('current');
+
+            if (shouldOpen) {
+                openSubmenu(false);
+            } else {
+                closeSubmenu(false);
+            }
+
+            trigger.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+            trigger.setAttribute('aria-haspopup', 'true');
+
+            trigger.addEventListener('click', function (event) {
+                if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                if (isExpanded()) {
+                    closeSubmenu(true);
+                } else {
+                    openSubmenu(true);
+                }
+            });
+        });
+
+        window.addEventListener('resize', function () {
+            submenuItems.forEach(function (item) {
+                if (item.classList.contains('wm-submenu-open') && !item.classList.contains('wm-submenu-closing')) {
+                    var panel = item.querySelector(':scope > .wp-submenu');
+
+                    if (panel && panel.style.maxHeight !== 'none') {
+                        panel.style.maxHeight = 'none';
+                    }
+                }
+            });
+        });
+
         var overlay = document.createElement('div');
         overlay.className = 'wm-admin-overlay hidden';
         overlay.setAttribute('aria-hidden', 'true');
