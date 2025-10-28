@@ -1,6 +1,10 @@
 <?php
 /**
- * Landing Page block pattern.
+ * Title: Landing Page
+ * Slug: webmakerr/landing-page
+ * Categories: webmakerr-pages
+ * Keywords: landing, hero, call to action
+ * Description: A minimalist landing page layout with hero, features, and call to action sections.
  *
  * @package Webmakerr
  */
