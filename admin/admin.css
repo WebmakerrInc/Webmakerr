@@ -79,6 +79,24 @@ body.wp-admin #wpfooter {
     z-index: 999;
 }
 
+@media (min-width: 640px) {
+    #wpadminbar {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    #wpadminbar #wp-admin-bar-menu-toggle {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    #wpadminbar {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
 #wpadminbar .quicklinks {
     align-items: center;
     display: flex;
@@ -274,15 +292,7 @@ body.wp-admin #wpfooter {
 }
 
 @media (min-width: 1024px) {
-    #wpadminbar {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    #wpadminbar #wp-admin-bar-menu-toggle {
-        display: none;
-    }
-
+    
     #wpadminbar #adminbarsearch {
         flex: 1 1 40%;
         order: 2;
@@ -328,6 +338,17 @@ body.wp-admin #wpfooter {
 body.wp-admin.wm-admin-menu-open #adminmenuwrap,
 body.wp-admin.wm-admin-menu-open #adminmenuback {
     transform: translateX(0);
+}
+
+@media (min-width: 640px) {
+    #adminmenuwrap,
+    #adminmenuback {
+        transform: none;
+    }
+
+    #adminmenuback {
+        display: none !important;
+    }
 }
 
 #adminmenuwrap {
@@ -438,18 +459,7 @@ body.wp-admin.folded #wpcontent,
 body.wp-admin.auto-fold #wpcontent,
 body.wp-admin.folded #wpfooter,
 body.wp-admin.auto-fold #wpfooter {
-    margin-left: var(--wm-admin-sidebar-width);
-}
-
-@media (min-width: 1024px) {
-    #adminmenuwrap,
-    #adminmenuback {
-        transform: none;
-    }
-
-    #adminmenuback {
-        display: none !important;
-    }
+    margin-left: 0;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -467,7 +477,7 @@ body.wp-admin.auto-fold #wpfooter {
     display: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
     .wm-admin-overlay {
         display: none !important;
     }
@@ -478,14 +488,22 @@ body.wp-admin.auto-fold #wpfooter {
 /* -------------------------------------------------------------------------- */
 
 #wpcontent {
+    display: flex;
+    flex-direction: column;
     margin: var(--wm-admin-header-height) 0 0;
+    min-height: calc(100vh - var(--wm-admin-header-height));
     padding: 16px;
     position: relative;
     transition: margin var(--wm-admin-transition);
 }
 
 #wpbody-content {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     padding-bottom: 60px;
+    width: 100%;
 }
 
 #wpbody-content > .wrap,
@@ -498,7 +516,8 @@ body.wp-admin.auto-fold #wpfooter {
 
 #wpbody-content > .wrap {
     margin: 0 auto;
-    max-width: 72rem;
+    max-width: 80rem;
+    padding: 0 !important;
     width: 100%;
 }
 
@@ -507,12 +526,14 @@ body.wp-admin.auto-fold #wpfooter {
     color: var(--wm-admin-text);
     font-size: 1.375rem;
     font-weight: 600;
+    margin: 0;
 }
 
 #wpbody-content .wrap > p.description,
 #wpbody-content .wrap > p {
     color: var(--wm-admin-muted);
     font-size: 0.95rem;
+    margin: 0;
     max-width: 48rem;
 }
 
@@ -622,7 +643,12 @@ body.wp-admin.auto-fold #wpfooter {
     padding: 24px 16px 32px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
+    #wpwrap {
+        display: flex;
+        flex-direction: column;
+    }
+
     #wpcontent {
         margin-left: var(--wm-admin-sidebar-width);
         padding: 32px;
@@ -633,10 +659,30 @@ body.wp-admin.auto-fold #wpfooter {
         padding: 24px 32px 40px;
     }
 
+    body.wp-admin.folded #wpcontent,
+    body.wp-admin.auto-fold #wpcontent,
+    body.wp-admin.folded #wpfooter,
+    body.wp-admin.auto-fold #wpfooter {
+        margin-left: var(--wm-admin-sidebar-width);
+    }
+
+    #wpbody-content {
+        gap: 32px;
+    }
+
     #wpbody-content > .wrap,
     #wpbody-content > .wrap > form,
     #wpbody-content > .wrap > .card {
         gap: 32px;
+    }
+
+    #wpbody-content .wrap .card,
+    #wpbody-content .wrap .postbox,
+    #wpbody-content .wrap .stuffbox,
+    #wpbody-content .wrap table.form-table,
+    #wpbody-content .wrap .notice,
+    #wpbody-content .wrap .webmakerr-license-card {
+        padding: 32px;
     }
 }
 
