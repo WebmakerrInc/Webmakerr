@@ -22,6 +22,15 @@ do_action('webmakerr_site_before');
 $contact_page = get_page_by_path('contact');
 $contact_url = $contact_page instanceof WP_Post ? get_permalink($contact_page) : home_url('/');
 $contact_url = apply_filters('webmakerr_contact_link', $contact_url);
+$has_primary_menu = has_nav_menu('primary');
+$has_fallback_pages = ! $has_primary_menu && ! empty(get_posts([
+    'post_type'      => 'page',
+    'post_status'    => 'publish',
+    'numberposts'    => 1,
+    'orderby'        => 'menu_order',
+    'order'          => 'ASC',
+]));
+$show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_can('edit_theme_options');
 ?>
 
 <div id="page" class="min-h-screen flex flex-col">
@@ -49,8 +58,14 @@ $contact_url = apply_filters('webmakerr_contact_link', $contact_url);
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3 md:hidden">
-                    <?php if (has_nav_menu('primary')): ?>
-                        <button type="button" aria-label="Toggle navigation" id="primary-menu-toggle">
+                    <?php if ($show_primary_toggle): ?>
+                        <button
+                            type="button"
+                            aria-label="<?php esc_attr_e('Toggle navigation', 'webmakerr'); ?>"
+                            aria-controls="primary-navigation"
+                            aria-expanded="false"
+                            id="primary-menu-toggle"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
@@ -66,9 +81,12 @@ $contact_url = apply_filters('webmakerr_contact_link', $contact_url);
                     </a>
                 </div>
 
-                <div id="primary-navigation" class="hidden flex flex-col gap-6 items-stretch border border-light rounded-xl p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0">
+                <div
+                    id="primary-navigation"
+                    class="hidden flex flex-col gap-6 items-stretch border border-light rounded-xl p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0"
+                >
                     <nav>
-                        <?php if (current_user_can('edit_theme_options') && !has_nav_menu('primary')): ?>
+                        <?php if (current_user_can('edit_theme_options') && !$has_primary_menu): ?>
                             <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>" class="text-sm text-zinc-600"><?php esc_html_e('Edit Menus', 'webmakerr'); ?></a>
                         <?php else: ?>
                             <?php
@@ -78,7 +96,7 @@ $contact_url = apply_filters('webmakerr_contact_link', $contact_url);
                                 'menu_class'      => 'md:flex md:-mx-4 [&_a]:!no-underline',
                                 'theme_location'  => 'primary',
                                 'li_class'        => 'md:mx-4',
-                                'fallback_cb'     => false,
+                                'fallback_cb'     => 'webmakerr_primary_menu_fallback',
                             ]);
                             ?>
                         <?php endif; ?>

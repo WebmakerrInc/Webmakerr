@@ -1,12 +1,45 @@
-window.addEventListener('load', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const mainNavigation = document.getElementById('primary-navigation')
     const mainNavigationToggle = document.getElementById('primary-menu-toggle')
 
     if (mainNavigation && mainNavigationToggle) {
+        const navBreakpoint = window.matchMedia('(min-width: 768px)')
+
+        const applyNavigationVisibility = function (expanded) {
+            mainNavigationToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false')
+
+            if (expanded) {
+                mainNavigation.classList.remove('hidden')
+                mainNavigation.setAttribute('aria-hidden', 'false')
+            } else {
+                mainNavigation.classList.add('hidden')
+                mainNavigation.setAttribute('aria-hidden', 'true')
+            }
+        }
+
+        const syncNavigationState = function () {
+            if (navBreakpoint.matches) {
+                applyNavigationVisibility(true)
+            } else {
+                const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
+                applyNavigationVisibility(expanded)
+            }
+        }
+
         mainNavigationToggle.addEventListener('click', function (event) {
             event.preventDefault()
-            mainNavigation.classList.toggle('hidden')
+
+            const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
+            applyNavigationVisibility(!expanded)
         })
+
+        syncNavigationState()
+
+        if (typeof navBreakpoint.addEventListener === 'function') {
+            navBreakpoint.addEventListener('change', syncNavigationState)
+        } else if (typeof navBreakpoint.addListener === 'function') {
+            navBreakpoint.addListener(syncNavigationState)
+        }
     }
 
     const footerAccordions = document.querySelectorAll('[data-footer-accordion-item]')

@@ -126,6 +126,67 @@ function webmakerr(): Theme
 // class run during the same after_setup_theme cycle.
 webmakerr();
 
+add_action(
+    'wp_enqueue_scripts',
+    static function (): void {
+        if (is_singular() && comments_open() && get_option('thread_comments')) {
+            wp_enqueue_script('comment-reply');
+        }
+    }
+);
+
+if (! function_exists('webmakerr_primary_menu_fallback')) {
+    function webmakerr_primary_menu_fallback(array $args): void
+    {
+        $menu_items = wp_list_pages([
+            'echo'     => false,
+            'title_li' => '',
+        ]);
+
+        $menu_items = $menu_items ? trim($menu_items) : '';
+        $item_class = isset($args['li_class']) ? trim((string) $args['li_class']) : '';
+
+        if ($menu_items !== '' && $item_class !== '') {
+            $menu_items = preg_replace_callback(
+                '/<li([^>]*)class="([^"]*)"([^>]*)>/',
+                static function (array $matches) use ($item_class): string {
+                    $classes = trim($matches[2].' '.$item_class);
+
+                    return '<li'.$matches[1].'class="'.esc_attr($classes).'"'.$matches[3].'>';
+                },
+                $menu_items
+            );
+        }
+
+        $menu_class = isset($args['menu_class']) ? trim((string) $args['menu_class']) : '';
+        $menu_id = $args['menu_id'] ?? 'primary-menu';
+        $link_before = $args['link_before'] ?? '';
+        $link_after = $args['link_after'] ?? '';
+
+        $home_item = sprintf(
+            '<li%1$s><a href="%2$s">%3$s</a></li>',
+            $item_class !== '' ? ' class="'.esc_attr($item_class).'"' : '',
+            esc_url(home_url('/')),
+            $link_before.esc_html__('Home', 'webmakerr').$link_after
+        );
+
+        echo '<ul';
+
+        if ($menu_class !== '') {
+            echo ' class="'.esc_attr($menu_class).'"';
+        }
+
+        if (! empty($menu_id)) {
+            echo ' id="'.esc_attr($menu_id).'"';
+        }
+
+        echo '>';
+        echo $home_item;
+        echo $menu_items; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output from wp_list_pages().
+        echo '</ul>';
+    }
+}
+
 add_filter(
     'nav_menu_css_class',
     static function (array $classes, $item, $args, int $depth): array {
