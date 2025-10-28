@@ -17,5 +17,14 @@
 
     <div class="entry-content mx-auto max-w-3xl mt-10 sm:mt-20">
         <?php the_content(); ?>
+
+        <?php
+        wp_link_pages([
+            'before'      => '<nav class="post-pagination" aria-label="' . esc_attr__('Post pages', 'webmakerr') . '"><span class="post-pagination__title">' . esc_html__('Pages:', 'webmakerr') . '</span>',
+            'after'       => '</nav>',
+            'link_before' => '<span class="post-pagination__item">',
+            'link_after'  => '</span>',
+        ]);
+        ?>
     </div>
 </article>

@@ -11,3 +11,52 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: webmakerr
 Tags: blog, custom-background, custom-logo, custom-menu, featured-images, translation-ready
 */
+
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+    background-color: #111827;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 2px #111827;
+    clip: auto;
+    clip-path: none;
+    color: #ffffff;
+    display: inline-block;
+    height: auto;
+    left: 1rem;
+    padding: 0.75rem 1rem;
+    top: 1rem;
+    width: auto;
+    z-index: 100;
+}
+
+.post-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.post-pagination__title {
+    font-weight: 600;
+}
+
+.post-pagination__item {
+    border: 1px solid #d4d4d8;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    text-decoration: none;
+}

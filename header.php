@@ -17,6 +17,11 @@
 <body <?php body_class('bg-white text-zinc-900 antialiased'); ?>>
 <?php
 wp_body_open();
+?>
+    <a class="skip-link screen-reader-text" href="#content">
+        <?php esc_html_e('Skip to content', 'webmakerr'); ?>
+    </a>
+<?php
 do_action('webmakerr_site_before');
 
 $contact_page = get_page_by_path('contact');
