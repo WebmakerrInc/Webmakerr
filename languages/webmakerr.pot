@@ -1,18 +1,36 @@
 # Copyright (C) 2025 Webmakerr
-# This file is distributed under the same license as the Webmakerr package.
+# This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Webmakerr\n"
+"Project-Id-Version: Webmakerr 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/Webmakerr\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-28 06:26+0000\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2025-10-28T08:47:10+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: webmakerr\n"
+
+#. Theme Name of the theme
+#. Author of the theme
+#: style.css
+#: footer.php:64
+msgid "Webmakerr"
+msgstr ""
+
+#. Theme URI of the theme
+#. Author URI of the theme
+#: style.css
+msgid "https://webmakerr.com"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "A fast, modern Tailwind CSS WordPress theme crafted by the Webmakerr team."
+msgstr ""
 
 #: 404.php:16
 msgid "Sorry, the page you are looking for could not be found."
@@ -61,16 +79,19 @@ msgstr ""
 msgid "Your email address*"
 msgstr ""
 
-#: comments.php:80, comments.php:81
+#: comments.php:80
+#: comments.php:81
 msgid "Your website URL"
 msgstr ""
 
-#: comments.php:87, comments.php:88
+#: comments.php:87
+#: comments.php:88
 msgid "Your comment"
 msgstr ""
 
 #. translators: 1: Link to profile, 2: Current user name, 3: Logout URL.
 #: comments.php:95
+#, php-format
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\">Log out?</a>"
 msgstr ""
 
@@ -79,6 +100,7 @@ msgid "Footer menu"
 msgstr ""
 
 #: footer.php:52
+#, php-format
 msgid "Copyright © %1$s %2$s."
 msgstr ""
 
@@ -86,123 +108,28 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: footer.php:64
-msgid "Webmakerr"
-msgstr ""
-
 #: footer.php:67
+#, php-format
 msgid "Proudly powered by %1$s and %2$s."
 msgstr ""
 
-#: front-page.php:16
-msgid "Welcome to Webmakerr"
-msgstr ""
-
-#: front-page.php:19
-msgid "Build a modern website in minutes."
-msgstr ""
-
-#: front-page.php:22
-msgid "Webmakerr provides a polished, performance-first foundation that looks great on every device—no demo imports required."
-msgstr ""
-
-#: front-page.php:26
-msgid "Explore Features"
-msgstr ""
-
-#: front-page.php:33
-msgid "Read the blog"
-msgstr ""
-
-#: front-page.php:43
-msgid "Designed for creators"
-msgstr ""
-
-#: front-page.php:46
-msgid "Everything you need to publish content, showcase your work, and grow your brand with zero setup friction."
-msgstr ""
-
-#: front-page.php:54
-msgid "Lightning-fast setup"
-msgstr ""
-
-#: front-page.php:55
-msgid "Launch instantly with a clean layout, modern typography, and accessibility-ready defaults."
-msgstr ""
-
-#: front-page.php:58
-msgid "Responsive by default"
-msgstr ""
-
-#: front-page.php:59
-msgid "Tailwind-powered spacing and components scale beautifully across phones, tablets, and desktops."
-msgstr ""
-
-#: front-page.php:62
-msgid "Block editor friendly"
-msgstr ""
-
-#: front-page.php:63
-msgid "Craft pages visually. Every section supports core blocks without extra plugins or imports."
-msgstr ""
-
-#: front-page.php:66
-msgid "Performance focused"
-msgstr ""
-
-#: front-page.php:67
-msgid "Lean templates and optimized assets keep your homepage loading in a flash."
-msgstr ""
-
-#: front-page.php:70
-msgid "Customizable palette"
-msgstr ""
-
-#: front-page.php:71
-msgid "Adjust colors, fonts, and layouts through the Customizer or theme.json with minimal effort."
-msgstr ""
-
-#: front-page.php:74
-msgid "Translation ready"
-msgstr ""
-
-#: front-page.php:75
-msgid "All strings are localization-friendly so your brand can speak to any audience."
-msgstr ""
-
-#: front-page.php:97
-msgid "Latest insights"
-msgstr ""
-
-#: front-page.php:100
-msgid "Stay up to date with recent articles, tutorials, and announcements from your team."
-msgstr ""
-
-#: front-page.php:144
-msgid "No posts yet. Publish your first article to see it here."
-msgstr ""
-
-#: front-page.php:136, template-parts/content.php:30
-msgid "Read more"
-msgstr ""
-
-#: functions.php:34
+#: functions.php:36
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:35
+#: functions.php:37
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:91
+#: functions.php:93
 msgid "Footer"
 msgstr ""
 
-#: functions.php:93
+#: functions.php:95
 msgid "Add widgets here to appear in your site footer."
 msgstr ""
 
-#: functions.php:170
+#: functions.php:173
 msgid "Home"
 msgstr ""
 
@@ -211,140 +138,67 @@ msgid "Skip to content"
 msgstr ""
 
 #: header.php:69
+#: header.php:75
 msgid "Toggle navigation"
 msgstr ""
 
-#: header.php:83, header.php:85, header.php:116, header.php:118
+#: header.php:85
+#: header.php:87
+#: header.php:118
+#: header.php:120
 msgid "Contact Us"
 msgstr ""
 
-#: header.php:96
+#: header.php:98
 msgid "Edit Menus"
 msgstr ""
 
-#: header.php:136
+#: header.php:153
 msgid "Rapidly build your next WordPress theme with Tailwind CSS"
 msgstr ""
 
 #. translators: 1: Opening link to Webmakerr, 2: Closing link, 3: Opening link to Tailwind CSS, 4: Closing link, 5: Opening link to WordPress, 6: Closing link.
-#: header.php:143
+#: header.php:160
+#, php-format
 msgid "%1$sWebmakerr%2$s is a %3$sTailwind CSS%4$s flavoured %5$sWordPress%6$s boilerplate theme. It's your go-to starting point for building custom WordPress themes with modern tools and practices."
 msgstr ""
 
-#: header.php:162
+#: header.php:180
 msgid "Documentation"
+msgstr ""
+
+#: index.php:28
+#, php-format
+msgid "Posts by %s"
+msgstr ""
+
+#: index.php:34
+#, php-format
+msgid "Daily Archives: %s"
+msgstr ""
+
+#: index.php:40
+#, php-format
+msgid "Monthly Archives: %s"
+msgstr ""
+
+#: index.php:46
+#, php-format
+msgid "Yearly Archives: %s"
+msgstr ""
+
+#: index.php:58
+#, php-format
+msgid "Search results for: %s"
 msgstr ""
 
 #: index.php:64
 msgid "Page Not Found"
 msgstr ""
 
-#: index.php:58
-msgid "Search results for: %s"
-msgstr ""
-
-#: index.php:52
-msgid "Yearly Archives: %s"
-msgstr ""
-
-#: index.php:46
-msgid "Monthly Archives: %s"
-msgstr ""
-
-#: index.php:40
-msgid "Daily Archives: %s"
-msgstr ""
-
-#: index.php:34
-msgid "Posts by %s"
-msgstr ""
-
-#: page-contact.php:3, page-contact.php:21
+#. Template Name of the theme
+#: template-parts/page-contact-default.php:11
 msgid "Contact"
-msgstr ""
-
-#: page-contact.php:22
-msgid "Get in touch"
-msgstr ""
-
-#: page-contact.php:23
-msgid "Ready to build with Webmakerr? Tell us a bit about your team and how we can help streamline your next launch."
-msgstr ""
-
-#: page-contact.php:27
-msgid "Email us directly at hello@example.com"
-msgstr ""
-
-#: page-contact.php:28
-msgid "View pricing and plans"
-msgstr ""
-
-#: page-contact.php:29
-msgid "Visit our support center"
-msgstr ""
-
-#: page-contact.php:35
-msgid "Webmakerr gave our team the momentum to launch in weeks instead of months. The layout is minimal, accessible, and lightning fast."
-msgstr ""
-
-#: page-contact.php:40
-msgid "Amelia Carter"
-msgstr ""
-
-#: page-contact.php:41
-msgid "Head of Product, Northwind"
-msgstr ""
-
-#: page-contact.php:46
-msgid "Northwind"
-msgstr ""
-
-#: page-contact.php:47
-msgid "Globex"
-msgstr ""
-
-#: page-contact.php:48
-msgid "Acme"
-msgstr ""
-
-#: page-contact.php:55
-msgid "Work with our team"
-msgstr ""
-
-#: page-contact.php:56
-msgid "We partner with agencies and product teams to build fast, accessible websites. Choose the contact method that works best for your workflow."
-msgstr ""
-
-#: page-contact.php:60
-msgid "Email"
-msgstr ""
-
-#: page-contact.php:61
-msgid "Send a message to hello@example.com and a member of our team will reply within two business days."
-msgstr ""
-
-#: page-contact.php:65
-msgid "Support portal"
-msgstr ""
-
-#: page-contact.php:66
-msgid "Track ongoing projects and ask technical questions inside the customer portal."
-msgstr ""
-
-#: page-contact.php:67
-msgid "Open support center"
-msgstr ""
-
-#: page-contact.php:71
-msgid "Contact form plugin"
-msgstr ""
-
-#: page-contact.php:72
-msgid "Prefer forms? Install your favorite contact form plugin and embed it here using a block or shortcode."
-msgstr ""
-
-#: page-contact.php:73
-msgid "This template keeps things presentation-only so you can choose the tools that fit your site."
 msgstr ""
 
 #: searchform.php:2
@@ -363,49 +217,62 @@ msgstr ""
 msgid "Previous page"
 msgstr ""
 
-#: src/Pagination.php:116
+#: src/Pagination.php:126
 msgid "Next page"
 msgstr ""
 
-#: src/Walkers/CommentWalker.php:17
-msgid "Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved."
+#: src/Pagination.php:149
+msgid "Ellipsis indicating skipped pages"
 msgstr ""
 
 #: src/Walkers/CommentWalker.php:15
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
+#: src/Walkers/CommentWalker.php:17
+msgid "Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved."
+msgstr ""
+
 #. translators: 1: Comment date, 2: Comment time.
-#: src/Walkers/CommentWalker.php:61
+#: src/Walkers/CommentWalker.php:62
+#, php-format
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: src/Walkers/CommentWalker.php:66
+#: src/Walkers/CommentWalker.php:67
 msgid "Edit"
+msgstr ""
+
+#: template-parts/content-contact.php:26
+#: template-parts/content-front-page.php:39
+msgid "Page navigation"
+msgstr ""
+
+#: template-parts/content-contact.php:26
+#: template-parts/content-front-page.php:39
+#: template-parts/content-single.php:42
+msgid "Pages:"
 msgstr ""
 
 #: template-parts/content-none.php:9
 msgid "Nothing Found"
 msgstr ""
 
-#: template-parts/content-none.php:14
-msgid "It seems we can't find what you're looking for. Perhaps searching can help."
-msgstr ""
-
 #: template-parts/content-none.php:12
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content-single.php:8
+#: template-parts/content-none.php:14
+msgid "It seems we can't find what you're looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-single.php:12
+#, php-format
 msgid "by %s"
 msgstr ""
 
-#: template-parts/content-single.php:23
+#: template-parts/content-single.php:42
 msgid "Post pages"
-msgstr ""
-
-#: template-parts/content-single.php:23
-msgid "Pages:"
 msgstr ""
 
 #: template-parts/content.php:7
@@ -417,9 +284,188 @@ msgid "Author"
 msgstr ""
 
 #: template-parts/content.php:15
+#, php-format
 msgid "Avatar for %s"
 msgstr ""
 
 #: template-parts/content.php:29
+#, php-format
 msgid "Read more: %s"
+msgstr ""
+
+#: template-parts/content.php:30
+#: template-parts/front-page-recent-posts.php:44
+msgid "Read more"
+msgstr ""
+
+#: template-parts/front-page-default.php:12
+msgid "Welcome to Webmakerr"
+msgstr ""
+
+#: template-parts/front-page-default.php:15
+msgid "Build a modern website in minutes."
+msgstr ""
+
+#: template-parts/front-page-default.php:18
+msgid "Webmakerr provides a polished, performance-first foundation that looks great on every device—no demo imports required."
+msgstr ""
+
+#: template-parts/front-page-default.php:22
+msgid "Explore Features"
+msgstr ""
+
+#: template-parts/front-page-default.php:29
+msgid "Read the blog"
+msgstr ""
+
+#: template-parts/front-page-default.php:39
+msgid "Designed for creators"
+msgstr ""
+
+#: template-parts/front-page-default.php:42
+msgid "Everything you need to publish content, showcase your work, and grow your brand with zero setup friction."
+msgstr ""
+
+#: template-parts/front-page-default.php:50
+msgid "Lightning-fast setup"
+msgstr ""
+
+#: template-parts/front-page-default.php:51
+msgid "Launch instantly with a clean layout, modern typography, and accessibility-ready defaults."
+msgstr ""
+
+#: template-parts/front-page-default.php:54
+msgid "Responsive by default"
+msgstr ""
+
+#: template-parts/front-page-default.php:55
+msgid "Tailwind-powered spacing and components scale beautifully across phones, tablets, and desktops."
+msgstr ""
+
+#: template-parts/front-page-default.php:58
+msgid "Block editor friendly"
+msgstr ""
+
+#: template-parts/front-page-default.php:59
+msgid "Craft pages visually. Every section supports core blocks without extra plugins or imports."
+msgstr ""
+
+#: template-parts/front-page-default.php:62
+msgid "Performance focused"
+msgstr ""
+
+#: template-parts/front-page-default.php:63
+msgid "Lean templates and optimized assets keep your homepage loading in a flash."
+msgstr ""
+
+#: template-parts/front-page-default.php:66
+msgid "Customizable palette"
+msgstr ""
+
+#: template-parts/front-page-default.php:67
+msgid "Adjust colors, fonts, and layouts through the Customizer or theme.json with minimal effort."
+msgstr ""
+
+#: template-parts/front-page-default.php:70
+msgid "Translation ready"
+msgstr ""
+
+#: template-parts/front-page-default.php:71
+msgid "All strings are localization-friendly so your brand can speak to any audience."
+msgstr ""
+
+#: template-parts/front-page-recent-posts.php:18
+msgid "Latest insights"
+msgstr ""
+
+#: template-parts/front-page-recent-posts.php:21
+msgid "Stay up to date with recent articles, tutorials, and announcements from your team."
+msgstr ""
+
+#: template-parts/front-page-recent-posts.php:52
+msgid "No posts yet. Publish your first article to see it here."
+msgstr ""
+
+#: template-parts/page-contact-default.php:12
+msgid "Get in touch"
+msgstr ""
+
+#: template-parts/page-contact-default.php:13
+msgid "Ready to build with Webmakerr? Tell us a bit about your team and how we can help streamline your next launch."
+msgstr ""
+
+#: template-parts/page-contact-default.php:19
+msgid "Email us directly at hello@example.com"
+msgstr ""
+
+#: template-parts/page-contact-default.php:24
+msgid "View pricing and plans"
+msgstr ""
+
+#: template-parts/page-contact-default.php:29
+msgid "Visit our support center"
+msgstr ""
+
+#: template-parts/page-contact-default.php:37
+msgid "Webmakerr gave our team the momentum to launch in weeks instead of months. The layout is minimal, accessible, and lightning fast."
+msgstr ""
+
+#: template-parts/page-contact-default.php:42
+msgid "Amelia Carter"
+msgstr ""
+
+#: template-parts/page-contact-default.php:43
+msgid "Head of Product, Northwind"
+msgstr ""
+
+#: template-parts/page-contact-default.php:48
+msgid "Northwind"
+msgstr ""
+
+#: template-parts/page-contact-default.php:49
+msgid "Globex"
+msgstr ""
+
+#: template-parts/page-contact-default.php:50
+msgid "Acme"
+msgstr ""
+
+#: template-parts/page-contact-default.php:57
+msgid "Work with our team"
+msgstr ""
+
+#: template-parts/page-contact-default.php:58
+msgid "We partner with agencies and product teams to build fast, accessible websites. Choose the contact method that works best for your workflow."
+msgstr ""
+
+#: template-parts/page-contact-default.php:62
+msgid "Email"
+msgstr ""
+
+#: template-parts/page-contact-default.php:63
+msgid "Send a message to hello@example.com and a member of our team will reply within two business days."
+msgstr ""
+
+#: template-parts/page-contact-default.php:67
+msgid "Support portal"
+msgstr ""
+
+#: template-parts/page-contact-default.php:68
+msgid "Track ongoing projects and ask technical questions inside the customer portal."
+msgstr ""
+
+#: template-parts/page-contact-default.php:70
+msgid "Open support center"
+msgstr ""
+
+#: template-parts/page-contact-default.php:75
+msgid "Contact form plugin"
+msgstr ""
+
+#: template-parts/page-contact-default.php:76
+msgid "Prefer forms? Install your favorite contact form plugin and embed it here using a block or shortcode."
+msgstr ""
+
+#: template-parts/page-contact-default.php:77
+msgid "This template keeps things presentation-only so you can choose the tools that fit your site."
 msgstr ""
