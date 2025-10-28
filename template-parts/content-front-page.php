@@ -7,7 +7,7 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('flex flex-col'); ?>>
     <header class="border-b border-zinc-200 bg-gradient-to-b from-sky-50 via-white to-white">
-        <div class="site-width py-16 sm:py-24">
+        <div class="site-width py-0 sm:py-0">
             <div class="mx-auto max-w-3xl text-center">
                 <h1 class="screen-reader-text"><?php echo esc_html(get_the_title()); ?></h1>
 
