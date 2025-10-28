@@ -116,7 +116,12 @@ class Theme
             return;
         }
 
-        register_nav_menus($this->menus);
+        $menus = array_map(
+            static fn (string $description): string => __($description, 'webmakerr'),
+            $this->menus
+        );
+
+        register_nav_menus($menus);
     }
 
     public function bootFeatures(): void
