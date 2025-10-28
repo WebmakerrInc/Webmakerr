@@ -28,6 +28,8 @@ if (! function_exists('webmakerr_setup')) {
         add_theme_support('automatic-feed-links');
         add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
+        add_theme_support('editor-styles');
+        add_editor_style('build/assets/editor-style.css');
 
         register_nav_menus(
             [
