@@ -12,6 +12,9 @@
         --color-white: #ffffff;
         --spacing: 0.25rem;
         --breakpoint-md: 782px;
+        --site-width: 80rem;
+        --site-gutter: clamp(1rem, 4vw, 2rem);
+        --site-header-height: 56px;
         --container-sm: 24rem;
         --container-md: 28rem;
         --container-xl: 36rem;
@@ -69,9 +72,34 @@
 }
 
 @layer components {
+    .site-width {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: var(--site-width);
+        margin-inline: auto;
+        padding-inline: var(--site-gutter);
+    }
+
+    .site-header {
+        height: var(--site-header-height);
+    }
+
+    .site-header .site-width {
+        height: 100%;
+    }
+
+    .site-content-shell {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: var(--site-width);
+        margin-inline: auto;
+        padding-inline: var(--site-gutter);
+    }
+
     .entry-content,
     .block-editor-block-list__layout {
         @apply text-lg leading-8 text-zinc-950;
+        font-family: var(--font-sans);
     }
 
     .entry-content > *:not(:first-child),
@@ -176,6 +204,19 @@
         color: var(--color-primary);
     }
 
+    .entry-content .wp-block,
+    .block-editor-block-list__layout .wp-block {
+        max-width: 100%;
+        font-family: inherit;
+    }
+
+    .entry-content .wp-block-button__link,
+    .block-editor-block-list__layout .wp-block-button__link {
+        font-family: var(--font-sans);
+        font-size: var(--wp--preset--font-size--sm, 0.875rem);
+        line-height: 1.25rem;
+    }
+
     .wp-block-button__link {
         @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white no-underline transition;
         background-color: var(--color-dark);
@@ -183,6 +224,18 @@
 
     .wp-block-button__link:hover {
         background-color: color-mix(in srgb, var(--color-dark) 90%, white 10%);
+    }
+
+    .entry-content .wp-block-heading,
+    .block-editor-block-list__layout .wp-block-heading {
+        color: var(--color-dark);
+        font-weight: 600;
+    }
+
+    .entry-content .wp-block-image img,
+    .block-editor-block-list__layout .wp-block-image img {
+        height: auto;
+        max-width: 100%;
     }
 }
 

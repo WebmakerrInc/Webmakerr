@@ -7,11 +7,9 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('flex flex-col'); ?>>
     <header class="border-b border-zinc-200 bg-gradient-to-b from-sky-50 via-white to-white">
-        <div class="container mx-auto px-6 py-16 sm:py-24 lg:px-8">
+        <div class="site-width py-16 sm:py-24">
             <div class="mx-auto max-w-3xl text-center">
-                <h1 class="text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">
-                    <?php echo esc_html(get_the_title()); ?>
-                </h1>
+                <h1 class="screen-reader-text"><?php echo esc_html(get_the_title()); ?></h1>
 
                 <?php if (has_excerpt()) : ?>
                     <div class="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg">
@@ -23,15 +21,15 @@
     </header>
 
     <?php if (has_post_thumbnail()) : ?>
-        <div class="container mx-auto -mt-12 px-6 lg:px-8">
+        <div class="site-width -mt-12">
             <figure class="mx-auto max-w-4xl overflow-hidden rounded-4xl border border-zinc-200 bg-white shadow-sm">
                 <?php the_post_thumbnail('large', ['class' => 'aspect-[16/10] w-full object-cover']); ?>
             </figure>
         </div>
     <?php endif; ?>
 
-    <section class="container mx-auto px-6 pb-24 pt-16 lg:px-8">
-        <div class="entry-content mx-auto max-w-4xl space-y-8 text-base leading-7 text-zinc-600 sm:text-lg [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80">
+    <section class="site-width pb-24 pt-16">
+        <div class="entry-content mx-auto max-w-none text-base leading-7 text-zinc-600 sm:text-lg [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80">
             <?php the_content(); ?>
 
             <?php

@@ -18,7 +18,7 @@
         class="mt-16 border-t border-neutral-200 bg-neutral-50 text-neutral-900"
         role="contentinfo"
     >
-        <div class="mx-auto w-full max-w-6xl px-6 py-12 lg:px-8 lg:py-16 space-y-8">
+        <div class="site-width space-y-8 py-12 lg:py-16">
             <?php do_action('webmakerr_footer'); ?>
 
             <div class="grid gap-8 md:grid-cols-2">

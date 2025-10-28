@@ -22,7 +22,7 @@ get_header();
             ?>
         <?php endwhile; ?>
     <?php else : ?>
-        <div class="container mx-auto px-6 lg:px-8">
+        <div class="site-width">
             <?php get_template_part('template-parts/content', 'none'); ?>
         </div>
     <?php endif; ?>

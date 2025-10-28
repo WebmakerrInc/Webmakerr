@@ -6,7 +6,7 @@
  */
 ?>
 <section class="border-b border-zinc-200 bg-gradient-to-b from-sky-50 via-white to-white">
-    <div class="container mx-auto px-6 py-20 sm:py-24 lg:px-8">
+    <div class="site-width py-20 sm:py-24">
         <div class="mx-auto max-w-3xl text-center">
             <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
                 <?php echo esc_html__('Welcome to Webmakerr', 'webmakerr'); ?>
@@ -33,7 +33,7 @@
     </div>
 </section>
 
-<section id="features" class="container mx-auto px-6 lg:px-8">
+<section id="features" class="site-width py-16 sm:py-20">
     <div class="mx-auto mb-12 flex max-w-3xl flex-col gap-4 text-center">
         <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
             <?php echo esc_html__('Designed for creators', 'webmakerr'); ?>

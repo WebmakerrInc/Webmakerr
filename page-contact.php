@@ -14,7 +14,7 @@ get_header();
 ?>
 
 <div class="bg-white py-16 sm:py-20 lg:py-24">
-    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="site-width">
         <?php if (have_posts()) : ?>
             <?php while (have_posts()) : the_post(); ?>
                 <?php

@@ -14,7 +14,7 @@ get_header();
             <?php get_template_part('template-parts/content', 'single'); ?>
 
             <?php if (comments_open() || get_comments_number()): ?>
-                <section class="px-6 lg:px-8">
+                <section class="site-width">
                     <?php comments_template(); ?>
                 </section>
             <?php endif; ?>

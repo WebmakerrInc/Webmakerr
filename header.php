@@ -42,8 +42,8 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
 <div id="page" class="min-h-screen flex flex-col">
     <?php do_action('webmakerr_header'); ?>
 
-    <header class="sticky top-0 z-50 bg-white shadow-md">
-        <div class="container mx-auto py-4 flex items-center justify-between gap-6">
+    <header class="site-header sticky top-0 z-50 bg-white shadow-md">
+        <div class="site-width flex h-full items-center justify-between gap-6">
             <div class="flex items-center gap-4">
                 <?php if (has_custom_logo()): ?>
                     <div class="site-logo">
@@ -89,7 +89,7 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
 
                 <div
                     id="primary-navigation"
-                    class="fixed inset-x-4 top-24 z-50 flex flex-col gap-6 rounded-2xl border border-light bg-white p-6 shadow-lg transition-[transform,opacity] duration-200 md:static md:z-auto md:flex md:flex-row md:items-center md:gap-6 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none"
+                    class="fixed inset-x-4 top-[calc(var(--site-header-height)+1rem)] z-50 flex flex-col gap-6 rounded-2xl border border-light bg-white p-6 shadow-lg transition-[transform,opacity] duration-200 md:static md:z-auto md:flex md:flex-row md:items-center md:gap-6 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none"
                     data-open="false"
                     aria-hidden="true"
                 >
@@ -135,7 +135,7 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
     <div id="content" class="site-content grow">
         <?php if (is_front_page() && is_home()): ?>
             <?php $documentation_url = apply_filters('webmakerr_documentation_link', ''); ?>
-            <section class="container mx-auto py-12">
+            <section class="site-width py-12">
                 <div class="max-w-(--breakpoint-md)">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 md:w-10 mb-4" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
                         <defs>
@@ -148,7 +148,7 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
                         <circle cx="44" cy="24" r="10" fill="#0f172a" opacity="0.55" />
                         <circle cx="32" cy="44" r="14" fill="#3b82f6" opacity="0.3" />
                     </svg>
-                        <div class="[&_a]:text-primary">
+                    <div class="[&_a]:text-primary">
                         <h1 class="leading-tight text-3xl md:text-5xl font-medium tracking-tight text-balance text-zinc-950">
                             <?php esc_html_e('Rapidly build your next WordPress theme with Tailwind CSS', 'webmakerr'); ?>
                         </h1>
@@ -173,7 +173,7 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
                             );
                             ?>
                         </p>
-                        </div>
+                    </div>
                         <?php if (! empty($documentation_url)) : ?>
                             <div>
                                 <a href="<?php echo esc_url($documentation_url); ?>" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
