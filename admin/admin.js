@@ -8,7 +8,7 @@
         var menuWrap = document.getElementById('adminmenuwrap');
         var menuBack = document.getElementById('adminmenuback');
         var toggleLink = document.querySelector('#wp-admin-bar-menu-toggle > a');
-        var BREAKPOINT = 640;
+        var BREAKPOINT = 1024;
 
         if (!menuWrap) {
             return;
