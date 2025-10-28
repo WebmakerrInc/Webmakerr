@@ -68,7 +68,7 @@ $contact_url = apply_filters('webmakerr_contact_link', $contact_url);
 
                 <div id="primary-navigation" class="hidden flex flex-col gap-6 items-stretch border border-light rounded-xl p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0">
                     <nav>
-                        <?php if (current_user_can('administrator') && !has_nav_menu('primary')): ?>
+                        <?php if (current_user_can('edit_theme_options') && !has_nav_menu('primary')): ?>
                             <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>" class="text-sm text-zinc-600"><?php esc_html_e('Edit Menus', 'webmakerr'); ?></a>
                         <?php else: ?>
                             <?php
@@ -107,20 +107,37 @@ $contact_url = apply_filters('webmakerr_contact_link', $contact_url);
                         <path d="M117.84 53.9c-1.32 8-3.79 14.85-7.42 20.55-3.63 5.7-8.02 10.09-13.18 13.16-5.16 3.07-10.72 4.6-16.7 4.6-4.5 0-8.05-.76-10.65-2.27-2.6-1.51-4.53-3.28-5.78-5.3s-2.19-3.82-2.8-5.4h-.92l-6.45 38.66h52.18c6.51 0 11.79-5.28 11.79-11.79V53.42c-.02.16-.05.31-.07.47Z"/>
                         <path d="M98.23 31.4c-2.51-2.25-5.93-3.37-10.27-3.37s-7.9 1.08-11.16 3.23-5.94 5.16-8.05 9.01c-2.1 3.86-3.57 8.35-4.41 13.49-.84 5.2-.84 9.77 0 13.69s2.51 6.98 5.04 9.18c2.52 2.2 5.86 3.3 10 3.3s8.08-1.15 11.33-3.45c3.24-2.3 5.94-5.42 8.07-9.37 2.14-3.95 3.64-8.4 4.51-13.35.77-4.88.75-9.27-.07-13.16-.82-3.89-2.48-6.96-4.99-9.2Z"/>
                     </svg>
-                    <div class="[&_a]:text-primary">
+                        <div class="[&_a]:text-primary">
                         <h1 class="leading-tight text-3xl md:text-5xl font-medium tracking-tight text-balance text-zinc-950">
-                            Rapidly build your next WordPress theme with Tailwind CSS
+                            <?php esc_html_e('Rapidly build your next WordPress theme with Tailwind CSS', 'webmakerr'); ?>
                         </h1>
                         <p class="my-6 text-lg md:text-xl text-zinc-600 leading-8">
-                            <a href="https://webmakerr.com/">Webmakerr</a> is a <a href="https://tailwindcss.com">Tailwind CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
-                            boilerplate theme. It's your go-to starting point for building custom WordPress themes with modern tools and practices.
+                            <?php
+                            printf(
+                                wp_kses(
+                                    /* translators: 1: Opening link to Webmakerr, 2: Closing link, 3: Opening link to Tailwind CSS, 4: Closing link, 5: Opening link to WordPress, 6: Closing link. */
+                                    __('%1$sWebmakerr%2$s is a %3$sTailwind CSS%4$s flavoured %5$sWordPress%6$s boilerplate theme. It\'s your go-to starting point for building custom WordPress themes with modern tools and practices.', 'webmakerr'),
+                                    [
+                                        'a' => [
+                                            'href' => [],
+                                        ],
+                                    ]
+                                ),
+                                sprintf('<a href="%s">', esc_url('https://webmakerr.com/')),
+                                '</a>',
+                                sprintf('<a href="%s">', esc_url('https://tailwindcss.com')),
+                                '</a>',
+                                sprintf('<a href="%s">', esc_url('https://wordpress.org')),
+                                '</a>'
+                            );
+                            ?>
                         </p>
-                    </div>
-                    <div>
+                        </div>
+                        <div>
                         <a href="https://webmakerr.com/" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
-                            Documentation
+                            <?php esc_html_e('Documentation', 'webmakerr'); ?>
                         </a>
-                    </div>
+                        </div>
                 </div>
             </section>
         <?php endif; ?>

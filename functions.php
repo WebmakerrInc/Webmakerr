@@ -122,6 +122,10 @@ function webmakerr(): Theme
         ]));
 }
 
+// Bootstrap the theme framework early so hooks registered within the Theme
+// class run during the same after_setup_theme cycle.
+webmakerr();
+
 add_filter(
     'nav_menu_css_class',
     static function (array $classes, $item, $args, int $depth): array {
@@ -179,13 +183,5 @@ add_filter(
     },
     10,
     4
-);
-
-add_action(
-    'after_setup_theme',
-    static function (): void {
-        webmakerr();
-    },
-    11
 );
 
