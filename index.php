@@ -49,7 +49,7 @@ get_header();
                 <?php elseif (is_archive()): ?>
                         <header class="mb-8">
                                 <h1 class="text-3xl font-semibold">
-                                        <?php echo esc_html(get_the_archive_title()); ?>
+                                        <?php the_archive_title(); ?>
                                 </h1>
                         </header>
                 <?php elseif (is_search()): ?>
