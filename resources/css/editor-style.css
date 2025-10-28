@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+    :root {
+        --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+            "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+            monospace;
+        --color-primary: var(--wp--preset--color--primary, #2c7fff);
+        --color-dark: var(--wp--preset--color--dark, #18181c);
+        --color-light: var(--wp--preset--color--light, #f4f4f5);
+        --color-white: #ffffff;
+    }
+
+    body.editor-styles-wrapper {
+        @apply mx-auto max-w-3xl bg-white p-8 font-sans text-base text-zinc-900;
+    }
+
+    .editor-styles-wrapper a {
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: color 150ms ease;
+    }
+
+    .editor-styles-wrapper a:hover {
+        color: var(--color-primary);
+        opacity: 0.85;
+        text-decoration: underline;
+    }
+}
+
+@layer components {
+    .editor-styles-wrapper .wp-block {
+        @apply my-6;
+    }
+
+    .editor-styles-wrapper .wp-block-heading h2 {
+        @apply text-2xl font-semibold leading-tight;
+    }
+
+    .editor-styles-wrapper .wp-block-heading h3 {
+        @apply text-xl font-semibold leading-snug;
+    }
+
+    .editor-styles-wrapper blockquote {
+        @apply border-l-4 px-6 py-4 text-lg italic;
+        border-left-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+        background-color: color-mix(in srgb, var(--color-light) 50%, transparent);
+        color: var(--color-dark);
+    }
+
+    .editor-styles-wrapper pre {
+        @apply rounded-2xl border bg-zinc-950/90 p-6 font-mono text-sm text-white shadow-inner;
+        border-color: var(--color-light);
+    }
+
+    .editor-styles-wrapper code {
+        @apply rounded px-1.5 py-0.5 font-mono text-sm;
+        background-color: var(--color-light);
+        color: var(--color-dark);
+    }
+
+    .editor-styles-wrapper ul {
+        @apply list-disc space-y-3 pl-6;
+    }
+
+    .editor-styles-wrapper ol {
+        @apply list-decimal space-y-3 pl-6;
+    }
+
+    .editor-styles-wrapper table {
+        @apply w-full table-auto overflow-hidden rounded-2xl border text-sm;
+        border-color: var(--color-light);
+    }
+
+    .editor-styles-wrapper thead {
+        background-color: color-mix(in srgb, var(--color-light) 60%, transparent);
+    }
+
+    .editor-styles-wrapper th {
+        @apply px-4 py-3 text-left font-semibold;
+    }
+
+    .editor-styles-wrapper td {
+        @apply border-t px-4 py-3;
+        border-color: var(--color-light);
+    }
+}
+
+@layer utilities {
+    .text-primary { color: var(--color-primary); }
+    .hover\:text-primary:hover { color: var(--color-primary); }
+    .text-primary\/80 { color: color-mix(in srgb, var(--color-primary) 80%, transparent); }
+    .text-dark { color: var(--color-dark); }
+    .text-dark\/90 { color: color-mix(in srgb, var(--color-dark) 90%, transparent); }
+    .text-dark\/80 { color: color-mix(in srgb, var(--color-dark) 80%, transparent); }
+    .text-dark\/70 { color: color-mix(in srgb, var(--color-dark) 70%, transparent); }
+    .text-dark\/60 { color: color-mix(in srgb, var(--color-dark) 60%, transparent); }
+    .text-light { color: var(--color-light); }
+    .bg-dark { background-color: var(--color-dark); }
+    .bg-dark\/90 { background-color: color-mix(in srgb, var(--color-dark) 90%, transparent); }
+    .hover\:bg-dark\/90:hover { background-color: color-mix(in srgb, var(--color-dark) 90%, transparent); }
+    .bg-light { background-color: var(--color-light); }
+    .border-light { border-color: var(--color-light); }
+    .border-dark\/10 { border-color: color-mix(in srgb, var(--color-dark) 10%, transparent); }
+    .focus-visible\:outline-dark:focus-visible { outline-color: var(--color-dark); }
+}
