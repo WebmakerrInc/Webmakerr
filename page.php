@@ -1,6 +1,6 @@
 <?php
 /**
- * Single post template file.
+ * Page template file.
  *
  * @package Webmakerr
  */
