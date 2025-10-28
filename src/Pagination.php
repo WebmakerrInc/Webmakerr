@@ -86,8 +86,11 @@ class Pagination
             );
         }
 
-        if (!in_array(2, $links)) {
-            echo '<li class="page-item"></li>';
+        if ( ! in_array( 2, $links, true ) ) {
+            printf(
+                '<li class="page-item"><span aria-hidden="true" class="px-2">&hellip;</span><span class="sr-only">%s</span></li>',
+                esc_html__( 'Ellipsis indicating skipped pages', 'webmakerr' )
+            );
         }
     }
 
@@ -119,9 +122,12 @@ class Pagination
             );
         }
 
-        if (!in_array($max, $links)) {
-            if (!in_array($max - 1, $links)) {
-                echo '<li class="page-item"></li>';
+        if ( ! in_array( $max, $links, true ) ) {
+            if ( ! in_array( $max - 1, $links, true ) ) {
+                printf(
+                    '<li class="page-item"><span aria-hidden="true" class="px-2">&hellip;</span><span class="sr-only">%s</span></li>',
+                    esc_html__( 'Ellipsis indicating skipped pages', 'webmakerr' )
+                );
             }
         }
     }
