@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@layer base {
+    :root {
+        --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+            "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+            monospace;
+        --color-primary: var(--wp--preset--color--primary, #2c7fff);
+        --color-dark: var(--wp--preset--color--dark, #18181c);
+        --color-light: var(--wp--preset--color--light, #f4f4f5);
+        --color-white: #ffffff;
+        --spacing: 0.25rem;
+        --breakpoint-md: 782px;
+        --container-sm: 24rem;
+        --container-md: 28rem;
+        --container-xl: 36rem;
+        --container-2xl: 42rem;
+        --container-3xl: 48rem;
+        --container-4xl: 56rem;
+        --container-5xl: 64rem;
+        --container-6xl: 72rem;
+    }
+
+    body {
+        font-family: var(--font-sans);
+    }
+
+    a {
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: color 150ms ease;
+    }
+
+    a:hover {
+        color: var(--color-primary);
+        opacity: 0.85;
+        text-decoration: underline;
+    }
+
+    .site-logo {
+        @apply h-[37px] max-h-[37px] w-[142px] max-w-[142px];
+    }
+
+    .site-logo img {
+        @apply block h-full w-full object-contain;
+    }
+
+    .footer-logo {
+        line-height: 0;
+    }
+
+    .footer-logo .custom-logo-link {
+        @apply inline-flex items-center;
+    }
+
+    .footer-logo .custom-logo,
+    .footer-logo img {
+        @apply h-auto w-full max-w-[120px] object-contain;
+    }
+
+    body.mobile-menu-open {
+        overflow: hidden;
+    }
+
+    .skip-link:focus {
+        @apply block;
+    }
+}
+
+@layer components {
+    .entry-content,
+    .block-editor-block-list__layout {
+        @apply text-lg leading-8 text-zinc-950;
+    }
+
+    .entry-content > *:not(:first-child),
+    .block-editor-block-list__layout > *:not(:first-child) {
+        @apply my-6;
+    }
+
+    .entry-content h2,
+    .block-editor-block-list__layout h2 {
+        @apply text-2xl font-semibold leading-tight;
+    }
+
+    .entry-content h3,
+    .block-editor-block-list__layout h3 {
+        @apply text-xl font-semibold leading-snug;
+    }
+
+    .entry-content h4,
+    .block-editor-block-list__layout h4 {
+        @apply text-lg font-semibold;
+    }
+
+    .entry-content a,
+    .block-editor-block-list__layout a {
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: color 150ms ease;
+    }
+
+    .entry-content a:hover,
+    .block-editor-block-list__layout a:hover {
+        opacity: 0.85;
+        text-decoration: underline;
+    }
+
+    .entry-content blockquote,
+    .block-editor-block-list__layout blockquote {
+        @apply border-l-4 px-6 py-4 text-lg font-medium italic;
+        border-left-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+        background-color: color-mix(in srgb, var(--color-light) 40%, transparent);
+        color: var(--color-dark);
+    }
+
+    .entry-content pre,
+    .block-editor-block-list__layout pre {
+        @apply rounded-2xl border bg-zinc-950/90 p-6 font-mono text-sm text-white shadow-inner;
+        border-color: var(--color-light);
+    }
+
+    .entry-content code,
+    .block-editor-block-list__layout code {
+        @apply rounded px-1.5 py-0.5 font-mono text-sm;
+        background-color: var(--color-light);
+        color: var(--color-dark);
+    }
+
+    .entry-content ul,
+    .block-editor-block-list__layout ul {
+        @apply list-disc space-y-3 pl-6;
+    }
+
+    .entry-content ol,
+    .block-editor-block-list__layout ol {
+        @apply list-decimal space-y-3 pl-6;
+    }
+
+    .entry-content table,
+    .block-editor-block-list__layout table {
+        @apply w-full table-auto overflow-hidden rounded-2xl border text-sm;
+        border-color: var(--color-light);
+    }
+
+    .entry-content thead,
+    .block-editor-block-list__layout thead {
+        @apply text-left;
+        background-color: color-mix(in srgb, var(--color-light) 60%, transparent);
+    }
+
+    .entry-content th,
+    .block-editor-block-list__layout th {
+        @apply px-4 py-3 font-semibold;
+    }
+
+    .entry-content td,
+    .block-editor-block-list__layout td {
+        @apply border-t px-4 py-3;
+        border-color: var(--color-light);
+    }
+
+    .entry-content figcaption,
+    .block-editor-block-list__layout figcaption {
+        @apply mt-3 text-center text-sm text-zinc-600;
+    }
+
+    .entry-content .children,
+    .block-editor-block-list__layout .children {
+        @apply ml-20 space-y-8;
+    }
+
+    .entry-content .children a,
+    .block-editor-block-list__layout .children a {
+        color: var(--color-primary);
+    }
+
+    .wp-block-button__link {
+        @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white no-underline transition;
+        background-color: var(--color-dark);
+    }
+
+    .wp-block-button__link:hover {
+        background-color: color-mix(in srgb, var(--color-dark) 90%, white 10%);
+    }
+}
+
+@layer utilities {
+    .no-underline { text-decoration: none; }
+    .text-primary { color: var(--color-primary); }
+    .hover\:text-primary:hover { color: var(--color-primary); }
+    .text-primary\/80 { color: color-mix(in srgb, var(--color-primary) 80%, transparent); }
+    .text-dark { color: var(--color-dark); }
+    .text-dark\/90 { color: color-mix(in srgb, var(--color-dark) 90%, transparent); }
+    .text-dark\/80 { color: color-mix(in srgb, var(--color-dark) 80%, transparent); }
+    .text-dark\/70 { color: color-mix(in srgb, var(--color-dark) 70%, transparent); }
+    .text-dark\/60 { color: color-mix(in srgb, var(--color-dark) 60%, transparent); }
+    .text-light { color: var(--color-light); }
+    .bg-dark { background-color: var(--color-dark); }
+    .bg-dark\/90 { background-color: color-mix(in srgb, var(--color-dark) 90%, transparent); }
+    .hover\:bg-dark\/90:hover { background-color: color-mix(in srgb, var(--color-dark) 90%, transparent); }
+    .bg-light { background-color: var(--color-light); }
+    .border-light { border-color: var(--color-light); }
+    .border-dark\/10 { border-color: color-mix(in srgb, var(--color-dark) 10%, transparent); }
+    .focus-visible\:outline-dark:focus-visible { outline-color: var(--color-dark); }
+}
