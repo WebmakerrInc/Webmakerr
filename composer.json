@@ -3,7 +3,7 @@
     "name": "webmakerr/theme",
     "description": "Webmakerr WordPress theme framework",
     "type": "project",
-    "license": "MIT",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Jeffrey van Rossum",
