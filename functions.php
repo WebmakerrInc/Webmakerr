@@ -260,3 +260,44 @@ add_filter(
     4
 );
 
+add_action(
+    'init',
+    static function (): void {
+        if (! function_exists('register_block_pattern_category') || ! function_exists('register_block_pattern')) {
+            return;
+        }
+
+        if (! apply_filters('webmakerr_enable_block_patterns', true)) {
+            return;
+        }
+
+        register_block_pattern_category(
+            'webmakerr-pages',
+            ['label' => __('Webmakerr Pages', 'webmakerr')]
+        );
+
+        $patterns_dir = get_template_directory().'/patterns/';
+
+        if (! is_dir($patterns_dir)) {
+            return;
+        }
+
+        $pattern_files = glob($patterns_dir.'*.php');
+
+        if ($pattern_files === false) {
+            return;
+        }
+
+        foreach ($pattern_files as $pattern_file) {
+            $pattern = require $pattern_file;
+
+            if (! is_array($pattern) || empty($pattern['title']) || empty($pattern['content'])) {
+                continue;
+            }
+
+            $slug = sanitize_title(basename($pattern_file, '.php'));
+
+            register_block_pattern('webmakerr/'.$slug, $pattern);
+        }
+    }
+);
