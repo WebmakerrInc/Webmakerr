@@ -124,6 +124,7 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
 
     <div id="content" class="site-content grow">
         <?php if (is_front_page() && is_home()): ?>
+            <?php $documentation_url = apply_filters('webmakerr_documentation_link', ''); ?>
             <section class="container mx-auto py-12">
                 <div class="max-w-(--breakpoint-md)">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 md:w-10 mb-4" viewBox="0 0 117.91 117.91">
@@ -157,14 +158,16 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
                             ?>
                         </p>
                         </div>
-                        <div>
-                        <a href="https://webmakerr.com/" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
-                            <?php esc_html_e('Documentation', 'webmakerr'); ?>
-                        </a>
-                        </div>
+                        <?php if (! empty($documentation_url)) : ?>
+                            <div>
+                                <a href="<?php echo esc_url($documentation_url); ?>" class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold transition bg-dark text-white hover:bg-dark/90 !no-underline">
+                                    <?php esc_html_e('Documentation', 'webmakerr'); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                 </div>
             </section>
         <?php endif; ?>
 
         <?php do_action('webmakerr_content_start'); ?>
-        <main>
+        <main id="primary" class="site-main grow">

@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<main id="primary" class="bg-white py-16 sm:py-20 lg:py-24">
+<div class="bg-white py-16 sm:py-20 lg:py-24">
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="grid gap-16 lg:grid-cols-[minmax(0,_1.1fr)_minmax(0,_1fr)] lg:gap-24">
       <section class="flex flex-col gap-10 text-left">
@@ -77,7 +77,7 @@ get_header();
       </section>
     </div>
   </div>
-</main>
+</div>
 
 <?php
 get_footer();
