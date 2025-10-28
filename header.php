@@ -15,7 +15,14 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class('bg-white text-zinc-900 antialiased'); ?>>
-<?php do_action('webmakerr_site_before'); ?>
+<?php
+wp_body_open();
+do_action('webmakerr_site_before');
+
+$contact_page = get_page_by_path('contact');
+$contact_url = $contact_page instanceof WP_Post ? get_permalink($contact_page) : home_url('/');
+$contact_url = apply_filters('webmakerr_contact_link', $contact_url);
+?>
 
 <div id="page" class="min-h-screen flex flex-col">
     <?php do_action('webmakerr_header'); ?>
@@ -52,7 +59,7 @@
 
                     <a
                         class="inline-flex items-center justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline md:hidden"
-                        href="<?php echo esc_url(home_url('/contact')); ?>"
+                        href="<?php echo esc_url($contact_url); ?>"
                         aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
                     >
                         <?php esc_html_e('Contact Us', 'webmakerr'); ?>
@@ -81,7 +88,7 @@
 
                     <a
                         class="hidden md:inline-flex md:w-auto justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"
-                        href="<?php echo esc_url(home_url('/contact')); ?>"
+                        href="<?php echo esc_url($contact_url); ?>"
                         aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
                     >
                         <?php esc_html_e('Contact Us', 'webmakerr'); ?>

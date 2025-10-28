@@ -64,23 +64,29 @@ if (post_password_required()) {
         comment_form([
             'fields' => apply_filters('comment_form_default_fields', [
                 'author' =>
-                    '<p class="comment-form-author">' .
-                    '<input id="author" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your Name*', 'webmakerr') . '" name="author" type="text" value="' . esc_attr($commenter['comment_author']) .
-                    '" size="30"' . $aria_req . ' /></p>',
+                    '<p class="comment-form-author">'
+                    . '<label class="screen-reader-text" for="author">' . esc_html__('Your name', 'webmakerr') . '</label>'
+                    . '<input id="author" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your name*', 'webmakerr') . '" name="author" type="text" value="' . esc_attr($commenter['comment_author'])
+                    . '" size="30"' . $aria_req . ' /></p>',
 
                 'email' =>
-                    '<p class="comment-form-email">' .
-                    '<input id="email" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your Email Address*', 'webmakerr') . '" name="email" type="text" value="' . esc_attr($commenter['comment_author_email']) .
-                    '" size="30"' . $aria_req . ' /></p>',
+                    '<p class="comment-form-email">'
+                    . '<label class="screen-reader-text" for="email">' . esc_html__('Your email address', 'webmakerr') . '</label>'
+                    . '<input id="email" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your email address*', 'webmakerr') . '" name="email" type="email" value="' . esc_attr($commenter['comment_author_email'])
+                    . '" size="30"' . $aria_req . ' /></p>',
 
                 'url' =>
-                    '<p class="comment-form-url">' .
-                    '<input id="url" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your Website URL', 'webmakerr') . '" name="url" type="text" value="' . esc_attr($commenter['comment_author_url']) .
-                    '" size="30" /></p>'
+                    '<p class="comment-form-url">'
+                    . '<label class="screen-reader-text" for="url">' . esc_html__('Your website URL', 'webmakerr') . '</label>'
+                    . '<input id="url" class="bg-light w-full px-4 py-3 mb-4 rounded-xl text-sm" placeholder="' . esc_attr__('Your website URL', 'webmakerr') . '" name="url" type="url" value="' . esc_attr($commenter['comment_author_url'])
+                    . '" size="30" /></p>'
             ]),
             'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title text-2xl font-bold mb-2">',
             'class_submit'      => 'bg-dark rounded-full px-4 py-1.5 text-sm font-semibold text-light my-4',
-            'comment_field'     => '<textarea id="comment" name="comment" class="bg-light w-full px-4 py-3 my-2 rounded-xl text-sm" aria-required="true" placeholder="' . esc_attr__('Your comment', 'webmakerr') . '"></textarea>',
+            'comment_field'     => '<p class="comment-form-comment">'
+                . '<label class="screen-reader-text" for="comment">' . esc_html__('Your comment', 'webmakerr') . '</label>'
+                . '<textarea id="comment" name="comment" class="bg-light w-full px-4 py-3 my-2 rounded-xl text-sm" aria-required="true" placeholder="' . esc_attr__('Your comment', 'webmakerr') . '"></textarea>'
+                . '</p>',
             'logged_in_as'      => '<p class="logged-in-as mb-4">',
         ]);
     ?>
