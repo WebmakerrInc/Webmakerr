@@ -1,5 +1,5 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('flex flex-col'); ?>>
-    <section class="border-b border-zinc-200 bg-gradient-to-b from-sky-50 via-white to-white">
+    <section>
         <div class="site-width py-16 sm:py-24">
             <div class="mx-auto max-w-3xl text-center">
                 <?php if (!is_page()): ?>
