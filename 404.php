@@ -7,7 +7,7 @@
 get_header();
 ?>
 
-<div class="container mx-auto py-16 lg:py-24">
+<div class="site-width py-16 lg:py-24">
     <section class="md:flex min-h-[60vh] items-center justify-center">
         <div class="w-full md:w-1/2 flex items-center justify-center">
             <div class="max-w-sm m-8 text-center md:text-left">

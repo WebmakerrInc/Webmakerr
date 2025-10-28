@@ -12,7 +12,7 @@ $recent_posts = new WP_Query([
 ]);
 ?>
 <section class="bg-light py-24">
-    <div class="container mx-auto flex flex-col gap-12 px-6 lg:px-8">
+    <div class="site-width flex flex-col gap-12">
         <div class="mx-auto flex max-w-3xl flex-col gap-4 text-center">
             <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                 <?php echo esc_html__('Latest insights', 'webmakerr'); ?>

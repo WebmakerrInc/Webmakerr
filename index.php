@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<div class="container mx-auto space-y-24 lg:space-y-32">
+<div class="site-width space-y-24 lg:space-y-32">
 	<?php if (!is_singular()): ?>
                 <?php if (is_category()): ?>
                         <header class="mb-8">
