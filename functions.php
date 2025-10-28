@@ -205,15 +205,15 @@ add_filter(
             return $classes;
         }
 
-        $normalized = ['menu-item', 'list-none'];
+        $classes[] = 'list-none';
 
         if ($depth === 0) {
-            $normalized[] = 'footer-menu-item';
+            $classes[] = 'footer-menu-item';
         } else {
-            $normalized[] = 'footer-submenu-item';
+            $classes[] = 'footer-submenu-item';
         }
 
-        return array_values(array_unique($normalized));
+        return array_values(array_unique(array_filter($classes)));
     },
     10,
     4
@@ -249,7 +249,8 @@ add_filter(
             $linkClasses = 'block no-underline text-sm text-neutral-500 hover:text-neutral-900';
         }
 
-        $atts['class'] = trim($linkClasses.' '.$baseClasses);
+        $existingClasses = isset($atts['class']) ? (string) $atts['class'] : '';
+        $atts['class'] = trim($existingClasses.' '.$linkClasses.' '.$baseClasses);
 
         return $atts;
     },
