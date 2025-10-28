@@ -9,8 +9,16 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+$pattern_slug = basename(__FILE__, '.php');
+
+if (function_exists('sanitize_title')) {
+    $pattern_slug = sanitize_title($pattern_slug);
+}
+
+$pattern_namespace = 'webmakerr';
+
 return [
-    'slug'       => 'webmakerr/landing-page',
+    'slug'       => $pattern_namespace.'/'.$pattern_slug,
     'title'      => __('Landing Page', 'webmakerr'),
     'description'=> __('A minimalist landing page layout with hero, features, and call to action sections.', 'webmakerr'),
     'categories' => ['webmakerr-pages'],
