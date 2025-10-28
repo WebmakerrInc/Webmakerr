@@ -1,6 +1,6 @@
 /**
  * Webmakerr Admin Dashboard Enhancements
- * Provides mobile sidebar toggle behaviour for the Tailwind-inspired admin UI.
+ * Mirrors Tailwind-style mobile sidebar behaviour for the Shopify-inspired layout.
  */
 (function () {
     document.addEventListener('DOMContentLoaded', function () {
@@ -8,13 +8,14 @@
         var menuWrap = document.getElementById('adminmenuwrap');
         var menuBack = document.getElementById('adminmenuback');
         var toggleLink = document.querySelector('#wp-admin-bar-menu-toggle > a');
+        var BREAKPOINT = 640;
 
         if (!menuWrap) {
             return;
         }
 
         var overlay = document.createElement('div');
-        overlay.className = 'wm-admin-overlay hidden fixed inset-0 bg-black/50 z-[98] lg:hidden';
+        overlay.className = 'wm-admin-overlay hidden';
         overlay.setAttribute('aria-hidden', 'true');
         body.appendChild(overlay);
 
@@ -36,32 +37,38 @@
             overlay.classList.add('hidden');
         }
 
-        function toggleMenu(event) {
-            event.preventDefault();
-            if (body.classList.contains('wm-admin-menu-open')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+        function isMobileLayout() {
+            return window.innerWidth < BREAKPOINT;
         }
 
-        if (window.innerWidth < 1024) {
-            closeMenu();
-        } else {
-            menuWrap.classList.remove('-translate-x-full');
-            if (menuBack) {
-                menuBack.classList.remove('-translate-x-full');
+        function syncLayout() {
+            if (isMobileLayout()) {
+                closeMenu();
+            } else {
+                body.classList.remove('wm-admin-menu-open');
+                menuWrap.classList.remove('-translate-x-full');
+                if (menuBack) {
+                    menuBack.classList.remove('-translate-x-full');
+                }
+                overlay.classList.add('hidden');
             }
         }
 
         overlay.addEventListener('click', closeMenu);
 
         if (toggleLink) {
-            toggleLink.addEventListener('click', toggleMenu);
+            toggleLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (body.classList.contains('wm-admin-menu-open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
         }
 
         menuWrap.addEventListener('click', function (event) {
-            if (window.innerWidth >= 1024) {
+            if (!isMobileLayout()) {
                 return;
             }
 
@@ -86,17 +93,8 @@
             }
         });
 
-        window.addEventListener('resize', function () {
-            if (window.innerWidth >= 1024) {
-                body.classList.remove('wm-admin-menu-open');
-                menuWrap.classList.remove('-translate-x-full');
-                if (menuBack) {
-                    menuBack.classList.remove('-translate-x-full');
-                }
-                overlay.classList.add('hidden');
-            } else if (!body.classList.contains('wm-admin-menu-open')) {
-                closeMenu();
-            }
-        });
+        window.addEventListener('resize', syncLayout);
+
+        syncLayout();
     });
 })();
