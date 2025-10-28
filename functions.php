@@ -112,8 +112,8 @@ function webmakerr(): Theme
         )
         ->features(static fn ($manager) => $manager->add(MenuOptions::class))
         ->menus(static fn ($manager) => $manager
-            ->add('primary', __('Primary Menu', 'webmakerr'))
-            ->add('footer', __('Footer Menu', 'webmakerr'))
+            ->add('primary', 'Primary Menu')
+            ->add('footer', 'Footer Menu')
         )
         ->themeSupport(static fn ($manager) => $manager->add([
             'align-wide',
