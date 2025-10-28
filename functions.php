@@ -104,6 +104,7 @@ function webmakerr(): Theme
     return Theme::instance()
         ->assets(static fn ($manager) => $manager
             ->withCompiler(new ViteCompiler(), static fn ($compiler) => $compiler
+                ->registerAsset('style.css')
                 ->registerAsset('build/assets/app.css')
                 ->registerAsset('build/assets/app.js')
                 ->editorStyleFile('build/assets/editor-style.css')
