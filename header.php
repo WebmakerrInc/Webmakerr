@@ -32,6 +32,7 @@ $has_fallback_pages = ! $has_primary_menu && ! empty(get_posts([
     'post_type'      => 'page',
     'post_status'    => 'publish',
     'numberposts'    => 1,
+    'fields'         => 'ids',
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
 ]));
