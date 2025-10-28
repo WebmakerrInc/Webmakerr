@@ -1,33 +1,52 @@
 document.addEventListener('DOMContentLoaded', function () {
     const mainNavigation = document.getElementById('primary-navigation')
     const mainNavigationToggle = document.getElementById('primary-menu-toggle')
+    const mainNavigationOverlay = document.getElementById('primary-navigation-overlay')
 
     if (mainNavigation && mainNavigationToggle) {
         const navBreakpoint = window.matchMedia('(min-width: 768px)')
         let userInteractedWithNavigation = false
 
         const applyNavigationVisibility = function (expanded) {
-            mainNavigationToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false')
+            const expandedValue = expanded ? 'true' : 'false'
 
-            if (expanded) {
-                mainNavigation.classList.remove('hidden')
-                mainNavigation.setAttribute('aria-hidden', 'false')
-            } else {
-                mainNavigation.classList.add('hidden')
-                mainNavigation.setAttribute('aria-hidden', 'true')
+            mainNavigationToggle.setAttribute('aria-expanded', expandedValue)
+            mainNavigation.setAttribute('aria-hidden', expanded ? 'false' : 'true')
+            mainNavigation.setAttribute('data-open', expandedValue)
+
+            if (mainNavigationOverlay) {
+                mainNavigationOverlay.setAttribute('data-open', expandedValue)
+                mainNavigationOverlay.setAttribute('aria-hidden', expanded ? 'false' : 'true')
             }
+
+            if (expanded && !navBreakpoint.matches) {
+                document.body.classList.add('mobile-menu-open')
+                const focusTarget = mainNavigation.querySelector(
+                    'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                )
+
+                if (focusTarget) {
+                    focusTarget.focus()
+                }
+            } else {
+                document.body.classList.remove('mobile-menu-open')
+            }
+        }
+
+        const closeNavigation = function () {
+            userInteractedWithNavigation = true
+            applyNavigationVisibility(false)
+            mainNavigationToggle.focus()
         }
 
         const syncNavigationState = function () {
             if (navBreakpoint.matches) {
                 applyNavigationVisibility(true)
+            } else if (userInteractedWithNavigation) {
+                const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
+                applyNavigationVisibility(expanded)
             } else {
-                if (userInteractedWithNavigation) {
-                    const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
-                    applyNavigationVisibility(expanded)
-                } else {
-                    applyNavigationVisibility(false)
-                }
+                applyNavigationVisibility(false)
             }
         }
 
@@ -37,6 +56,19 @@ document.addEventListener('DOMContentLoaded', function () {
             const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
             userInteractedWithNavigation = true
             applyNavigationVisibility(!expanded)
+        })
+
+        if (mainNavigationOverlay) {
+            mainNavigationOverlay.addEventListener('click', function (event) {
+                event.preventDefault()
+                closeNavigation()
+            })
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && mainNavigationToggle.getAttribute('aria-expanded') === 'true' && !navBreakpoint.matches) {
+                closeNavigation()
+            }
         })
 
         syncNavigationState()
