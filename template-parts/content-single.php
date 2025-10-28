@@ -1,6 +1,6 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('flex flex-col'); ?>>
     <section>
-        <div class="site-width py-16 sm:py-24">
+        <div class="site-width py-0 sm:py-0">
             <div class="mx-auto max-w-3xl text-center">
                 <?php if (!is_page()): ?>
                     <time datetime="<?php echo esc_attr(get_the_date('c')); ?>" itemprop="datePublished" class="text-xs font-semibold uppercase tracking-[0.3em] text-primary"><?php echo esc_html(get_the_date()); ?></time>
