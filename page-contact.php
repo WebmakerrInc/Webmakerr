@@ -1,54 +1,13 @@
 <?php
 /**
  * Template Name: Contact
- * Description: Contact page template with a two-column layout and contact form.
+ * Description: Contact page template with a two-column layout and contact information.
  *
  * @package Webmakerr
  */
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
-}
-
-$webmakerr_contact_errors = array();
-$webmakerr_contact_success = false;
-
-if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['webmakerr_contact_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['webmakerr_contact_nonce'])), 'webmakerr_contact_form')) {
-    $full_name     = isset($_POST['full_name']) ? sanitize_text_field(wp_unslash($_POST['full_name'])) : '';
-    $company_name  = isset($_POST['company_name']) ? sanitize_text_field(wp_unslash($_POST['company_name'])) : '';
-    $company_email = isset($_POST['company_email']) ? sanitize_email(wp_unslash($_POST['company_email'])) : '';
-    $use_case      = isset($_POST['use_case']) ? sanitize_text_field(wp_unslash($_POST['use_case'])) : '';
-    $description   = isset($_POST['description']) ? sanitize_textarea_field(wp_unslash($_POST['description'])) : '';
-    $newsletter    = isset($_POST['newsletter']) ? __('Yes', 'webmakerr') : __('No', 'webmakerr');
-
-    if (empty($full_name)) {
-        $webmakerr_contact_errors[] = __('Please provide your full name.', 'webmakerr');
-    }
-
-    if (empty($company_email) || ! is_email($company_email)) {
-        $webmakerr_contact_errors[] = __('Please provide a valid company email address.', 'webmakerr');
-    }
-
-    if (empty($description)) {
-        $webmakerr_contact_errors[] = __('Please provide a brief description of your project.', 'webmakerr');
-    }
-
-    if (empty($webmakerr_contact_errors)) {
-        $admin_email = get_option('admin_email');
-        $subject     = sprintf(__('New contact form submission from %s', 'webmakerr'), $full_name);
-
-        $message_body  = sprintf("%s %s\n", __('Name:', 'webmakerr'), $full_name);
-        $message_body .= sprintf("%s %s\n", __('Company:', 'webmakerr'), $company_name);
-        $message_body .= sprintf("%s %s\n", __('Email:', 'webmakerr'), $company_email);
-        $message_body .= sprintf("%s %s\n", __('Use case:', 'webmakerr'), $use_case);
-        $message_body .= sprintf("%s %s\n\n", __('Newsletter signup:', 'webmakerr'), $newsletter);
-        $message_body .= sprintf("%s\n%s", __('Description:', 'webmakerr'), $description);
-
-        // Placeholder for future integration. For now, attempt to send an email to the site admin.
-        wp_mail($admin_email, $subject, $message_body, array('Reply-To' => $company_email));
-
-        $webmakerr_contact_success = true;
-    }
 }
 
 get_header();
@@ -93,67 +52,27 @@ get_header();
 
       <section>
         <div class="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
-          <h2 class="text-2xl font-semibold text-zinc-950 sm:text-3xl"><?php esc_html_e('Tell us about your project', 'webmakerr'); ?></h2>
-          <p class="mt-3 text-sm leading-6 text-zinc-600"><?php esc_html_e('Fill out the form and we’ll follow up within two business days.', 'webmakerr'); ?></p>
+          <h2 class="text-2xl font-semibold text-zinc-950 sm:text-3xl"><?php esc_html_e('Work with our team', 'webmakerr'); ?></h2>
+          <p class="mt-3 text-sm leading-6 text-zinc-600"><?php esc_html_e('We partner with agencies and product teams to build fast, accessible websites. Choose the contact method that works best for your workflow.', 'webmakerr'); ?></p>
 
-          <?php if ($webmakerr_contact_success) : ?>
-            <div class="mt-6 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
-              <?php esc_html_e('Thanks for reaching out! We’ll get back to you soon.', 'webmakerr'); ?>
-            </div>
-          <?php elseif (! empty($webmakerr_contact_errors)) : ?>
-            <div class="mt-6 space-y-2">
-              <?php foreach ($webmakerr_contact_errors as $error_message) : ?>
-                <p class="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"><?php echo esc_html($error_message); ?></p>
-              <?php endforeach; ?>
-            </div>
-          <?php endif; ?>
-
-          <form class="mt-8 flex flex-col gap-6" action="" method="post">
-            <?php wp_nonce_field('webmakerr_contact_form', 'webmakerr_contact_nonce'); ?>
-
-            <div class="grid gap-6 sm:grid-cols-2">
-              <div class="flex flex-col gap-2">
-                <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="full_name"><?php esc_html_e('Full name', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-                <input class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="text" id="full_name" name="full_name" required />
-              </div>
-              <div class="flex flex-col gap-2">
-                <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="company_name"><?php esc_html_e('Company name', 'webmakerr'); ?></label>
-                <input class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="text" id="company_name" name="company_name" />
-              </div>
+          <div class="mt-8 space-y-6">
+            <div>
+              <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500"><?php esc_html_e('Email', 'webmakerr'); ?></h3>
+              <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('Send a message to hello@example.com and a member of our team will reply within two business days.', 'webmakerr'); ?></p>
             </div>
 
-            <div class="flex flex-col gap-2">
-              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="company_email"><?php esc_html_e('Company email', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-              <input class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="email" id="company_email" name="company_email" required />
+            <div>
+              <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500"><?php esc_html_e('Support portal', 'webmakerr'); ?></h3>
+              <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('Track ongoing projects and ask technical questions inside the customer portal.', 'webmakerr'); ?></p>
+              <a class="mt-3 inline-flex items-center text-sm font-semibold text-dark transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" href="<?php echo esc_url(home_url('/support')); ?>"><?php esc_html_e('Open support center', 'webmakerr'); ?></a>
             </div>
 
-            <div class="flex flex-col gap-2">
-              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="use_case"><?php esc_html_e('Use case', 'webmakerr'); ?></label>
-              <select class="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" id="use_case" name="use_case">
-                <option value="" disabled selected><?php esc_html_e('Select an option', 'webmakerr'); ?></option>
-                <option value="launch"><?php esc_html_e('Launching a new product', 'webmakerr'); ?></option>
-                <option value="migration"><?php esc_html_e('Migrating an existing site', 'webmakerr'); ?></option>
-                <option value="revamp"><?php esc_html_e('Refreshing our brand', 'webmakerr'); ?></option>
-                <option value="other"><?php esc_html_e('Something else', 'webmakerr'); ?></option>
-              </select>
+            <div>
+              <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500"><?php esc_html_e('Contact form plugin', 'webmakerr'); ?></h3>
+              <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('Prefer forms? Install your favorite contact form plugin and embed it here using a block or shortcode.', 'webmakerr'); ?></p>
+              <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('This template keeps things presentation-only so you can choose the tools that fit your site.', 'webmakerr'); ?></p>
             </div>
-
-            <div class="flex flex-col gap-2">
-              <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="description"><?php esc_html_e('Project description', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-              <textarea class="min-h-[160px] w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" id="description" name="description" required></textarea>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <input class="mt-1 h-4 w-4 rounded border border-zinc-200 text-dark focus:ring-dark/40" type="checkbox" id="newsletter" name="newsletter" />
-              <label class="text-sm leading-6 text-zinc-600" for="newsletter"><?php esc_html_e('Keep me up to date with product updates, tips, and launches.', 'webmakerr'); ?></label>
-            </div>
-
-            <div class="pt-2">
-              <button class="inline-flex w-full justify-center rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" type="submit">
-                <?php esc_html_e('Submit form', 'webmakerr'); ?>
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </section>
     </div>
