@@ -29,6 +29,10 @@ class Pagination
         }
 
         if ($wp_query->max_num_pages <= 1) {
+            if ($original_query) {
+                $wp_query = $original_query;
+            }
+
             return;
         }
 
@@ -69,10 +73,6 @@ class Pagination
 
     private static function render_previous_link(int $paged, array $links): void
     {
-        if (in_array(1, $links)) {
-            return;
-        }
-
         if (get_previous_posts_link()) {
             printf(
                 '<li><span class="page-link">%s</span></li>',
@@ -86,29 +86,36 @@ class Pagination
             );
         }
 
-        if ( ! in_array( 2, $links, true ) ) {
-            printf(
-                '<li class="page-item"><span aria-hidden="true" class="px-2">&hellip;</span><span class="sr-only">%s</span></li>',
-                esc_html__( 'Ellipsis indicating skipped pages', 'webmakerr' )
-            );
+        if (! in_array(1, $links, true)) {
+            self::render_page_link_item($paged, 1);
+
+            $first_link = min($links);
+
+            if ($first_link > 2) {
+                self::render_ellipsis();
+            }
         }
     }
 
     private static function render_page_links(int $paged, array $links): void
     {
         foreach ($links as $link) {
-            $class = $paged === $link ? 'text-dark' : 'text-dark/60';
-            printf(
-                '<li><a href="%s" class="%s px-4 mx-4">%s</a></li>',
-                esc_url(get_pagenum_link($link)),
-                esc_attr($class),
-                esc_html($link)
-            );
+            self::render_page_link_item($paged, $link);
         }
     }
 
     private static function render_next_link(int $paged, int $max, array $links): void
     {
+        if (! in_array($max, $links, true)) {
+            $last_link = max($links);
+
+            if ($last_link < $max - 1) {
+                self::render_ellipsis();
+            }
+
+            self::render_page_link_item($paged, $max);
+        }
+
         if (get_next_posts_link()) {
             printf(
                 '<li><span class="page-link">%s</span></li>',
@@ -121,14 +128,25 @@ class Pagination
                 )
             );
         }
+    }
 
-        if ( ! in_array( $max, $links, true ) ) {
-            if ( ! in_array( $max - 1, $links, true ) ) {
-                printf(
-                    '<li class="page-item"><span aria-hidden="true" class="px-2">&hellip;</span><span class="sr-only">%s</span></li>',
-                    esc_html__( 'Ellipsis indicating skipped pages', 'webmakerr' )
-                );
-            }
-        }
+    private static function render_page_link_item(int $paged, int $link): void
+    {
+        $class = $paged === $link ? 'text-dark' : 'text-dark/60';
+
+        printf(
+            '<li><a href="%s" class="%s px-4 mx-4">%s</a></li>',
+            esc_url(get_pagenum_link($link)),
+            esc_attr($class),
+            esc_html($link)
+        );
+    }
+
+    private static function render_ellipsis(): void
+    {
+        printf(
+            '<li class="page-item"><span aria-hidden="true" class="px-2">&hellip;</span><span class="sr-only">%s</span></li>',
+            esc_html__('Ellipsis indicating skipped pages', 'webmakerr')
+        );
     }
 }

@@ -10,13 +10,7 @@ get_header();
 
 <div class="container mx-auto space-y-24 lg:space-y-32">
 	<?php if (!is_singular()): ?>
-                <?php if (is_archive()): ?>
-                        <header class="mb-8">
-                                <h1 class="text-3xl font-semibold">
-                                        <?php echo esc_html(get_the_archive_title()); ?>
-                                </h1>
-                        </header>
-                <?php elseif (is_category()): ?>
+                <?php if (is_category()): ?>
                         <header class="mb-8">
                                 <h1 class="text-3xl font-semibold">
                                         <?php echo esc_html(single_cat_title('', false)); ?>
@@ -50,6 +44,12 @@ get_header();
                         <header class="mb-8">
                                 <h1 class="text-3xl font-semibold">
                                         <?php printf(esc_html__('Yearly Archives: %s', 'webmakerr'), esc_html(get_the_date('Y'))); ?>
+                                </h1>
+                        </header>
+                <?php elseif (is_archive()): ?>
+                        <header class="mb-8">
+                                <h1 class="text-3xl font-semibold">
+                                        <?php echo esc_html(get_the_archive_title()); ?>
                                 </h1>
                         </header>
                 <?php elseif (is_search()): ?>
