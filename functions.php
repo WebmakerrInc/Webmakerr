@@ -297,6 +297,10 @@ add_action(
 
             $slug = sanitize_title(basename($pattern_file, '.php'));
 
+            if (empty($pattern['slug'])) {
+                $pattern['slug'] = 'webmakerr/'.$slug;
+            }
+
             register_block_pattern('webmakerr/'.$slug, $pattern);
         }
     }
