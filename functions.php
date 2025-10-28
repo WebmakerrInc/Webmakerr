@@ -190,7 +190,17 @@ if (! function_exists('webmakerr_primary_menu_fallback')) {
 add_filter(
     'nav_menu_css_class',
     static function (array $classes, $item, $args, int $depth): array {
-        if (($args->theme_location ?? null) !== 'footer') {
+        $location = $args->theme_location ?? null;
+
+        if ($location === 'primary') {
+            if ($depth === 0) {
+                $classes[] = 'md:mx-4';
+            }
+
+            return array_values(array_unique(array_filter($classes)));
+        }
+
+        if ($location !== 'footer') {
             return $classes;
         }
 

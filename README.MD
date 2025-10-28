@@ -44,18 +44,15 @@ Clone or download the repository, then install dependencies and build assets:
 ```bash
 npm install
 npm run build
-
+```
 
 ### Theme Check Submission Note
 
-Exclude development dependencies and build tooling. Make sure your distributable ZIP does not include `node_modules/`, source files, or any build configuration files. The Theme Directory forbids bundling development tools. Use a `.distignore` file or an exclude pattern when creating your ZIP.
+Before creating a ZIP for the WordPress.org Theme Directory:
 
-For example, you can include this in your readme or theme submission note:
-
-⚙️ **Build Note:**
-Development dependencies (e.g. `node_modules/`, `src/`, and build configs) are excluded from the final distributable using a `.distignore` file and/or `zip -r` exclude command.
-
-```
+- Run `npm install && npm run build` so compiled assets are included.
+- Exclude development dependencies such as `node_modules/`, uncompiled source (`src/`, `resources/`), and build tooling configs from the final archive (e.g., via `.distignore` or `zip -r --exclude`).
+- Document the build step in your release notes so reviewers can reproduce it if necessary.
 
 ## Theme Features
 
