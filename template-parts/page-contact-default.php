@@ -4,6 +4,13 @@
  *
  * @package Webmakerr
  */
+
+$admin_email      = get_option('admin_email');
+$has_admin_email  = $admin_email && is_email($admin_email);
+$pricing_page     = get_page_by_path('pricing');
+$pricing_url      = $pricing_page ? get_permalink($pricing_page) : '';
+$support_page     = get_page_by_path('support');
+$support_url      = $support_page ? get_permalink($support_page) : '';
 ?>
 <div class="grid gap-16 lg:grid-cols-[minmax(0,_1.1fr)_minmax(0,_1fr)] lg:gap-24">
     <section class="flex flex-col gap-10 text-left">
@@ -15,19 +22,37 @@
 
         <ul class="flex list-disc flex-col gap-3 pl-5 text-sm font-semibold text-zinc-900">
             <li>
-                <a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url('mailto:hello@example.com'); ?>">
-                    <?php esc_html_e('Email us directly at hello@example.com', 'webmakerr'); ?>
-                </a>
+                <?php if ($has_admin_email) : ?>
+                    <a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url('mailto:' . antispambot($admin_email)); ?>">
+                        <?php printf(esc_html__('Email us directly at %s', 'webmakerr'), esc_html($admin_email)); ?>
+                    </a>
+                <?php else : ?>
+                    <span class="inline-flex items-center text-zinc-500">
+                        <?php esc_html_e('Add your contact email in Settings → General to display it here.', 'webmakerr'); ?>
+                    </span>
+                <?php endif; ?>
             </li>
             <li>
-                <a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url(home_url('/pricing')); ?>">
-                    <?php esc_html_e('View pricing and plans', 'webmakerr'); ?>
-                </a>
+                <?php if ($pricing_url) : ?>
+                    <a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($pricing_url); ?>">
+                        <?php esc_html_e('View pricing and plans', 'webmakerr'); ?>
+                    </a>
+                <?php else : ?>
+                    <span class="inline-flex items-center text-zinc-500">
+                        <?php esc_html_e('Create a pricing page to add a link in this spot.', 'webmakerr'); ?>
+                    </span>
+                <?php endif; ?>
             </li>
             <li>
-                <a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url(home_url('/support')); ?>">
-                    <?php esc_html_e('Visit our support center', 'webmakerr'); ?>
-                </a>
+                <?php if ($support_url) : ?>
+                    <a class="inline-flex items-center text-zinc-950 transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($support_url); ?>">
+                        <?php esc_html_e('Visit our support center', 'webmakerr'); ?>
+                    </a>
+                <?php else : ?>
+                    <span class="inline-flex items-center text-zinc-500">
+                        <?php esc_html_e('Publish a support page to activate this link.', 'webmakerr'); ?>
+                    </span>
+                <?php endif; ?>
             </li>
         </ul>
 
@@ -60,15 +85,23 @@
             <div class="mt-8 space-y-6">
                 <div>
                     <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500"><?php esc_html_e('Email', 'webmakerr'); ?></h3>
-                    <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('Send a message to hello@example.com and a member of our team will reply within two business days.', 'webmakerr'); ?></p>
+                    <?php if ($has_admin_email) : ?>
+                        <p class="mt-2 text-sm text-zinc-600"><?php printf(esc_html__('Send a message to %s and a member of our team will reply within two business days.', 'webmakerr'), esc_html($admin_email)); ?></p>
+                    <?php else : ?>
+                        <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('Add your preferred contact email in Settings → General to update this message.', 'webmakerr'); ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
                     <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500"><?php esc_html_e('Support portal', 'webmakerr'); ?></h3>
                     <p class="mt-2 text-sm text-zinc-600"><?php esc_html_e('Track ongoing projects and ask technical questions inside the customer portal.', 'webmakerr'); ?></p>
-                    <a class="mt-3 inline-flex items-center text-sm font-semibold text-dark transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" href="<?php echo esc_url(home_url('/support')); ?>">
-                        <?php esc_html_e('Open support center', 'webmakerr'); ?>
-                    </a>
+                    <?php if ($support_url) : ?>
+                        <a class="mt-3 inline-flex items-center text-sm font-semibold text-dark transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" href="<?php echo esc_url($support_url); ?>">
+                            <?php esc_html_e('Open support center', 'webmakerr'); ?>
+                        </a>
+                    <?php else : ?>
+                        <p class="mt-3 text-sm text-zinc-500"><?php esc_html_e('Publish a dedicated support page to share it with visitors here.', 'webmakerr'); ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
