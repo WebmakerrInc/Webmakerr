@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<main id="primary" class="flex flex-col gap-24 lg:gap-32">
+<div class="flex flex-col gap-24 lg:gap-32">
   <section class="border-b border-zinc-200 bg-white">
     <div class="container mx-auto px-6 py-20 sm:py-24 lg:px-8">
       <div class="mx-auto max-w-3xl text-center">
@@ -147,7 +147,7 @@ get_header();
       <?php wp_reset_postdata(); ?>
     </div>
   </section>
-</main>
+</div>
 
 <?php
 get_footer();

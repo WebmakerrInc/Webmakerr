@@ -7,7 +7,7 @@
 get_header();
 ?>
 
-<main id="primary" class="container mx-auto py-16 lg:py-24">
+<div class="container mx-auto py-16 lg:py-24">
     <section class="md:flex min-h-[60vh] items-center justify-center">
         <div class="w-full md:w-1/2 flex items-center justify-center">
             <div class="max-w-sm m-8 text-center md:text-left">
@@ -20,7 +20,7 @@ get_header();
             </div>
         </div>
     </section>
-</main>
+</div>
 
 <?php
 get_footer();
