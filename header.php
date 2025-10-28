@@ -64,13 +64,13 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3 md:hidden">
                     <?php if ($show_primary_toggle): ?>
-                        <button
-                            type="button"
-                            aria-label="<?php esc_attr_e('Toggle navigation', 'webmakerr'); ?>"
-                            aria-controls="primary-navigation"
-                            aria-expanded="false"
-                            id="primary-menu-toggle"
-                        >
+                            <button
+                                type="button"
+                                aria-label="<?php esc_attr_e('Toggle navigation', 'webmakerr'); ?>"
+                                aria-controls="primary-navigation"
+                                aria-expanded="true"
+                                id="primary-menu-toggle"
+                            >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
@@ -88,7 +88,8 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
 
                 <div
                     id="primary-navigation"
-                    class="hidden flex flex-col gap-6 items-stretch border border-light rounded-xl p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0"
+                    class="flex flex-col gap-6 items-stretch border border-light rounded-xl p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0"
+                    aria-hidden="false"
                 >
                     <nav>
                         <?php if (current_user_can('edit_theme_options') && !$has_primary_menu): ?>
@@ -122,7 +123,7 @@ $show_primary_toggle = $has_primary_menu || $has_fallback_pages || current_user_
     </header>
 
     <div id="content" class="site-content grow">
-        <?php if (is_front_page()): ?>
+        <?php if (is_front_page() && is_home()): ?>
             <section class="container mx-auto py-12">
                 <div class="max-w-(--breakpoint-md)">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 md:w-10 mb-4" viewBox="0 0 117.91 117.91">

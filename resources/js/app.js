@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (mainNavigation && mainNavigationToggle) {
         const navBreakpoint = window.matchMedia('(min-width: 768px)')
+        let userInteractedWithNavigation = false
 
         const applyNavigationVisibility = function (expanded) {
             mainNavigationToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false')
@@ -21,8 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (navBreakpoint.matches) {
                 applyNavigationVisibility(true)
             } else {
-                const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
-                applyNavigationVisibility(expanded)
+                if (userInteractedWithNavigation) {
+                    const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
+                    applyNavigationVisibility(expanded)
+                } else {
+                    applyNavigationVisibility(false)
+                }
             }
         }
 
@@ -30,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault()
 
             const expanded = mainNavigationToggle.getAttribute('aria-expanded') === 'true'
+            userInteractedWithNavigation = true
             applyNavigationVisibility(!expanded)
         })
 
