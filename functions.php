@@ -509,4 +509,65 @@ if (! function_exists('tailpress_custom_admin_interface')) {
         );
     }
 }
-add_action('admin_enqueue_scripts', 'tailpress_custom_admin_interface');
+if (! function_exists('tailpress_deregister_default_admin_styles')) {
+    function tailpress_deregister_default_admin_styles(): void
+    {
+        $coreHandles = [
+            'about',
+            'admin-menu',
+            'buttons',
+            'colors',
+            'colors-fresh',
+            'colors-light',
+            'common',
+            'dashboard',
+            'edit',
+            'forms',
+            'install',
+            'list-tables',
+            'l10n',
+            'login',
+            'nav-menus',
+            'revisions',
+            'site-icon',
+            'themes',
+            'widgets',
+        ];
+
+        foreach ($coreHandles as $handle) {
+            if (wp_style_is($handle, 'enqueued')) {
+                wp_dequeue_style($handle);
+            }
+
+            if (wp_style_is($handle, 'registered')) {
+                wp_deregister_style($handle);
+            }
+        }
+
+        global $wp_styles;
+
+        if ($wp_styles instanceof \WP_Styles) {
+            foreach ($wp_styles->queue as $handle) {
+                if (str_starts_with($handle, 'colors-')) {
+                    wp_dequeue_style($handle);
+                    wp_deregister_style($handle);
+                }
+            }
+        }
+    }
+}
+
+add_action('admin_enqueue_scripts', 'tailpress_deregister_default_admin_styles', 1);
+add_action('admin_enqueue_scripts', 'tailpress_custom_admin_interface', 20);
+
+add_action(
+    'admin_init',
+    static function (): void {
+        global $_wp_admin_css_colors;
+
+        if (is_array($_wp_admin_css_colors)) {
+            $_wp_admin_css_colors = [];
+        }
+    },
+    1
+);
