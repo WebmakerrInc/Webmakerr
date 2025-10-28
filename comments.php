@@ -87,7 +87,23 @@ if (post_password_required()) {
                 . '<label class="screen-reader-text" for="comment">' . esc_html__('Your comment', 'webmakerr') . '</label>'
                 . '<textarea id="comment" name="comment" class="bg-light w-full px-4 py-3 my-2 rounded-xl text-sm" aria-required="true" placeholder="' . esc_attr__('Your comment', 'webmakerr') . '"></textarea>'
                 . '</p>',
-            'logged_in_as'      => '<p class="logged-in-as mb-4">',
+            'logged_in_as'      => sprintf(
+                '<p class="logged-in-as mb-4">%s</p>',
+                sprintf(
+                    wp_kses(
+                        /* translators: 1: Link to profile, 2: Current user name, 3: Logout URL. */
+                        __('Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s">Log out?</a>', 'webmakerr'),
+                        [
+                            'a' => [
+                                'href' => [],
+                            ],
+                        ]
+                    ),
+                    esc_url(get_edit_user_link()),
+                    esc_html(wp_get_current_user()->display_name),
+                    esc_url(wp_logout_url(get_permalink()))
+                )
+            ),
         ]);
     ?>
 </div>
