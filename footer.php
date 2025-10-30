@@ -368,21 +368,33 @@ $mobile_cta_url = apply_filters('webmakerr_mobile_cta_url', home_url('/get-start
                 </ul>
             </div>
             <div class="flex flex-col justify-center rounded border border-neutral-200 bg-white/90 p-6 shadow-inner">
-                <form id="promoForm" class="flex flex-col gap-4">
+                <form
+                    id="promoForm"
+                    class="flex flex-col gap-4"
+                    method="post"
+                    data-webseo-lead-form
+                    data-webseo-lead-success="<?php esc_attr_e('✅ You\'re in! Check your inbox.', 'webmakerr'); ?>"
+                >
                     <label class="text-sm font-medium text-neutral-900" for="promoEmail"><?php esc_html_e('Email address', 'webmakerr'); ?></label>
                     <input
                         id="promoEmail"
                         type="email"
+                        name="email"
                         required
                         placeholder="<?php esc_attr_e('you@example.com', 'webmakerr'); ?>"
                         class="w-full rounded border border-neutral-300 px-4 py-3 text-sm text-neutral-900 transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/20"
                     />
+                    <input type="hidden" name="source" value="footer-cta" />
+                    <input type="hidden" name="webseo_lead_nonce" value="<?php echo esc_attr(wp_create_nonce('webseo_lead_nonce')); ?>" />
                     <button
                         type="submit"
+                        data-webseo-lead-submit
+                        data-webseo-loading-text="<?php esc_attr_e('Submitting…', 'webmakerr'); ?>"
                         class="inline-flex items-center justify-center rounded bg-dark px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
                     >
                         <?php esc_html_e('Claim my 20% off', 'webmakerr'); ?>
                     </button>
+                    <p class="hidden text-sm font-medium" data-webseo-lead-message aria-live="polite"></p>
                 </form>
                 <button
                     id="promoDismiss"
