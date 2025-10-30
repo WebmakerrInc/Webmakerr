@@ -128,7 +128,7 @@ class FooterMenuWalker extends Walker_Nav_Menu
             $item_output .= '</a>';
 
             if ($hasChildren) {
-                $item_output .= '<button type="button" class="md:hidden flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 text-neutral-500 transition-colors duration-200 ease-out hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900" data-footer-accordion-trigger aria-expanded="false" aria-controls="'.esc_attr($sectionId).'">';
+                $item_output .= '<button type="button" class="md:hidden flex h-9 w-9 items-center justify-center rounded border border-neutral-200 text-neutral-500 transition-colors duration-200 ease-out hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900" data-footer-accordion-trigger aria-expanded="false" aria-controls="'.esc_attr($sectionId).'">';
                 $item_output .= '<span class="sr-only">'.esc_html(sprintf(__('Toggle %s menu', 'webmakerr'), $title_text)).'</span>';
                 $item_output .= '<svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-footer-accordion-icon><path d="M8 3.25V12.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.75 8H3.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
                 $item_output .= '</button>';

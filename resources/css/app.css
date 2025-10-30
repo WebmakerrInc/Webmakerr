@@ -36,6 +36,16 @@
   }
 }
 
+@layer base {
+  *,
+  ::before,
+  ::after,
+  ::file-selector-button,
+  ::backdrop {
+    border-radius: 5px;
+  }
+}
+
 @layer components {
   .site-logo {
     width: 142px;
