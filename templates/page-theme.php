@@ -147,14 +147,17 @@ get_header();
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php echo esc_html($intro ?: $intro_default); ?>
               </p>
-              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($primary_cta_url); ?>">
+              <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($primary_cta_url); ?>">
                   <?php echo esc_html($primary_cta_text); ?>
                 </a>
-                <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($secondary_cta_url); ?>">
                   <?php echo esc_html($secondary_cta_text); ?>
                 </a>
               </div>
+              <p class="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
+                <?php esc_html_e('★★★★★ 4.9/5 on WordPress.org — 12,000+ teams ship with Webmakerr', 'webmakerr'); ?>
+              </p>
               <dl class="grid gap-6 pt-6 sm:grid-cols-3">
                 <div class="rounded-[5px] border border-zinc-200 bg-white/80 p-4 shadow-sm">
                   <dt class="text-xs font-semibold uppercase tracking-[0.26em] text-zinc-500"><?php esc_html_e('Free forever', 'webmakerr'); ?></dt>

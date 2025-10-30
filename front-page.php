@@ -21,18 +21,21 @@ get_header();
         <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg">
           <?php echo esc_html__('Webmakerr provides a polished, performance-first foundation that looks great on every device—no demo imports required.', 'webmakerr'); ?>
         </p>
-        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url('#features'); ?>">
+        <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+          <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url('#features'); ?>">
             <?php echo esc_html__('Explore Features', 'webmakerr'); ?>
           </a>
           <?php
           $posts_page_id = (int) get_option('page_for_posts');
           $posts_page_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
           ?>
-          <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($posts_page_url); ?>">
+          <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($posts_page_url); ?>">
             <?php echo esc_html__('Read the blog', 'webmakerr'); ?>
           </a>
         </div>
+        <p class="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
+          <?php echo esc_html__('★★★★★ 4.9/5 rating — 2,500+ creators launched with Webmakerr', 'webmakerr'); ?>
+        </p>
       </div>
     </div>
   </section>

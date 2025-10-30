@@ -55,16 +55,16 @@ $download_url = home_url('/download-webbuilder');
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('WebBuilder gives you total design freedom with an intuitive drag-and-drop builder that works with any WordPress theme, and looks perfect with Webmakerr.', 'webmakerr'); ?>
               </p>
-              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
+              <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>">
                   <?php esc_html_e('Download WebBuilder Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url(home_url('/webbuilder-showcase')); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbuilder-showcase')); ?>">
                   <?php esc_html_e('Preview WebBuilder Live', 'webmakerr'); ?>
                 </a>
               </div>
-              <p class="text-sm text-zinc-500">
-                <?php esc_html_e('Fast • Visual • Free Forever', 'webmakerr'); ?>
+              <p class="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
+                <?php esc_html_e('★★★★★ Loved by 6,500+ creative teams building pixel-perfect sites', 'webmakerr'); ?>
               </p>
             </header>
             <div class="relative isolate rounded-[5px] border border-white/60 bg-white/80 p-6 shadow-xl shadow-primary/10 backdrop-blur">

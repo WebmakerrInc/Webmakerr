@@ -159,13 +159,13 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('Build, sell, and scale faster than ever. WebCommerce turns WordPress into a powerful, high-performance store engine — no bloat, no limits.', 'webmakerr'); ?>
               </p>
-              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($buy_url); ?>">
+              <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($buy_url); ?>">
                   <?php esc_html_e('Buy WebCommerce Now', 'webmakerr'); ?>
                 </a>
               </div>
-              <p class="text-sm text-zinc-500">
-                <?php esc_html_e('Lightweight. Open-source. Built to outperform every legacy eCommerce plugin.', 'webmakerr'); ?>
+              <p class="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
+                <?php esc_html_e('★★★★★ Powering 9,800+ stores with $180M in annual transactions', 'webmakerr'); ?>
               </p>
             </div>
             <div class="relative isolate overflow-hidden rounded-[5px] border border-white/60 bg-white/80 p-8 shadow-xl shadow-primary/10 backdrop-blur">

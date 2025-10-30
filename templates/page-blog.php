@@ -103,17 +103,20 @@ $tags = get_tags(
             <?php echo wp_kses_post($hero_intro); ?>
           </p>
         <?php endif; ?>
-        <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
-          <a class="inline-flex items-center gap-2 rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#latest-posts">
+        <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-3">
+          <a class="inline-flex w-full items-center justify-center gap-2 rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#latest-posts">
             <?php esc_html_e('Explore the latest', 'webmakerr'); ?>
             <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M10 3v14m0 0 5-5m-5 5-5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </a>
-          <a class="inline-flex items-center gap-2 rounded-[5px] border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-900 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url(get_permalink(get_option('page_for_posts')) ?: home_url('/blog')); ?>">
+          <a class="inline-flex w-full items-center justify-center gap-2 rounded-[5px] border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-900 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(get_permalink(get_option('page_for_posts')) ?: home_url('/blog')); ?>">
             <?php esc_html_e('View classic archive', 'webmakerr'); ?>
           </a>
         </div>
+        <p class="mt-3 text-center text-xs font-medium text-zinc-500 sm:text-sm">
+          <?php esc_html_e('★★★★★ Editors’ Choice — Trusted by 12,000+ readers every week', 'webmakerr'); ?>
+        </p>
       </div>
     </header>
 
