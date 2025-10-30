@@ -19,7 +19,7 @@ get_header();
       <article <?php post_class('flex flex-col gap-16'); ?>>
         <header class="flex flex-col gap-4 text-center">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary"><?php esc_html_e('Pricing', 'webmakerr'); ?></p>
-          <?php the_title('<h1 class="text-4xl font-medium tracking-tight text-zinc-950 sm:text-5xl">', '</h1>'); ?>
+          <?php the_title('<h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">', '</h1>'); ?>
           <p class="mx-auto max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg"><?php echo wp_kses_post(get_post_meta(get_the_ID(), '_webmakerr_pricing_intro', true)); ?></p>
         </header>
 
@@ -40,7 +40,7 @@ get_header();
                       </p>
                       <div class="text-sm leading-6 text-zinc-600"><?php echo $description; ?></div>
                     </div>
-                    <a class="inline-flex items-center justify-center rounded bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>">
+                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>">
                       <?php esc_html_e('Choose plan', 'webmakerr'); ?>
                     </a>
                   </div>

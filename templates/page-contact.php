@@ -60,7 +60,7 @@ get_header();
       <section class="flex flex-col gap-10 text-left">
         <div class="flex flex-col gap-6">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary"><?php esc_html_e('Contact', 'webmakerr'); ?></p>
-          <h1 class="text-4xl font-medium tracking-tight text-zinc-950 sm:text-5xl"><?php esc_html_e('Get in touch', 'webmakerr'); ?></h1>
+          <h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl"><?php esc_html_e('Get in touch', 'webmakerr'); ?></h1>
           <p class="max-w-xl text-base leading-7 text-zinc-600 sm:text-lg"><?php esc_html_e('Ready to build with Webmakerr? Tell us a bit about your team and how we can help streamline your next launch.', 'webmakerr'); ?></p>
         </div>
 
@@ -93,7 +93,7 @@ get_header();
 
       <section>
         <div class="rounded border border-zinc-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
-          <h2 class="text-2xl font-semibold text-zinc-950 sm:text-3xl"><?php esc_html_e('Tell us about your project', 'webmakerr'); ?></h2>
+          <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl"><?php esc_html_e('Tell us about your project', 'webmakerr'); ?></h2>
           <p class="mt-3 text-sm leading-6 text-zinc-600"><?php esc_html_e('Fill out the form and we’ll follow up within two business days.', 'webmakerr'); ?></p>
 
           <?php if ($webmakerr_contact_success) : ?>

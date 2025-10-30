@@ -95,15 +95,15 @@ get_header();
               <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
                 <?php esc_html_e('Free Tailwind WordPress Theme', 'webmakerr'); ?>
               </span>
-              <?php the_title('<h1 class="text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl lg:text-6xl">', '</h1>'); ?>
+              <?php the_title('<h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">', '</h1>'); ?>
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php echo esc_html($intro ?: $intro_default); ?>
               </p>
-              <div class="flex flex-col gap-4 sm:flex-row">
-                <a class="inline-flex items-center justify-center rounded bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($primary_cta_url); ?>">
+              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($primary_cta_url); ?>">
                   <?php echo esc_html($primary_cta_text); ?>
                 </a>
-                <a class="inline-flex items-center justify-center rounded border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>">
+                <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>">
                   <?php echo esc_html($secondary_cta_text); ?>
                 </a>
               </div>
@@ -208,7 +208,7 @@ get_header();
             <?php foreach ($integration_groups as $group) : ?>
               <div class="flex flex-col gap-5 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm">
                 <div class="flex flex-col gap-2">
-                  <h3 class="text-lg font-semibold text-zinc-950"><?php echo esc_html($group['title']); ?></h3>
+                  <h3 class="text-xl font-semibold text-zinc-950"><?php echo esc_html($group['title']); ?></h3>
                   <p class="text-sm leading-6 text-zinc-600"><?php echo esc_html($group['description']); ?></p>
                 </div>
                 <ul class="grid gap-3 text-sm font-semibold text-zinc-950 sm:grid-cols-2">
@@ -256,7 +256,7 @@ get_header();
             <p class="text-sm text-zinc-500"><?php esc_html_e('Developers get clear structure, marketers get flexible content controls, and everyone ships faster with clean Tailwind components.', 'webmakerr'); ?></p>
           </div>
           <div class="rounded-[5px] border border-zinc-200 bg-light/80 p-8 shadow-inner">
-            <h3 class="text-lg font-semibold text-zinc-950"><?php esc_html_e('What’s included for free', 'webmakerr'); ?></h3>
+            <h3 class="text-xl font-semibold text-zinc-950"><?php esc_html_e('What’s included for free', 'webmakerr'); ?></h3>
             <ul class="mt-4 grid gap-3 text-sm text-zinc-700">
               <li class="flex items-start gap-3"><span class="mt-1 flex h-5 w-5 items-center justify-center rounded bg-primary/10 text-primary">✓</span><?php esc_html_e('Conversion-optimized home, pricing, and landing page templates.', 'webmakerr'); ?></li>
               <li class="flex items-start gap-3"><span class="mt-1 flex h-5 w-5 items-center justify-center rounded bg-primary/10 text-primary">✓</span><?php esc_html_e('Theme.json tokens tuned for SEO, accessibility, and brand consistency.', 'webmakerr'); ?></li>
@@ -281,11 +281,11 @@ get_header();
           <span class="text-xs font-semibold uppercase tracking-[0.26em] text-white/70"><?php esc_html_e('Open-source & always improving', 'webmakerr'); ?></span>
           <h2 class="text-3xl font-semibold text-white sm:text-4xl"><?php esc_html_e('Launch a performance-first site with Webmakerr', 'webmakerr'); ?></h2>
           <p class="max-w-2xl text-base leading-7 text-white/80 sm:text-lg"><?php esc_html_e('Download the free theme, benefit from regular updates, and ship blazing-fast pages optimized for search, accessibility, and growth.', 'webmakerr'); ?></p>
-          <div class="flex flex-col gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center rounded bg-white px-5 py-2 text-sm font-semibold text-dark transition hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline" href="<?php echo esc_url($primary_cta_url); ?>">
+          <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($primary_cta_url); ?>">
               <?php echo esc_html($primary_cta_text); ?>
             </a>
-            <a class="inline-flex items-center justify-center rounded border border-white/40 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>">
+            <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>">
               <?php esc_html_e('Preview the components', 'webmakerr'); ?>
             </a>
           </div>

@@ -48,17 +48,17 @@ $download_url = home_url('/download-webbooking');
               <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
                 <?php esc_html_e('WebBooking Plugin', 'webmakerr'); ?>
               </span>
-              <h1 class="text-4xl font-medium tracking-tight text-zinc-950 [text-wrap:balance] sm:text-5xl lg:text-6xl">
+              <h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">
                 <?php esc_html_e('The Smartest Way to Schedule in WordPress', 'webmakerr'); ?>
               </h1>
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('WebBooking lets you manage bookings, teams, and calendar sync — fast, reliable, and built beautifully for Webmakerr.', 'webmakerr'); ?>
               </p>
-              <div class="flex flex-col gap-4 sm:flex-row">
-                <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary no-underline hover:no-underline" href="<?php echo esc_url($download_url); ?>">
+              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
                   <?php esc_html_e('Get WebBooking Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex items-center justify-center rounded-[5px] border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-sm transition hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/40 no-underline hover:no-underline" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>">
+                <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>">
                   <?php esc_html_e('See WebBooking in action', 'webmakerr'); ?>
                 </a>
               </div>
@@ -102,7 +102,7 @@ $download_url = home_url('/download-webbooking');
 
         <section class="rounded-[5px] border border-zinc-200 bg-white p-8 shadow-sm sm:p-10">
           <header class="mx-auto flex max-w-3xl flex-col gap-4 text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+            <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
               <?php esc_html_e('Build a frictionless scheduling experience your clients love', 'webmakerr'); ?>
             </h2>
             <p class="text-base leading-7 text-zinc-600 sm:text-lg">
@@ -152,7 +152,7 @@ $download_url = home_url('/download-webbooking');
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo webbooking_render_icon($feature['icon']);
                     ?>
-                    <h3 class="text-lg font-semibold text-zinc-900">
+                    <h3 class="text-xl font-semibold text-zinc-950">
                       <?php echo esc_html($feature['title']); ?>
                     </h3>
                   </div>
@@ -169,7 +169,7 @@ $download_url = home_url('/download-webbooking');
         <section class="grid gap-10 rounded-[5px] border border-zinc-200 bg-white p-8 shadow-sm lg:grid-cols-2 lg:items-center lg:gap-16 lg:p-12">
           <div class="flex flex-col gap-6">
             <header class="flex flex-col gap-4">
-              <h2 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+              <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                 <?php esc_html_e('Showcase bookings with branded, high-converting pages', 'webmakerr'); ?>
               </h2>
               <p class="text-base leading-7 text-zinc-600">
@@ -206,15 +206,15 @@ $download_url = home_url('/download-webbooking');
 
         <section class="rounded-[5px] border border-zinc-200 bg-gradient-to-br from-primary/5 via-white to-white p-10 text-center shadow-sm sm:p-12">
           <header class="mx-auto flex max-w-3xl flex-col gap-4">
-            <h2 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+            <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
               <?php esc_html_e('Ready to Book Smarter?', 'webmakerr'); ?>
             </h2>
             <p class="text-base leading-7 text-zinc-600">
               <?php esc_html_e('Join professionals using WebBooking to automate scheduling and save hours every week.', 'webmakerr'); ?>
             </p>
           </header>
-          <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary no-underline hover:no-underline" href="<?php echo esc_url($download_url); ?>">
+          <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
               <?php esc_html_e('Download WebBooking Free', 'webmakerr'); ?>
             </a>
             <p class="text-sm text-zinc-500">

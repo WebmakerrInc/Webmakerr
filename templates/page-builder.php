@@ -19,7 +19,7 @@ get_header();
       <article <?php post_class('flex flex-col gap-16'); ?>>
         <header class="flex flex-col gap-4 text-left">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary"><?php esc_html_e('Builder', 'webmakerr'); ?></p>
-          <?php the_title('<h1 class="text-4xl font-medium tracking-tight text-zinc-950 sm:text-5xl">', '</h1>'); ?>
+          <?php the_title('<h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">', '</h1>'); ?>
           <p class="max-w-3xl text-base leading-7 text-zinc-600 sm:text-lg"><?php echo wp_kses_post(get_post_meta(get_the_ID(), '_webmakerr_builder_intro', true)); ?></p>
         </header>
 
@@ -33,7 +33,7 @@ get_header();
                     $copy  = isset($highlight['copy']) ? wp_kses_post($highlight['copy']) : '';
                     ?>
                     <div class="rounded border border-zinc-200 bg-white p-6 shadow-sm">
-                      <h2 class="text-lg font-semibold text-zinc-950"><?php echo esc_html($title); ?></h2>
+                      <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl"><?php echo esc_html($title); ?></h2>
                       <div class="mt-3 text-sm leading-6 text-zinc-600"><?php echo $copy; ?></div>
                     </div>
                     <?php
