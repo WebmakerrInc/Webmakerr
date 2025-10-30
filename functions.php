@@ -676,11 +676,27 @@ if (! function_exists('handle_webseo_lead')) {
             $listsToApply = $listId ? [$listId] : [];
             $tagsToApply = ! empty($tagIds) ? $tagIds : [];
 
-            if (! empty($listsToApply) || ! empty($tagsToApply)) {
-                $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
+            $supportsRelationshipArgs = webseo_fluentcrm_subscriber_supports_relationship_args($subscriberClass);
+
+            if ($supportsRelationshipArgs) {
+                $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
             } else {
-                $subscriberClass::createOrUpdate($subscriberData);
+                $subscriber = $subscriberClass::createOrUpdate($subscriberData);
             }
+
+            if (is_wp_error($subscriber)) {
+                throw new \RuntimeException($subscriber->get_error_message());
+            }
+
+            if (! is_object($subscriber)) {
+                $subscriber = webseo_find_fluentcrm_model($subscriberClass, 'email', $email);
+            }
+
+            if (! is_object($subscriber)) {
+                throw new \RuntimeException(__('Unable to save your details at the moment. Please try again later.', 'webmakerr'));
+            }
+
+            webseo_sync_fluentcrm_contact_relations($subscriber, $subscriberClass, $email, $listsToApply, $tagsToApply, ! $supportsRelationshipArgs);
 
             if ($contactNonceValid) {
                 webseo_maybe_send_contact_notification($email, $contactData);
@@ -960,6 +976,191 @@ if (! function_exists('webseo_get_fluentcrm_model_class')) {
         $resolved[$normalizedModel] = null;
 
         return null;
+    }
+}
+
+if (! function_exists('webseo_fluentcrm_subscriber_supports_relationship_args')) {
+    function webseo_fluentcrm_subscriber_supports_relationship_args(string $subscriberClass): bool
+    {
+        if (! method_exists($subscriberClass, 'createOrUpdate')) {
+            return false;
+        }
+
+        try {
+            $method = new \ReflectionMethod($subscriberClass, 'createOrUpdate');
+        } catch (\ReflectionException $exception) {
+            return true;
+        }
+
+        $parameters = $method->getParameters();
+        $parameterCount = count($parameters);
+
+        if ($parameterCount >= 3) {
+            return true;
+        }
+
+        if ($parameterCount < 2) {
+            return false;
+        }
+
+        $secondParameter = $parameters[1];
+        $type = $secondParameter->getType();
+
+        if ($type instanceof \ReflectionNamedType) {
+            if (! $type->isBuiltin()) {
+                return true;
+            }
+
+            return $type->getName() === 'array';
+        }
+
+        if ($type instanceof \ReflectionUnionType) {
+            foreach ($type->getTypes() as $named) {
+                if ($named instanceof \ReflectionNamedType) {
+                    if (! $named->isBuiltin()) {
+                        return true;
+                    }
+
+                    if ($named->getName() === 'array') {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        if ($secondParameter->isDefaultValueAvailable()) {
+            $defaultValue = $secondParameter->getDefaultValue();
+
+            if (is_array($defaultValue) || $defaultValue === null) {
+                return true;
+            }
+        }
+
+        return true;
+    }
+}
+
+if (! function_exists('webseo_get_fluentcrm_contact_api')) {
+    function webseo_get_fluentcrm_contact_api()
+    {
+        static $resolved = false;
+        static $instance = null;
+
+        if ($resolved) {
+            return $instance;
+        }
+
+        $resolved = true;
+
+        if (function_exists('fluentcrm_api')) {
+            $maybeApi = fluentcrm_api('contacts');
+
+            if (is_object($maybeApi)) {
+                $instance = $maybeApi;
+
+                return $instance;
+            }
+        }
+
+        if (function_exists('FluentCrmApi')) {
+            $maybeApi = FluentCrmApi('contacts');
+
+            if (is_object($maybeApi)) {
+                $instance = $maybeApi;
+
+                return $instance;
+            }
+        }
+
+        $contactApiClass = webseo_get_fluentcrm_model_class('Services\\Contacts\\ContactApi');
+
+        if ($contactApiClass && class_exists($contactApiClass)) {
+            try {
+                $maybeApi = new $contactApiClass();
+
+                if (is_object($maybeApi)) {
+                    $instance = $maybeApi;
+                }
+            } catch (\Throwable $throwable) {
+                $instance = null;
+            }
+        }
+
+        return $instance;
+    }
+}
+
+if (! function_exists('webseo_try_fluentcrm_contact_api_methods')) {
+    function webseo_try_fluentcrm_contact_api_methods(int $subscriberId, array $items, array $methods): void
+    {
+        if ($subscriberId <= 0 || empty($items)) {
+            return;
+        }
+
+        $api = webseo_get_fluentcrm_contact_api();
+
+        if (! is_object($api)) {
+            return;
+        }
+
+        foreach ($methods as $method) {
+            if (! is_string($method) || $method === '') {
+                continue;
+            }
+
+            $result = webseo_fluentcrm_object_call($api, $method, [$subscriberId, $items]);
+
+            if ($result !== null) {
+                break;
+            }
+        }
+    }
+}
+
+if (! function_exists('webseo_sync_fluentcrm_contact_relations')) {
+    function webseo_sync_fluentcrm_contact_relations($subscriber, string $subscriberClass, string $email, array $lists, array $tags, bool $force = false): void
+    {
+        if (empty($lists) && empty($tags)) {
+            return;
+        }
+
+        if (! is_object($subscriber)) {
+            $subscriber = webseo_find_fluentcrm_model($subscriberClass, 'email', $email);
+        }
+
+        if (! is_object($subscriber)) {
+            return;
+        }
+
+        $subscriberId = isset($subscriber->id) ? (int) $subscriber->id : 0;
+
+        if (! empty($lists)) {
+            $attached = webseo_fluentcrm_object_call($subscriber, 'attachLists', [$lists]);
+
+            if ($attached === null) {
+                $attached = webseo_fluentcrm_object_call($subscriber, 'syncLists', [$lists]);
+            }
+
+            if ($attached === null && $force && $subscriberId > 0) {
+                webseo_try_fluentcrm_contact_api_methods($subscriberId, $lists, ['attachLists', 'syncLists', 'attachToLists']);
+            }
+        }
+
+        if (! empty($tags)) {
+            $attached = webseo_fluentcrm_object_call($subscriber, 'attachTags', [$tags]);
+
+            if ($attached === null) {
+                $attached = webseo_fluentcrm_object_call($subscriber, 'syncTags', [$tags]);
+            }
+
+            if ($attached === null && $force && $subscriberId > 0) {
+                webseo_try_fluentcrm_contact_api_methods($subscriberId, $tags, ['attachTags', 'syncTags', 'attachToTags']);
+            }
+        }
+
+        webseo_fluentcrm_object_call($subscriber, 'flushCache');
     }
 }
 
