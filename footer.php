@@ -186,12 +186,39 @@
             </div>
         </div>
     </footer>
+
+    <div aria-hidden="true" class="md:hidden h-[110px]"></div>
+</div>
+
+<?php
+$mobile_cta_url = apply_filters('webmakerr_mobile_cta_url', home_url('/get-started'));
+?>
+
+<div
+    class="fixed bottom-0 left-0 right-0 z-50 bg-dark text-white shadow-[0_-12px_24px_rgba(0,0,0,0.18)] md:hidden"
+    role="complementary"
+    aria-label="<?php esc_attr_e('Get started call to action', 'webmakerr'); ?>"
+>
+    <div
+        class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-4"
+        style="padding-bottom: calc(1rem + env(safe-area-inset-bottom));"
+    >
+        <a
+            class="inline-flex w-full items-center justify-center rounded bg-primary px-6 py-3 text-base font-semibold text-white transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline"
+            href="<?php echo esc_url($mobile_cta_url); ?>"
+        >
+            <?php esc_html_e('Get Started, It’s Free', 'webmakerr'); ?>
+        </a>
+        <p class="text-sm font-medium text-white/70">
+            <?php esc_html_e('No credit card required · Instant setup', 'webmakerr'); ?>
+        </p>
+    </div>
 </div>
 
 <!-- ================= Cookie Banner + Modal ================= -->
 <div
     id="cookie-banner"
-    class="fixed bottom-0 left-0 right-0 z-50 hidden border-t border-neutral-200 bg-neutral-50 shadow-lg shadow-black/5"
+    class="fixed bottom-[calc(7rem+env(safe-area-inset-bottom))] left-0 right-0 z-[60] hidden border-t border-neutral-200 bg-neutral-50 shadow-lg shadow-black/5 md:bottom-0"
 >
     <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-4 text-sm text-neutral-700 md:flex-row md:items-center md:justify-between">
         <div class="flex-1 text-center leading-relaxed md:text-left">
