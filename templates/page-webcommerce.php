@@ -153,14 +153,14 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
                 <?php esc_html_e('WebCommerce Plugin', 'webmakerr'); ?>
               </span>
-              <h1 class="text-4xl font-medium tracking-tight text-zinc-950 [text-wrap:balance] sm:text-5xl lg:text-6xl">
+              <h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">
                 <?php esc_html_e('The New Standard for WordPress eCommerce', 'webmakerr'); ?>
               </h1>
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('Build, sell, and scale faster than ever. WebCommerce turns WordPress into a powerful, high-performance store engine — no bloat, no limits.', 'webmakerr'); ?>
               </p>
-              <div class="flex flex-col gap-4 sm:flex-row">
-                <a class="btn btn-primary inline-flex items-center justify-center rounded bg-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($buy_url); ?>">
+              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($buy_url); ?>">
                   <?php esc_html_e('Buy WebCommerce Now', 'webmakerr'); ?>
                 </a>
               </div>
@@ -202,13 +202,13 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
         <div class="mx-auto max-w-screen-xl px-6 lg:px-8">
           <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div class="flex flex-col gap-6">
-              <h2 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+              <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                 <?php esc_html_e('Speed is Money. Keep Both.', 'webmakerr'); ?>
               </h2>
               <p class="text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('WebCommerce is engineered for raw speed and scalability. Every request, every order, every checkout happens faster — keeping your store smooth and your customers happy.', 'webmakerr'); ?>
               </p>
-              <a class="btn btn-outline inline-flex w-fit items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($performance_anchor); ?>">
+              <a class="mt-6 inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($performance_anchor); ?>">
                 <?php esc_html_e('See How It Performs', 'webmakerr'); ?>
               </a>
             </div>
@@ -254,7 +254,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
             <?php endforeach; ?>
           </div>
           <div class="mt-10 flex justify-center">
-            <a class="btn btn-outline inline-flex items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($product_anchor); ?>">
+            <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($product_anchor); ?>">
               <?php esc_html_e('Explore Product Types', 'webmakerr'); ?>
             </a>
           </div>
@@ -265,7 +265,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
         <div class="mx-auto max-w-screen-xl px-6 lg:px-8">
           <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div class="flex flex-col gap-6">
-              <h2 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+              <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                 <?php esc_html_e('Built for Stores That Expect to Grow', 'webmakerr'); ?>
               </h2>
               <p class="text-base leading-7 text-zinc-600 sm:text-lg">
@@ -299,7 +299,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <p class="text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('Customize every block — checkout, pricing, or product layouts — directly inside WordPress. Stay 100% on-brand without touching a line of code.', 'webmakerr'); ?>
               </p>
-              <a class="btn btn-outline inline-flex w-fit items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($branding_anchor); ?>">
+              <a class="mt-6 inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($branding_anchor); ?>">
                 <?php esc_html_e('Explore Store Design', 'webmakerr'); ?>
               </a>
             </div>
@@ -337,13 +337,13 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
                   echo webcommerce_render_icon($card['icon'], 'h-6 w-6');
                   ?>
                 </span>
-                <h3 class="text-lg font-semibold text-zinc-950"><?php echo esc_html($card['title']); ?></h3>
+                <h3 class="text-xl font-semibold text-zinc-950"><?php echo esc_html($card['title']); ?></h3>
                 <p class="text-sm leading-6 text-zinc-600"><?php echo esc_html($card['description']); ?></p>
               </div>
             <?php endforeach; ?>
           </div>
           <div class="mt-10 flex justify-center">
-            <a class="btn btn-outline inline-flex items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($analytics_anchor); ?>">
+            <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($analytics_anchor); ?>">
               <?php esc_html_e('View Analytics', 'webmakerr'); ?>
             </a>
           </div>
@@ -360,7 +360,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <p class="text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('WebCommerce is open-source and extensible. Create custom workflows, integrate third-party apps, or go fully headless with REST APIs — while keeping your backend secure and fast.', 'webmakerr'); ?>
               </p>
-              <a class="btn btn-outline inline-flex w-fit items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($developer_anchor); ?>">
+              <a class="mt-6 inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($developer_anchor); ?>">
                 <?php esc_html_e('Explore Developer Docs', 'webmakerr'); ?>
               </a>
             </div>
@@ -373,7 +373,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
                     echo webcommerce_render_icon($item['icon'], 'h-6 w-6');
                     ?>
                   </span>
-                  <h3 class="text-lg font-semibold text-zinc-950"><?php echo esc_html($item['title']); ?></h3>
+                  <h3 class="text-xl font-semibold text-zinc-950"><?php echo esc_html($item['title']); ?></h3>
                   <p class="text-sm leading-6 text-zinc-600"><?php echo esc_html($item['description']); ?></p>
                 </div>
               <?php endforeach; ?>
@@ -386,13 +386,13 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
         <div class="mx-auto max-w-screen-xl px-6 lg:px-8">
           <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div class="flex flex-col gap-6">
-              <h2 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+              <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                 <?php esc_html_e('Get Paid Your Way — No Platform Fees', 'webmakerr'); ?>
               </h2>
               <p class="text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('Accept global payments instantly with Stripe and PayPal. Or integrate any local gateway with our developer-friendly payment API. No transaction fees. No revenue sharing. Ever.', 'webmakerr'); ?>
               </p>
-              <a class="btn btn-outline inline-flex w-fit items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($payments_anchor); ?>">
+              <a class="mt-6 inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($payments_anchor); ?>">
                 <?php esc_html_e('Explore Payments', 'webmakerr'); ?>
               </a>
             </div>
@@ -430,7 +430,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <p class="text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('Already selling elsewhere? Migrate your products, orders, and customers with one click. WebCommerce makes migration effortless so you can get back to business fast.', 'webmakerr'); ?>
               </p>
-              <a class="btn btn-outline inline-flex w-fit items-center justify-center rounded border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline" href="<?php echo esc_url($migration_anchor); ?>">
+              <a class="mt-6 inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($migration_anchor); ?>">
                 <?php esc_html_e('Switch to WebCommerce', 'webmakerr'); ?>
               </a>
             </div>
@@ -461,17 +461,17 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
       <section class="relative overflow-hidden bg-gradient-to-r from-primary/90 via-dark to-dark py-12 lg:py-20">
         <div class="relative mx-auto max-w-screen-xl px-6 lg:px-8">
           <div class="mx-auto flex max-w-3xl flex-col gap-6 text-center text-white">
-            <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 class="text-3xl font-semibold text-white sm:text-4xl">
               <?php esc_html_e('Faster. Lighter. Smarter.', 'webmakerr'); ?>
             </h2>
             <p class="text-base leading-7 text-white/80 sm:text-lg">
               <?php esc_html_e('The future of WordPress eCommerce starts with WebCommerce.', 'webmakerr'); ?>
             </p>
-            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-              <a class="btn btn-primary inline-flex items-center justify-center rounded bg-white px-6 py-3 text-sm font-semibold text-dark transition hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline" href="<?php echo esc_url($buy_url); ?>">
+            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($buy_url); ?>">
                 <?php esc_html_e('Buy Now', 'webmakerr'); ?>
               </a>
-              <a class="btn btn-outline inline-flex items-center justify-center rounded border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-white hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline" href="<?php echo esc_url($demo_url); ?>">
+              <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($demo_url); ?>">
                 <?php esc_html_e('View Demo', 'webmakerr'); ?>
               </a>
             </div>
