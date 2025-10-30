@@ -678,10 +678,37 @@ if (! function_exists('handle_webseo_lead')) {
 
             $supportsRelationshipArgs = webseo_fluentcrm_subscriber_supports_relationship_args($subscriberClass);
 
-            if ($supportsRelationshipArgs) {
-                $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
-            } else {
-                $subscriber = $subscriberClass::createOrUpdate($subscriberData);
+            $subscriber = null;
+            $contactApi = webseo_get_fluentcrm_contact_api();
+
+            if (is_object($contactApi) && method_exists($contactApi, 'createOrUpdate')) {
+                $contactPayload = $subscriberData;
+
+                if (! empty($listsToApply)) {
+                    $contactPayload['lists'] = $listsToApply;
+                }
+
+                if (! empty($tagsToApply)) {
+                    $contactPayload['tags'] = $tagsToApply;
+                }
+
+                $apiResult = webseo_fluentcrm_object_call($contactApi, 'createOrUpdate', [$contactPayload]);
+
+                if ($apiResult !== null) {
+                    if (is_wp_error($apiResult)) {
+                        throw new \RuntimeException($apiResult->get_error_message());
+                    }
+
+                    $subscriber = $apiResult;
+                }
+            }
+
+            if ($subscriber === null) {
+                if ($supportsRelationshipArgs) {
+                    $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
+                } else {
+                    $subscriber = $subscriberClass::createOrUpdate($subscriberData);
+                }
             }
 
             if (is_wp_error($subscriber)) {
