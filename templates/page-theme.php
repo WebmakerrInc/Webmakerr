@@ -148,10 +148,10 @@ get_header();
                 <?php echo esc_html($intro ?: $intro_default); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($primary_cta_url); ?>">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($primary_cta_url); ?>" data-lead-trigger data-lead-source="theme-hero-primary">
                   <?php echo esc_html($primary_cta_text); ?>
                 </a>
-                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($secondary_cta_url); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($secondary_cta_url); ?>" data-lead-trigger data-lead-source="theme-hero-secondary">
                   <?php echo esc_html($secondary_cta_text); ?>
                 </a>
               </div>
@@ -375,10 +375,10 @@ get_header();
           <h2 class="text-3xl font-semibold text-white sm:text-4xl"><?php esc_html_e('Launch a performance-first site with Webmakerr', 'webmakerr'); ?></h2>
           <p class="max-w-2xl text-base leading-7 text-white/80 sm:text-lg"><?php esc_html_e('Download the free theme, benefit from regular updates, and ship blazing-fast pages optimized for search, accessibility, and growth.', 'webmakerr'); ?></p>
           <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($primary_cta_url); ?>">
+            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($primary_cta_url); ?>" data-lead-trigger data-lead-source="theme-footer-primary">
               <?php echo esc_html($primary_cta_text); ?>
             </a>
-            <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>">
+            <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>" data-lead-trigger data-lead-source="theme-footer-secondary">
               <?php esc_html_e('Preview the components', 'webmakerr'); ?>
             </a>
           </div>

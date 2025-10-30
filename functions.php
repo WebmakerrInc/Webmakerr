@@ -512,6 +512,51 @@ add_action(
     20
 );
 
+add_action(
+    'wp_footer',
+    static function (): void {
+        if (is_admin()) {
+            return;
+        }
+
+        get_template_part('templates/partials/global-lead-form');
+    },
+    20
+);
+
+if (! function_exists('webseo_get_template_basename')) {
+    function webseo_get_template_basename(string $pageTemplate, string $pageUrl = ''): string
+    {
+        $template = $pageTemplate !== '' ? basename($pageTemplate) : '';
+
+        if ($template === '' && function_exists('get_queried_object_id')) {
+            $queriedId = get_queried_object_id();
+
+            if ($queriedId) {
+                $maybeTemplate = get_page_template_slug($queriedId);
+
+                if (is_string($maybeTemplate) && $maybeTemplate !== '') {
+                    $template = basename($maybeTemplate);
+                }
+            }
+        }
+
+        if ($template === '' && $pageUrl !== '') {
+            $postId = url_to_postid($pageUrl);
+
+            if ($postId) {
+                $maybeTemplate = get_page_template_slug($postId);
+
+                if (is_string($maybeTemplate) && $maybeTemplate !== '') {
+                    $template = basename($maybeTemplate);
+                }
+            }
+        }
+
+        return $template;
+    }
+}
+
 if (! function_exists('handle_webseo_lead')) {
     function handle_webseo_lead(): void
     {
@@ -547,8 +592,10 @@ if (! function_exists('handle_webseo_lead')) {
         $pageTemplate = sanitize_text_field($rawTemplate);
         $pageUrl = isset($_POST['page_url']) ? esc_url_raw(wp_unslash($_POST['page_url'])) : '';
 
+        $templateBasename = webseo_get_template_basename($pageTemplate, $pageUrl);
+
         $source = webseo_resolve_lead_source($sanitizedSource, $pageTemplate, $pageUrl);
-        $tags = webseo_resolve_lead_tags($source);
+        $tags = webseo_resolve_lead_tags($source, $templateBasename);
 
         $contactNonceValid = false;
 
@@ -670,37 +717,17 @@ if (! function_exists('webseo_resolve_lead_source')) {
             return $source;
         }
 
-        $template = $pageTemplate !== '' ? basename($pageTemplate) : '';
-
-        if ($template === '' && function_exists('get_queried_object_id')) {
-            $queriedId = get_queried_object_id();
-
-            if ($queriedId) {
-                $maybeTemplate = get_page_template_slug($queriedId);
-
-                if (is_string($maybeTemplate)) {
-                    $template = basename($maybeTemplate);
-                }
-            }
-        }
-
-        if ($template === '' && $pageUrl !== '') {
-            $postId = url_to_postid($pageUrl);
-
-            if ($postId) {
-                $maybeTemplate = get_page_template_slug($postId);
-
-                if (is_string($maybeTemplate)) {
-                    $template = basename($maybeTemplate);
-                }
-            }
-        }
+        $template = webseo_get_template_basename($pageTemplate, $pageUrl);
 
         switch ($template) {
+            case 'page-theme.php':
+                return 'theme-page';
             case 'page-webseo.php':
                 return 'seo-page';
             case 'page-booking.php':
                 return 'app-page';
+            case 'page-webuilder.php':
+                return 'builder-page';
             case 'page-pricing.php':
                 return 'pricing';
             case 'page-contact.php':
@@ -715,23 +742,38 @@ if (! function_exists('webseo_resolve_lead_tags')) {
     /**
      * @return array<int, string>
      */
-    function webseo_resolve_lead_tags(string $source): array
+    function webseo_resolve_lead_tags(string $source, string $templateBasename = ''): array
     {
-        $map = [
-            'footer-cta' => ['webseo-footer', 'lead'],
-            'seo-page'   => ['webseo-page', 'seo-interest'],
-            'app-page'   => ['webseo-app', 'mobile-cta'],
-            'pricing'    => ['webseo-pricing', 'intent-high'],
-            'contact'    => ['webseo-contact'],
+        $template = $templateBasename !== '' ? basename($templateBasename) : '';
+
+        $templateMap = [
+            'page-theme.php'     => ['theme'],
+            'page-webseo.php'    => ['webseo'],
+            'page-booking.php'   => ['booking'],
+            'page-webuilder.php' => ['webuilder'],
+        ];
+
+        if ($template !== '' && isset($templateMap[$template])) {
+            return $templateMap[$template];
+        }
+
+        $sourceMap = [
+            'theme-page'   => ['theme'],
+            'seo-page'     => ['webseo'],
+            'app-page'     => ['booking'],
+            'builder-page' => ['webuilder'],
+            'pricing'      => ['lead'],
+            'contact'      => ['lead'],
+            'footer-cta'   => ['lead'],
         ];
 
         $normalizedSource = $source !== '' ? $source : 'footer-cta';
 
-        if (isset($map[$normalizedSource])) {
-            return $map[$normalizedSource];
+        if (isset($sourceMap[$normalizedSource])) {
+            return $sourceMap[$normalizedSource];
         }
 
-        return ['webseo-lead'];
+        return ['lead'];
     }
 }
 

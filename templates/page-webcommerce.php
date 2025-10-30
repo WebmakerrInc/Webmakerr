@@ -160,7 +160,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
                 <?php esc_html_e('Build, sell, and scale faster than ever. WebCommerce turns WordPress into a powerful, high-performance store engine — no bloat, no limits.', 'webmakerr'); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($buy_url); ?>">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($buy_url); ?>" data-lead-trigger data-lead-source="webcommerce-hero-primary">
                   <?php esc_html_e('Buy WebCommerce Now', 'webmakerr'); ?>
                 </a>
               </div>
@@ -468,10 +468,10 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <?php esc_html_e('The future of WordPress eCommerce starts with WebCommerce.', 'webmakerr'); ?>
             </p>
             <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($buy_url); ?>">
+              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($buy_url); ?>" data-lead-trigger data-lead-source="webcommerce-footer-primary">
                 <?php esc_html_e('Buy Now', 'webmakerr'); ?>
               </a>
-              <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($demo_url); ?>">
+              <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($demo_url); ?>" data-lead-trigger data-lead-source="webcommerce-footer-secondary">
                 <?php esc_html_e('View Demo', 'webmakerr'); ?>
               </a>
             </div>

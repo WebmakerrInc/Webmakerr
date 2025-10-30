@@ -79,6 +79,198 @@ window.addEventListener('load', function () {
         })
     }
 
+    const leadModal = document.getElementById('global-lead-modal')
+    const leadForm = leadModal ? leadModal.querySelector('[data-webseo-lead-form]') : null
+
+    if (leadModal && leadForm) {
+        const overlay = leadModal.querySelector('[data-lead-overlay]')
+        const dialog = leadModal.querySelector('[data-lead-dialog]')
+        const closeButtons = leadModal.querySelectorAll('[data-lead-close]')
+        const sourceField = leadModal.querySelector('[data-lead-source-field]')
+        const messageElement = leadModal.querySelector('[data-webseo-lead-message]')
+        const focusableSelector =
+            'a[href], button:not([disabled]), input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([-1])'
+
+        let lastFocusedElement = null
+        let isOpen = false
+
+        const resetMessage = function () {
+            if (!messageElement) {
+                return
+            }
+
+            messageElement.textContent = ''
+            messageElement.classList.add('hidden')
+            messageElement.classList.remove('text-green-600', 'text-red-600')
+        }
+
+        const syncAria = function (state) {
+            leadModal.setAttribute('aria-hidden', state ? 'false' : 'true')
+        }
+
+        const handleEscape = function (event) {
+            if (!isOpen || event.key !== 'Escape') {
+                return
+            }
+
+            event.preventDefault()
+            closeModal()
+        }
+
+        const handleFocusTrap = function (event) {
+            if (!isOpen || event.key !== 'Tab' || !dialog) {
+                return
+            }
+
+            const focusableElements = dialog.querySelectorAll(focusableSelector)
+
+            if (!focusableElements.length) {
+                return
+            }
+
+            const firstElement = focusableElements[0]
+            const lastElement = focusableElements[focusableElements.length - 1]
+            const activeElement = document.activeElement
+
+            if (event.shiftKey) {
+                if (activeElement === firstElement || activeElement === dialog) {
+                    event.preventDefault()
+                    lastElement.focus()
+                }
+            } else if (activeElement === lastElement) {
+                event.preventDefault()
+                firstElement.focus()
+            }
+        }
+
+        const openModal = function (source = '') {
+            if (sourceField) {
+                sourceField.value = source || ''
+            }
+
+            if (isOpen) {
+                return
+            }
+
+            isOpen = true
+            lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
+
+            resetMessage()
+
+            leadModal.classList.remove('hidden')
+            syncAria(true)
+            document.body.classList.add('overflow-hidden')
+
+            window.requestAnimationFrame(function () {
+                if (overlay) {
+                    overlay.classList.remove('opacity-0', 'pointer-events-none')
+                    overlay.classList.add('opacity-100', 'pointer-events-auto')
+                }
+
+                if (dialog) {
+                    dialog.classList.remove('opacity-0', 'scale-95', 'translate-y-4', 'pointer-events-none')
+                    dialog.classList.add('opacity-100', 'scale-100', 'translate-y-0')
+
+                    const focusableElements = dialog.querySelectorAll(focusableSelector)
+
+                    if (focusableElements.length) {
+                        const firstElement = focusableElements[0]
+
+                        if (firstElement && typeof firstElement.focus === 'function') {
+                            firstElement.focus()
+                        }
+                    } else {
+                        dialog.focus()
+                    }
+                }
+            })
+
+            document.addEventListener('keydown', handleEscape)
+        }
+
+        const closeModal = function () {
+            if (!isOpen) {
+                return
+            }
+
+            isOpen = false
+
+            if (overlay) {
+                overlay.classList.remove('opacity-100', 'pointer-events-auto')
+                overlay.classList.add('opacity-0', 'pointer-events-none')
+            }
+
+            if (dialog) {
+                dialog.classList.remove('opacity-100', 'scale-100', 'translate-y-0')
+                dialog.classList.add('opacity-0', 'scale-95', 'translate-y-4', 'pointer-events-none')
+            }
+
+            document.removeEventListener('keydown', handleEscape)
+
+            window.setTimeout(function () {
+                leadModal.classList.add('hidden')
+                syncAria(false)
+                document.body.classList.remove('overflow-hidden')
+
+                if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+                    lastFocusedElement.focus()
+                }
+
+                lastFocusedElement = null
+            }, 200)
+        }
+
+        const registerTriggers = function () {
+            const triggers = document.querySelectorAll('[data-lead-trigger]')
+
+            triggers.forEach(function (trigger) {
+                if (trigger.dataset.leadBound === 'true') {
+                    return
+                }
+
+                trigger.dataset.leadBound = 'true'
+
+                trigger.addEventListener('click', function (event) {
+                    event.preventDefault()
+
+                    const source = trigger.getAttribute('data-lead-source') || ''
+                    openModal(source)
+                })
+            })
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', function (event) {
+                event.preventDefault()
+                closeModal()
+            })
+        }
+
+        if (closeButtons.length) {
+            closeButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault()
+                    closeModal()
+                })
+            })
+        }
+
+        leadModal.addEventListener('keydown', handleFocusTrap)
+
+        registerTriggers()
+
+        window.openLeadPopup = function (source = '') {
+            openModal(source)
+        }
+
+        window.closeLeadPopup = function () {
+            closeModal()
+        }
+    } else {
+        window.openLeadPopup = function () {}
+        window.closeLeadPopup = function () {}
+    }
+
     const leadForms = document.querySelectorAll('[data-webseo-lead-form]')
 
     if (leadForms.length) {
