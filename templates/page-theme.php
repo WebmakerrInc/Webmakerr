@@ -258,8 +258,8 @@ get_header();
       </section>
 
       <section class="border-y border-zinc-200 bg-white py-24">
-        <div class="mx-auto grid max-w-screen-xl gap-16 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-          <div class="flex flex-col gap-6">
+        <div class="mx-auto grid max-w-screen-xl gap-16 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:px-8">
+          <div class="flex flex-col gap-6 lg:sticky lg:top-24 lg:h-fit">
             <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary"><?php esc_html_e('Integrations', 'webmakerr'); ?></span>
             <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl"><?php esc_html_e('Plug Webmakerr into your growth stack', 'webmakerr'); ?></h2>
             <p class="text-base leading-7 text-zinc-600 sm:text-lg"><?php esc_html_e('Ship faster with API-ready snippets, documented hooks, and clean separation of data, presentation, and business logic.', 'webmakerr'); ?></p>
