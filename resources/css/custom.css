@@ -81,3 +81,31 @@
     margin-bottom: 0 !important;
   }
 }
+
+@layer utilities {
+  .animate-mobile-cta-glow {
+    --mobile-cta-glow-color: rgba(255, 255, 255, 0.32);
+    --mobile-cta-glow-color-transparent: rgba(255, 255, 255, 0);
+    animation: mobile-cta-glow 2.8s ease-in-out infinite;
+    box-shadow: 0 0 0 0 var(--mobile-cta-glow-color);
+    will-change: box-shadow;
+  }
+
+  @supports (color: color-mix(in srgb, black 50%, white)) {
+    .animate-mobile-cta-glow {
+      --mobile-cta-glow-color: color-mix(in srgb, var(--color-primary, rgba(255, 255, 255, 1)) 32%, transparent);
+      --mobile-cta-glow-color-transparent: color-mix(in srgb, var(--color-primary, rgba(255, 255, 255, 1)) 0%, transparent);
+    }
+  }
+
+  @keyframes mobile-cta-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--mobile-cta-glow-color);
+    }
+
+    50% {
+      box-shadow: 0 0 0 18px var(--mobile-cta-glow-color-transparent);
+    }
+  }
+}

@@ -204,12 +204,12 @@ $mobile_cta_url = apply_filters('webmakerr_mobile_cta_url', home_url('/get-start
         style="padding-bottom: calc(1rem + env(safe-area-inset-bottom));"
     >
         <a
-            class="inline-flex w-full items-center justify-center rounded bg-primary px-6 py-3 text-base font-semibold text-white transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline"
+            class="inline-flex w-full items-center justify-center rounded bg-primary px-6 py-3 text-base font-semibold text-white transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white !no-underline animate-mobile-cta-glow md:animate-none"
             href="<?php echo esc_url($mobile_cta_url); ?>"
         >
             <?php esc_html_e('Get Started, It’s Free', 'webmakerr'); ?>
         </a>
-        <p class="text-sm font-medium text-white/70">
+        <p class="w-full text-center text-sm font-medium text-white/70">
             <?php esc_html_e('No credit card required · Instant setup', 'webmakerr'); ?>
         </p>
     </div>
