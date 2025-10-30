@@ -686,12 +686,14 @@ if (! function_exists('handle_webseo_lead')) {
             $listsToApply = $listId ? [$listId] : [];
             $tagsToApply = ! empty($tagIds) ? $tagIds : [];
 
-            $supportsRelationshipArgs = webseo_fluentcrm_subscriber_supports_relationship_args($subscriberClass);
+            $relationshipArgCount = webseo_fluentcrm_subscriber_relationship_arg_count($subscriberClass);
 
             $contactApi = webseo_get_fluentcrm_contact_api();
 
-            if ($supportsRelationshipArgs) {
+            if ($relationshipArgCount >= 2) {
                 $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
+            } elseif ($relationshipArgCount === 1) {
+                $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply);
             } else {
                 $subscriber = $subscriberClass::createOrUpdate($subscriberData);
             }
@@ -743,7 +745,14 @@ if (! function_exists('handle_webseo_lead')) {
                 throw new \RuntimeException(__('Unable to save your details at the moment. Please try again later.', 'webmakerr'));
             }
 
-            webseo_sync_fluentcrm_contact_relations($subscriber, $subscriberClass, $email, $listsToApply, $tagsToApply, ! $supportsRelationshipArgs);
+            webseo_sync_fluentcrm_contact_relations(
+                $subscriber,
+                $subscriberClass,
+                $email,
+                $listsToApply,
+                $tagsToApply,
+                $relationshipArgCount === 0
+            );
 
             if ($contactNonceValid) {
                 webseo_maybe_send_contact_notification($email, $contactData);
@@ -1026,66 +1035,41 @@ if (! function_exists('webseo_get_fluentcrm_model_class')) {
     }
 }
 
-if (! function_exists('webseo_fluentcrm_subscriber_supports_relationship_args')) {
-    function webseo_fluentcrm_subscriber_supports_relationship_args(string $subscriberClass): bool
+if (! function_exists('webseo_fluentcrm_subscriber_relationship_arg_count')) {
+    function webseo_fluentcrm_subscriber_relationship_arg_count(string $subscriberClass): int
     {
         if (! method_exists($subscriberClass, 'createOrUpdate')) {
-            return false;
+            return 0;
         }
 
         try {
             $method = new \ReflectionMethod($subscriberClass, 'createOrUpdate');
         } catch (\ReflectionException $exception) {
-            return true;
+            return 2;
         }
 
-        $parameters = $method->getParameters();
-        $parameterCount = count($parameters);
+        if ($method->isVariadic()) {
+            return 2;
+        }
+
+        $parameterCount = $method->getNumberOfParameters();
+
+        if ($parameterCount <= 1) {
+            return 0;
+        }
 
         if ($parameterCount >= 3) {
-            return true;
+            return 2;
         }
 
-        if ($parameterCount < 2) {
-            return false;
-        }
+        return 1;
+    }
+}
 
-        $secondParameter = $parameters[1];
-        $type = $secondParameter->getType();
-
-        if ($type instanceof \ReflectionNamedType) {
-            if (! $type->isBuiltin()) {
-                return true;
-            }
-
-            return $type->getName() === 'array';
-        }
-
-        if ($type instanceof \ReflectionUnionType) {
-            foreach ($type->getTypes() as $named) {
-                if ($named instanceof \ReflectionNamedType) {
-                    if (! $named->isBuiltin()) {
-                        return true;
-                    }
-
-                    if ($named->getName() === 'array') {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        if ($secondParameter->isDefaultValueAvailable()) {
-            $defaultValue = $secondParameter->getDefaultValue();
-
-            if (is_array($defaultValue) || $defaultValue === null) {
-                return true;
-            }
-        }
-
-        return true;
+if (! function_exists('webseo_fluentcrm_subscriber_supports_relationship_args')) {
+    function webseo_fluentcrm_subscriber_supports_relationship_args(string $subscriberClass): bool
+    {
+        return webseo_fluentcrm_subscriber_relationship_arg_count($subscriberClass) > 0;
     }
 }
 
