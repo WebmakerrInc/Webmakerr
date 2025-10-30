@@ -214,7 +214,7 @@ $download_url = home_url('/download-webbooking');
             </p>
           </header>
           <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
+            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
               <?php esc_html_e('Download WebBooking Free', 'webmakerr'); ?>
             </a>
             <p class="text-sm text-zinc-500">
