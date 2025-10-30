@@ -16,7 +16,12 @@ $webmakerr_contact_success = false;
 if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['webmakerr_contact_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['webmakerr_contact_nonce'])), 'webmakerr_contact_form')) {
     $full_name     = isset($_POST['full_name']) ? sanitize_text_field(wp_unslash($_POST['full_name'])) : '';
     $company_name  = isset($_POST['company_name']) ? sanitize_text_field(wp_unslash($_POST['company_name'])) : '';
-    $company_email = isset($_POST['company_email']) ? sanitize_email(wp_unslash($_POST['company_email'])) : '';
+    $email_field   = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
+    $company_email = $email_field;
+
+    if (empty($company_email) && isset($_POST['company_email'])) {
+        $company_email = sanitize_email(wp_unslash($_POST['company_email']));
+    }
     $use_case      = isset($_POST['use_case']) ? sanitize_text_field(wp_unslash($_POST['use_case'])) : '';
     $description   = isset($_POST['description']) ? sanitize_textarea_field(wp_unslash($_POST['description'])) : '';
     $newsletter    = isset($_POST['newsletter']) ? __('Yes', 'webmakerr') : __('No', 'webmakerr');
@@ -108,8 +113,16 @@ get_header();
             </div>
           <?php endif; ?>
 
-          <form class="mt-8 flex flex-col gap-6" action="" method="post">
+          <form
+            class="mt-8 flex flex-col gap-6"
+            action=""
+            method="post"
+            data-webseo-lead-form
+            data-webseo-lead-success="<?php esc_attr_e('✅ Thanks! We\'ll follow up shortly.', 'webmakerr'); ?>"
+          >
             <?php wp_nonce_field('webmakerr_contact_form', 'webmakerr_contact_nonce'); ?>
+            <input type="hidden" name="source" value="contact" />
+            <input type="hidden" name="webseo_lead_nonce" value="<?php echo esc_attr(wp_create_nonce('webseo_lead_nonce')); ?>" />
 
             <div class="grid gap-6 sm:grid-cols-2">
               <div class="flex flex-col gap-2">
@@ -124,7 +137,7 @@ get_header();
 
             <div class="flex flex-col gap-2">
               <label class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" for="company_email"><?php esc_html_e('Company email', 'webmakerr'); ?> <span class="text-red-500">*</span></label>
-              <input class="w-full rounded border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="email" id="company_email" name="company_email" required />
+              <input class="w-full rounded border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:border-dark focus:outline-none focus:ring-2 focus:ring-dark/10" type="email" id="company_email" name="email" required />
             </div>
 
             <div class="flex flex-col gap-2">
@@ -148,8 +161,15 @@ get_header();
               <label class="text-sm leading-6 text-zinc-600" for="newsletter"><?php esc_html_e('Keep me up to date with product updates, tips, and launches.', 'webmakerr'); ?></label>
             </div>
 
+            <p class="hidden text-sm font-medium" data-webseo-lead-message aria-live="polite"></p>
+
             <div class="pt-2">
-              <button class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" type="submit">
+              <button
+                class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark"
+                type="submit"
+                data-webseo-lead-submit
+                data-webseo-loading-text="<?php esc_attr_e('Submitting…', 'webmakerr'); ?>"
+              >
                 <?php esc_html_e('Submit form', 'webmakerr'); ?>
               </button>
             </div>

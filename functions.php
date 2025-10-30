@@ -461,13 +461,391 @@ if (! function_exists('webmakerr_rest_check_license')) {
 
         $responseCode = $validation['is_valid'] ? 200 : ($validation['status_code'] >= 400 ? $validation['status_code'] : 400);
 
-        return new WP_REST_Response(
+return new WP_REST_Response(
             [
                 'valid'   => $validation['is_valid'],
                 'status'  => $validation['is_valid'] ? 'active' : 'inactive',
                 'message' => $validation['message'],
             ],
             $responseCode
+        );
+    }
+}
+
+add_action(
+    'wp_enqueue_scripts',
+    static function (): void {
+        $handle = 'webmakerr-build-assets-app-js';
+
+        if (! wp_script_is($handle, 'enqueued') && ! wp_script_is($handle, 'registered')) {
+            return;
+        }
+
+        $pageTemplate = '';
+
+        if (function_exists('get_queried_object_id')) {
+            $queriedId = get_queried_object_id();
+
+            if ($queriedId) {
+                $templateSlug = get_page_template_slug($queriedId);
+
+                if (is_string($templateSlug)) {
+                    $pageTemplate = $templateSlug;
+                }
+            }
+        }
+
+        wp_localize_script(
+            $handle,
+            'webseoLead',
+            [
+                'ajaxUrl'      => esc_url_raw(admin_url('admin-ajax.php')),
+                'nonce'        => wp_create_nonce('webseo_lead_nonce'),
+                'pageTemplate' => $pageTemplate,
+                'messages'     => [
+                    'success' => __('✅ You’re in! Check your inbox.', 'webmakerr'),
+                    'error'   => __('Something went wrong. Please try again.', 'webmakerr'),
+                ],
+            ]
+        );
+    },
+    20
+);
+
+if (! function_exists('handle_webseo_lead')) {
+    function handle_webseo_lead(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            wp_send_json_error(
+                [
+                    'message' => __('Invalid request method.', 'webmakerr'),
+                ],
+                405
+            );
+        }
+
+        check_ajax_referer('webseo_lead_nonce', 'webseo_lead_nonce');
+
+        $rawEmail = isset($_POST['email']) ? wp_unslash($_POST['email']) : '';
+        $email = sanitize_email($rawEmail);
+
+        if (empty($email) || ! is_email($email)) {
+            wp_send_json_error(
+                [
+                    'message' => __('Please provide a valid email address.', 'webmakerr'),
+                ],
+                422
+            );
+        }
+
+        $rawName = isset($_POST['name']) ? wp_unslash($_POST['name']) : '';
+        $name = sanitize_text_field($rawName);
+
+        $rawSource = isset($_POST['source']) ? wp_unslash($_POST['source']) : '';
+        $sanitizedSource = sanitize_key($rawSource);
+        $rawTemplate = isset($_POST['page_template']) ? wp_unslash($_POST['page_template']) : '';
+        $pageTemplate = sanitize_text_field($rawTemplate);
+        $pageUrl = isset($_POST['page_url']) ? esc_url_raw(wp_unslash($_POST['page_url'])) : '';
+
+        $source = webseo_resolve_lead_source($sanitizedSource, $pageTemplate, $pageUrl);
+        $tags = webseo_resolve_lead_tags($source);
+
+        $contactNonceValid = false;
+
+        if (isset($_POST['webmakerr_contact_nonce'])) {
+            $contactNonce = sanitize_text_field(wp_unslash($_POST['webmakerr_contact_nonce']));
+            $contactNonceValid = (bool) wp_verify_nonce($contactNonce, 'webmakerr_contact_form');
+        }
+
+        $contactErrors = [];
+        $contactData = [];
+
+        if ($contactNonceValid) {
+            $contactData['full_name'] = isset($_POST['full_name']) ? sanitize_text_field(wp_unslash($_POST['full_name'])) : '';
+            $contactData['company_name'] = isset($_POST['company_name']) ? sanitize_text_field(wp_unslash($_POST['company_name'])) : '';
+            $contactData['use_case'] = isset($_POST['use_case']) ? sanitize_text_field(wp_unslash($_POST['use_case'])) : '';
+            $contactData['description'] = isset($_POST['description']) ? sanitize_textarea_field(wp_unslash($_POST['description'])) : '';
+            $contactData['newsletter'] = isset($_POST['newsletter']) ? __('Yes', 'webmakerr') : __('No', 'webmakerr');
+
+            if ($contactData['full_name'] === '') {
+                $contactErrors[] = __('Please provide your full name.', 'webmakerr');
+            }
+
+            if ($contactData['description'] === '') {
+                $contactErrors[] = __('Please provide a brief description of your project.', 'webmakerr');
+            }
+        }
+
+        if (! empty($contactErrors)) {
+            wp_send_json_error(
+                [
+                    'message' => $contactErrors[0],
+                    'errors'  => $contactErrors,
+                ],
+                422
+            );
+        }
+
+        if ($name === '' && ! empty($contactData['full_name'])) {
+            $name = $contactData['full_name'];
+        }
+
+        $subscriberData = [
+            'email'  => $email,
+            'status' => 'subscribed',
+        ];
+
+        if ($name !== '') {
+            $nameParts = preg_split('/\s+/', $name);
+
+            if (is_array($nameParts) && ! empty($nameParts)) {
+                $subscriberData['first_name'] = array_shift($nameParts);
+
+                if (! empty($nameParts)) {
+                    $subscriberData['last_name'] = implode(' ', $nameParts);
+                }
+            }
+        }
+
+        if (! class_exists('\FluentCrm\App\Models\Subscriber')) {
+            wp_send_json_error(
+                [
+                    'message' => __('FluentCRM is not active.', 'webmakerr'),
+                ],
+                500
+            );
+        }
+
+        try {
+            $listId = webseo_ensure_fluentcrm_list('webseo-leads', 'WebSEO Leads');
+            $tagIds = webseo_ensure_fluentcrm_tags($tags);
+
+            $applyData = [];
+
+            if ($listId) {
+                $applyData['lists'] = [$listId];
+            }
+
+            if (! empty($tagIds)) {
+                $applyData['tags'] = $tagIds;
+            }
+
+            $subscriberClass = '\FluentCrm\App\Models\Subscriber';
+
+            if (! empty($applyData)) {
+                $subscriberClass::createOrUpdate($subscriberData, $applyData);
+            } else {
+                $subscriberClass::createOrUpdate($subscriberData);
+            }
+
+            if ($contactNonceValid) {
+                webseo_maybe_send_contact_notification($email, $contactData);
+            }
+        } catch (\Throwable $exception) {
+            wp_send_json_error(
+                [
+                    'message' => __('Unable to save your details at the moment. Please try again later.', 'webmakerr'),
+                ],
+                500
+            );
+        }
+
+        wp_send_json_success(
+            [
+                'message' => __('✅ You’re in! Check your inbox.', 'webmakerr'),
+                'source'  => $source,
+                'tags'    => $tags,
+            ]
+        );
+    }
+}
+
+add_action('wp_ajax_add_webseo_lead', 'handle_webseo_lead');
+add_action('wp_ajax_nopriv_add_webseo_lead', 'handle_webseo_lead');
+
+if (! function_exists('webseo_resolve_lead_source')) {
+    function webseo_resolve_lead_source(string $source, string $pageTemplate, string $pageUrl): string
+    {
+        if ($source !== '') {
+            return $source;
+        }
+
+        $template = $pageTemplate !== '' ? basename($pageTemplate) : '';
+
+        if ($template === '' && function_exists('get_queried_object_id')) {
+            $queriedId = get_queried_object_id();
+
+            if ($queriedId) {
+                $maybeTemplate = get_page_template_slug($queriedId);
+
+                if (is_string($maybeTemplate)) {
+                    $template = basename($maybeTemplate);
+                }
+            }
+        }
+
+        if ($template === '' && $pageUrl !== '') {
+            $postId = url_to_postid($pageUrl);
+
+            if ($postId) {
+                $maybeTemplate = get_page_template_slug($postId);
+
+                if (is_string($maybeTemplate)) {
+                    $template = basename($maybeTemplate);
+                }
+            }
+        }
+
+        switch ($template) {
+            case 'page-webseo.php':
+                return 'seo-page';
+            case 'page-booking.php':
+                return 'app-page';
+            case 'page-pricing.php':
+                return 'pricing';
+            case 'page-contact.php':
+                return 'contact';
+            default:
+                return 'footer-cta';
+        }
+    }
+}
+
+if (! function_exists('webseo_resolve_lead_tags')) {
+    /**
+     * @return array<int, string>
+     */
+    function webseo_resolve_lead_tags(string $source): array
+    {
+        $map = [
+            'footer-cta' => ['webseo-footer', 'lead'],
+            'seo-page'   => ['webseo-page', 'seo-interest'],
+            'app-page'   => ['webseo-app', 'mobile-cta'],
+            'pricing'    => ['webseo-pricing', 'intent-high'],
+            'contact'    => ['webseo-contact'],
+        ];
+
+        $normalizedSource = $source !== '' ? $source : 'footer-cta';
+
+        if (isset($map[$normalizedSource])) {
+            return $map[$normalizedSource];
+        }
+
+        return ['webseo-lead'];
+    }
+}
+
+if (! function_exists('webseo_ensure_fluentcrm_list')) {
+    function webseo_ensure_fluentcrm_list(string $slug, string $title): ?int
+    {
+        $listClass = '\FluentCrm\App\Models\Lists';
+
+        if (! class_exists($listClass)) {
+            return null;
+        }
+
+        $list = null;
+
+        if (method_exists($listClass, 'where')) {
+            $list = $listClass::where('slug', $slug)->first();
+        }
+
+        if (! $list && method_exists($listClass, 'firstOrCreate')) {
+            $list = $listClass::firstOrCreate(
+                ['slug' => $slug],
+                ['title' => $title]
+            );
+        } elseif (! $list && method_exists($listClass, 'create')) {
+            $list = $listClass::create(
+                ['slug' => $slug, 'title' => $title]
+            );
+        }
+
+        if (! $list && method_exists($listClass, 'where')) {
+            $list = $listClass::where('title', $title)->first();
+        }
+
+        if ($list && isset($list->id)) {
+            return (int) $list->id;
+        }
+
+        return null;
+    }
+}
+
+if (! function_exists('webseo_ensure_fluentcrm_tags')) {
+    /**
+     * @param array<int, string> $tags
+     * @return array<int, int>
+     */
+    function webseo_ensure_fluentcrm_tags(array $tags): array
+    {
+        $tagClass = '\FluentCrm\App\Models\Tag';
+
+        if (! class_exists($tagClass)) {
+            return [];
+        }
+
+        $tagIds = [];
+
+        foreach ($tags as $tag) {
+            $slug = sanitize_key($tag);
+
+            if ($slug === '') {
+                continue;
+            }
+
+            $tagModel = null;
+
+            if (method_exists($tagClass, 'where')) {
+                $tagModel = $tagClass::where('slug', $slug)->first();
+            }
+
+            if (! $tagModel && method_exists($tagClass, 'firstOrCreate')) {
+                $tagModel = $tagClass::firstOrCreate(
+                    ['slug' => $slug],
+                    ['title' => ucwords(str_replace('-', ' ', $slug))]
+                );
+            } elseif (! $tagModel && method_exists($tagClass, 'create')) {
+                $tagModel = $tagClass::create(
+                    ['slug' => $slug, 'title' => ucwords(str_replace('-', ' ', $slug))]
+                );
+            }
+
+            if ($tagModel && isset($tagModel->id)) {
+                $tagIds[] = (int) $tagModel->id;
+            }
+        }
+
+        return array_values(array_unique($tagIds));
+    }
+}
+
+if (! function_exists('webseo_maybe_send_contact_notification')) {
+    /**
+     * @param array{full_name?: string, company_name?: string, use_case?: string, description?: string, newsletter?: string} $contactData
+     */
+    function webseo_maybe_send_contact_notification(string $email, array $contactData): void
+    {
+        if ($contactData['full_name'] === '' || $contactData['description'] === '') {
+            return;
+        }
+
+        $adminEmail = get_option('admin_email');
+        $subject = sprintf(__('New contact form submission from %s', 'webmakerr'), $contactData['full_name']);
+
+        $messageBody  = sprintf("%s %s\n", __('Name:', 'webmakerr'), $contactData['full_name']);
+        $messageBody .= sprintf("%s %s\n", __('Company:', 'webmakerr'), $contactData['company_name'] ?? '');
+        $messageBody .= sprintf("%s %s\n", __('Email:', 'webmakerr'), $email);
+        $messageBody .= sprintf("%s %s\n", __('Use case:', 'webmakerr'), $contactData['use_case'] ?? '');
+        $messageBody .= sprintf("%s %s\n\n", __('Newsletter signup:', 'webmakerr'), $contactData['newsletter'] ?? '');
+        $messageBody .= sprintf("%s\n%s", __('Description:', 'webmakerr'), $contactData['description'] ?? '');
+
+        wp_mail(
+            $adminEmail,
+            $subject,
+            $messageBody,
+            ['Reply-To' => $email]
         );
     }
 }
