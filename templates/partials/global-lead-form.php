@@ -54,6 +54,19 @@ $descriptionId = 'global-lead-form-description';
 
             <form class="mt-6 flex flex-col gap-4" method="post" data-webseo-lead-form>
                 <div class="flex flex-col items-start gap-2 text-left">
+                    <label class="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500" for="global-lead-name">
+                        <?php esc_html_e('Full name', 'webmakerr'); ?>
+                    </label>
+                    <input
+                        id="global-lead-name"
+                        class="w-full rounded-[5px] border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 shadow-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        type="text"
+                        name="name"
+                        required
+                        autocomplete="name"
+                    />
+                </div>
+                <div class="flex flex-col items-start gap-2 text-left">
                     <label class="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500" for="global-lead-email">
                         <?php esc_html_e('Business email', 'webmakerr'); ?>
                     </label>
