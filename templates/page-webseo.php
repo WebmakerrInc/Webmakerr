@@ -62,16 +62,16 @@ get_header();
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('WebSEO instantly optimizes your WordPress website for higher rankings — no technical setup, no SEO jargon. Just install, activate, and start ranking.', 'webmakerr'); ?>
               </p>
-              <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#get-webseo">
+              <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <a class="inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#get-webseo">
                   <?php esc_html_e('Get WebSEO Now', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex items-center justify-center rounded-[5px] border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="#demo-webseo">
+                <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="#demo-webseo">
                   <?php esc_html_e('Try Live Demo', 'webmakerr'); ?>
                 </a>
               </div>
-              <p class="text-sm text-zinc-500">
-                <?php esc_html_e('Automate SEO • Increase visibility • Save time', 'webmakerr'); ?>
+              <p class="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
+                <?php esc_html_e('★★★★★ 4.9/5 from SEO pros — 18,000+ sites optimized on autopilot', 'webmakerr'); ?>
               </p>
             </header>
             <div class="relative isolate rounded-[5px] border border-white/60 bg-white/80 p-6 shadow-xl shadow-primary/10 backdrop-blur">

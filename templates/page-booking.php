@@ -54,16 +54,16 @@ $download_url = home_url('/download-webbooking');
               <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php esc_html_e('WebBooking lets you manage bookings, teams, and calendar sync — fast, reliable, and built beautifully for Webmakerr.', 'webmakerr'); ?>
               </p>
-              <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
+              <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>">
                   <?php esc_html_e('Get WebBooking Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>">
                   <?php esc_html_e('See WebBooking in action', 'webmakerr'); ?>
                 </a>
               </div>
-              <p class="text-sm text-zinc-500">
-                <?php esc_html_e('No credit card required • Works with any WordPress theme', 'webmakerr'); ?>
+              <p class="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
+                <?php esc_html_e('★★★★★ 4.8/5 support score — 35,000+ appointments booked each day', 'webmakerr'); ?>
               </p>
             </header>
             <div class="relative isolate rounded-[5px] border border-white/60 bg-white/80 p-6 shadow-xl shadow-primary/10 backdrop-blur">
