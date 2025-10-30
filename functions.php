@@ -688,9 +688,7 @@ if (! function_exists('handle_webseo_lead')) {
                 throw new \RuntimeException($subscriber->get_error_message());
             }
 
-            if (! is_object($subscriber)) {
-                $subscriber = webseo_find_fluentcrm_model($subscriberClass, 'email', $email);
-            }
+            $subscriber = webseo_normalize_fluentcrm_subscriber_result($subscriberClass, $subscriber, $email);
 
             if (! is_object($subscriber)) {
                 throw new \RuntimeException(__('Unable to save your details at the moment. Please try again later.', 'webmakerr'));
@@ -1116,6 +1114,164 @@ if (! function_exists('webseo_try_fluentcrm_contact_api_methods')) {
                 break;
             }
         }
+    }
+}
+
+if (! function_exists('webseo_normalize_fluentcrm_subscriber_result')) {
+    function webseo_normalize_fluentcrm_subscriber_result(string $subscriberClass, $subscriber, string $email)
+    {
+        if (is_object($subscriber)) {
+            return $subscriber;
+        }
+
+        if (function_exists('is_wp_error') && is_wp_error($subscriber)) {
+            return $subscriber;
+        }
+
+        $possibleEmail = $email;
+        $possibleId = 0;
+        $normalizeEmail = static function ($value): string {
+            if (! is_scalar($value)) {
+                return '';
+            }
+
+            $value = (string) $value;
+
+            if ($value === '') {
+                return '';
+            }
+
+            if (function_exists('sanitize_email')) {
+                $value = sanitize_email($value);
+            } else {
+                $filtered = filter_var($value, FILTER_SANITIZE_EMAIL);
+                $value = is_string($filtered) ? $filtered : '';
+            }
+
+            return $value !== '' ? $value : '';
+        };
+
+        if (is_array($subscriber)) {
+            if (isset($subscriber['subscriber'])) {
+                $maybeSubscriber = $subscriber['subscriber'];
+
+                if (is_object($maybeSubscriber)) {
+                    return $maybeSubscriber;
+                }
+
+                if (is_array($maybeSubscriber)) {
+                    if (isset($maybeSubscriber['id']) && is_scalar($maybeSubscriber['id'])) {
+                        $possibleId = (int) $maybeSubscriber['id'];
+                    }
+
+                    if (isset($maybeSubscriber['email'])) {
+                        $maybeEmail = $normalizeEmail($maybeSubscriber['email']);
+
+                        if ($maybeEmail !== '') {
+                            $possibleEmail = $maybeEmail;
+                        }
+                    }
+                }
+            }
+
+            foreach (['data', 'result', 'contact'] as $nestedKey) {
+                if (! array_key_exists($nestedKey, $subscriber)) {
+                    continue;
+                }
+
+                $nestedCandidate = $subscriber[$nestedKey];
+
+                if ($nestedCandidate === $subscriber) {
+                    continue;
+                }
+
+                $normalizedCandidate = webseo_normalize_fluentcrm_subscriber_result($subscriberClass, $nestedCandidate, $possibleEmail);
+
+                if (is_object($normalizedCandidate)) {
+                    return $normalizedCandidate;
+                }
+
+                if (function_exists('is_wp_error') && is_wp_error($normalizedCandidate)) {
+                    return $normalizedCandidate;
+                }
+
+                if (is_array($nestedCandidate)) {
+                    if ($possibleId <= 0 && isset($nestedCandidate['id']) && is_scalar($nestedCandidate['id'])) {
+                        $possibleId = (int) $nestedCandidate['id'];
+                    }
+
+                    if (isset($nestedCandidate['email'])) {
+                        $maybeEmail = $normalizeEmail($nestedCandidate['email']);
+
+                        if ($maybeEmail !== '') {
+                            $possibleEmail = $maybeEmail;
+                        }
+                    }
+                }
+            }
+
+            if ($possibleId <= 0) {
+                foreach (['id', 'subscriber_id', 'ID'] as $key) {
+                    if (isset($subscriber[$key]) && is_scalar($subscriber[$key])) {
+                        $possibleId = (int) $subscriber[$key];
+
+                        if ($possibleId > 0) {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (isset($subscriber['email'])) {
+                $maybeEmail = $normalizeEmail($subscriber['email']);
+
+                if ($maybeEmail !== '') {
+                    $possibleEmail = $maybeEmail;
+                }
+            }
+
+            if ($possibleId > 0) {
+                $found = webseo_find_fluentcrm_model($subscriberClass, 'id', (string) $possibleId);
+
+                if (is_object($found)) {
+                    return $found;
+                }
+            }
+        }
+
+        if (is_numeric($subscriber)) {
+            $found = webseo_find_fluentcrm_model($subscriberClass, 'id', (string) $subscriber);
+
+            if (is_object($found)) {
+                return $found;
+            }
+        }
+
+        if ($subscriber === true) {
+            $found = webseo_find_fluentcrm_model($subscriberClass, 'email', $possibleEmail);
+
+            if (is_object($found)) {
+                return $found;
+            }
+        }
+
+        if ($possibleEmail !== '') {
+            $found = webseo_find_fluentcrm_model($subscriberClass, 'email', $possibleEmail);
+
+            if (is_object($found)) {
+                return $found;
+            }
+        }
+
+        if ($email !== '' && $possibleEmail !== $email) {
+            $found = webseo_find_fluentcrm_model($subscriberClass, 'email', $email);
+
+            if (is_object($found)) {
+                return $found;
+            }
+        }
+
+        return null;
     }
 }
 
