@@ -34,7 +34,7 @@
   <section class="bg-white">
     <div class="container mx-auto flex flex-col gap-16 px-6 py-16 sm:py-24 lg:px-8">
       <?php if (has_post_thumbnail()) : ?>
-        <div class="overflow-hidden rounded-3xl bg-light">
+        <div class="overflow-hidden rounded bg-light">
           <?php the_post_thumbnail('large', array('class' => 'aspect-16/10 w-full object-cover')); ?>
         </div>
       <?php endif; ?>

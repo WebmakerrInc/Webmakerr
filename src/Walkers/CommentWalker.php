@@ -22,7 +22,7 @@ class CommentWalker extends \Walker_Comment
 
 				<footer class="comment-meta flex">
                     <dd class="flex items-start gap-x-4">
-                        <div class="flex-none overflow-hidden rounded-xl bg-neutral-100">
+                        <div class="flex-none overflow-hidden rounded bg-neutral-100">
                             <?php
                                 if ( 0 !== $args['avatar_size'] ) {
                                     echo get_avatar( $comment, 32, '', '', [

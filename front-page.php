@@ -22,14 +22,14 @@ get_header();
           <?php echo esc_html__('Webmakerr provides a polished, performance-first foundation that looks great on every device—no demo imports required.', 'webmakerr'); ?>
         </p>
         <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a class="inline-flex rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url('#features'); ?>">
+          <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url('#features'); ?>">
             <?php echo esc_html__('Explore Features', 'webmakerr'); ?>
           </a>
           <?php
           $posts_page_id = (int) get_option('page_for_posts');
           $posts_page_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
           ?>
-          <a class="inline-flex rounded-full border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($posts_page_url); ?>">
+          <a class="inline-flex rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($posts_page_url); ?>">
             <?php echo esc_html__('Read the blog', 'webmakerr'); ?>
           </a>
         </div>
@@ -78,7 +78,7 @@ get_header();
 
       foreach ($features as $feature) :
         ?>
-        <div class="flex flex-col gap-3 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+        <div class="flex flex-col gap-3 rounded border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
           <h3 class="text-xl font-semibold text-zinc-950">
             <?php echo esc_html($feature['title']); ?>
           </h3>
@@ -117,7 +117,7 @@ get_header();
           while ($recent_posts->have_posts()) :
             $recent_posts->the_post();
             ?>
-            <article <?php post_class('flex flex-col gap-4 rounded-3xl bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg'); ?>>
+            <article <?php post_class('flex flex-col gap-4 rounded bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg'); ?>>
               <div class="flex flex-col gap-2">
                 <time datetime="<?php echo esc_attr(get_the_date('c')); ?>" class="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
                   <?php echo esc_html(get_the_date()); ?>
@@ -132,7 +132,7 @@ get_header();
                 <?php the_excerpt(); ?>
               </div>
               <div class="mt-auto">
-                <a class="inline-flex rounded-full bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php the_permalink(); ?>">
+                <a class="inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php the_permalink(); ?>">
                   <?php echo esc_html__('Read more', 'webmakerr'); ?>
                 </a>
               </div>
