@@ -586,6 +586,10 @@ if (! function_exists('handle_webseo_lead')) {
         $rawName = isset($_POST['name']) ? wp_unslash($_POST['name']) : '';
         $name = sanitize_text_field($rawName);
 
+        if ($name !== '') {
+            $name = trim(preg_replace('/\s+/', ' ', $name));
+        }
+
         $rawSource = isset($_POST['source']) ? wp_unslash($_POST['source']) : '';
         $sanitizedSource = sanitize_key($rawSource);
         $rawTemplate = isset($_POST['page_template']) ? wp_unslash($_POST['page_template']) : '';
@@ -634,7 +638,7 @@ if (! function_exists('handle_webseo_lead')) {
         }
 
         if ($name === '' && ! empty($contactData['full_name'])) {
-            $name = $contactData['full_name'];
+            $name = trim(preg_replace('/\s+/', ' ', $contactData['full_name']));
         }
 
         $subscriberData = [
@@ -654,7 +658,9 @@ if (! function_exists('handle_webseo_lead')) {
             }
         }
 
-        if (! class_exists('\FluentCrm\App\Models\Subscriber')) {
+        $subscriberClass = webseo_get_fluentcrm_model_class('Subscriber');
+
+        if (! $subscriberClass) {
             wp_send_json_error(
                 [
                     'message' => __('FluentCRM is not active.', 'webmakerr'),
@@ -664,7 +670,7 @@ if (! function_exists('handle_webseo_lead')) {
         }
 
         try {
-            $listId = webseo_ensure_fluentcrm_list('webseo-leads', 'WebSEO Leads');
+            $listId = webseo_ensure_fluentcrm_list('database', 'Database');
             $tagIds = webseo_ensure_fluentcrm_tags($tags);
 
             $applyData = [];
@@ -676,8 +682,6 @@ if (! function_exists('handle_webseo_lead')) {
             if (! empty($tagIds)) {
                 $applyData['tags'] = $tagIds;
             }
-
-            $subscriberClass = '\FluentCrm\App\Models\Subscriber';
 
             if (! empty($applyData)) {
                 $subscriberClass::createOrUpdate($subscriberData, $applyData);
@@ -780,31 +784,60 @@ if (! function_exists('webseo_resolve_lead_tags')) {
 if (! function_exists('webseo_ensure_fluentcrm_list')) {
     function webseo_ensure_fluentcrm_list(string $slug, string $title): ?int
     {
-        $listClass = '\FluentCrm\App\Models\Lists';
+        $listClass = webseo_get_fluentcrm_model_class('Lists');
 
-        if (! class_exists($listClass)) {
+        if (! $listClass) {
             return null;
         }
 
+        $normalizedSlug = sanitize_key($slug);
+
+        if ($normalizedSlug === '') {
+            $normalizedSlug = sanitize_title($title);
+        }
+
+        $normalizedTitle = sanitize_text_field($title);
         $list = null;
 
-        if (method_exists($listClass, 'where')) {
-            $list = $listClass::where('slug', $slug)->first();
+        if ($normalizedSlug !== '') {
+            $list = webseo_find_fluentcrm_model($listClass, 'slug', $normalizedSlug);
         }
 
-        if (! $list && method_exists($listClass, 'firstOrCreate')) {
-            $list = $listClass::firstOrCreate(
-                ['slug' => $slug],
-                ['title' => $title]
-            );
-        } elseif (! $list && method_exists($listClass, 'create')) {
-            $list = $listClass::create(
-                ['slug' => $slug, 'title' => $title]
+        if (! $list && $normalizedTitle !== '') {
+            $list = webseo_find_fluentcrm_model($listClass, 'title', $normalizedTitle);
+        }
+
+        if (! $list && $normalizedSlug !== '') {
+            $list = webseo_find_fluentcrm_record_via_db('fc_lists', 'slug', $normalizedSlug);
+        }
+
+        if (! $list && $normalizedTitle !== '') {
+            $list = webseo_find_fluentcrm_record_via_db('fc_lists', 'title', $normalizedTitle);
+        }
+
+        if (! $list && $normalizedSlug !== '') {
+            $list = webseo_fluentcrm_static_call(
+                $listClass,
+                'firstOrCreate',
+                [
+                    ['slug' => $normalizedSlug],
+                    ['title' => $normalizedTitle !== '' ? $normalizedTitle : $title],
+                ]
             );
         }
 
-        if (! $list && method_exists($listClass, 'where')) {
-            $list = $listClass::where('title', $title)->first();
+        if (! $list) {
+            $createPayload = ['title' => $normalizedTitle !== '' ? $normalizedTitle : $title];
+
+            if ($normalizedSlug !== '') {
+                $createPayload['slug'] = $normalizedSlug;
+            }
+
+            $list = webseo_fluentcrm_static_call(
+                $listClass,
+                'create',
+                [$createPayload]
+            );
         }
 
         if ($list && isset($list->id)) {
@@ -822,9 +855,9 @@ if (! function_exists('webseo_ensure_fluentcrm_tags')) {
      */
     function webseo_ensure_fluentcrm_tags(array $tags): array
     {
-        $tagClass = '\FluentCrm\App\Models\Tag';
+        $tagClass = webseo_get_fluentcrm_model_class('Tag');
 
-        if (! class_exists($tagClass)) {
+        if (! $tagClass) {
             return [];
         }
 
@@ -834,23 +867,46 @@ if (! function_exists('webseo_ensure_fluentcrm_tags')) {
             $slug = sanitize_key($tag);
 
             if ($slug === '') {
+                $slug = sanitize_title($tag);
+            }
+
+            if ($slug === '') {
                 continue;
             }
 
-            $tagModel = null;
+            $title = sanitize_text_field(ucwords(str_replace(['-', '_'], ' ', $slug)));
+            $tagModel = webseo_find_fluentcrm_model($tagClass, 'slug', $slug);
 
-            if (method_exists($tagClass, 'where')) {
-                $tagModel = $tagClass::where('slug', $slug)->first();
+            if (! $tagModel && $title !== '') {
+                $tagModel = webseo_find_fluentcrm_model($tagClass, 'title', $title);
             }
 
-            if (! $tagModel && method_exists($tagClass, 'firstOrCreate')) {
-                $tagModel = $tagClass::firstOrCreate(
-                    ['slug' => $slug],
-                    ['title' => ucwords(str_replace('-', ' ', $slug))]
+            if (! $tagModel) {
+                $tagModel = webseo_find_fluentcrm_record_via_db('fc_tags', 'slug', $slug);
+            }
+
+            if (! $tagModel && $title !== '') {
+                $tagModel = webseo_find_fluentcrm_record_via_db('fc_tags', 'title', $title);
+            }
+
+            if (! $tagModel) {
+                $tagModel = webseo_fluentcrm_static_call(
+                    $tagClass,
+                    'firstOrCreate',
+                    [
+                        ['slug' => $slug],
+                        ['title' => $title !== '' ? $title : ucwords(str_replace('-', ' ', $tag))],
+                    ]
                 );
-            } elseif (! $tagModel && method_exists($tagClass, 'create')) {
-                $tagModel = $tagClass::create(
-                    ['slug' => $slug, 'title' => ucwords(str_replace('-', ' ', $slug))]
+            }
+
+            if (! $tagModel) {
+                $tagModel = webseo_fluentcrm_static_call(
+                    $tagClass,
+                    'create',
+                    [
+                        ['slug' => $slug, 'title' => $title !== '' ? $title : ucwords(str_replace('-', ' ', $tag))],
+                    ]
                 );
             }
 
@@ -860,6 +916,188 @@ if (! function_exists('webseo_ensure_fluentcrm_tags')) {
         }
 
         return array_values(array_unique($tagIds));
+    }
+}
+
+if (! function_exists('webseo_get_fluentcrm_model_class')) {
+    function webseo_get_fluentcrm_model_class(string $model): ?string
+    {
+        static $resolved = [];
+
+        $normalizedModel = ltrim($model, '\\');
+
+        if (array_key_exists($normalizedModel, $resolved)) {
+            return $resolved[$normalizedModel];
+        }
+
+        $namespaces = apply_filters(
+            'webseo_fluentcrm_model_namespaces',
+            [
+                '\\FluentCrm\\App\\Models\\',
+                '\\WebCrm\\App\\Models\\',
+            ],
+            $normalizedModel
+        );
+
+        if (is_array($namespaces)) {
+            foreach ($namespaces as $namespace) {
+                $namespace = '\\' . ltrim($namespace, '\\');
+                $candidate = rtrim($namespace, '\\') . '\\' . $normalizedModel;
+
+                if (class_exists($candidate)) {
+                    $resolved[$normalizedModel] = $candidate;
+
+                    return $candidate;
+                }
+            }
+        }
+
+        $suffix = '\\App\\Models\\' . $normalizedModel;
+        $suffixLength = strlen($suffix);
+
+        foreach (get_declared_classes() as $declared) {
+            if ($suffixLength > 0 && substr($declared, -$suffixLength) === $suffix && class_exists($declared)) {
+                $candidate = '\\' . ltrim($declared, '\\');
+                $resolved[$normalizedModel] = $candidate;
+
+                return $candidate;
+            }
+        }
+
+        $resolved[$normalizedModel] = null;
+
+        return null;
+    }
+}
+
+if (! function_exists('webseo_find_fluentcrm_model')) {
+    /**
+     * @param object|mixed $query
+     * @return mixed
+     */
+    function webseo_find_fluentcrm_model(string $modelClass, string $field, string $value)
+    {
+        $query = webseo_fluentcrm_static_call($modelClass, 'where', [$field, $value]);
+
+        if (! is_object($query)) {
+            return null;
+        }
+
+        $result = webseo_fluentcrm_object_call($query, 'first');
+
+        if (is_object($result)) {
+            return $result;
+        }
+
+        return null;
+    }
+}
+
+if (! function_exists('webseo_fluentcrm_static_call')) {
+    function webseo_fluentcrm_static_call(string $class, string $method, array $arguments = [])
+    {
+        if (! class_exists($class)) {
+            return null;
+        }
+
+        try {
+            return $class::$method(...$arguments);
+        } catch (\Throwable $throwable) {
+            return null;
+        }
+    }
+}
+
+if (! function_exists('webseo_fluentcrm_object_call')) {
+    function webseo_fluentcrm_object_call($instance, string $method, array $arguments = [])
+    {
+        if (! is_object($instance)) {
+            return null;
+        }
+
+        try {
+            return $instance->$method(...$arguments);
+        } catch (\Throwable $throwable) {
+            return null;
+        }
+    }
+}
+
+if (! function_exists('webseo_find_fluentcrm_record_via_db')) {
+    function webseo_find_fluentcrm_record_via_db(string $table, string $field, string $value)
+    {
+        $allowedFields = ['slug', 'title'];
+
+        if (! in_array($field, $allowedFields, true) || $value === '') {
+            return null;
+        }
+
+        $tableName = webseo_get_fluentcrm_table_name($table);
+
+        if (! $tableName) {
+            return null;
+        }
+
+        global $wpdb;
+
+        if (! isset($wpdb)) {
+            return null;
+        }
+
+        $query = $wpdb->prepare(
+            "SELECT * FROM {$tableName} WHERE {$field} = %s LIMIT 1",
+            $value
+        );
+
+        if (! $query) {
+            return null;
+        }
+
+        return $wpdb->get_row($query);
+    }
+}
+
+if (! function_exists('webseo_get_fluentcrm_table_name')) {
+    function webseo_get_fluentcrm_table_name(string $table): ?string
+    {
+        global $wpdb;
+
+        if (! isset($wpdb) || ! $table) {
+            return null;
+        }
+
+        static $checked = [];
+
+        if (! preg_match('/^[A-Za-z0-9_]+$/', $table)) {
+            return null;
+        }
+
+        $tableName = $wpdb->prefix . ltrim($table, '_');
+
+        if (array_key_exists($tableName, $checked)) {
+            return $checked[$tableName];
+        }
+
+        $like = method_exists($wpdb, 'esc_like') ? $wpdb->esc_like($tableName) : $tableName;
+        $prepared = $wpdb->prepare('SHOW TABLES LIKE %s', $like);
+
+        if (! $prepared) {
+            $checked[$tableName] = null;
+
+            return null;
+        }
+
+        $exists = $wpdb->get_var($prepared);
+
+        if ($exists === $tableName) {
+            $checked[$tableName] = $tableName;
+
+            return $tableName;
+        }
+
+        $checked[$tableName] = null;
+
+        return null;
     }
 }
 
