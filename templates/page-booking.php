@@ -55,10 +55,10 @@ $download_url = home_url('/download-webbooking');
                 <?php esc_html_e('WebBooking lets you manage bookings, teams, and calendar sync — fast, reliable, and built beautifully for Webmakerr.', 'webmakerr'); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>" data-lead-trigger data-lead-source="booking-hero-primary">
                   <?php esc_html_e('Get WebBooking Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>" data-lead-trigger data-lead-source="booking-hero-secondary">
                   <?php esc_html_e('See WebBooking in action', 'webmakerr'); ?>
                 </a>
               </div>

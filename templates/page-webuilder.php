@@ -56,10 +56,10 @@ $download_url = home_url('/download-webbuilder');
                 <?php esc_html_e('WebBuilder gives you total design freedom with an intuitive drag-and-drop builder that works with any WordPress theme, and looks perfect with Webmakerr.', 'webmakerr'); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>" data-lead-trigger data-lead-source="webuilder-hero-primary">
                   <?php esc_html_e('Download WebBuilder Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbuilder-showcase')); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbuilder-showcase')); ?>" data-lead-trigger data-lead-source="webuilder-hero-secondary">
                   <?php esc_html_e('Preview WebBuilder Live', 'webmakerr'); ?>
                 </a>
               </div>

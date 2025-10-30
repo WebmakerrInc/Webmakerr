@@ -31,6 +31,7 @@ get_header();
                   $title       = isset($plan['title']) ? sanitize_text_field($plan['title']) : '';
                   $price       = isset($plan['price']) ? sanitize_text_field($plan['price']) : '';
                   $description = isset($plan['description']) ? wp_kses_post($plan['description']) : '';
+                  $planSource  = $title !== '' ? 'pricing-plan-'.sanitize_title($title) : 'pricing-plan';
                   ?>
                   <div class="flex h-full flex-col gap-6 rounded border border-zinc-200 bg-white p-8 text-left shadow-sm">
                     <div class="flex flex-col gap-2">
@@ -40,7 +41,7 @@ get_header();
                       </p>
                       <div class="text-sm leading-6 text-zinc-600"><?php echo $description; ?></div>
                     </div>
-                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>">
+                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>" data-lead-trigger data-lead-source="<?php echo esc_attr($planSource); ?>">
                       <?php esc_html_e('Choose plan', 'webmakerr'); ?>
                     </a>
                   </div>
