@@ -673,18 +673,11 @@ if (! function_exists('handle_webseo_lead')) {
             $listId = webseo_ensure_fluentcrm_list('database', 'Database');
             $tagIds = webseo_ensure_fluentcrm_tags($tags);
 
-            $applyData = [];
+            $listsToApply = $listId ? [$listId] : [];
+            $tagsToApply = ! empty($tagIds) ? $tagIds : [];
 
-            if ($listId) {
-                $applyData['lists'] = [$listId];
-            }
-
-            if (! empty($tagIds)) {
-                $applyData['tags'] = $tagIds;
-            }
-
-            if (! empty($applyData)) {
-                $subscriberClass::createOrUpdate($subscriberData, $applyData);
+            if (! empty($listsToApply) || ! empty($tagsToApply)) {
+                $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
             } else {
                 $subscriberClass::createOrUpdate($subscriberData);
             }
