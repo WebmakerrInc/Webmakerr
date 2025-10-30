@@ -637,6 +637,14 @@ if (! function_exists('handle_webseo_lead')) {
             );
         }
 
+        if ($name === '' && isset($_POST['full_name'])) {
+            $maybeFullName = sanitize_text_field(wp_unslash($_POST['full_name']));
+
+            if ($maybeFullName !== '') {
+                $name = trim(preg_replace('/\s+/', ' ', $maybeFullName));
+            }
+        }
+
         if ($name === '' && ! empty($contactData['full_name'])) {
             $name = trim(preg_replace('/\s+/', ' ', $contactData['full_name']));
         }
@@ -656,6 +664,8 @@ if (! function_exists('handle_webseo_lead')) {
                     $subscriberData['last_name'] = implode(' ', $nameParts);
                 }
             }
+
+            $subscriberData['full_name'] = $name;
         }
 
         $subscriberClass = webseo_get_fluentcrm_model_class('Subscriber');
@@ -678,10 +688,21 @@ if (! function_exists('handle_webseo_lead')) {
 
             $supportsRelationshipArgs = webseo_fluentcrm_subscriber_supports_relationship_args($subscriberClass);
 
-            $subscriber = null;
             $contactApi = webseo_get_fluentcrm_contact_api();
 
-            if (is_object($contactApi) && method_exists($contactApi, 'createOrUpdate')) {
+            if ($supportsRelationshipArgs) {
+                $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
+            } else {
+                $subscriber = $subscriberClass::createOrUpdate($subscriberData);
+            }
+
+            if (is_wp_error($subscriber)) {
+                throw new \RuntimeException($subscriber->get_error_message());
+            }
+
+            $subscriber = webseo_normalize_fluentcrm_subscriber_result($subscriberClass, $subscriber, $email);
+
+            if (! is_object($subscriber) && is_object($contactApi) && method_exists($contactApi, 'createOrUpdate')) {
                 $contactPayload = $subscriberData;
 
                 if (! empty($listsToApply)) {
@@ -692,30 +713,31 @@ if (! function_exists('handle_webseo_lead')) {
                     $contactPayload['tags'] = $tagsToApply;
                 }
 
+                if (! isset($contactPayload['full_name']) && $name !== '') {
+                    $contactPayload['full_name'] = $name;
+                }
+
+                $contactPayload['subscriber'] = $subscriberData;
+                $contactPayload['contact'] = $subscriberData;
+
                 $apiResult = webseo_fluentcrm_object_call($contactApi, 'createOrUpdate', [$contactPayload]);
+
+                if ($apiResult === null) {
+                    $apiResult = webseo_fluentcrm_object_call(
+                        $contactApi,
+                        'createOrUpdate',
+                        [$subscriberData, $listsToApply, $tagsToApply]
+                    );
+                }
 
                 if ($apiResult !== null) {
                     if (is_wp_error($apiResult)) {
                         throw new \RuntimeException($apiResult->get_error_message());
                     }
 
-                    $subscriber = $apiResult;
+                    $subscriber = webseo_normalize_fluentcrm_subscriber_result($subscriberClass, $apiResult, $email);
                 }
             }
-
-            if ($subscriber === null) {
-                if ($supportsRelationshipArgs) {
-                    $subscriber = $subscriberClass::createOrUpdate($subscriberData, $listsToApply, $tagsToApply);
-                } else {
-                    $subscriber = $subscriberClass::createOrUpdate($subscriberData);
-                }
-            }
-
-            if (is_wp_error($subscriber)) {
-                throw new \RuntimeException($subscriber->get_error_message());
-            }
-
-            $subscriber = webseo_normalize_fluentcrm_subscriber_result($subscriberClass, $subscriber, $email);
 
             if (! is_object($subscriber)) {
                 throw new \RuntimeException(__('Unable to save your details at the moment. Please try again later.', 'webmakerr'));
