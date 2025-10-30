@@ -141,16 +141,16 @@ get_header();
       $post_id = get_the_ID();
 
       $hero_headline = get_post_meta($post_id, '_webmakerr_video_hero_headline', true);
-      $hero_headline = $hero_headline ? wp_kses_post($hero_headline) : __('We Create Films That Tell Your Brand’s Story.', 'webmakerr');
+      $hero_headline = $hero_headline ? wp_kses_post($hero_headline) : __('Gain More Customers with a Webmakerr Explainer Video', 'webmakerr');
 
       $hero_subheadline = get_post_meta($post_id, '_webmakerr_video_hero_subheadline', true);
-      $hero_subheadline = $hero_subheadline ? wp_kses_post($hero_subheadline) : __('From concept to final cut, our studio crafts cinematic experiences that convert viewers into loyal customers.', 'webmakerr');
+      $hero_subheadline = $hero_subheadline ? wp_kses_post($hero_subheadline) : __('Turn confusion into clarity — and clicks into customers. At Webmakerr, we craft high-converting explainer videos that tell your story in under 90 seconds — so your audience gets it, feels it, and acts on it.', 'webmakerr');
 
       $hero_primary_label = get_post_meta($post_id, '_webmakerr_video_hero_primary_label', true);
-      $hero_primary_label = $hero_primary_label ? sanitize_text_field($hero_primary_label) : __('Book Your Free Strategy Call', 'webmakerr');
+      $hero_primary_label = $hero_primary_label ? sanitize_text_field($hero_primary_label) : __('Free Strategy Call →', 'webmakerr');
 
       $hero_secondary_label = get_post_meta($post_id, '_webmakerr_video_hero_secondary_label', true);
-      $hero_secondary_label = $hero_secondary_label ? sanitize_text_field($hero_secondary_label) : __('See Our Work', 'webmakerr');
+      $hero_secondary_label = $hero_secondary_label ? sanitize_text_field($hero_secondary_label) : __('See Case Studies →', 'webmakerr');
 
       $hero_secondary_target = get_post_meta($post_id, '_webmakerr_video_hero_secondary_target', true);
       $hero_secondary_target = $hero_secondary_target ? esc_url($hero_secondary_target) : '#portfolio';
@@ -163,39 +163,44 @@ get_header();
       $hero_poster_url = $hero_poster_src ? $hero_poster_src[0] : '';
 
       $about_heading = get_post_meta($post_id, '_webmakerr_video_about_heading', true);
-      $about_heading = $about_heading ? sanitize_text_field($about_heading) : __('Video that launches products, sparks emotion, and builds trust.', 'webmakerr');
+      $about_heading = $about_heading ? sanitize_text_field($about_heading) : __('Why Explainer Videos Work', 'webmakerr');
 
       $about_highlights = get_post_meta($post_id, '_webmakerr_video_about_highlights', true);
       $about_highlights = is_array($about_highlights) ? $about_highlights : [
           [
-              'title' => __('Story-driven scripting', 'webmakerr'),
-              'copy'  => __('We uncover your hook, craft persuasive messaging, and map a shot list designed to convert.', 'webmakerr'),
+              'title' => __('Story', 'webmakerr'),
+              'copy'  => __('Forget the tired “Meet Tom” scripts. Our professional screenwriters build narratives that make your audience say, “Finally, someone gets me.”', 'webmakerr'),
           ],
           [
-              'title' => __('Full-service production', 'webmakerr'),
-              'copy'  => __('Directors, cinematographers, and editors manage every detail so you stay focused on launch day.', 'webmakerr'),
+              'title' => __('Style', 'webmakerr'),
+              'copy'  => __('No generic cartoon cutouts. Every frame is designed to fit your brand — clean, modern, and memorable.', 'webmakerr'),
           ],
           [
-              'title' => __('Distribution ready assets', 'webmakerr'),
-              'copy'  => __('Deliverables are optimized for web, paid media, and event screens—no extra edits required.', 'webmakerr'),
+              'title' => __('Strategy', 'webmakerr'),
+              'copy'  => __('We don’t just create a video; we build a conversion engine and show you exactly how to use it to attract traffic, leads, and sales.', 'webmakerr'),
           ],
       ];
 
       $process_steps = get_post_meta($post_id, '_webmakerr_video_process_steps', true);
       $process_steps = is_array($process_steps) ? $process_steps : [
           [
-              'title' => __('Strategy Workshop', 'webmakerr'),
-              'copy'  => __('We clarify goals, audience, and key messaging in a focused kickoff session.', 'webmakerr'),
+              'title' => __('Kick-Off Call', 'webmakerr'),
+              'copy'  => __('Tell us about your brand and goals. We’ll align on who you’re targeting and what success looks like. (60 min)', 'webmakerr'),
               'icon'  => 'strategy',
           ],
           [
-              'title' => __('Script & Storyboards', 'webmakerr'),
-              'copy'  => __('Our creative team develops scripts, shot lists, and mood boards that align with your brand.', 'webmakerr'),
+              'title' => __('Scriptwriting', 'webmakerr'),
+              'copy'  => __('We write a conversion-focused script that makes your audience say, “Finally, someone gets me.” (20 min)', 'webmakerr'),
               'icon'  => 'script',
           ],
           [
-              'title' => __('Production & Post', 'webmakerr'),
-              'copy'  => __('We capture cinematic footage, mix audio, and deliver polished edits with lightning-fast revisions.', 'webmakerr'),
+              'title' => __('Storyboard Review', 'webmakerr'),
+              'copy'  => __('Preview the visual flow and messaging before we animate a single frame. (20 min)', 'webmakerr'),
+              'icon'  => 'production',
+          ],
+          [
+              'title' => __('Animation & Voiceover', 'webmakerr'),
+              'copy'  => __('We handle production, voiceover, and edits—so you stay focused on launch day. (20 min)', 'webmakerr'),
               'icon'  => 'production',
           ],
       ];
@@ -203,23 +208,18 @@ get_header();
       $portfolio_items = get_post_meta($post_id, '_webmakerr_video_portfolio', true);
       $portfolio_items = is_array($portfolio_items) ? $portfolio_items : [
           [
-              'title'    => __('Product Launch Film', 'webmakerr'),
-              'category' => __('SaaS', 'webmakerr'),
+              'title'    => __('“Webmakerr videos bring us 5–10 leads per day.”', 'webmakerr'),
+              'category' => '',
               'image'    => 0,
           ],
           [
-              'title'    => __('Brand Anthem', 'webmakerr'),
-              'category' => __('Lifestyle', 'webmakerr'),
+              'title'    => __('“€500K in revenue from one video.”', 'webmakerr'),
+              'category' => '',
               'image'    => 0,
           ],
           [
-              'title'    => __('Event Recap', 'webmakerr'),
-              'category' => __('Enterprise', 'webmakerr'),
-              'image'    => 0,
-          ],
-          [
-              'title'    => __('Customer Story', 'webmakerr'),
-              'category' => __('Ecommerce', 'webmakerr'),
+              'title'    => __('“10× ROI on our explainer video investment.”', 'webmakerr'),
+              'category' => '',
               'image'    => 0,
           ],
       ];
@@ -267,13 +267,13 @@ get_header();
       ];
 
       $cta_heading = get_post_meta($post_id, '_webmakerr_video_cta_heading', true);
-      $cta_heading = $cta_heading ? sanitize_text_field($cta_heading) : __('Ready to capture your next big moment?', 'webmakerr');
+      $cta_heading = $cta_heading ? sanitize_text_field($cta_heading) : __('Let’s make your message unforgettable.', 'webmakerr');
 
       $cta_copy = get_post_meta($post_id, '_webmakerr_video_cta_copy', true);
-      $cta_copy = $cta_copy ? wp_kses_post($cta_copy) : __('Let’s plan a content engine that blends cinematic craft with measurable growth. Schedule a discovery call and we’ll build your launch roadmap together.', 'webmakerr');
+      $cta_copy = $cta_copy ? wp_kses_post($cta_copy) : __('Book your free consultation now → and get a custom roadmap for turning attention into revenue.', 'webmakerr');
 
       $cta_button = get_post_meta($post_id, '_webmakerr_video_cta_button', true);
-      $cta_button = $cta_button ? sanitize_text_field($cta_button) : __('Start Your Project', 'webmakerr');
+      $cta_button = $cta_button ? sanitize_text_field($cta_button) : __('Book Your Free Consultation', 'webmakerr');
 
       $hero_metrics = [
           [
@@ -298,7 +298,7 @@ get_header();
           <div class="grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
             <div class="flex flex-col gap-6 opacity-0 translate-y-8 transition-all duration-700" data-animate>
               <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
-                <?php esc_html_e('Video Production Studio', 'webmakerr'); ?>
+                <?php esc_html_e('Explainer Video Agency', 'webmakerr'); ?>
               </span>
               <h1 class="mt-2 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl lg:text-6xl">
                 <?php echo wp_kses_post($hero_headline); ?>
@@ -392,7 +392,16 @@ get_header();
               if ($content) {
                   the_content();
               } else {
-                  echo wp_kses_post('<p>' . __('Partner with an in-house crew obsessed with narrative craft, performance data, and post-production polish. We plug directly into your marketing roadmap, then deliver videos engineered to convert across campaigns.', 'webmakerr') . '</p>');
+                  echo wp_kses_post(
+                      '<p>' . __('Because people don’t buy what they don’t understand.', 'webmakerr') . '</p>' .
+                      '<ul class="list-disc space-y-2 pl-5">'
+                          . '<li><strong>' . __('Fact 1:', 'webmakerr') . '</strong> ' . __('People only buy what they clearly understand.', 'webmakerr') . '</li>'
+                          . '<li><strong>' . __('Fact 2:', 'webmakerr') . '</strong> ' . __('You have about 8 seconds to make them care.', 'webmakerr') . '</li>'
+                          . '<li><strong>' . __('Fact 3:', 'webmakerr') . '</strong> ' . __('Text alone can’t explain your offer that fast.', 'webmakerr') . '</li>'
+                      . '</ul>' .
+                      '<p><strong>' . __('Result:', 'webmakerr') . '</strong> ' . __('Most visitors leave — not because your product is bad, but because they didn’t get it fast enough.', 'webmakerr') . '</p>' .
+                      '<p>' . __('That’s where we come in.', 'webmakerr') . '</p>'
+                  );
               }
               ?>
             </div>
@@ -418,10 +427,10 @@ get_header();
         <div class="mx-auto flex max-w-screen-xl flex-col gap-12 px-6 lg:px-8">
           <div class="max-w-3xl opacity-0 translate-y-8 transition-all duration-700" data-animate>
             <h2 id="process-heading" class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-              <?php esc_html_e('How we bring your story to life', 'webmakerr'); ?>
+              <?php esc_html_e('The Webmakerr Process', 'webmakerr'); ?>
             </h2>
             <p class="mt-4 text-base leading-7 text-zinc-600 sm:text-lg">
-              <?php esc_html_e('A collaborative playbook that keeps your stakeholders aligned from kickoff to final delivery.', 'webmakerr'); ?>
+              <?php esc_html_e('We handle everything. You invest about 2 hours total.', 'webmakerr'); ?>
             </p>
           </div>
 
@@ -451,10 +460,10 @@ get_header();
         <div class="mx-auto flex max-w-screen-xl flex-col gap-12 px-6 lg:px-8">
           <div class="flex flex-col gap-4 opacity-0 translate-y-8 transition-all duration-700" data-animate>
             <h2 id="portfolio-heading" class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-              <?php esc_html_e('Recent productions', 'webmakerr'); ?>
+              <?php esc_html_e('Our Results Speak for Themselves', 'webmakerr'); ?>
             </h2>
             <p class="text-base leading-7 text-zinc-600 sm:text-lg">
-              <?php esc_html_e('Launch films, testimonials, and social-first edits designed for every stage of your funnel.', 'webmakerr'); ?>
+              <?php esc_html_e('Over 3,500+ successful campaigns and counting.', 'webmakerr'); ?>
             </p>
           </div>
 
@@ -484,7 +493,7 @@ get_header();
                 </div>
                 <div class="mt-auto px-1">
                   <a class="inline-flex w-full items-center justify-center gap-2 rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="#lead-capture" data-lead-popup-trigger>
-                    <?php esc_html_e('Request case study', 'webmakerr'); ?>
+                    <?php esc_html_e('See case studies →', 'webmakerr'); ?>
                     <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 11-1.414-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                   </a>
                 </div>
@@ -498,10 +507,13 @@ get_header();
         <div class="mx-auto grid max-w-screen-xl gap-16 px-6 lg:grid-cols-[minmax(0,_1.1fr)_minmax(0,_0.9fr)] lg:px-8">
           <div class="flex flex-col gap-6 opacity-0 translate-y-8 transition-all duration-700" data-animate>
             <h2 id="testimonials-heading" class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-              <?php esc_html_e('Loved by ambitious brands', 'webmakerr'); ?>
+              <?php esc_html_e('Why Brands Choose Webmakerr', 'webmakerr'); ?>
             </h2>
             <p class="text-base leading-7 text-zinc-600 sm:text-lg">
-              <?php esc_html_e('Teams rely on us for strategic storytelling, on-location agility, and post-production that turns heads.', 'webmakerr'); ?>
+              <?php esc_html_e('We’re not just video producers — we’re performance marketers. Our videos are designed to sell, not just look good.', 'webmakerr'); ?>
+            </p>
+            <p class="text-base leading-7 text-zinc-600 sm:text-lg">
+              <?php esc_html_e('That’s why startups and global brands alike trust Webmakerr to turn attention into revenue.', 'webmakerr'); ?>
             </p>
 
             <div class="grid gap-4 sm:grid-cols-2">
