@@ -49,7 +49,7 @@ get_header();
   <div class="flex flex-col">
     <?php while (have_posts()) : the_post(); ?>
       <article <?php post_class('flex flex-col'); ?>>
-        <section class="bg-primary py-20 text-white sm:py-24">
+        <section class="bg-[#18184d] py-20 text-white sm:py-24">
           <div class="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16 lg:px-8">
             <div class="flex flex-1 flex-col gap-6">
               <h1 class="text-4xl font-medium tracking-tight [text-wrap:balance] sm:text-5xl lg:text-6xl">
@@ -59,7 +59,7 @@ get_header();
                 <?php esc_html_e('Earn commissions by promoting Webmakerr tools and themes.', 'webmakerr'); ?>
               </p>
               <div class="flex flex-col gap-3 sm:flex-row">
-                <a class="btn-primary inline-flex w-full items-center justify-center sm:w-auto" href="<?php echo esc_url(home_url('/affiliate-signup')); ?>">
+                <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-transparent bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-sm transition hover:bg-gray-100 hover:text-zinc-900 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/affiliate-signup')); ?>">
                   <?php esc_html_e('Join Now', 'webmakerr'); ?>
                 </a>
               </div>
@@ -164,7 +164,7 @@ get_header();
                         <?php echo esc_html($product['description']); ?>
                       </p>
                     </div>
-                    <a class="text-sm font-semibold text-primary transition hover:text-primary/80" href="<?php echo esc_url($product['link']); ?>">
+                    <a class="btn-primary inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($product['link']); ?>">
                       <?php esc_html_e('View More', 'webmakerr'); ?>
                     </a>
                   </article>
@@ -230,7 +230,7 @@ get_header();
                         <li><?php echo esc_html($bullet); ?></li>
                       <?php endforeach; ?>
                     </ul>
-                    <a class="btn-primary inline-flex items-center justify-center" href="<?php echo esc_url(home_url('/affiliate-signup')); ?>">
+                    <a class="btn-primary inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url(home_url('/affiliate-signup')); ?>">
                       <?php esc_html_e('Start Earning', 'webmakerr'); ?>
                     </a>
                   </article>
@@ -395,15 +395,15 @@ get_header();
           </div>
         </section>
 
-        <section class="bg-green-500 py-16 text-white sm:py-20 lg:py-24">
+        <section class="bg-[#18184d] py-16 text-white sm:py-20 lg:py-24">
           <div class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 px-4 text-center sm:px-6 lg:px-8">
             <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">
               <?php esc_html_e('Ready to partner up?', 'webmakerr'); ?>
             </h2>
-            <p class="max-w-2xl text-base leading-7 text-white/90 sm:text-lg">
+            <p class="max-w-2xl text-base leading-7 text-white sm:text-lg">
               <?php esc_html_e('Register, promote, and start earning commissions today.', 'webmakerr'); ?>
             </p>
-            <a class="btn-primary inline-flex items-center justify-center" href="<?php echo esc_url(home_url('/affiliate-signup')); ?>">
+            <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-transparent bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-sm transition hover:bg-gray-100 hover:text-zinc-900 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/affiliate-signup')); ?>">
               <?php esc_html_e('Join Now', 'webmakerr'); ?>
             </a>
           </div>
