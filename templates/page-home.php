@@ -191,6 +191,41 @@ get_header();
               'icon' => 'career-ai-specialist.svg',
           ),
       );
+
+      $content_highlights = array(
+          array(
+              'title' => __('Guided Projects', 'webmakerr'),
+              'description' => __('Complete bite-sized, hands-on builds you can finish in under two hours.', 'webmakerr'),
+              'tag' => __('Hands-on practice', 'webmakerr'),
+              'icon' => 'content-guided-projects.svg',
+              'url' => home_url('/guided-projects'),
+              'background' => 'from-[#eef2ff] via-[#e0f2ff] to-[#f7f9ff]',
+          ),
+          array(
+              'title' => __('Courses', 'webmakerr'),
+              'description' => __('Learn from experts with structured lessons, quizzes, and real-world examples.', 'webmakerr'),
+              'tag' => __('Most popular', 'webmakerr'),
+              'icon' => 'content-courses.svg',
+              'url' => home_url('/courses'),
+              'background' => 'from-[#fff4de] via-[#ffeacd] to-[#fff9ee]',
+          ),
+          array(
+              'title' => __('Professional Certificates', 'webmakerr'),
+              'description' => __('Earn employer-recognized credentials designed with top companies.', 'webmakerr'),
+              'tag' => __('Career credentials', 'webmakerr'),
+              'icon' => 'content-certificates.svg',
+              'url' => home_url('/certificates'),
+              'background' => 'from-[#e5f9f3] via-[#d8f3ec] to-[#f0fffb]',
+          ),
+          array(
+              'title' => __('Degrees', 'webmakerr'),
+              'description' => __('Pursue flexible, accredited online degrees from leading universities.', 'webmakerr'),
+              'tag' => __('Go further', 'webmakerr'),
+              'icon' => 'content-degrees.svg',
+              'url' => home_url('/degrees'),
+              'background' => 'from-[#f5eeff] via-[#ece4ff] to-[#faf7ff]',
+          ),
+      );
       ?>
 
       <section class="relative overflow-hidden">
@@ -489,6 +524,55 @@ get_header();
                 </article>
               <?php endforeach; ?>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-16 sm:py-20 lg:py-24">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col items-center gap-3 text-center">
+            <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
+              <?php esc_html_e('Explore content', 'webmakerr'); ?>
+            </h2>
+            <p class="max-w-2xl text-base leading-7 text-zinc-600">
+              <?php esc_html_e('Find the learning experience that fits your schedule, goals, and level of support.', 'webmakerr'); ?>
+            </p>
+          </div>
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <?php foreach ($content_highlights as $content) : ?>
+              <a class="group relative flex h-full flex-col gap-6 overflow-hidden rounded-[18px] border border-white/60 bg-gradient-to-br <?php echo esc_attr($content['background']); ?> p-6 shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.12)] !no-underline" href="<?php echo esc_url($content['url']); ?>">
+                <div class="absolute -right-12 top-12 h-24 w-24 rounded-full bg-white/20 blur-3xl transition group-hover:bg-white/30"></div>
+                <div class="absolute -left-16 -bottom-10 h-28 w-28 rounded-full bg-white/30 blur-3xl transition group-hover:bg-white/40"></div>
+                <span class="relative inline-flex w-fit items-center gap-2 rounded-full border border-white/70 bg-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-700 shadow-sm">
+                  <?php echo esc_html($content['tag']); ?>
+                </span>
+                <div class="relative flex items-center gap-4">
+                  <div class="flex h-14 w-14 items-center justify-center rounded-[12px] bg-white/70 shadow-inner shadow-white/40">
+                    <?php
+                    $content_icon = get_template_directory() . '/assets/svg/home/content/' . $content['icon'];
+                    if (file_exists($content_icon)) {
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo file_get_contents($content_icon);
+                    }
+                    ?>
+                  </div>
+                  <div class="flex flex-col gap-2 text-left">
+                    <h3 class="text-xl font-semibold text-zinc-900">
+                      <?php echo esc_html($content['title']); ?>
+                    </h3>
+                    <p class="text-sm leading-6 text-zinc-600">
+                      <?php echo esc_html($content['description']); ?>
+                    </p>
+                  </div>
+                </div>
+                <span class="relative mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:text-primary/80">
+                  <?php esc_html_e('Browse now', 'webmakerr'); ?>
+                  <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </a>
+            <?php endforeach; ?>
           </div>
         </div>
       </section>
