@@ -22,16 +22,16 @@ get_header();
         <div class="absolute inset-y-0 left-0 hidden w-1/3 bg-gradient-to-r from-primary/10 via-transparent to-transparent lg:block"></div>
         <div class="container mx-auto grid gap-12 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-24">
           <div class="relative z-10 flex flex-col gap-6">
-            <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
               <?php esc_html_e('Case Study', 'webmakerr'); ?>
             </span>
-            <h1 class="text-4xl font-semibold text-zinc-950 sm:text-5xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+            <h1 class="text-4xl font-semibold text-zinc-950 sm:text-5xl lg:text-6xl">
               <?php esc_html_e('Launchfuel SaaS Growth Transformation', 'webmakerr'); ?>
             </h1>
-            <p class="text-base leading-7 text-zinc-600 sm:text-lg" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <p class="text-base leading-7 text-zinc-600 sm:text-lg">
               <?php esc_html_e('Rearchitecting the marketing site, funnel experience, and positioning to create a unified growth engine.', 'webmakerr'); ?>
             </p>
-            <div class="grid gap-6 sm:grid-cols-2" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <div class="grid gap-6 sm:grid-cols-2">
               <div class="rounded-[5px] border border-primary/20 bg-white px-5 py-4 shadow-sm">
                 <p class="text-xs font-semibold uppercase tracking-[0.26em] text-primary"><?php esc_html_e('Industry', 'webmakerr'); ?></p>
                 <p class="mt-2 text-base font-medium text-zinc-950"><?php esc_html_e('B2B SaaS', 'webmakerr'); ?></p>
@@ -43,8 +43,8 @@ get_header();
             </div>
           </div>
           <div class="relative z-10 flex items-center justify-center">
-            <div class="w-full max-w-md mx-auto md:mx-0">
-              <svg class="w-full h-auto" viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data visualization showing compound growth metrics">
+            <div class="mx-auto w-full max-w-xl overflow-hidden rounded-2xl border border-zinc-200 bg-white/90 p-6 shadow-xl ring-1 ring-black/5 md:mx-0">
+              <svg class="h-auto w-full" viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data visualization showing compound growth metrics">
                 <defs>
                   <linearGradient id="heroGradient" x1="64" y1="36" x2="360" y2="292" gradientUnits="userSpaceOnUse">
                     <stop offset="0" stop-color="#FFFFFF" />
@@ -126,16 +126,16 @@ get_header();
 
       <section class="container mx-auto grid gap-10 px-6 lg:grid-cols-[0.45fr_0.55fr] lg:items-center lg:px-8">
         <div class="flex items-center justify-center">
-          <div class="flex h-full w-full max-w-xs flex-col items-center justify-center gap-4 rounded-[5px] border border-zinc-200 bg-white p-8 text-center shadow-sm" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+          <div class="flex h-full w-full max-w-xs flex-col items-center justify-center gap-4 rounded-2xl border border-zinc-200 bg-white/90 p-8 text-center shadow-sm">
             <div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <span class="text-xl font-semibold" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">LF</span>
+              <span class="text-xl font-semibold">LF</span>
             </div>
             <p class="text-base font-medium text-zinc-950"><?php esc_html_e('Launchfuel', 'webmakerr'); ?></p>
             <p class="text-sm leading-6 text-zinc-600"><?php esc_html_e('Venture-backed SaaS platform for marketing automation teams.', 'webmakerr'); ?></p>
           </div>
         </div>
-        <div class="flex flex-col gap-4" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-          <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
             <?php esc_html_e('About the Client', 'webmakerr'); ?>
           </h2>
           <p class="text-base leading-7 text-zinc-600 sm:text-lg">
@@ -147,8 +147,8 @@ get_header();
         </div>
       </section>
 
-      <section class="container mx-auto flex flex-col gap-6 px-6 lg:px-8" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+      <section class="container mx-auto flex flex-col gap-6 px-6 lg:px-8">
+        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
           <?php esc_html_e('The Challenge', 'webmakerr'); ?>
         </h2>
         <p class="max-w-3xl text-base leading-7 text-zinc-600 sm:text-lg">
@@ -156,8 +156,8 @@ get_header();
         </p>
       </section>
 
-      <section class="container mx-auto flex flex-col gap-6 px-6 lg:px-8" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+      <section class="container mx-auto flex flex-col gap-6 px-6 lg:px-8">
+        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
           <?php esc_html_e('The Solution', 'webmakerr'); ?>
         </h2>
         <ol class="max-w-4xl list-decimal space-y-4 pl-6 text-base leading-7 text-zinc-600 sm:text-lg">
@@ -168,28 +168,28 @@ get_header();
         </ol>
       </section>
 
-      <section class="container mx-auto flex flex-col gap-8 px-6 lg:px-8" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+      <section class="container mx-auto flex flex-col gap-8 px-6 lg:px-8">
+        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
           <?php esc_html_e('The Results', 'webmakerr'); ?>
         </h2>
         <div class="grid gap-6 sm:grid-cols-3">
           <div class="rounded-[5px] border border-zinc-200 bg-white p-6 text-center shadow-sm">
-            <p class="text-3xl font-semibold text-[#1877F2]">218%</p>
+            <p class="text-3xl font-semibold text-primary">218%</p>
             <p class="mt-2 text-xs font-semibold uppercase tracking-[0.26em] text-zinc-500"><?php esc_html_e('Increase in Qualified Demos', 'webmakerr'); ?></p>
           </div>
           <div class="rounded-[5px] border border-zinc-200 bg-white p-6 text-center shadow-sm">
-            <p class="text-3xl font-semibold text-[#1877F2]">3.8x</p>
+            <p class="text-3xl font-semibold text-primary">3.8x</p>
             <p class="mt-2 text-xs font-semibold uppercase tracking-[0.26em] text-zinc-500"><?php esc_html_e('Pipeline ROI', 'webmakerr'); ?></p>
           </div>
           <div class="rounded-[5px] border border-zinc-200 bg-white p-6 text-center shadow-sm">
-            <p class="text-3xl font-semibold text-[#1877F2]">42%</p>
+            <p class="text-3xl font-semibold text-primary">42%</p>
             <p class="mt-2 text-xs font-semibold uppercase tracking-[0.26em] text-zinc-500"><?php esc_html_e('Growth in Paid Conversions', 'webmakerr'); ?></p>
           </div>
         </div>
       </section>
 
-      <section class="container mx-auto flex flex-col gap-8 px-6 lg:px-8" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+      <section class="container mx-auto flex flex-col gap-8 px-6 lg:px-8">
+        <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
           <?php esc_html_e('Visual Proof', 'webmakerr'); ?>
         </h2>
         <?php
@@ -197,26 +197,26 @@ get_header();
         ?>
       </section>
 
-      <section class="container mx-auto px-6 lg:px-8">
-        <div class="relative overflow-hidden rounded-[5px] border border-zinc-900/20 bg-zinc-950 px-8 py-16 text-center text-white shadow-lg sm:px-12" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]"></div>
-          <div class="relative mx-auto flex max-w-3xl flex-col gap-6">
-            <span class="text-xs font-semibold uppercase tracking-[0.26em] text-white/70"><?php esc_html_e('Want results like this?', 'webmakerr'); ?></span>
-            <h2 class="text-3xl font-semibold sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
-              <?php esc_html_e('Book your free call and get a tailored growth roadmap.', 'webmakerr'); ?>
-            </h2>
-            <p class="text-base leading-7 text-white/80 sm:text-lg">
-              <?php esc_html_e('We’ll audit your funnel, uncover the conversion gaps, and map your next launch so you can scale with confidence.', 'webmakerr'); ?>
-            </p>
-            <div class="flex justify-center">
-              <a class="btn btn-primary inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($strategy_call_link['href']); ?>"<?php echo $strategy_call_link['attributes']; ?>>
-                <?php esc_html_e('Book Free Call', 'webmakerr'); ?>
-              </a>
+        <section class="container mx-auto px-6 lg:px-8">
+          <div class="relative overflow-hidden rounded-[5px] border border-zinc-900/20 bg-zinc-950 px-8 py-16 text-center text-white shadow-lg sm:px-12">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]"></div>
+            <div class="relative mx-auto flex max-w-3xl flex-col gap-6">
+              <span class="text-xs font-semibold uppercase tracking-[0.26em] text-white/70"><?php esc_html_e('Want results like this?', 'webmakerr'); ?></span>
+              <h2 class="text-3xl font-semibold sm:text-4xl">
+                <?php esc_html_e('Book your free call and get a tailored growth roadmap.', 'webmakerr'); ?>
+              </h2>
+              <p class="text-base leading-7 text-white/80 sm:text-lg">
+                <?php esc_html_e('We’ll audit your funnel, uncover the conversion gaps, and map your next launch so you can scale with confidence.', 'webmakerr'); ?>
+              </p>
+              <div class="flex justify-center">
+                <a class="inline-flex items-center justify-center rounded bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($strategy_call_link['href']); ?>"<?php echo $strategy_call_link['attributes']; ?>>
+                  <?php esc_html_e('Book Free Call', 'webmakerr'); ?>
+                </a>
+              </div>
+              <p class="text-xs font-medium uppercase tracking-[0.26em] text-white/60"><?php esc_html_e('Spots fill quickly — secure your time in under 60 seconds.', 'webmakerr'); ?></p>
             </div>
-            <p class="text-xs font-medium uppercase tracking-[0.26em] text-white/60"><?php esc_html_e('Spots fill quickly — secure your time in under 60 seconds.', 'webmakerr'); ?></p>
           </div>
-        </div>
-      </section>
+        </section>
     </article>
   <?php endwhile; ?>
 </main>

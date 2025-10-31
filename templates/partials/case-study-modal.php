@@ -21,25 +21,27 @@ if (! defined('ABSPATH')) {
     >
       <button
         type="button"
-        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-2xl font-light text-zinc-400 transition hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-transparent text-zinc-400 transition hover:border-zinc-200 hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         data-case-study-modal-close
         aria-label="<?php esc_attr_e('Close case study', 'webmakerr'); ?>"
       >
-        &times;
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 6l8 8m0-8-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </button>
       <div class="relative flex flex-col gap-8 px-8 pb-10 pt-12 sm:px-12 sm:pb-12 sm:pt-14">
         <header class="flex flex-col gap-4 text-center sm:text-left">
-          <h2 id="case-study-modal-title" class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
+          <h2 id="case-study-modal-title" class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
             <?php esc_html_e('Launchfuel SaaS Website Rebuild', 'webmakerr'); ?>
           </h2>
-          <p id="case-study-modal-summary" class="text-base leading-7 text-zinc-600" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+          <p id="case-study-modal-summary" class="text-base leading-7 text-zinc-600">
             <?php esc_html_e('How we redesigned a scaling SaaS brand’s digital experience to 3x their qualified pipeline in six weeks.', 'webmakerr'); ?>
           </p>
         </header>
 
-        <div class="grid gap-8 sm:grid-cols-3" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+        <div class="grid gap-8 sm:grid-cols-3">
           <div class="flex flex-col gap-3">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary">
               <?php esc_html_e('Challenge', 'webmakerr'); ?>
             </h3>
             <p class="text-sm leading-6 text-zinc-600">
@@ -47,7 +49,7 @@ if (! defined('ABSPATH')) {
             </p>
           </div>
           <div class="flex flex-col gap-3">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary">
               <?php esc_html_e('Solution', 'webmakerr'); ?>
             </h3>
             <p class="text-sm leading-6 text-zinc-600">
@@ -55,7 +57,7 @@ if (! defined('ABSPATH')) {
             </p>
           </div>
           <div class="flex flex-col gap-3">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary">
               <?php esc_html_e('Results', 'webmakerr'); ?>
             </h3>
             <ul class="space-y-2 text-sm leading-6 text-zinc-600">
@@ -66,8 +68,8 @@ if (! defined('ABSPATH')) {
           </div>
         </div>
 
-        <div class="flex flex-col gap-4" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-          <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+        <div class="flex flex-col gap-4">
+          <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary">
             <?php esc_html_e('Visual Proof', 'webmakerr'); ?>
           </h3>
           <?php
@@ -78,8 +80,8 @@ if (! defined('ABSPATH')) {
           ?>
         </div>
 
-        <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-start" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-          <a class="btn btn-primary inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/contact')); ?>">
+        <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-start">
+          <a class="inline-flex w-full items-center justify-center rounded bg-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/contact')); ?>">
             <?php esc_html_e('Get Similar Results →', 'webmakerr'); ?>
           </a>
           <a class="text-xs font-medium uppercase tracking-[0.26em] text-zinc-500 transition hover:text-zinc-900" href="<?php echo esc_url(home_url('/case-study.html')); ?>">
@@ -170,7 +172,18 @@ if (! defined('ABSPATH')) {
   });
 
   closers.forEach(function(closer) {
-    closer.addEventListener('click', closeModal);
+    closer.addEventListener('click', function(event) {
+      event.preventDefault();
+      closeModal();
+    });
+  });
+
+  dialog.addEventListener('click', function(event) {
+    var closeTarget = event.target.closest('[data-case-study-modal-close]');
+    if (closeTarget) {
+      event.preventDefault();
+      closeModal();
+    }
   });
 
   modal.addEventListener('click', function(event) {

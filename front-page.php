@@ -45,14 +45,95 @@ if (! function_exists('webmakerr_frontpage_logo')) {
     /**
      * Render trust badge logos.
      */
-    function webmakerr_frontpage_logo(string $logo, string $class = 'h-8 text-zinc-400')
+    function webmakerr_frontpage_logo(string $logo, string $class = 'h-12 w-auto')
     {
         $logos = array(
-            'growthlab'  => '<path d="M4 16V8l4-2 4 2v8l-4 2z"></path><path d="M12 6.5 16 4l4 2.5V16l-4 2.5-4-2.5"></path>',
-            'launchpad'  => '<path d="M12 4a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V8a4 4 0 0 1 4-4z"></path><path d="M8 14.5 6 19l6-2 6 2-2-4.5"></path>',
-            'convertix'  => '<path d="m4 5 6 6-6 6"></path><path d="m20 5-6 6 6 6"></path><path d="M9 5h6"></path><path d="M9 17h6"></path>',
-            'scale'      => '<path d="M4 7h16"></path><path d="M6 7v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7"></path><path d="M9 3h6"></path>',
-            'brightwave' => '<path d="M4 15c1.5-3 4.5-5 8-5s6.5 2 8 5"></path><path d="M8 11a4 4 0 1 1 8 0"></path><path d="M12 7V3"></path>',
+            'growthlab'  => '
+                <defs>
+                  <linearGradient id="growthlabGradient" x1="12" y1="4" x2="108" y2="36" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#1D4ED8" />
+                    <stop offset="1" stop-color="#22D3EE" />
+                  </linearGradient>
+                  <linearGradient id="growthlabAccent" x1="24" y1="10" x2="96" y2="30" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#E0F2FE" />
+                    <stop offset="1" stop-color="#C7D2FE" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="4" width="116" height="32" rx="12" fill="#F8FAFC" />
+                <path d="M24 30C26 20.5 38.5 14 52 14C65.5 14 78 20.5 80 30" fill="url(#growthlabAccent)" />
+                <path d="M36 26C38 18.5 45 14 52 14C59 14 66 18.5 68 26" fill="#FFFFFF" />
+                <path d="M24 30C26.3 20 36 12 52 12C68 12 78.5 20 80 30" stroke="url(#growthlabGradient)" stroke-width="4" stroke-linecap="round" />
+                <circle cx="52" cy="16" r="6" fill="#0F172A" />
+                <path d="M48 18.5L52 24L56 18.5" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            ',
+            'launchpad'  => '
+                <defs>
+                  <linearGradient id="launchpadTrail" x1="12" y1="8" x2="108" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#A855F7" />
+                    <stop offset="1" stop-color="#6366F1" />
+                  </linearGradient>
+                  <linearGradient id="launchpadGlow" x1="40" y1="6" x2="80" y2="34" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#F5F3FF" />
+                    <stop offset="1" stop-color="#E0E7FF" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="4" width="116" height="32" rx="12" fill="#F5F3FF" />
+                <path d="M30 28C34 20 46 14 60 14C74 14 86 20 90 28" stroke="url(#launchpadTrail)" stroke-width="4" stroke-linecap="round" />
+                <path d="M60 10C65.5 16 69 23 69 29C69 30.2 68.9 31.3 68.8 32H51.2C51.1 31.3 51 30.2 51 29C51 23 54.5 16 60 10Z" fill="#1E1B4B" />
+                <path d="M60 12C56.7 16 54 22 54 27.5C54 29.6 54.2 31.5 54.5 33H65.5C65.8 31.5 66 29.6 66 27.5C66 22 63.3 16 60 12Z" fill="url(#launchpadGlow)" />
+                <circle cx="60" cy="18" r="4" fill="#312E81" />
+                <path d="M44 30L60 20L76 30" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round" />
+                <circle cx="44" cy="30" r="3" fill="#C4B5FD" />
+                <circle cx="76" cy="30" r="3" fill="#C4B5FD" />
+            ',
+            'convertix'  => '
+                <defs>
+                  <linearGradient id="convertixGradient" x1="12" y1="8" x2="108" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#0EA5E9" />
+                    <stop offset="1" stop-color="#2563EB" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="4" width="116" height="32" rx="12" fill="#F0F9FF" />
+                <path d="M26 11L52 28" stroke="#0284C7" stroke-width="4" stroke-linecap="round" />
+                <path d="M94 11L68 28" stroke="#2563EB" stroke-width="4" stroke-linecap="round" />
+                <circle cx="40" cy="19" r="9" fill="#38BDF8" opacity="0.2" />
+                <circle cx="80" cy="19" r="9" fill="#2563EB" opacity="0.2" />
+                <path d="M40 12H80" stroke="url(#convertixGradient)" stroke-width="4" stroke-linecap="round" />
+                <path d="M48 32H72" stroke="#0F172A" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+                <circle cx="40" cy="19" r="4" fill="#0EA5E9" />
+                <circle cx="80" cy="19" r="4" fill="#2563EB" />
+            ',
+            'scale'      => '
+                <defs>
+                  <linearGradient id="scaleGradient" x1="24" y1="8" x2="92" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#16A34A" />
+                    <stop offset="1" stop-color="#22C55E" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="4" width="116" height="32" rx="12" fill="#ECFDF5" />
+                <rect x="28" y="14" width="8" height="14" rx="3" fill="#BBF7D0" />
+                <rect x="46" y="10" width="10" height="18" rx="3" fill="#86EFAC" />
+                <rect x="66" y="8" width="12" height="20" rx="3" fill="#4ADE80" />
+                <rect x="88" y="6" width="12" height="22" rx="3" fill="#22C55E" />
+                <path d="M26 30H94" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round" />
+                <path d="M26 24C40 16 62 12 94 14" stroke="url(#scaleGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="88" cy="14" r="4" fill="#15803D" />
+            ',
+            'brightwave' => '
+                <defs>
+                  <linearGradient id="brightwaveGradient" x1="16" y1="8" x2="104" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#38BDF8" />
+                    <stop offset="1" stop-color="#6366F1" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="4" width="116" height="32" rx="12" fill="#EEF2FF" />
+                <path d="M20 26C32 18 44 14 60 14C76 14 90 18 100 26" stroke="url(#brightwaveGradient)" stroke-width="4" stroke-linecap="round" />
+                <path d="M20 22C32 16 44 12 60 12C76 12 90 16 100 22" stroke="#A5B4FC" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+                <circle cx="36" cy="20" r="3" fill="#38BDF8" />
+                <circle cx="60" cy="18" r="4" fill="#2563EB" />
+                <circle cx="84" cy="20" r="3" fill="#6366F1" />
+                <path d="M26 30H94" stroke="#C7D2FE" stroke-width="3" stroke-linecap="round" />
+            ',
         );
 
         if (! isset($logos[$logo])) {
@@ -60,7 +141,7 @@ if (! function_exists('webmakerr_frontpage_logo')) {
         }
 
         return sprintf(
-            '<svg class="%1$s" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%2$s</svg>',
+            '<svg class="%1$s" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">%2$s</svg>',
             esc_attr($class),
             $logos[$logo]
         );
@@ -113,16 +194,18 @@ $toolkit_link       = webmakerr_get_popup_link_attributes($toolkit_url, $popup_e
         <p class="text-xs font-semibold uppercase tracking-[0.26em] text-zinc-500">
           <?php esc_html_e('Trusted by creators, marketers, and growing businesses.', 'webmakerr'); ?>
         </p>
-        <div class="grid w-full max-w-5xl grid-cols-2 items-center gap-6 sm:grid-cols-3 lg:grid-cols-5">
+        <div class="grid w-full max-w-5xl grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-5">
           <?php
           $logos = array('growthlab', 'launchpad', 'convertix', 'scale', 'brightwave');
           foreach ($logos as $logo) :
               ?>
-            <div class="flex items-center justify-center rounded-[5px] border border-zinc-200 bg-white px-4 py-3 shadow-sm">
+            <div class="flex h-full min-h-[84px] w-full items-center justify-center rounded-xl border border-zinc-200/80 bg-white/95 px-4 py-3 shadow-sm transition will-change-transform hover:border-zinc-300 hover:shadow-md">
+              <div class="w-full max-w-[164px]"><!-- visual wrapper ensures consistent scaling -->
               <?php
               // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-              echo webmakerr_frontpage_logo($logo);
+              echo webmakerr_frontpage_logo($logo, 'h-auto w-full');
               ?>
+              </div>
             </div>
           <?php endforeach; ?>
         </div>
