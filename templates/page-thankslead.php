@@ -79,11 +79,11 @@ $appointment_link = webmakerr_get_popup_link_attributes($appointment_url, $popup
                     </p>
                   </div>
                 </div>
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <a class="btn btn-primary inline-flex items-center justify-center rounded-[5px] px-5 py-2 text-sm font-semibold !no-underline" href="<?php echo esc_url($appointment_link['href']); ?>"<?php echo $appointment_link['attributes']; ?>>
+                <div class="mt-2 flex flex-col items-center text-center">
+                  <a class="btn btn-primary inline-flex items-center justify-center rounded-[5px] bg-black px-6 py-3 font-semibold text-white !no-underline" href="<?php echo esc_url($appointment_link['href']); ?>"<?php echo $appointment_link['attributes']; ?>>
                     <?php esc_html_e('Book My Free Call', 'webmakerr'); ?>
                   </a>
-                  <p class="text-sm text-zinc-500">
+                  <p class="mt-2 text-center text-sm text-gray-600">
                     <?php esc_html_e('Spots fill quickly—secure your time in under 60 seconds.', 'webmakerr'); ?>
                   </p>
                 </div>
@@ -122,6 +122,12 @@ $appointment_link = webmakerr_get_popup_link_attributes($appointment_url, $popup
             </div>
           </div>
         </section>
+
+        <div class="flex justify-center pt-8">
+          <a class="btn btn-primary inline-flex items-center justify-center rounded-[5px] bg-black px-6 py-3 font-semibold text-white !no-underline" href="<?php echo esc_url($appointment_link['href']); ?>"<?php echo $appointment_link['attributes']; ?>>
+            <?php esc_html_e('Reserve My Free Strategy Call', 'webmakerr'); ?>
+          </a>
+        </div>
 
         <section class="rounded-[5px] border border-zinc-200 bg-white p-8 shadow-sm sm:p-10">
           <header class="mx-auto flex max-w-3xl flex-col gap-4 text-center">
