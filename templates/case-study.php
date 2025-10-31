@@ -130,20 +130,9 @@ get_header();
         <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
           <?php esc_html_e('Visual Proof', 'webmakerr'); ?>
         </h2>
-        <div class="grid gap-6 md:grid-cols-2">
-          <figure class="flex h-full flex-col gap-4 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm">
-            <figcaption class="text-sm font-semibold uppercase tracking-[0.26em] text-zinc-500"><?php esc_html_e('Before', 'webmakerr'); ?></figcaption>
-            <div class="flex flex-1 items-center justify-center rounded-[5px] border border-dashed border-zinc-300 bg-zinc-50">
-              <span class="text-sm font-medium text-zinc-400"><?php esc_html_e('Legacy site screenshot placeholder', 'webmakerr'); ?></span>
-            </div>
-          </figure>
-          <figure class="flex h-full flex-col gap-4 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm">
-            <figcaption class="text-sm font-semibold uppercase tracking-[0.26em] text-zinc-500"><?php esc_html_e('After', 'webmakerr'); ?></figcaption>
-            <div class="flex flex-1 items-center justify-center rounded-[5px] border border-dashed border-primary/40 bg-primary/5">
-              <span class="text-sm font-medium text-primary"><?php esc_html_e('High-converting redesign placeholder', 'webmakerr'); ?></span>
-            </div>
-          </figure>
-        </div>
+        <?php
+        get_template_part('templates/partials/case-study-visual-proof');
+        ?>
       </section>
 
       <section class="container mx-auto px-6 lg:px-8">

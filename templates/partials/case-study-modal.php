@@ -66,6 +66,18 @@ if (! defined('ABSPATH')) {
           </div>
         </div>
 
+        <div class="flex flex-col gap-4" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+          <h3 class="text-sm font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+            <?php esc_html_e('Visual Proof', 'webmakerr'); ?>
+          </h3>
+          <?php
+          get_template_part('templates/partials/case-study-visual-proof', null, [
+              'wrapper_classes' => 'grid gap-4 sm:grid-cols-2',
+              'figure_classes'  => 'flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-5 shadow-sm'
+          ]);
+          ?>
+        </div>
+
         <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-start" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
           <a class="btn btn-primary inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-6 py-3 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/contact')); ?>">
             <?php esc_html_e('Get Similar Results →', 'webmakerr'); ?>
