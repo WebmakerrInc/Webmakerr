@@ -335,7 +335,7 @@ $tags = get_tags(
           <p class="mt-2 text-sm leading-6 text-zinc-600">
             <?php esc_html_e('Subscribe to get the latest product drops, guides, and strategies delivered weekly.', 'webmakerr'); ?>
           </p>
-          <a class="mt-4 inline-flex items-center gap-2 rounded-[5px] bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-primary/90 !no-underline" href="<?php echo esc_url(home_url('/contact')); ?>">
+          <a class="mt-4 inline-flex items-center gap-2 rounded-[5px] bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-primary/90 !no-underline" href="<?php echo esc_url(home_url('/contact')); ?>" data-popup-trigger>
             <?php esc_html_e('Join our newsletter', 'webmakerr'); ?>
           </a>
         </div>
@@ -346,4 +346,21 @@ $tags = get_tags(
 
 <?php
 wp_reset_postdata();
+$form_id = 0;
+$form_config_path = get_template_directory() . '/templets/config/forms.php';
+
+if (is_readable($form_config_path)) {
+    $forms = include $form_config_path;
+    if (is_array($forms)) {
+        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+    }
+}
+
+if ($form_id > 0) {
+    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
+    if (is_readable($popup_partial)) {
+        include $popup_partial;
+    }
+}
+
 get_footer();

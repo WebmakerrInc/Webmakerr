@@ -40,7 +40,7 @@ get_header();
                       </p>
                       <div class="text-sm leading-6 text-zinc-600"><?php echo $description; ?></div>
                     </div>
-                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>">
+                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>" data-popup-trigger>
                       <?php esc_html_e('Choose plan', 'webmakerr'); ?>
                     </a>
                   </div>
@@ -65,4 +65,21 @@ get_header();
 </main>
 
 <?php
+$form_id = 0;
+$form_config_path = get_template_directory() . '/templets/config/forms.php';
+
+if (is_readable($form_config_path)) {
+    $forms = include $form_config_path;
+    if (is_array($forms)) {
+        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+    }
+}
+
+if ($form_id > 0) {
+    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
+    if (is_readable($popup_partial)) {
+        include $popup_partial;
+    }
+}
+
 get_footer();
