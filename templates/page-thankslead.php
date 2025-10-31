@@ -59,11 +59,11 @@ $appointment_link = webmakerr_get_popup_link_attributes($appointment_url, $popup
                   <span class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                   echo thankslead_render_icon('download', 'h-7 w-7'); ?></span>
                   <h1 class="text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">
-                    <?php esc_html_e('Your Free Download Is on the Way!', 'webmakerr'); ?>
+                    <?php esc_html_e('Let’s Turn Your Website into a Growth Engine.', 'webmakerr'); ?>
                   </h1>
                 </div>
                 <p class="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
-                  <?php esc_html_e('We just delivered your resource to your inbox. While you dive in, let’s map the fastest path to results with a strategy call.', 'webmakerr'); ?>
+                  <?php esc_html_e('Your download is in your inbox—now let’s build a site that converts. Whether you need a complete redesign, plugin customization, or a brand-new build, we’ll craft a roadmap that drives measurable growth.', 'webmakerr'); ?>
                 </p>
               </div>
               <div class="flex flex-col gap-5 rounded-[5px] border border-zinc-200 bg-white/80 p-6 shadow-sm">
@@ -72,10 +72,10 @@ $appointment_link = webmakerr_get_popup_link_attributes($appointment_url, $popup
                   echo thankslead_render_icon('phone-call', 'h-7 w-7'); ?></span>
                   <div class="flex flex-col gap-3">
                     <h2 class="text-xl font-semibold text-zinc-950">
-                      <?php esc_html_e('Unlock tailored guidance with a free strategy call.', 'webmakerr'); ?>
+                      <?php esc_html_e('Unlock tailored guidance for your next web project.', 'webmakerr'); ?>
                     </h2>
                     <p class="text-sm text-zinc-600">
-                      <?php esc_html_e('Connect with a marketing strategist who will review your goals, surface quick wins, and outline a growth roadmap built around your offer.', 'webmakerr'); ?>
+                      <?php esc_html_e('Connect with a lead strategist who will review your goals, surface conversion quick wins, and outline your redesign, customization, or launch plan.', 'webmakerr'); ?>
                     </p>
                   </div>
                 </div>
@@ -98,85 +98,166 @@ $appointment_link = webmakerr_get_popup_link_attributes($appointment_url, $popup
                     <?php esc_html_e('Inside your inbox', 'webmakerr'); ?>
                   </span>
                   <p class="text-lg font-medium text-zinc-950">
-                    <?php esc_html_e('Download link, pro tips, and a quick-start checklist to implement today.', 'webmakerr'); ?>
+                    <?php esc_html_e('Download link, conversion checklists, and next steps to implement today.', 'webmakerr'); ?>
                   </p>
                 </div>
                 <ul class="grid gap-3 text-sm text-zinc-600">
                   <li class="flex items-center gap-3 rounded-[5px] border border-zinc-200 bg-white px-4 py-3">
                     <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo thankslead_render_icon('review'); ?></span>
-                    <span><?php esc_html_e('Personalized insights curated by our growth team.', 'webmakerr'); ?></span>
+                    <span><?php esc_html_e('Personalized website audit insights curated by our growth team.', 'webmakerr'); ?></span>
                   </li>
                   <li class="flex items-center gap-3 rounded-[5px] border border-zinc-200 bg-white px-4 py-3">
                     <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo thankslead_render_icon('calendar'); ?></span>
-                    <span><?php esc_html_e('Exclusive access to priority calendar slots for new clients.', 'webmakerr'); ?></span>
+                    <span><?php esc_html_e('Priority scheduling links to secure your consultation quickly.', 'webmakerr'); ?></span>
                   </li>
                   <li class="flex items-center gap-3 rounded-[5px] border border-zinc-200 bg-white px-4 py-3">
                     <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo thankslead_render_icon('sparkles'); ?></span>
-                    <span><?php esc_html_e('Action-ready ideas you can implement before we meet.', 'webmakerr'); ?></span>
+                    <span><?php esc_html_e('Action-ready optimization ideas to deploy before we meet.', 'webmakerr'); ?></span>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
-
-        <div class="flex justify-center pt-8">
-          <a class="btn btn-primary inline-flex items-center justify-center rounded-[5px] bg-black px-6 py-3 font-semibold text-white !no-underline" href="<?php echo esc_url($appointment_link['href']); ?>"<?php echo $appointment_link['attributes']; ?>>
-            <?php esc_html_e('Reserve My Free Strategy Call', 'webmakerr'); ?>
-          </a>
-        </div>
-
         <section class="rounded-[5px] border border-zinc-200 bg-white p-8 shadow-sm sm:p-10">
           <header class="mx-auto flex max-w-3xl flex-col gap-4 text-center">
             <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-              <?php esc_html_e('Here’s What Happens Next', 'webmakerr'); ?>
+              <?php esc_html_e('Your Website Growth Blueprint Starts Here', 'webmakerr'); ?>
             </h2>
             <p class="text-base leading-7 text-zinc-600 sm:text-lg">
-              <?php esc_html_e('Our concierge onboarding keeps momentum high so you move from download to done in record time.', 'webmakerr'); ?>
+              <?php esc_html_e('Every engagement is engineered to convert—combining strategic redesigns, precision plugin customization, and full-scale builds tailored to your goals.', 'webmakerr'); ?>
             </p>
           </header>
           <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <?php
-            $steps = array(
+            $benefits = array(
                 array(
-                    'icon'        => 'check-circle',
-                    'title'       => __('We Confirm Your Goals', 'webmakerr'),
-                    'description' => __('A strategist reviews your submission and gathers any missing context within one business day.', 'webmakerr'),
+                    'icon'        => 'target',
+                    'title'       => __('Conversion-Focused Design', 'webmakerr'),
+                    'description' => __('Launch a high-performing layout grounded in data-backed UX and persuasive copy.', 'webmakerr'),
+                ),
+                array(
+                    'icon'        => 'sparkles',
+                    'title'       => __('Tailored Solutions', 'webmakerr'),
+                    'description' => __('From plugin customization to bespoke systems, we adapt every component to your stack.', 'webmakerr'),
                 ),
                 array(
                     'icon'        => 'calendar',
-                    'title'       => __('You Book the Call', 'webmakerr'),
-                    'description' => __('Choose the time that fits best—our priority calendar is reserved for new downloads like yours.', 'webmakerr'),
-                ),
-                array(
-                    'icon'        => 'target',
-                    'title'       => __('We Build Your Roadmap', 'webmakerr'),
-                    'description' => __('During the session we co-create a 90-day growth plan with clear deliverables and next actions.', 'webmakerr'),
+                    'title'       => __('Fast Turnaround', 'webmakerr'),
+                    'description' => __('Dedicated sprint teams accelerate delivery while maintaining premium quality.', 'webmakerr'),
                 ),
             );
 
-            foreach ($steps as $step) :
+            foreach ($benefits as $benefit) :
                 ?>
                 <article class="flex h-full flex-col items-center rounded-[5px] border border-zinc-200 bg-zinc-50 p-6 text-center shadow-sm transition hover:border-primary/40 hover:shadow-md">
                   <div class="flex flex-col items-center">
                     <?php
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    echo thankslead_render_icon($step['icon']);
+                    echo thankslead_render_icon($benefit['icon']);
                     ?>
                     <h3 class="mt-3 text-xl font-semibold text-zinc-950">
-                      <?php echo esc_html($step['title']); ?>
+                      <?php echo esc_html($benefit['title']); ?>
                     </h3>
                   </div>
                   <p class="mt-3 text-sm leading-6 text-zinc-600">
-                    <?php echo esc_html($step['description']); ?>
+                    <?php echo esc_html($benefit['description']); ?>
                   </p>
                 </article>
                 <?php
             endforeach;
             ?>
+          </div>
+        </section>
+
+        <section class="rounded-[5px] border border-zinc-200 bg-white p-8 shadow-sm sm:p-10">
+          <div class="mx-auto grid max-w-4xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div class="flex flex-col gap-6">
+              <header class="flex flex-col gap-4">
+                <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
+                  <?php esc_html_e('What to Expect During Your Consultation', 'webmakerr'); ?>
+                </h2>
+                <p class="text-base leading-7 text-zinc-600 sm:text-lg">
+                  <?php esc_html_e('We make your first 30 minutes count—clarifying objectives, auditing key conversion paths, and mapping the execution timeline.', 'webmakerr'); ?>
+                </p>
+              </header>
+              <ul class="space-y-4 text-sm text-zinc-600">
+                <li class="flex items-start gap-3 rounded-[5px] border border-zinc-200 bg-white px-4 py-3">
+                  <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                  echo thankslead_render_icon('check-circle'); ?></span>
+                  <div class="flex flex-col gap-1">
+                    <p class="font-semibold text-zinc-900">
+                      <?php esc_html_e('Audit & Opportunity Snapshot', 'webmakerr'); ?>
+                    </p>
+                    <p>
+                      <?php esc_html_e('Review the current site or tech stack to highlight conversion leaks and performance wins.', 'webmakerr'); ?>
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-[5px] border border-zinc-200 bg-white px-4 py-3">
+                  <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                  echo thankslead_render_icon('review'); ?></span>
+                  <div class="flex flex-col gap-1">
+                    <p class="font-semibold text-zinc-900">
+                      <?php esc_html_e('Custom Solution Roadmap', 'webmakerr'); ?>
+                    </p>
+                    <p>
+                      <?php esc_html_e('Define the redesign, plugin customization, or new build plan to reach your revenue targets.', 'webmakerr'); ?>
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-[5px] border border-zinc-200 bg-white px-4 py-3">
+                  <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                  echo thankslead_render_icon('handshake'); ?></span>
+                  <div class="flex flex-col gap-1">
+                    <p class="font-semibold text-zinc-900">
+                      <?php esc_html_e('Launch Timeline & Next Steps', 'webmakerr'); ?>
+                    </p>
+                    <p>
+                      <?php esc_html_e('Leave with a prioritized schedule, investment overview, and dedicated launch team.', 'webmakerr'); ?>
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-6 rounded-[5px] border border-zinc-200 bg-gradient-to-br from-primary/5 via-white to-white p-8 text-left shadow-sm">
+              <header class="flex flex-col gap-3">
+                <span class="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                  <?php esc_html_e('Client outcomes', 'webmakerr'); ?>
+                </span>
+                <p class="text-lg font-medium text-zinc-950">
+                  <?php esc_html_e('“Our redesigned launch captured 3x more qualified leads in the first month—Webmakerr made the tech seamless.”', 'webmakerr'); ?>
+                </p>
+                <p class="text-sm text-zinc-500">
+                  <?php esc_html_e('Jordan Blake — Director of Digital Experience, Northshore Labs', 'webmakerr'); ?>
+                </p>
+              </header>
+              <div class="rounded-[5px] border border-zinc-200 bg-white p-6">
+                <h3 class="text-base font-semibold text-zinc-950">
+                  <?php esc_html_e('Growth Highlights', 'webmakerr'); ?>
+                </h3>
+                <ul class="mt-4 space-y-3 text-sm text-zinc-600">
+                  <li class="flex items-center gap-3">
+                    <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo thankslead_render_icon('target', 'h-5 w-5'); ?></span>
+                    <span><?php esc_html_e('Conversion-focused redesign with analytics-backed UX improvements.', 'webmakerr'); ?></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo thankslead_render_icon('sparkles', 'h-5 w-5'); ?></span>
+                    <span><?php esc_html_e('Custom plugin integrations automated lead capture and follow-ups.', 'webmakerr'); ?></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo thankslead_render_icon('calendar', 'h-5 w-5'); ?></span>
+                    <span><?php esc_html_e('Launch-ready in weeks with a dedicated conversion squad on call.', 'webmakerr'); ?></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -191,31 +272,22 @@ $appointment_link = webmakerr_get_popup_link_attributes($appointment_url, $popup
                 <?php esc_html_e('Let’s discuss how we can help you grow—your complimentary consultation is one click away.', 'webmakerr'); ?>
               </p>
             </header>
-            <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a class="btn btn-primary inline-flex items-center justify-center rounded-[5px] px-5 py-2 text-sm font-semibold !no-underline" href="<?php echo esc_url($appointment_link['href']); ?>"<?php echo $appointment_link['attributes']; ?>>
+            <div class="flex flex-col items-center justify-center gap-3">
+              <a class="btn btn-primary inline-flex items-center justify-center rounded-[5px] bg-black px-6 py-3 text-sm font-semibold text-white !no-underline" href="<?php echo esc_url($appointment_link['href']); ?>"<?php echo $appointment_link['attributes']; ?>>
                 <?php esc_html_e('Reserve My Free Strategy Call', 'webmakerr'); ?>
               </a>
               <span class="text-sm text-zinc-500">
                 <?php esc_html_e('Limited availability each week—schedule now to lock in your spot.', 'webmakerr'); ?>
               </span>
             </div>
-            <div class="flex flex-col items-center gap-3 rounded-[5px] border border-zinc-200 bg-white/80 p-6 text-left shadow-sm sm:flex-row sm:items-center sm:text-center sm:justify-center">
+            <div class="flex flex-col items-center gap-3 rounded-[5px] border border-zinc-200 bg-white/80 p-6 text-left shadow-sm sm:flex-row sm:items-center sm:justify-center sm:text-center">
               <span class="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary"><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
               echo thankslead_render_icon('handshake', 'h-6 w-6'); ?></span>
               <p class="text-sm leading-6 text-zinc-600">
-                <?php esc_html_e('“The insights from our first call paid for the project in weeks. Their team is the real deal.” — Avery Chen, VP of Growth', 'webmakerr'); ?>
+                <?php esc_html_e('“The brief alone helped us align leadership and move fast—book the call while it’s still free.” — Avery Chen, VP of Growth', 'webmakerr'); ?>
               </p>
             </div>
           </div>
-        </section>
-
-        <section class="flex flex-col items-center gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 text-center shadow-sm">
-          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500">
-            <?php esc_html_e('Trusted by professionals worldwide', 'webmakerr'); ?>
-          </p>
-          <p class="text-sm text-zinc-500">
-            <?php esc_html_e('From venture-backed startups to global agencies, leaders count on Webmakerr to ship campaigns faster.', 'webmakerr'); ?>
-          </p>
         </section>
       </article>
     <?php endwhile; ?>
