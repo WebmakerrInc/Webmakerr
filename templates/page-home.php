@@ -428,6 +428,91 @@ get_header();
         </div>
       </section>
 
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+          <div class="grid md:grid-cols-2 gap-6">
+
+            <div class="bg-blue-700 text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden">
+              <div>
+                <p class="text-sm uppercase font-semibold mb-2">coursera <span class="font-bold">plus</span></p>
+                <h2 class="text-xl font-semibold mb-4 leading-snug">
+                  Unlock access to 10,000+ courses<br>with a subscription
+                </h2>
+                <a href="#" class="inline-flex items-center text-white font-medium bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-md transition">
+                  Start 7-day free trial →
+                </a>
+              </div>
+              <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="absolute right-4 bottom-4 rounded-xl">
+            </div>
+
+            <div class="bg-blue-900 text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden">
+              <div>
+                <p class="text-sm uppercase font-semibold mb-2">
+                  coursera <span class="font-normal">for business</span>
+                </p>
+                <h2 class="text-xl font-semibold mb-4 leading-snug">
+                  Drive your business forward and empower your teams
+                </h2>
+                <a href="#" class="inline-flex items-center text-blue-900 font-medium bg-white hover:bg-gray-100 px-4 py-2 rounded-md transition">
+                  Try Coursera for Business →
+                </a>
+              </div>
+              <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="absolute right-4 bottom-4 rounded-xl">
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="pb-20 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="text-xl md:text-2xl font-semibold text-gray-900 mb-8">Why people choose Coursera</h2>
+
+          <div class="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2">
+
+            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="https://via.placeholder.com/60x60" alt="Sarah" class="w-12 h-12 rounded-full">
+                <h4 class="font-semibold text-gray-900 text-sm">Sarah W.</h4>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                "Coursera's reputation for high-quality content, paired with its flexible structure, made it possible for me to dive into data analytics while managing family, health, and everyday life."
+              </p>
+            </div>
+
+            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="https://via.placeholder.com/60x60" alt="Noeris" class="w-12 h-12 rounded-full">
+                <h4 class="font-semibold text-gray-900 text-sm">Noeris B.</h4>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                "Coursera rebuilt my confidence and showed me I could dream bigger. It wasn't just about gaining knowledge—it was about believing in my potential again."
+              </p>
+            </div>
+
+            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="https://via.placeholder.com/60x60" alt="Abdullahi" class="w-12 h-12 rounded-full">
+                <h4 class="font-semibold text-gray-900 text-sm">Abdullahi M.</h4>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                "I now feel more prepared to take on leadership roles and have already started mentoring some of my colleagues."
+              </p>
+            </div>
+
+            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="https://via.placeholder.com/60x60" alt="Anas" class="w-12 h-12 rounded-full">
+                <h4 class="font-semibold text-gray-900 text-sm">Anas A.</h4>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                "Learning with Coursera has expanded my professional expertise by giving me access to cutting-edge research, practical tools, and global perspectives."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="bg-zinc-50 py-16 sm:py-20 lg:py-24">
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="flex flex-col gap-10">
