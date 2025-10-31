@@ -240,11 +240,12 @@ get_header();
         </div>
       </section>
 
-      <section class="relative z-[1] -mt-20 pb-16">
-        <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-6 md:grid-cols-3 md:px-8">
-          <?php foreach ($discover_tiles as $tile) : ?>
-            <a class="group flex h-full flex-col gap-4 rounded-2xl border border-white/60 bg-white p-6 shadow-[0_20px_50px_rgba(6,35,100,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(6,35,100,0.12)] !no-underline" href="<?php echo esc_url($tile['url']); ?>">
-              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#062364]/5 text-[#062364]">
+      <section class="relative z-[1] -mt-16 pb-16 sm:pb-20 lg:pb-24">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <?php foreach ($discover_tiles as $tile) : ?>
+            <a class="group flex h-full flex-col gap-5 rounded-[6px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($tile['url']); ?>">
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-[5px] bg-primary/10 text-primary">
                 <?php
                 $icon_path = get_template_directory() . '/assets/svg/home/icons/' . $tile['icon'];
                 if (file_exists($icon_path)) {
@@ -254,37 +255,38 @@ get_header();
                 ?>
               </span>
               <div class="flex flex-col gap-2">
-                <span class="font-serif text-xl font-semibold text-[#062364]">
+                <span class="text-xl font-semibold text-zinc-950">
                   <?php echo esc_html($tile['title']); ?>
                 </span>
-                <p class="text-sm leading-6 text-slate-600">
+                <p class="text-sm leading-6 text-zinc-600">
                   <?php echo esc_html($tile['description']); ?>
                 </p>
               </div>
-              <span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#1f3a83] transition group-hover:text-[#0f1d46]">
+              <span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:text-primary/80">
                 <?php esc_html_e('Start exploring', 'webmakerr'); ?>
                 <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </span>
             </a>
-          <?php endforeach; ?>
+            <?php endforeach; ?>
+          </div>
         </div>
       </section>
 
-      <section class="border-y border-[#dbe3ff] bg-white py-16">
-        <div class="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 md:px-8">
-          <div class="flex flex-col items-center gap-2 text-center">
-            <p class="text-xs font-semibold uppercase tracking-[0.35em] text-[#1f3a83]">
+      <section class="border-y border-zinc-200 bg-zinc-50 py-16 sm:py-20 lg:py-24">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col items-center gap-3 text-center">
+            <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
               <?php esc_html_e('Learn from leading universities and companies', 'webmakerr'); ?>
             </p>
-            <p class="font-serif text-2xl font-semibold text-slate-900 sm:text-3xl">
+            <p class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
               <?php esc_html_e('Trusted by teams building the future of work', 'webmakerr'); ?>
             </p>
           </div>
-          <div class="-mx-4 flex items-center gap-6 overflow-x-auto px-4 pb-2">
+          <div class="-mx-4 flex items-center gap-6 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
             <?php foreach ($trusted_brands as $brand) : ?>
-              <div class="flex min-w-[160px] items-center justify-center rounded-2xl border border-[#e0e6ff] bg-white px-6 py-4 shadow-[0_12px_30px_rgba(6,35,100,0.08)]">
+              <div class="flex min-w-[160px] items-center justify-center rounded-[6px] border border-zinc-200 bg-white px-6 py-4 shadow-sm">
                 <span class="sr-only"><?php echo esc_html($brand['name']); ?></span>
                 <?php
                 $brand_path = get_template_directory() . '/assets/svg/home/brands/' . $brand['logo'];
@@ -299,19 +301,19 @@ get_header();
         </div>
       </section>
 
-      <section class="py-20">
-        <div class="mx-auto grid w-full max-w-7xl gap-10 px-6 md:px-8 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <section class="py-16 sm:py-20 lg:py-24">
+        <div class="mx-auto grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:px-8 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div class="flex flex-col gap-8">
-            <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 class="font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+                <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                   <?php esc_html_e('Trending courses', 'webmakerr'); ?>
                 </h2>
-                <p class="mt-2 max-w-2xl text-base leading-7 text-slate-600">
+                <p class="mt-2 max-w-2xl text-base leading-7 text-zinc-600">
                   <?php esc_html_e('Stay ahead with programs updated alongside the fastest-moving AI innovations.', 'webmakerr'); ?>
                 </p>
               </div>
-              <a class="inline-flex items-center gap-2 text-sm font-semibold text-[#1f3a83] !no-underline" href="<?php echo esc_url(home_url('/courses')); ?>">
+              <a class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80 !no-underline" href="<?php echo esc_url(home_url('/courses')); ?>">
                 <?php esc_html_e('View all', 'webmakerr'); ?>
                 <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -320,8 +322,8 @@ get_header();
             </div>
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <?php foreach ($trending_courses as $course) : ?>
-                <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-[#e0e6ff] bg-white shadow-[0_18px_45px_rgba(6,35,100,0.08)]">
-                  <div class="relative aspect-[5/3] w-full overflow-hidden bg-[#eef2ff]">
+                <article class="flex h-full flex-col overflow-hidden rounded-[6px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                  <div class="relative aspect-[5/3] w-full overflow-hidden bg-zinc-100">
                     <?php
                     $thumbnail_path = get_template_directory() . '/assets/svg/home/courses/' . $course['thumbnail'];
                     if (file_exists($thumbnail_path)) {
@@ -332,31 +334,31 @@ get_header();
                   </div>
                   <div class="flex flex-1 flex-col gap-5 p-6">
                     <div class="flex flex-col gap-2">
-                      <span class="inline-flex items-center rounded-full bg-[#eaf1ff] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1f3a83]">
+                      <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
                         <?php echo esc_html($course['badge']); ?>
                       </span>
-                      <h3 class="font-serif text-xl font-semibold text-slate-900">
+                      <h3 class="text-xl font-semibold text-zinc-950">
                         <?php echo esc_html($course['title']); ?>
                       </h3>
-                      <p class="text-sm leading-6 text-slate-600">
+                      <p class="text-sm leading-6 text-zinc-600">
                         <?php echo esc_html($course['description']); ?>
                       </p>
                     </div>
-                    <div class="flex items-center gap-2 text-sm font-medium text-slate-500">
-                      <span class="h-2 w-2 rounded-full bg-[#7fe6ff]"></span>
+                    <div class="flex items-center gap-2 text-sm font-medium text-zinc-500">
+                      <span class="h-2 w-2 rounded-full bg-primary/40"></span>
                       <?php echo esc_html($course['provider']); ?>
                     </div>
                     <?php if (! empty($course['tags'])) : ?>
                       <div class="flex flex-wrap gap-2">
                         <?php foreach ($course['tags'] as $tag) : ?>
-                          <span class="inline-flex items-center rounded-full bg-[#f1f4ff] px-3 py-1 text-xs font-medium text-[#1f3a83]">
+                          <span class="inline-flex items-center rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-primary">
                             <?php echo esc_html($tag); ?>
                           </span>
                         <?php endforeach; ?>
                       </div>
                     <?php endif; ?>
                     <div class="mt-auto pt-4">
-                      <a class="inline-flex w-full items-center justify-center rounded-lg bg-[#1f3a83] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#162961] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7fe6ff] focus-visible:ring-offset-2 focus-visible:ring-offset-white !no-underline" href="<?php echo esc_url(home_url('/courses')); ?>">
+                      <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white !no-underline" href="<?php echo esc_url(home_url('/courses')); ?>">
                         <?php esc_html_e('Start learning', 'webmakerr'); ?>
                       </a>
                     </div>
@@ -366,28 +368,28 @@ get_header();
             </div>
           </div>
           <aside class="flex flex-col gap-8">
-            <div class="rounded-3xl border border-[#e0e6ff] bg-white p-6 shadow-[0_18px_45px_rgba(6,35,100,0.08)]">
-              <h3 class="font-serif text-2xl font-semibold text-slate-900">
+            <div class="rounded-[6px] border border-zinc-200 bg-white p-6 shadow-sm">
+              <h3 class="text-2xl font-semibold text-zinc-950">
                 <?php esc_html_e('Explore categories', 'webmakerr'); ?>
               </h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">
+              <p class="mt-3 text-sm leading-6 text-zinc-600">
                 <?php esc_html_e('Browse curated topics to tailor the learning journey for your goals.', 'webmakerr'); ?>
               </p>
               <div class="mt-6 flex flex-wrap gap-2">
-                <button type="button" class="inline-flex items-center rounded-full bg-[#1f3a83] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition hover:bg-[#162961] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7fe6ff]">
+                <button type="button" class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   <?php esc_html_e('All programs', 'webmakerr'); ?>
                 </button>
-                <button type="button" class="inline-flex items-center rounded-full border border-[#d0d8ff] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#1f3a83] transition hover:border-[#1f3a83] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7fe6ff]">
+                <button type="button" class="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
                   <?php esc_html_e('Popular', 'webmakerr'); ?>
                 </button>
-                <button type="button" class="inline-flex items-center rounded-full border border-[#d0d8ff] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#1f3a83] transition hover:border-[#1f3a83] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7fe6ff]">
+                <button type="button" class="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
                   <?php esc_html_e('Career tracks', 'webmakerr'); ?>
                 </button>
               </div>
               <div class="mt-8 grid grid-cols-1 gap-4">
                 <?php foreach ($categories as $category) : ?>
-                  <div class="group flex items-center gap-4 rounded-2xl border border-transparent bg-[#f5f7ff] p-4 transition hover:border-[#1f3a83]/20 hover:bg-white">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-white shadow-[0_10px_25px_rgba(6,35,100,0.08)]">
+                  <div class="group flex items-center gap-4 rounded-[6px] border border-transparent bg-zinc-50 p-4 transition hover:border-primary/20 hover:bg-white">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-[5px] bg-white shadow-sm">
                       <?php
                       $category_path = get_template_directory() . '/assets/svg/home/categories/' . $category['image'];
                       if (file_exists($category_path)) {
@@ -397,10 +399,10 @@ get_header();
                       ?>
                     </div>
                     <div class="flex flex-col">
-                      <span class="font-serif text-lg font-semibold text-slate-900">
+                      <span class="text-lg font-semibold text-zinc-950">
                         <?php echo esc_html($category['title']); ?>
                       </span>
-                      <p class="text-sm text-slate-600">
+                      <p class="text-sm text-zinc-600">
                         <?php echo esc_html($category['description']); ?>
                       </p>
                     </div>
@@ -410,8 +412,8 @@ get_header();
             </div>
             <div class="flex flex-col gap-4">
               <?php foreach ($spotlight_programs as $program) : ?>
-                <a class="group flex flex-col overflow-hidden rounded-3xl border border-[#e0e6ff] bg-white shadow-[0_18px_45px_rgba(6,35,100,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(6,35,100,0.12)] !no-underline" href="<?php echo esc_url($program['url']); ?>">
-                  <div class="relative h-40 overflow-hidden bg-[#eef2ff]">
+                <a class="group flex flex-col overflow-hidden rounded-[6px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($program['url']); ?>">
+                  <div class="relative h-40 overflow-hidden bg-zinc-100">
                     <?php
                     $program_image = get_template_directory() . '/assets/svg/home/courses/' . $program['image'];
                     if (file_exists($program_image)) {
@@ -419,19 +421,19 @@ get_header();
                         echo file_get_contents($program_image);
                     }
                     ?>
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#03133f]/70 to-transparent"></div>
-                    <span class="absolute left-6 top-6 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#1f3a83]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/70 to-transparent"></div>
+                    <span class="absolute left-6 top-6 inline-flex items-center rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                       <?php esc_html_e('Spotlight', 'webmakerr'); ?>
                     </span>
                   </div>
                   <div class="flex flex-col gap-3 p-6">
-                    <h4 class="font-serif text-xl font-semibold text-slate-900">
+                    <h4 class="text-xl font-semibold text-zinc-950">
                       <?php echo esc_html($program['title']); ?>
                     </h4>
-                    <p class="text-sm leading-6 text-slate-600">
+                    <p class="text-sm leading-6 text-zinc-600">
                       <?php echo esc_html($program['description']); ?>
                     </p>
-                    <span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#1f3a83]">
+                    <span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:text-primary/80">
                       <?php echo esc_html($program['cta']); ?>
                       <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -445,20 +447,20 @@ get_header();
         </div>
       </section>
 
-      <section class="bg-[#f0f3ff] py-20">
-        <div class="mx-auto w-full max-w-7xl px-6 md:px-8">
+      <section class="bg-zinc-50 py-16 sm:py-20 lg:py-24">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="flex flex-col gap-10">
             <div class="flex flex-col items-center gap-3 text-center">
-              <h2 class="font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+              <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
                 <?php esc_html_e('Explore careers', 'webmakerr'); ?>
               </h2>
-              <p class="max-w-2xl text-base leading-7 text-slate-600">
+              <p class="max-w-2xl text-base leading-7 text-zinc-600">
                 <?php esc_html_e('Map your next role with curated skills, projects, and hiring insights from global employers.', 'webmakerr'); ?>
               </p>
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
               <?php foreach ($career_paths as $career) : ?>
-                <article class="flex h-full flex-col gap-5 rounded-3xl border border-[#dce4ff] bg-white p-6 shadow-[0_18px_45px_rgba(6,35,100,0.08)]">
+                <article class="flex h-full flex-col gap-5 rounded-[6px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                   <div class="h-16 w-16">
                     <?php
                     $career_path = get_template_directory() . '/assets/svg/home/careers/' . $career['icon'];
@@ -469,15 +471,15 @@ get_header();
                     ?>
                   </div>
                   <div class="flex flex-col gap-3">
-                    <h3 class="font-serif text-xl font-semibold text-slate-900">
+                    <h3 class="text-xl font-semibold text-zinc-950">
                       <?php echo esc_html($career['title']); ?>
                     </h3>
-                    <p class="text-sm leading-6 text-slate-600">
+                    <p class="text-sm leading-6 text-zinc-600">
                       <?php echo esc_html($career['description']); ?>
                     </p>
                   </div>
                   <div class="mt-auto pt-2">
-                    <a class="inline-flex items-center gap-2 text-sm font-semibold text-[#1f3a83] !no-underline" href="<?php echo esc_url(home_url('/careers')); ?>">
+                    <a class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80 !no-underline" href="<?php echo esc_url(home_url('/careers')); ?>">
                       <?php esc_html_e('View path', 'webmakerr'); ?>
                       <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -491,27 +493,27 @@ get_header();
         </div>
       </section>
 
-      <section class="relative overflow-hidden py-24">
-        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#061f5c] to-transparent"></div>
-        <div class="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-10 overflow-hidden rounded-[40px] bg-gradient-to-r from-[#1f3a83] to-[#061f5c] px-6 py-16 text-center text-white shadow-[0_30px_80px_rgba(6,35,100,0.35)] md:px-16">
-          <div class="absolute -right-14 -top-10 h-40 w-40 rounded-full bg-[radial-gradient(circle_at_top,#7fe6ff,transparent_60%)] opacity-80 blur-2xl"></div>
-          <div class="absolute -left-16 top-1/2 h-52 w-52 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_top,#ff6bd6,transparent_60%)] opacity-70 blur-3xl"></div>
+      <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/20 to-transparent"></div>
+        <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 overflow-hidden rounded-[24px] border border-zinc-200 bg-white px-6 py-14 text-center shadow-lg shadow-primary/10 sm:px-10">
+          <div class="absolute -right-14 -top-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl"></div>
+          <div class="absolute -left-12 bottom-0 h-36 w-36 rounded-full bg-primary/5 blur-3xl"></div>
           <div class="relative">
-            <span class="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/80">
+            <span class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-primary">
               <?php esc_html_e('Get started today', 'webmakerr'); ?>
             </span>
-            <h2 class="mt-6 font-serif text-3xl font-semibold text-white sm:text-4xl">
+            <h2 class="mt-6 text-3xl font-semibold text-zinc-950 sm:text-4xl">
               <?php esc_html_e('What brings you to Webmakerr today?', 'webmakerr'); ?>
             </h2>
-            <p class="mt-4 text-base leading-7 text-white/80">
+            <p class="mt-4 text-base leading-7 text-zinc-600">
               <?php esc_html_e('Choose the path that matches your goals and we’ll surface the right courses, credentials, and support.', 'webmakerr'); ?>
             </p>
           </div>
           <div class="relative flex flex-col gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-[#061f5c] shadow-lg shadow-[#03133f]/30 transition hover:bg-[#f5f7ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:ring-white/70 !no-underline" href="<?php echo esc_url(home_url('/learn')); ?>">
+            <a class="inline-flex items-center justify-center gap-2 rounded-[6px] border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-sm transition hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 !no-underline" href="<?php echo esc_url(home_url('/learn')); ?>">
               <?php esc_html_e('I want to learn new skills', 'webmakerr'); ?>
             </a>
-            <a class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 !no-underline" href="<?php echo esc_url(home_url('/business-solutions')); ?>">
+            <a class="inline-flex items-center justify-center gap-2 rounded-[6px] border border-transparent bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white !no-underline" href="<?php echo esc_url(home_url('/business-solutions')); ?>">
               <?php esc_html_e("I'm exploring for my business", 'webmakerr'); ?>
             </a>
           </div>
@@ -519,8 +521,8 @@ get_header();
       </section>
 
       <?php if (trim(get_the_content())) : ?>
-        <section class="py-20">
-          <div class="prose prose-lg mx-auto w-full max-w-4xl px-6 text-slate-600 prose-headings:font-serif prose-headings:text-slate-900 md:px-8">
+        <section class="py-16 sm:py-20 lg:py-24">
+          <div class="prose prose-lg mx-auto w-full max-w-4xl px-4 text-zinc-600 prose-headings:text-zinc-950 sm:px-6 lg:px-8">
             <?php the_content(); ?>
           </div>
         </section>
