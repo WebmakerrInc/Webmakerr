@@ -55,10 +55,10 @@ $download_url = home_url('/download-webbooking');
                 <?php esc_html_e('WebBooking lets you manage bookings, teams, and calendar sync — fast, reliable, and built beautifully for Webmakerr.', 'webmakerr'); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>">
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>" data-popup-trigger>
                   <?php esc_html_e('Get WebBooking Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>" data-popup-trigger>
                   <?php esc_html_e('See WebBooking in action', 'webmakerr'); ?>
                 </a>
               </div>
@@ -214,7 +214,7 @@ $download_url = home_url('/download-webbooking');
             </p>
           </header>
           <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($download_url); ?>">
+            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($download_url); ?>" data-popup-trigger>
               <?php esc_html_e('Download WebBooking Free', 'webmakerr'); ?>
             </a>
             <p class="text-sm text-zinc-500">
@@ -228,4 +228,21 @@ $download_url = home_url('/download-webbooking');
 </main>
 
 <?php
+$form_id = 0;
+$form_config_path = get_template_directory() . '/templets/config/forms.php';
+
+if (is_readable($form_config_path)) {
+    $forms = include $form_config_path;
+    if (is_array($forms)) {
+        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+    }
+}
+
+if ($form_id > 0) {
+    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
+    if (is_readable($popup_partial)) {
+        include $popup_partial;
+    }
+}
+
 get_footer();

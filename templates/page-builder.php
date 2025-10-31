@@ -77,4 +77,21 @@ get_header();
 </main>
 
 <?php
+$form_id = 0;
+$form_config_path = get_template_directory() . '/templets/config/forms.php';
+
+if (is_readable($form_config_path)) {
+    $forms = include $form_config_path;
+    if (is_array($forms)) {
+        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+    }
+}
+
+if ($form_id > 0) {
+    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
+    if (is_readable($popup_partial)) {
+        include $popup_partial;
+    }
+}
+
 get_footer();

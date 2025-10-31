@@ -307,7 +307,7 @@ get_header();
                 <?php echo wp_kses_post($hero_subheadline); ?>
               </p>
               <div class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#lead-capture" data-lead-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#lead-capture" data-lead-popup-trigger data-popup-trigger>
                   <?php echo esc_html($hero_primary_label); ?>
                 </a>
                 <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($hero_secondary_target); ?>">
@@ -492,7 +492,7 @@ get_header();
                   </h3>
                 </div>
                 <div class="mt-auto px-1">
-                  <a class="inline-flex w-full items-center justify-center gap-2 rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="#lead-capture" data-lead-popup-trigger>
+                  <a class="inline-flex w-full items-center justify-center gap-2 rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="#lead-capture" data-lead-popup-trigger data-popup-trigger>
                     <?php esc_html_e('See case studies →', 'webmakerr'); ?>
                     <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 11-1.414-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                   </a>
@@ -567,7 +567,7 @@ get_header();
               <?php echo wp_kses_post($cta_copy); ?>
             </p>
             <div class="flex flex-wrap gap-3">
-              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="#lead-capture" data-lead-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="#lead-capture" data-lead-popup-trigger data-popup-trigger>
                 <?php echo esc_html($cta_button); ?>
               </a>
               <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="#process">
@@ -617,4 +617,21 @@ get_header();
 </main>
 
 <?php
+$form_id = 0;
+$form_config_path = get_template_directory() . '/templets/config/forms.php';
+
+if (is_readable($form_config_path)) {
+    $forms = include $form_config_path;
+    if (is_array($forms)) {
+        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+    }
+}
+
+if ($form_id > 0) {
+    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
+    if (is_readable($popup_partial)) {
+        include $popup_partial;
+    }
+}
+
 get_footer();

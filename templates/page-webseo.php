@@ -63,7 +63,7 @@ get_header();
                 <?php esc_html_e('WebSEO instantly optimizes your WordPress website for higher rankings — no technical setup, no SEO jargon. Just install, activate, and start ranking.', 'webmakerr'); ?>
               </p>
               <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#get-webseo">
+                <a class="inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#get-webseo" data-popup-trigger>
                   <?php esc_html_e('Get WebSEO Now', 'webmakerr'); ?>
                 </a>
                 <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="#demo-webseo">
@@ -286,7 +286,7 @@ get_header();
               ?>
             </ul>
             <div class="mt-6">
-              <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 !no-underline" href="#get-webseo">
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 !no-underline" href="#get-webseo" data-popup-trigger>
                 <?php esc_html_e('Start with WebSEO Free', 'webmakerr'); ?>
               </a>
             </div>
@@ -367,7 +367,7 @@ get_header();
               <p class="max-w-xs text-sm leading-6 text-zinc-600">
                 <?php esc_html_e('Start free and upgrade when you’re ready for advanced automation, deeper insights, and collaborative workflows.', 'webmakerr'); ?>
               </p>
-              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#upgrade-webseo">
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#upgrade-webseo" data-popup-trigger>
                 <?php esc_html_e('Upgrade to WebSEO Pro', 'webmakerr'); ?>
               </a>
             </div>
@@ -459,7 +459,7 @@ get_header();
             ?>
           </div>
           <div class="mt-8 flex justify-center">
-            <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 !no-underline" href="#blog-webseo">
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 !no-underline" href="#blog-webseo">
               <?php esc_html_e('Read the Blog', 'webmakerr'); ?>
             </a>
           </div>
@@ -518,7 +518,7 @@ get_header();
               <?php esc_html_e('Automate SEO. Increase visibility. Save time. WebSEO does the hard work for you — effortlessly.', 'webmakerr'); ?>
             </p>
             <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-6 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#purchase-webseo">
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-6 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#purchase-webseo" data-popup-trigger>
                 <?php esc_html_e('Get WebSEO Now', 'webmakerr'); ?>
               </a>
               <a id="demo-webseo" class="inline-flex items-center justify-center rounded-[5px] border border-zinc-200 px-6 py-2 text-sm font-semibold text-zinc-950 transition hover:border-primary hover:text-primary !no-underline" href="#demo">
@@ -533,4 +533,21 @@ get_header();
 </main>
 
 <?php
+$form_id = 0;
+$form_config_path = get_template_directory() . '/templets/config/forms.php';
+
+if (is_readable($form_config_path)) {
+    $forms = include $form_config_path;
+    if (is_array($forms)) {
+        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+    }
+}
+
+if ($form_id > 0) {
+    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
+    if (is_readable($popup_partial)) {
+        include $popup_partial;
+    }
+}
+
 get_footer();
