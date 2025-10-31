@@ -14,11 +14,13 @@ if ($form_id <= 0) {
 }
 ?>
 
-<div id="ff-popup" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 px-4 py-6" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="relative mx-auto w-full max-w-xl rounded-none border border-zinc-200 bg-white p-6 font-sans shadow-lg sm:max-w-lg" data-popup-content>
-    <button type="button" class="absolute right-4 top-4 text-2xl font-light text-zinc-500 transition hover:text-zinc-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark" data-popup-close aria-label="<?php esc_attr_e('Close popup', 'webmakerr'); ?>">&times;</button>
-    <div class="space-y-6 text-left text-zinc-900">
-      <?php echo do_shortcode('[fluentform id="' . esc_attr($form_id) . '"]'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<div id="ff-popup" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/70 px-4 py-6 sm:py-10" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="relative mx-auto w-full max-w-2xl overflow-hidden rounded-none border border-gray-200 bg-white shadow-2xl" data-popup-content>
+    <button type="button" class="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center text-2xl font-light text-gray-500 transition hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" data-popup-close aria-label="<?php esc_attr_e('Close popup', 'webmakerr'); ?>">&times;</button>
+    <div class="max-h-[85vh] overflow-y-auto px-6 py-10 text-left font-sans text-gray-900 sm:px-10">
+      <div class="space-y-6">
+        <?php echo do_shortcode('[fluentform id="' . esc_attr($form_id) . '"]'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+      </div>
     </div>
   </div>
 </div>
