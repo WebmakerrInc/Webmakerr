@@ -166,13 +166,13 @@
   #ff-popup form.fluent_form select,
   #ff-popup form.fluent_form textarea {
     width: 100% !important;
-    border: 1px solid #e5e7eb !important;
+    border: 1px solid #d1d5db !important;
     background-color: #ffffff !important;
-    padding: 0.75rem 1rem !important;
+    padding: 0.5rem 0.75rem !important;
     font-size: 1rem !important;
     line-height: 1.5 !important;
-    color: #111827 !important;
-    border-radius: 0 !important;
+    color: #1f2937 !important;
+    border-radius: 5px !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
     box-shadow: none !important;
   }
@@ -196,9 +196,9 @@
   #ff-popup form.fluent_form input:focus,
   #ff-popup form.fluent_form select:focus,
   #ff-popup form.fluent_form textarea:focus {
-    border-color: #111827 !important;
-    outline: 2px solid transparent !important;
-    box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.1) !important;
+    border-color: #000000 !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   #ff-popup .fluentform .ff-el-is-error input,
@@ -232,12 +232,18 @@
   }
 
   #ff-popup .fluentform input[type='checkbox'],
+  #ff-popup form.fluent_form input[type='checkbox'] {
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+    border-radius: 5px !important;
+    border: 1px solid #d1d5db !important;
+  }
+
   #ff-popup .fluentform input[type='radio'],
-  #ff-popup form.fluent_form input[type='checkbox'],
   #ff-popup form.fluent_form input[type='radio'] {
     width: 1.1rem !important;
     height: 1.1rem !important;
-    border-radius: 0 !important;
+    border-radius: 9999px !important;
     border: 1px solid #d1d5db !important;
   }
 
@@ -248,43 +254,45 @@
     box-shadow: inset 0 0 0 2px #ffffff !important;
   }
 
+  #ff-popup .btn,
   #ff-popup .fluentform .ff-btn-submit,
   #ff-popup .fluentform button[type='submit'],
   #ff-popup .fluentform .ff_submit_btn_wrapper button,
   #ff-popup form.fluent_form .ff-btn-submit,
   #ff-popup form.fluent_form button[type='submit'],
   #ff-popup form.fluent_form .ff_submit_btn_wrapper button {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border-radius: 0 !important;
-    padding: 0.75rem 1.75rem !important;
+    border-radius: 5px !important;
+    padding: 0.75rem 1.5rem !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.02em !important;
     text-transform: none !important;
     border: 1px solid transparent !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0.5rem !important;
-    transition: background-color 0.2s ease, color 0.2s ease !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
   }
 
+  #ff-popup .btn-primary,
+  #ff-popup .fluentform .ff-btn-submit,
+  #ff-popup form.fluent_form .ff-btn-submit {
+    background-color: #111827 !important;
+    color: #ffffff !important;
+    border-color: #111827 !important;
+  }
+
+  #ff-popup .btn-primary:hover,
   #ff-popup .fluentform .ff-btn-submit:hover,
-  #ff-popup .fluentform button[type='submit']:hover,
-  #ff-popup .fluentform .ff_submit_btn_wrapper button:hover,
-  #ff-popup form.fluent_form .ff-btn-submit:hover,
-  #ff-popup form.fluent_form button[type='submit']:hover,
-  #ff-popup form.fluent_form .ff_submit_btn_wrapper button:hover {
-    background-color: rgba(0, 0, 0, 0.85) !important;
+  #ff-popup form.fluent_form .ff-btn-submit:hover {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
   }
 
+  #ff-popup .btn-primary:focus-visible,
   #ff-popup .fluentform .ff-btn-submit:focus-visible,
-  #ff-popup .fluentform button[type='submit']:focus-visible,
-  #ff-popup .fluentform .ff_submit_btn_wrapper button:focus-visible,
-  #ff-popup form.fluent_form .ff-btn-submit:focus-visible,
-  #ff-popup form.fluent_form button[type='submit']:focus-visible,
-  #ff-popup form.fluent_form .ff_submit_btn_wrapper button:focus-visible {
+  #ff-popup form.fluent_form .ff-btn-submit:focus-visible {
     outline: 2px solid #000000 !important;
     outline-offset: 3px !important;
   }
@@ -294,7 +302,7 @@
     margin-top: 1rem !important;
     padding: 1rem 1.25rem !important;
     border: 1px solid #86efac !important;
-    border-radius: 0 !important;
+    border-radius: 5px !important;
     background-color: #f0fdf4 !important;
     color: #15803d !important;
   }
