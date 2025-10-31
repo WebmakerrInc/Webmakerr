@@ -13,6 +13,17 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
 <main id="primary" class="bg-[#f5f7ff]">
   <?php while (have_posts()) : the_post(); ?>
     <article <?php post_class('flex flex-col'); ?>>
@@ -342,6 +353,77 @@ get_header();
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-6">Explore categories</h2>
+
+          <div class="flex gap-3 mb-10 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full flex items-center gap-2 cursor-pointer hover:bg-blue-100 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M9 21h6M4 10l1.89 9.45A2 2 0 007.85 21h8.3a2 2 0 001.96-1.55L20 10M12 3v7" />
+              </svg>
+              Business
+            </span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Artificial Intelligence</span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Data Science</span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Computer Science</span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Information Technology</span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Personal Development</span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Healthcare</span>
+            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Language Learning</span>
+          </div>
+
+          <div class="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+            <div class="flex-none snap-start w-72 bg-gradient-to-r from-blue-600 to-blue-400 text-white p-8 rounded-2xl flex flex-col justify-center items-start">
+              <h3 class="text-xl font-semibold mb-4">Hot new releases</h3>
+              <a href="#" class="inline-flex items-center gap-2 bg-white text-blue-600 font-medium px-4 py-2 rounded-md hover:bg-blue-50 transition">
+                Explore courses
+                <span class="text-lg">→</span>
+              </a>
+            </div>
+
+            <div class="flex-none snap-start w-72 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition overflow-hidden">
+              <img src="https://via.placeholder.com/400x200" alt="Google Course" class="w-full h-40 object-cover">
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-1">
+                  <img src="https://via.placeholder.com/20x20" alt="Google" class="w-5 h-5 rounded-full">
+                  <span class="text-sm text-gray-600 font-medium">Google</span>
+                </div>
+                <h4 class="text-base font-semibold text-gray-900 mb-1">Google People Management Essentials</h4>
+                <p class="text-sm text-gray-500">Specialization</p>
+                <p class="text-sm text-gray-500 mt-1">⭐ 4.8</p>
+              </div>
+            </div>
+
+            <div class="flex-none snap-start w-72 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition overflow-hidden">
+              <img src="https://via.placeholder.com/400x200" alt="Google Data Analysis" class="w-full h-40 object-cover">
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-1">
+                  <img src="https://via.placeholder.com/20x20" alt="Google" class="w-5 h-5 rounded-full">
+                  <span class="text-sm text-gray-600 font-medium">Google</span>
+                </div>
+                <h4 class="text-base font-semibold text-gray-900 mb-1">Google Data Analysis with Python</h4>
+                <p class="text-sm text-gray-500">Specialization</p>
+                <p class="text-sm text-gray-500 mt-1">⭐ 4.8</p>
+              </div>
+            </div>
+
+            <div class="flex-none snap-start w-72 bg-white rounded-xl border-4 border-green-300 shadow-sm hover:shadow-md transition overflow-hidden">
+              <img src="https://via.placeholder.com/400x200" alt="Google Stakeholder Management" class="w-full h-40 object-cover">
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-1">
+                  <img src="https://via.placeholder.com/20x20" alt="Google" class="w-5 h-5 rounded-full">
+                  <span class="text-sm text-gray-600 font-medium">Google</span>
+                </div>
+                <h4 class="text-base font-semibold text-gray-900 mb-1">Google Stakeholder Management</h4>
+                <p class="text-sm text-gray-500">Specialization</p>
+                <p class="text-sm text-gray-500 mt-1">⭐ 4.6</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
