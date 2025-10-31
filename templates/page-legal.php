@@ -16,9 +16,9 @@ get_header();
 <main id="primary" class="bg-white">
   <?php while (have_posts()) : the_post(); ?>
     <article <?php post_class('flex flex-col'); ?>>
-      <section class="bg-[#18184d]">
-        <div class="container mx-auto grid grid-cols-1 items-center gap-12 px-6 py-24 md:grid-cols-2">
-          <div class="space-y-6 text-white">
+      <section class="bg-[#18184d] py-20 text-white sm:py-24">
+        <div class="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 md:grid-cols-2 lg:gap-16 lg:px-8">
+          <div class="flex flex-col gap-6">
             <span class="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
               <?php esc_html_e('Legal Resources', 'webmakerr'); ?>
             </span>
@@ -29,7 +29,7 @@ get_header();
               <?php esc_html_e('All the essential policies you should know — simple, clear, and transparent.', 'webmakerr'); ?>
             </p>
           </div>
-          <div class="flex justify-center">
+          <div class="flex items-center justify-center">
             <img
               class="w-full max-w-md"
               src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/legal-hero.svg'); ?>"
@@ -69,10 +69,10 @@ get_header();
       );
       ?>
 
-      <section class="py-20 sm:py-24">
-        <div class="container mx-auto px-6">
-          <header class="mx-auto flex max-w-3xl flex-col gap-3 text-center">
-            <span class="text-xs font-semibold uppercase tracking-[0.35em] text-indigo-300">
+      <section class="py-16 sm:py-20 lg:py-24">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <header class="mx-auto flex max-w-3xl flex-col gap-4 text-center">
+            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
               <?php esc_html_e('How Webmakerr Works', 'webmakerr'); ?>
             </span>
             <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
@@ -86,32 +86,32 @@ get_header();
           <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             <?php foreach ($policy_cards as $card) : ?>
               <a
-                class="group flex h-full flex-col gap-5 rounded-2xl border border-indigo-100 bg-gray-50/90 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md"
+                class="group flex h-full flex-col gap-6 rounded-[6px] border border-zinc-200 bg-white p-8 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md"
                 href="<?php echo esc_url($card['link']); ?>"
               >
-                <span class="inline-flex h-16 w-16 items-center justify-center">
+                <span class="inline-flex h-14 w-14 items-center justify-center rounded-[5px] bg-primary/10">
                   <img
-                    class="h-16 w-16"
+                    class="h-10 w-10"
                     src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $card['icon']); ?>"
                     alt="<?php echo esc_attr($card['title']); ?>"
                     loading="lazy"
                   />
                 </span>
                 <div class="flex flex-col gap-3">
-                  <h3 class="text-lg font-semibold text-zinc-950">
+                  <h3 class="text-xl font-semibold text-zinc-950">
                     <?php echo esc_html($card['title']); ?>
                   </h3>
                   <p class="text-sm leading-6 text-zinc-600">
                     <?php echo esc_html($card['description']); ?>
                   </p>
-                  <span class="inline-flex items-center text-sm font-semibold text-indigo-600 transition group-hover:text-indigo-700">
-                    <?php esc_html_e('Read more', 'webmakerr'); ?>
-                    <svg class="ml-2 h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      <path d="M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
                 </div>
+                <span class="inline-flex items-center text-sm font-semibold text-primary transition group-hover:text-primary/80">
+                  <?php esc_html_e('Read more', 'webmakerr'); ?>
+                  <svg class="ml-2 h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
               </a>
             <?php endforeach; ?>
           </div>
@@ -147,15 +147,15 @@ get_header();
       );
       ?>
 
-      <section class="bg-white">
+      <section class="bg-white py-16 sm:py-20 lg:py-24">
         <?php foreach ($policy_categories as $index => $category) :
             $is_even = $index % 2 === 0;
             $media_classes = $is_even ? 'md:order-1' : 'md:order-2';
             $text_classes = $is_even ? 'md:order-2 md:items-start' : 'md:order-1 md:items-end';
             $text_alignment = $is_even ? 'md:text-left' : 'md:text-right';
             ?>
-          <div class="container mx-auto grid grid-cols-1 items-center gap-12 px-6 py-16 md:grid-cols-2">
-            <div class="flex justify-center <?php echo esc_attr($media_classes); ?>">
+          <div class="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 py-12 sm:px-6 lg:px-8 md:grid-cols-2 lg:py-16">
+            <div class="flex items-center justify-center <?php echo esc_attr($media_classes); ?>">
               <img
                 class="w-full max-w-xl"
                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $category['image']); ?>"
@@ -164,13 +164,13 @@ get_header();
               />
             </div>
             <div class="flex flex-col gap-6 <?php echo esc_attr($text_classes . ' ' . $text_alignment); ?>">
-              <h3 class="text-3xl font-semibold text-zinc-950">
+              <h3 class="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
                 <?php echo esc_html($category['title']); ?>
               </h3>
               <p class="max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
                 <?php echo esc_html($category['description']); ?>
               </p>
-              <a class="inline-flex items-center text-sm font-semibold text-indigo-600 transition hover:text-indigo-700"
+              <a class="inline-flex items-center text-sm font-semibold text-primary transition hover:text-primary/80"
                 href="<?php echo esc_url($category['link']); ?>">
                 <?php esc_html_e('Explore documentation', 'webmakerr'); ?>
                 <svg class="ml-2 h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -183,8 +183,8 @@ get_header();
         <?php endforeach; ?>
       </section>
 
-      <section class="bg-[#18184d]">
-        <div class="container mx-auto flex flex-col items-center gap-6 px-6 py-20 text-center text-white">
+      <section class="bg-[#18184d] py-16 text-white sm:py-20 lg:py-24">
+        <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6 lg:px-8">
           <h2 class="text-3xl font-semibold tracking-tight [text-wrap:balance] sm:text-4xl">
             <?php esc_html_e('Need more information? Contact Webmakerr Support.', 'webmakerr'); ?>
           </h2>
@@ -192,7 +192,7 @@ get_header();
             <?php esc_html_e('Our support specialists are ready to help with compliance questions, partnership agreements, and anything in between.', 'webmakerr'); ?>
           </p>
           <a
-            class="btn btn-primary inline-flex items-center justify-center rounded-[5px] border border-transparent bg-white px-6 py-3 text-sm font-semibold text-[#18184d] shadow-sm transition hover:bg-zinc-100 hover:text-[#18184d] !no-underline"
+            class="inline-flex w-full items-center justify-center rounded-[5px] border border-transparent bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-sm transition hover:bg-gray-100 hover:text-zinc-900 !no-underline sm:w-auto"
             href="<?php echo esc_url(home_url('/contact')); ?>"
           >
             <?php esc_html_e('Contact Support', 'webmakerr'); ?>
