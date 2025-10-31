@@ -43,20 +43,82 @@ get_header();
             </div>
           </div>
           <div class="relative z-10 flex items-center justify-center">
-            <div class="aspect-[4/3] w-full rounded-[5px] border border-zinc-200 bg-gradient-to-br from-primary/10 via-white to-white p-6 shadow-lg">
-              <div class="flex h-full flex-col justify-between rounded-[5px] border border-dashed border-primary/40 bg-white/60 p-6">
-                <div>
-                  <p class="text-sm font-semibold uppercase tracking-[0.26em] text-primary" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-                    <?php esc_html_e('Snapshot', 'webmakerr'); ?>
-                  </p>
-                  <h2 class="mt-4 text-2xl font-semibold text-zinc-950" style="font-family: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', Times, serif;">
-                    <?php esc_html_e('218% Demo Growth in Six Weeks', 'webmakerr'); ?>
-                  </h2>
-                </div>
-                <p class="text-sm leading-6 text-zinc-600" style="font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-                  <?php esc_html_e('A redesigned demand engine that combines high-velocity experimentation with narrative-driven messaging to accelerate acquisition.', 'webmakerr'); ?>
-                </p>
-              </div>
+            <div class="w-full max-w-md mx-auto md:mx-0">
+              <svg class="w-full h-auto" viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data visualization showing compound growth metrics">
+                <defs>
+                  <linearGradient id="heroGradient" x1="64" y1="36" x2="360" y2="292" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#FFFFFF" />
+                    <stop offset="1" stop-color="#F4F4F5" />
+                  </linearGradient>
+                  <linearGradient id="accentGradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#2563EB" />
+                    <stop offset="1" stop-color="#0EA5E9" />
+                  </linearGradient>
+                  <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#1E293B" stop-opacity="0.12" />
+                    <stop offset="1" stop-color="#1E293B" stop-opacity="0.04" />
+                  </linearGradient>
+                  <clipPath id="chartClip">
+                    <rect x="84" y="96" width="236" height="132" rx="16" />
+                  </clipPath>
+                </defs>
+                <rect x="36" y="28" width="348" height="264" rx="28" fill="url(#heroGradient)" stroke="#D4D4D8" stroke-width="1.5" />
+                <rect x="60" y="56" width="300" height="212" rx="22" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5" />
+                <g clip-path="url(#chartClip)">
+                  <rect x="84" y="96" width="236" height="132" rx="16" fill="#F8FAFC" />
+                  <path d="M108 204H304" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M108 180H304" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 8" />
+                  <path d="M108 156H304" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M108 132H304" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 8" />
+                  <path d="M132 108V228" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M168 108V228" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M204 108V228" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M240 108V228" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M276 108V228" stroke="#E4E4E7" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M116 212L156 192L192 202L228 170L260 150L292 128" stroke="url(#accentGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M292 128L312 146L320 124" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="156" cy="192" r="5" fill="#2563EB" />
+                  <circle cx="228" cy="170" r="5" fill="#2563EB" />
+                  <circle cx="292" cy="128" r="6" fill="#2563EB" stroke="#FFFFFF" stroke-width="2" />
+                </g>
+                <rect x="84" y="246" width="84" height="40" rx="12" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5" />
+                <rect x="180" y="246" width="84" height="40" rx="12" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5" />
+                <rect x="276" y="246" width="84" height="40" rx="12" fill="#111827" fill-opacity="0.92" stroke="#0F172A" stroke-width="1.5" />
+                <text x="102" y="270" fill="#0F172A" font-family="'Roboto', 'Inter', sans-serif" font-size="12" font-weight="600">Visitors</text>
+                <text x="198" y="270" fill="#0F172A" font-family="'Roboto', 'Inter', sans-serif" font-size="12" font-weight="600">SQLs</text>
+                <text x="290" y="270" fill="#FFFFFF" font-family="'Roboto', 'Inter', sans-serif" font-size="12" font-weight="600">Wins</text>
+                <text x="102" y="286" fill="#4B5563" font-family="'Roboto', 'Inter', sans-serif" font-size="11" font-weight="500">+182%</text>
+                <text x="198" y="286" fill="#4B5563" font-family="'Roboto', 'Inter', sans-serif" font-size="11" font-weight="500">+94%</text>
+                <text x="290" y="286" fill="#FFFFFF" font-family="'Roboto', 'Inter', sans-serif" font-size="11" font-weight="500">+38%</text>
+                <g>
+                  <rect x="96" y="72" width="62" height="44" rx="12" fill="#111827" fill-opacity="0.04" stroke="#D4D4D8" stroke-width="1.5" />
+                  <text x="108" y="94" fill="#0F172A" font-family="'Roboto', 'Inter', sans-serif" font-size="11" font-weight="600">ARR Trend</text>
+                  <text x="108" y="108" fill="#2563EB" font-family="'Playfair Display', 'Georgia', serif" font-size="18" font-weight="600">$2.4M</text>
+                </g>
+                <g>
+                  <rect x="176" y="72" width="110" height="44" rx="12" fill="#111827" fill-opacity="0.04" stroke="#D4D4D8" stroke-width="1.5" />
+                  <text x="188" y="94" fill="#0F172A" font-family="'Roboto', 'Inter', sans-serif" font-size="11" font-weight="600">Acquisition Velocity</text>
+                  <path d="M192 104H222" stroke="#2563EB" stroke-width="3" stroke-linecap="round" />
+                  <path d="M232 104H268" stroke="#CBD5F5" stroke-width="3" stroke-linecap="round" />
+                </g>
+                <g>
+                  <rect x="304" y="72" width="56" height="44" rx="12" fill="#2563EB" fill-opacity="0.12" stroke="#2563EB" stroke-width="1.5" />
+                  <path d="M316 104L326 92L338 112" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="326" cy="92" r="4" fill="#2563EB" />
+                </g>
+                <g>
+                  <rect x="108" y="180" width="24" height="48" rx="8" fill="url(#barGradient)" stroke="#CBD5F5" stroke-width="1.5" />
+                  <rect x="148" y="168" width="24" height="60" rx="8" fill="url(#barGradient)" stroke="#CBD5F5" stroke-width="1.5" />
+                  <rect x="188" y="152" width="24" height="76" rx="8" fill="url(#barGradient)" stroke="#CBD5F5" stroke-width="1.5" />
+                  <rect x="228" y="132" width="24" height="96" rx="8" fill="url(#barGradient)" stroke="#CBD5F5" stroke-width="1.5" />
+                  <rect x="268" y="116" width="24" height="112" rx="8" fill="url(#barGradient)" stroke="#CBD5F5" stroke-width="1.5" />
+                </g>
+                <g>
+                  <rect x="246" y="40" width="112" height="32" rx="16" fill="#111827" fill-opacity="0.9" />
+                  <text x="262" y="62" fill="#FFFFFF" font-family="'Roboto', 'Inter', sans-serif" font-size="12" font-weight="600">Conversion Rate</text>
+                  <text x="358" y="62" fill="#A5B4FC" font-family="'Roboto', 'Inter', sans-serif" font-size="12" font-weight="600">+4.8%</text>
+                </g>
+              </svg>
             </div>
           </div>
         </div>
