@@ -204,7 +204,7 @@ $toolkit_link       = webmakerr_get_popup_link_attributes($toolkit_url, $popup_e
           <p class="text-base leading-7 text-zinc-600 sm:text-lg">
             <?php esc_html_e('A fast-growing SaaS brand partnered with Webmakerr to rebuild their marketing site, align messaging, and overhaul their funnel. The result: a 218% lift in qualified demos within six weeks.', 'webmakerr'); ?>
           </p>
-          <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($case_study_url); ?>">
+          <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($case_study_url); ?>" data-case-study-modal-trigger>
             <?php esc_html_e('View Case Study', 'webmakerr'); ?>
           </a>
         </div>
@@ -440,5 +440,6 @@ $toolkit_link       = webmakerr_get_popup_link_attributes($toolkit_url, $popup_e
 </main>
 
 <?php
+get_template_part('templates/partials/case-study-modal');
 webmakerr_render_template_popup($popup_settings);
 get_footer();
