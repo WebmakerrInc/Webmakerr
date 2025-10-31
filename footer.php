@@ -24,28 +24,83 @@
             <div class="mb-12 hidden gap-8 border-b border-neutral-200 pb-8 text-center text-sm text-neutral-600 md:grid md:grid-cols-4 md:text-left">
                 <div class="flex flex-col items-center gap-2 md:items-start">
                     <div class="flex items-center gap-2 text-neutral-900">
-                        <img src="/wp-content/uploads/icons/delivery.svg" alt="<?php esc_attr_e('Delivery icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="h-6 w-6"
+                            aria-hidden="true"
+                        >
+                            <path d="M2.25 7.5A1.5 1.5 0 013.75 6h8.5a1.5 1.5 0 011.5 1.5V16h-6" />
+                            <path d="M13.75 9.5h4.05a1.5 1.5 0 011.2.6l2.5 3.4a1.5 1.5 0 01.3.9V16a1.5 1.5 0 01-1.5 1.5H18" />
+                            <circle cx="7.25" cy="17.25" r="1.75" />
+                            <circle cx="17" cy="17.25" r="1.75" />
+                        </svg>
                         <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Free delivery', 'webmakerr'); ?></span>
                     </div>
                     <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('On all orders', 'webmakerr'); ?></p>
                 </div>
                 <div class="flex flex-col items-center gap-2 md:items-start">
                     <div class="flex items-center gap-2 text-neutral-900">
-                        <img src="/wp-content/uploads/icons/returns.svg" alt="<?php esc_attr_e('Returns icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="h-6 w-6"
+                            aria-hidden="true"
+                        >
+                            <path d="M16.25 8h4.5V3.5" />
+                            <path d="M2.25 12a9.75 9.75 0 0115.02-7.6L21 7.75" />
+                            <path d="M7.75 16H3.25V20.5" />
+                            <path d="M21.75 12a9.75 9.75 0 01-15.02 7.6L3 16.25" />
+                        </svg>
                         <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Free returns', 'webmakerr'); ?></span>
                     </div>
                     <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('No questions asked return policy', 'webmakerr'); ?></p>
                 </div>
                 <div class="flex flex-col items-center gap-2 md:items-start">
                     <div class="flex items-center gap-2 text-neutral-900">
-                        <img src="/wp-content/uploads/icons/help.svg" alt="<?php esc_attr_e('Help icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="h-6 w-6"
+                            aria-hidden="true"
+                        >
+                            <path d="M2.25 6.75v-2.5A1.5 1.5 0 013.75 2.75h2.5a1.5 1.5 0 011.47 1.21l.9 4.5a1.5 1.5 0 01-.86 1.64l-1.05.45a11.25 11.25 0 006.06 6.06l.45-1.05a1.5 1.5 0 011.64-.86l4.5.9a1.5 1.5 0 011.21 1.47v2.5a1.5 1.5 0 01-1.5 1.5H17.25c-8.28 0-15-6.72-15-15z" />
+                        </svg>
                         <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Need help? +123 456 7890', 'webmakerr'); ?></span>
                     </div>
                     <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('Call us on a toll-free phone number', 'webmakerr'); ?></p>
                 </div>
                 <div class="flex flex-col items-center gap-2 md:items-start">
                     <div class="flex items-center gap-2 text-neutral-900">
-                        <img src="/wp-content/uploads/icons/guarantee.svg" alt="<?php esc_attr_e('Guarantee icon', 'webmakerr'); ?>" class="h-6 w-6" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="h-6 w-6"
+                            aria-hidden="true"
+                        >
+                            <path d="M4.5 6.75v4.05c0 5.17 3.3 9.6 7.88 10.9 4.58-1.3 7.87-5.73 7.87-10.9V6.75a1.5 1.5 0 00-.96-1.4l-6.3-2.52a1.5 1.5 0 00-1.12 0l-6.3 2.52a1.5 1.5 0 00-.97 1.4z" />
+                            <path d="M9 12l2.25 2.25L15.75 9.5" />
+                        </svg>
                         <span class="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Money back guarantee', 'webmakerr'); ?></span>
                     </div>
                     <p class="text-xs font-medium text-neutral-500"><?php esc_html_e('Worry-free shopping', 'webmakerr'); ?></p>
@@ -168,11 +223,73 @@
             <div class="mt-12 flex flex-col gap-6 border-t border-neutral-200 pt-6 text-xs text-neutral-500 md:flex-row md:items-center md:justify-between md:text-sm">
                 <div class="flex flex-col items-center gap-2 text-center md:flex-row md:gap-3 md:text-left">
                     <span class="font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Payment methods:', 'webmakerr'); ?></span>
-                    <img src="/wp-content/uploads/payment-icons.png" alt="<?php esc_attr_e('Payment icons', 'webmakerr'); ?>" class="h-6 w-auto md:h-7" />
+                    <div class="flex items-center gap-3 text-neutral-900">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 64 24"
+                            class="h-6 w-auto fill-current md:h-7"
+                            aria-hidden="true"
+                        >
+                            <path d="M12.6 5h12.2c3.7 0 6.3 2.4 6.3 5.7 0 3.6-2.8 6-6.7 6h-4.5l-.9 5.3h-6.3L12.6 5z" />
+                            <path d="M29 5.6h8.6c3.3 0 5.6 2.1 5.6 5.1 0 3.1-2.4 5.8-5.9 5.8h-4.3l-.9 5.1h-5.8l2.3-12.8A2.1 2.1 0 0129 5.6z" opacity=".65" />
+                        </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 64 24"
+                            class="h-6 w-auto fill-current md:h-7"
+                            aria-hidden="true"
+                        >
+                            <path d="M6.5 5l3.6 14h4.2l4.6-14h-4.1l-2.8 9.6L9 5H6.5z" />
+                            <path d="M24.5 5h3.5l-1.4 14h-3.5L24.5 5z" />
+                            <path d="M33.7 6.7c1.2-.7 2.6-1 4-1 1.6 0 2.9.3 3.9 1 .8.6 1.3 1.4 1.3 2.4 0 1.7-1.2 2.8-3.6 3.3-1.3.3-1.9.5-2.2.7-.3.2-.4.4-.4.7 0 .5.6.9 1.7.9 1.1 0 2.2-.2 3.4-.7l.9 2.7a11 11 0 01-4.6.8c-3.6 0-5.5-1.4-5.5-3.7 0-1.6 1-2.7 3.2-3.3 1.1-.3 1.8-.5 2-.6.3-.2.4-.4.4-.6 0-.6-.6-.9-1.6-.9a7.8 7.8 0 00-3.3.7l-.7-2.4z" />
+                            <path d="M46.8 5h3.6l5 14h-3.9l-.7-2h-5.5l-.7 2h-3.7L46.8 5zm2.2 8.1L48 8.3l-1.3 4h2.3z" />
+                        </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 64 24"
+                            class="h-6 w-auto fill-current md:h-7"
+                            aria-hidden="true"
+                        >
+                            <circle cx="20" cy="12" r="7" opacity=".75" />
+                            <circle cx="28" cy="12" r="7" opacity=".4" />
+                            <path d="M24 5a7 7 0 010 14 7 7 0 010-14z" />
+                        </svg>
+                    </div>
                 </div>
                 <div class="flex flex-col items-center gap-2 text-center md:flex-row md:gap-3 md:text-left">
                     <span class="font-semibold uppercase tracking-[0.18em] text-neutral-900"><?php esc_html_e('Buy with confidence:', 'webmakerr'); ?></span>
-                    <img src="/wp-content/uploads/trust-badges.png" alt="<?php esc_attr_e('Trust badges', 'webmakerr'); ?>" class="h-6 w-auto md:h-7" />
+                    <div class="flex items-center gap-3 text-neutral-900">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 64 24"
+                            class="h-6 w-auto md:h-7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M11 20.25h42" />
+                            <path d="M14 18V10h36v8" />
+                            <path d="M11 10l22-8 22 8H11z" />
+                            <path d="M25 12v6" />
+                            <path d="M41 12v6" />
+                        </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 64 24"
+                            class="h-6 w-auto fill-current md:h-7"
+                            aria-hidden="true"
+                        >
+                            <path d="M17 9.4c1.3-.8 3-1.3 4.9-1.3 3.2 0 5.2 1.6 5.2 4.1v8.3h-3.6v-1.6c-.7 1.1-1.8 1.8-3.3 1.8-2.4 0-4-1.4-4-3.5 0-2.6 2.1-3.8 5.8-3.8h1.5V13c0-.9-.6-1.4-1.8-1.4-1 0-2.2.3-3.2.9L17 9.4z" />
+                            <path d="M32.7 8.5h3.7V21h-3.7z" />
+                            <path d="M39.6 10.7h3.6V21h-3.6z" />
+                            <path d="M39.6 8.5h3.6v1.8h-3.6z" />
+                            <path d="M46.8 10.7h3.6V21h-3.6z" />
+                            <path d="M55.8 10.1c1.4 0 2.6.4 3.5 1V8.3a8 8 0 00-3.1-.6c-3.2 0-5.3 1.6-5.3 4.4v8.9h3.6v-7.4c0-1.6 1-2.8 2.3-2.8z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
 
