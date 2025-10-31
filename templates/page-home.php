@@ -22,6 +22,10 @@ get_header();
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  body.page-template-page-home {
+    overflow-x: hidden;
+  }
 </style>
 
 <main id="primary" class="bg-[#f5f7ff]">
@@ -46,57 +50,6 @@ get_header();
               'description' => __('Pursue accredited programs with top universities and companies.', 'webmakerr'),
               'icon' => 'earn-degree.svg',
               'url' => home_url('/degrees'),
-          ),
-      );
-
-      $trusted_brands = array(
-          array(
-              'name' => __('Aurora Institute', 'webmakerr'),
-              'logo' => 'brand-aurora.svg',
-          ),
-          array(
-              'name' => __('Northwind University', 'webmakerr'),
-              'logo' => 'brand-northwind.svg',
-          ),
-          array(
-              'name' => __('Summit Labs', 'webmakerr'),
-              'logo' => 'brand-summit.svg',
-          ),
-          array(
-              'name' => __('Lumen College', 'webmakerr'),
-              'logo' => 'brand-lumen.svg',
-          ),
-          array(
-              'name' => __('Orbit Partners', 'webmakerr'),
-              'logo' => 'brand-orbit.svg',
-          ),
-      );
-
-      $career_paths = array(
-          array(
-              'title' => __('Data Analyst', 'webmakerr'),
-              'description' => __('Translate complex datasets into actionable insights for stakeholders.', 'webmakerr'),
-              'icon' => 'career-data-analyst.svg',
-          ),
-          array(
-              'title' => __('Python Developer', 'webmakerr'),
-              'description' => __('Automate workflows, integrate APIs, and deliver scalable AI services.', 'webmakerr'),
-              'icon' => 'career-python-developer.svg',
-          ),
-          array(
-              'title' => __('UX Designer', 'webmakerr'),
-              'description' => __('Craft intuitive interfaces that guide users through intelligent systems.', 'webmakerr'),
-              'icon' => 'career-ux-designer.svg',
-          ),
-          array(
-              'title' => __('Product Manager', 'webmakerr'),
-              'description' => __('Lead cross-functional teams to launch AI-driven customer experiences.', 'webmakerr'),
-              'icon' => 'career-product-manager.svg',
-          ),
-          array(
-              'title' => __('AI Specialist', 'webmakerr'),
-              'description' => __('Architect machine learning pipelines and optimize production models.', 'webmakerr'),
-              'icon' => 'career-ai-specialist.svg',
           ),
       );
 
@@ -212,33 +165,6 @@ get_header();
                 </svg>
               </span>
             </a>
-            <?php endforeach; ?>
-          </div>
-        </div>
-      </section>
-
-      <section class="border-y border-zinc-200 bg-zinc-50 py-16 sm:py-20 lg:py-24">
-        <div class="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col items-center gap-3 text-center">
-            <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
-              <?php esc_html_e('Learn from leading universities and companies', 'webmakerr'); ?>
-            </p>
-            <p class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-              <?php esc_html_e('Trusted by teams building the future of work', 'webmakerr'); ?>
-            </p>
-          </div>
-          <div class="-mx-4 flex items-center gap-6 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
-            <?php foreach ($trusted_brands as $brand) : ?>
-              <div class="flex min-w-[160px] items-center justify-center rounded-[6px] border border-zinc-200 bg-white px-6 py-4 shadow-sm">
-                <span class="sr-only"><?php echo esc_html($brand['name']); ?></span>
-                <?php
-                $brand_path = get_template_directory() . '/assets/svg/home/brands/' . $brand['logo'];
-                if (file_exists($brand_path)) {
-                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    echo file_get_contents($brand_path);
-                }
-                ?>
-              </div>
             <?php endforeach; ?>
           </div>
         </div>
@@ -508,52 +434,6 @@ get_header();
               <p class="text-sm text-gray-600 leading-relaxed">
                 "Learning with Coursera has expanded my professional expertise by giving me access to cutting-edge research, practical tools, and global perspectives."
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="bg-zinc-50 py-16 sm:py-20 lg:py-24">
-        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col gap-10">
-            <div class="flex flex-col items-center gap-3 text-center">
-              <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-                <?php esc_html_e('Explore careers', 'webmakerr'); ?>
-              </h2>
-              <p class="max-w-2xl text-base leading-7 text-zinc-600">
-                <?php esc_html_e('Map your next role with curated skills, projects, and hiring insights from global employers.', 'webmakerr'); ?>
-              </p>
-            </div>
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-              <?php foreach ($career_paths as $career) : ?>
-                <article class="flex h-full flex-col gap-5 rounded-[6px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                  <div class="h-16 w-16">
-                    <?php
-                    $career_path = get_template_directory() . '/assets/svg/home/careers/' . $career['icon'];
-                    if (file_exists($career_path)) {
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo file_get_contents($career_path);
-                    }
-                    ?>
-                  </div>
-                  <div class="flex flex-col gap-3">
-                    <h3 class="text-xl font-semibold text-zinc-950">
-                      <?php echo esc_html($career['title']); ?>
-                    </h3>
-                    <p class="text-sm leading-6 text-zinc-600">
-                      <?php echo esc_html($career['description']); ?>
-                    </p>
-                  </div>
-                  <div class="mt-auto pt-2">
-                    <a class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80 !no-underline" href="<?php echo esc_url(home_url('/careers')); ?>">
-                      <?php esc_html_e('View path', 'webmakerr'); ?>
-                      <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
-                </article>
-              <?php endforeach; ?>
             </div>
           </div>
         </div>
