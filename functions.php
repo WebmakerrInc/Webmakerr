@@ -297,6 +297,108 @@ add_action(
     }
 );
 
+if (! function_exists('webmakerr_get_template_popup_settings')) {
+    /**
+     * Retrieve popup configuration for a specific template.
+     */
+    function webmakerr_get_template_popup_settings(string $template_file): array
+    {
+        static $cache = [];
+
+        $template_key = basename($template_file);
+
+        if (isset($cache[$template_key])) {
+            return $cache[$template_key];
+        }
+
+        $defaults = [
+            'form_id'  => 0,
+            'headline' => '',
+            'enabled'  => false,
+        ];
+
+        $config_path = get_template_directory().'/templates/config/popup-content.php';
+
+        if (! is_readable($config_path)) {
+            $cache[$template_key] = $defaults;
+
+            return $defaults;
+        }
+
+        $config = include $config_path;
+
+        if (! is_array($config)) {
+            $cache[$template_key] = $defaults;
+
+            return $defaults;
+        }
+
+        if (! isset($config[$template_key]) || ! is_array($config[$template_key])) {
+            $cache[$template_key] = $defaults;
+
+            return $defaults;
+        }
+
+        $settings = $config[$template_key];
+        $form_id  = isset($settings['form_id']) ? absint($settings['form_id']) : 0;
+        $headline = isset($settings['headline']) ? (string) $settings['headline'] : '';
+
+        $resolved = [
+            'form_id'  => $form_id,
+            'headline' => $headline,
+            'enabled'  => $form_id > 0,
+        ];
+
+        $cache[$template_key] = $resolved;
+
+        return $resolved;
+    }
+}
+
+if (! function_exists('webmakerr_get_popup_link_attributes')) {
+    /**
+     * Normalize CTA link attributes when a popup is available.
+     */
+    function webmakerr_get_popup_link_attributes(string $fallback_url, bool $popup_enabled): array
+    {
+        if ($popup_enabled) {
+            return [
+                'href'       => '#ff-popup',
+                'attributes' => ' data-popup-trigger aria-controls="ff-popup"',
+            ];
+        }
+
+        return [
+            'href'       => $fallback_url,
+            'attributes' => '',
+        ];
+    }
+}
+
+if (! function_exists('webmakerr_render_template_popup')) {
+    /**
+     * Render the Fluent Form popup when enabled for the template.
+     */
+    function webmakerr_render_template_popup(array $popup_settings): void
+    {
+        $form_id = isset($popup_settings['form_id']) ? absint($popup_settings['form_id']) : 0;
+
+        if ($form_id <= 0) {
+            return;
+        }
+
+        $popup_partial = get_template_directory().'/partials/fluentform-popup.php';
+
+        if (! is_readable($popup_partial)) {
+            return;
+        }
+
+        $popup_headline = isset($popup_settings['headline']) ? (string) $popup_settings['headline'] : '';
+
+        include $popup_partial;
+    }
+}
+
 if (! function_exists('webmakerr_validate_license_remotely')) {
     /**
      * Validate a license key against the remote server.

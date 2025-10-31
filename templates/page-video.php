@@ -10,6 +10,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 $script_handle = 'webmakerr-build-assets-app-js';
 $inline_bootstrap = <<<JS
 (function() {
@@ -154,6 +157,8 @@ get_header();
 
       $hero_secondary_target = get_post_meta($post_id, '_webmakerr_video_hero_secondary_target', true);
       $hero_secondary_target = $hero_secondary_target ? esc_url($hero_secondary_target) : '#portfolio';
+
+      $lead_capture_link = webmakerr_get_popup_link_attributes('#lead-capture', $popup_enabled);
 
       $hero_video_id = (int) get_post_meta($post_id, '_webmakerr_video_hero_video', true);
       $hero_video_src = $hero_video_id ? wp_get_attachment_url($hero_video_id) : '';
@@ -307,7 +312,7 @@ get_header();
                 <?php echo wp_kses_post($hero_subheadline); ?>
               </p>
               <div class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#lead-capture" data-lead-popup-trigger data-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($lead_capture_link['href']); ?>" data-lead-popup-trigger<?php echo $lead_capture_link['attributes']; ?>>
                   <?php echo esc_html($hero_primary_label); ?>
                 </a>
                 <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($hero_secondary_target); ?>">
@@ -492,7 +497,7 @@ get_header();
                   </h3>
                 </div>
                 <div class="mt-auto px-1">
-                  <a class="inline-flex w-full items-center justify-center gap-2 rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="#lead-capture" data-lead-popup-trigger data-popup-trigger>
+                  <a class="inline-flex w-full items-center justify-center gap-2 rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline" href="<?php echo esc_url($lead_capture_link['href']); ?>" data-lead-popup-trigger<?php echo $lead_capture_link['attributes']; ?>>
                     <?php esc_html_e('See case studies →', 'webmakerr'); ?>
                     <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 11-1.414-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                   </a>
@@ -567,7 +572,7 @@ get_header();
               <?php echo wp_kses_post($cta_copy); ?>
             </p>
             <div class="flex flex-wrap gap-3">
-              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="#lead-capture" data-lead-popup-trigger data-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($lead_capture_link['href']); ?>" data-lead-popup-trigger<?php echo $lead_capture_link['attributes']; ?>>
                 <?php echo esc_html($cta_button); ?>
               </a>
               <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="#process">
@@ -617,25 +622,6 @@ get_header();
 </main>
 
 <?php
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();

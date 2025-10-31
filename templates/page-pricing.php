@@ -10,6 +10,9 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 get_header();
 ?>
 
@@ -17,6 +20,10 @@ get_header();
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
     <?php while (have_posts()) : the_post(); ?>
       <article <?php post_class('flex flex-col gap-16'); ?>>
+        <?php
+        $plan_cta_url  = get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true);
+        $plan_cta_link = webmakerr_get_popup_link_attributes($plan_cta_url ?: '', $popup_enabled);
+        ?>
         <header class="flex flex-col gap-4 text-center">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary"><?php esc_html_e('Pricing', 'webmakerr'); ?></p>
           <?php the_title('<h1 class="mt-4 text-4xl font-medium tracking-tight [text-wrap:balance] text-zinc-950 sm:text-5xl">', '</h1>'); ?>
@@ -40,7 +47,7 @@ get_header();
                       </p>
                       <div class="text-sm leading-6 text-zinc-600"><?php echo $description; ?></div>
                     </div>
-                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url(get_post_meta(get_the_ID(), '_webmakerr_pricing_cta_link', true)); ?>" data-popup-trigger>
+                    <a class="mt-4 inline-flex rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($plan_cta_link['href']); ?>"<?php echo $plan_cta_link['attributes']; ?>>
                       <?php esc_html_e('Choose plan', 'webmakerr'); ?>
                     </a>
                   </div>
@@ -65,25 +72,6 @@ get_header();
 </main>
 
 <?php
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();

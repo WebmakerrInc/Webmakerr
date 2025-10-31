@@ -7,6 +7,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 if (! function_exists('webbooking_render_icon')) {
     function webbooking_render_icon($name, $class = 'w-6 h-6 text-primary mb-3')
     {
@@ -34,6 +37,10 @@ if (! function_exists('webbooking_render_icon')) {
 get_header();
 
 $download_url = home_url('/download-webbooking');
+$demo_url     = home_url('/webbooking-demo');
+
+$download_link = webmakerr_get_popup_link_attributes($download_url, $popup_enabled);
+$demo_link     = webmakerr_get_popup_link_attributes($demo_url, $popup_enabled);
 ?>
 
 <main id="primary" class="bg-white py-16 sm:py-20 lg:py-24">
@@ -55,10 +62,10 @@ $download_url = home_url('/download-webbooking');
                 <?php esc_html_e('WebBooking lets you manage bookings, teams, and calendar sync — fast, reliable, and built beautifully for Webmakerr.', 'webmakerr'); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_url); ?>" data-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($download_link['href']); ?>"<?php echo $download_link['attributes']; ?>>
                   <?php esc_html_e('Get WebBooking Free', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url(home_url('/webbooking-demo')); ?>" data-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($demo_link['href']); ?>"<?php echo $demo_link['attributes']; ?>>
                   <?php esc_html_e('See WebBooking in action', 'webmakerr'); ?>
                 </a>
               </div>
@@ -214,7 +221,7 @@ $download_url = home_url('/download-webbooking');
             </p>
           </header>
           <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($download_url); ?>" data-popup-trigger>
+            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($download_link['href']); ?>"<?php echo $download_link['attributes']; ?>>
               <?php esc_html_e('Download WebBooking Free', 'webmakerr'); ?>
             </a>
             <p class="text-sm text-zinc-500">
@@ -228,25 +235,6 @@ $download_url = home_url('/download-webbooking');
 </main>
 
 <?php
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();

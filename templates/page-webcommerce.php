@@ -7,6 +7,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 get_header();
 
 $buy_url             = home_url('/buy-webcommerce');
@@ -19,6 +22,9 @@ $analytics_anchor    = '#analytics';
 $developer_anchor    = '#developer';
 $payments_anchor     = '#payments';
 $migration_anchor    = '#migration';
+
+$primary_cta_link   = webmakerr_get_popup_link_attributes($buy_url, $popup_enabled);
+$secondary_cta_link = webmakerr_get_popup_link_attributes($demo_url, $popup_enabled);
 
 $performance_stats = array(
     array(
@@ -160,7 +166,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
                 <?php esc_html_e('Build, sell, and scale faster than ever. WebCommerce turns WordPress into a powerful, high-performance store engine — no bloat, no limits.', 'webmakerr'); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($buy_url); ?>" data-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($primary_cta_link['href']); ?>"<?php echo $primary_cta_link['attributes']; ?>>
                   <?php esc_html_e('Buy WebCommerce Now', 'webmakerr'); ?>
                 </a>
               </div>
@@ -468,10 +474,10 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
               <?php esc_html_e('The future of WordPress eCommerce starts with WebCommerce.', 'webmakerr'); ?>
             </p>
             <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($buy_url); ?>" data-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($primary_cta_link['href']); ?>"<?php echo $primary_cta_link['attributes']; ?>>
                 <?php esc_html_e('Buy Now', 'webmakerr'); ?>
               </a>
-              <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($demo_url); ?>" data-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($secondary_cta_link['href']); ?>"<?php echo $secondary_cta_link['attributes']; ?>>
                 <?php esc_html_e('View Demo', 'webmakerr'); ?>
               </a>
             </div>
@@ -486,26 +492,7 @@ function webcommerce_render_icon($name, $class = 'h-6 w-6')
 </main>
 
 <?php
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();
 ?>
