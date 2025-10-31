@@ -346,13 +346,18 @@ $tags = get_tags(
 
 <?php
 wp_reset_postdata();
-$form_id = 0;
-$form_config_path = get_template_directory() . '/templets/config/forms.php';
 
-if (is_readable($form_config_path)) {
-    $forms = include $form_config_path;
-    if (is_array($forms)) {
-        $form_id = isset($forms[basename(__FILE__)]) ? absint($forms[basename(__FILE__)]) : 0;
+$form_id         = 0;
+$popup_headline  = '';
+$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
+$template_handle = basename(__FILE__);
+
+if (is_readable($popup_config)) {
+    $popup_settings = include $popup_config;
+    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
+        $template_settings = $popup_settings[$template_handle];
+        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
+        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
     }
 }
 

@@ -196,12 +196,12 @@ $mobile_cta_attributes = '';
 
 $current_template = get_page_template_slug();
 if ($current_template) {
-    $form_config_path = get_template_directory() . '/templets/config/forms.php';
+    $form_config_path = get_template_directory() . '/templates/config/popup-content.php';
     if (is_readable($form_config_path)) {
         $forms             = include $form_config_path;
         $template_basename = basename($current_template);
 
-        if (isset($forms[$template_basename]) && absint($forms[$template_basename]) > 0) {
+        if (isset($forms[$template_basename]) && is_array($forms[$template_basename]) && isset($forms[$template_basename]['form_id']) && absint($forms[$template_basename]['form_id']) > 0) {
             $mobile_cta_url        = '#ff-popup';
             $mobile_cta_attributes = ' data-popup-trigger aria-controls="ff-popup"';
         }
