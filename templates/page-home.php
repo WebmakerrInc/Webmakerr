@@ -61,108 +61,140 @@ get_header();
           ),
       );
 
-      $trending_courses = array(
+      $trending_sections = array(
           array(
-              'title' => __('Generative AI Foundations', 'webmakerr'),
-              'description' => __('Design prompts, automate creative work, and deliver responsible AI solutions.', 'webmakerr'),
-              'tags' => array(__('Beginner', 'webmakerr'), __('6 weeks', 'webmakerr'), __('Hands-on labs', 'webmakerr')),
-              'badge' => __('Professional Certificate', 'webmakerr'),
-              'provider' => __('Aurora Institute', 'webmakerr'),
-              'thumbnail' => 'course-generative-ai.svg',
+              'title' => __('Most popular', 'webmakerr'),
+              'icon' => 'sparkles',
+              'icon_style' => 'bg-white/80 text-[#4338ca]',
+              'courses' => array(
+                  array(
+                      'provider' => __('Google', 'webmakerr'),
+                      'provider_initials' => 'G',
+                      'provider_style' => 'bg-[#e8f1ff] text-[#1d4ed8]',
+                      'title' => __('Google Project Management', 'webmakerr'),
+                      'badge' => __('Professional Certificate', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'users', 'label' => __('1.4M learners', 'webmakerr')),
+                          array('icon' => 'clock', 'label' => __('6-month track', 'webmakerr')),
+                      ),
+                  ),
+                  array(
+                      'provider' => __('Meta', 'webmakerr'),
+                      'provider_initials' => 'M',
+                      'provider_style' => 'bg-[#f3f0ff] text-[#6b21a8]',
+                      'title' => __('Meta Social Media Marketing', 'webmakerr'),
+                      'badge' => __('Professional Certificate', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'users', 'label' => __('910k learners', 'webmakerr')),
+                          array('icon' => 'spark', 'label' => __('Beginner friendly', 'webmakerr')),
+                      ),
+                  ),
+              ),
           ),
           array(
-              'title' => __('Data Analytics with Python', 'webmakerr'),
-              'description' => __('Build dashboards, automate reporting, and communicate insights effectively.', 'webmakerr'),
-              'tags' => array(__('Intermediate', 'webmakerr'), __('Self-paced', 'webmakerr')),
-              'badge' => __('Specialization', 'webmakerr'),
-              'provider' => __('Northwind University', 'webmakerr'),
-              'thumbnail' => 'course-data-analytics.svg',
+              'title' => __('Weekly spotlight', 'webmakerr'),
+              'icon' => 'calendar-star',
+              'icon_style' => 'bg-white/80 text-[#c026d3]',
+              'courses' => array(
+                  array(
+                      'provider' => __('DeepLearning.AI', 'webmakerr'),
+                      'provider_initials' => 'DL',
+                      'provider_style' => 'bg-[#f0f9ff] text-[#0369a1]',
+                      'title' => __('Practical Prompt Engineering for Deep Learning', 'webmakerr'),
+                      'badge' => __('Specialization', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'clock', 'label' => __('3-course series', 'webmakerr')),
+                          array('icon' => 'spark', 'label' => __('Hands-on projects', 'webmakerr')),
+                      ),
+                  ),
+                  array(
+                      'provider' => __('Macquarie University', 'webmakerr'),
+                      'provider_initials' => 'MU',
+                      'provider_style' => 'bg-[#eefbf0] text-[#047857]',
+                      'title' => __('Excel Skills for Business', 'webmakerr'),
+                      'badge' => __('Specialization', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'users', 'label' => __('1.1M learners', 'webmakerr')),
+                          array('icon' => 'stack', 'label' => __('4-course path', 'webmakerr')),
+                      ),
+                  ),
+              ),
           ),
           array(
-              'title' => __('AI Strategy for Leaders', 'webmakerr'),
-              'description' => __('Create adoption roadmaps, manage change, and measure program impact.', 'webmakerr'),
-              'tags' => array(__('Leadership', 'webmakerr'), __('Certificate', 'webmakerr')),
-              'badge' => __('Guided Project', 'webmakerr'),
-              'provider' => __('Summit Labs', 'webmakerr'),
-              'thumbnail' => 'course-leadership-ai.svg',
-          ),
-          array(
-              'title' => __('Python Automation Projects', 'webmakerr'),
-              'description' => __('Ship production-ready automations with reusable templates.', 'webmakerr'),
-              'tags' => array(__('Project-based', 'webmakerr'), __('Career track', 'webmakerr')),
-              'badge' => __('Professional Certificate', 'webmakerr'),
-              'provider' => __('Orbit Partners', 'webmakerr'),
-              'thumbnail' => 'course-python-automation.svg',
-          ),
-          array(
-              'title' => __('Ethics & Governance in AI', 'webmakerr'),
-              'description' => __('Ensure transparency, mitigate bias, and align teams with global standards.', 'webmakerr'),
-              'tags' => array(__('Advanced', 'webmakerr'), __('Policy focus', 'webmakerr')),
-              'badge' => __('Specialization', 'webmakerr'),
-              'provider' => __('Lumen College', 'webmakerr'),
-              'thumbnail' => 'course-ai-ethics.svg',
-          ),
-          array(
-              'title' => __('UX Strategy for Intelligent Products', 'webmakerr'),
-              'description' => __('Design human-centered experiences that integrate machine intelligence.', 'webmakerr'),
-              'tags' => array(__('Design', 'webmakerr'), __('Portfolio ready', 'webmakerr')),
-              'badge' => __('Course', 'webmakerr'),
-              'provider' => __('Webmakerr Studio', 'webmakerr'),
-              'thumbnail' => 'course-ux-strategy.svg',
+              'title' => __('In-demand AI skills', 'webmakerr'),
+              'icon' => 'chip',
+              'icon_style' => 'bg-white/80 text-[#0f766e]',
+              'courses' => array(
+                  array(
+                      'provider' => __('OpenAI', 'webmakerr'),
+                      'provider_initials' => 'OA',
+                      'provider_style' => 'bg-[#f3f4ff] text-[#4338ca]',
+                      'title' => __('Prompt Engineering', 'webmakerr'),
+                      'badge' => __('Guided Project', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'spark', 'label' => __('Create effective prompts', 'webmakerr')),
+                          array('icon' => 'clock', 'label' => __('Under 2 hours', 'webmakerr')),
+                      ),
+                  ),
+                  array(
+                      'provider' => __('Google', 'webmakerr'),
+                      'provider_initials' => 'G',
+                      'provider_style' => 'bg-[#e8f1ff] text-[#1d4ed8]',
+                      'title' => __('Google AI Essentials', 'webmakerr'),
+                      'badge' => __('Course', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'users', 'label' => __('Beginner friendly', 'webmakerr')),
+                          array('icon' => 'stack', 'label' => __('Self-paced', 'webmakerr')),
+                      ),
+                  ),
+                  array(
+                      'provider' => __('IBM', 'webmakerr'),
+                      'provider_initials' => 'IBM',
+                      'provider_style' => 'bg-[#ecf4ff] text-[#1d4ed8]',
+                      'title' => __('Building AI-powered Workflows', 'webmakerr'),
+                      'badge' => __('Professional Certificate', 'webmakerr'),
+                      'meta' => array(
+                          array('icon' => 'users', 'label' => __('Enterprise ready', 'webmakerr')),
+                          array('icon' => 'clock', 'label' => __('4-week sprint', 'webmakerr')),
+                      ),
+                  ),
+              ),
           ),
       );
 
-      $categories = array(
-          array(
-              'title' => __('Data Science', 'webmakerr'),
-              'description' => __('Analytics, visualization, and machine learning specializations.', 'webmakerr'),
-              'image' => 'category-data-science.svg',
-          ),
-          array(
-              'title' => __('Business', 'webmakerr'),
-              'description' => __('Strategy, operations, and leadership for AI-enabled teams.', 'webmakerr'),
-              'image' => 'category-business.svg',
-          ),
-          array(
-              'title' => __('Computer Science', 'webmakerr'),
-              'description' => __('Software engineering, cloud infrastructure, and automation.', 'webmakerr'),
-              'image' => 'category-computer-science.svg',
-          ),
-          array(
-              'title' => __('Personal Development', 'webmakerr'),
-              'description' => __('Creativity, communication, and growth skills for every career.', 'webmakerr'),
-              'image' => 'category-personal-development.svg',
-          ),
-          array(
-              'title' => __('AI for Everyone', 'webmakerr'),
-              'description' => __('Non-technical primers that demystify AI concepts for teams.', 'webmakerr'),
-              'image' => 'category-ai-everyone.svg',
-          ),
-      );
+      if (! function_exists('webmakerr_get_trending_icon_svg')) {
+          function webmakerr_get_trending_icon_svg($icon)
+          {
+              switch ($icon) {
+                  case 'sparkles':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2.5l1.3 3.57 3.7.27-2.86 2.2.97 3.63L10 10.91l-3.11 1.26.97-3.63-2.86-2.2 3.7-.27L10 2.5z"/></svg>';
+                  case 'calendar-star':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6.5 2a1 1 0 011 1v1h5V3a1 1 0 112 0v1h1.25A1.25 1.25 0 0117 5.25v10.5A1.25 1.25 0 0115.75 17H4.25A1.25 1.25 0 013 15.75V5.25A1.25 1.25 0 014.25 4H5.5V3a1 1 0 011-1zm8.5 7H5v6.5a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V9zm-4.5-.75l.83 1.58 1.74.22-1.29 1.22.33 1.74L11 12.1l-1.61.91.33-1.74-1.29-1.22 1.74-.22.83-1.58zM15 6.5H5V8h10V6.5z"/></svg>';
+                  case 'chip':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h.25A1.75 1.75 0 0116 4.75V5h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v.25A1.75 1.75 0 0114.25 17H14v1a1 1 0 11-2 0v-1h-2v1a1 1 0 11-2 0v-1h-.25A1.75 1.75 0 015 15.25V15H4a1 1 0 110-2h1v-2H4a1 1 0 110-2h1V7H4a1 1 0 110-2h1v-.25A1.75 1.75 0 016.75 3H7V2a1 1 0 011-1zm5.25 5h-6.5a.75.75 0 00-.75.75v6.5c0 .414.336.75.75.75h6.5a.75.75 0 00.75-.75v-6.5a.75.75 0 00-.75-.75z"/></svg>';
+              }
 
-      $spotlight_programs = array(
-          array(
-              'title' => __('Hot new releases', 'webmakerr'),
-              'description' => __('Be first to explore programs refreshed for 2024 AI roadmaps.', 'webmakerr'),
-              'image' => 'course-generative-ai.svg',
-              'url' => home_url('/new-releases'),
-              'cta' => __('See the updates', 'webmakerr'),
-          ),
-          array(
-              'title' => __('Skill up for in-demand jobs', 'webmakerr'),
-              'description' => __('Learn the career-ready skills employers want in data and AI.', 'webmakerr'),
-              'image' => 'course-python-automation.svg',
-              'url' => home_url('/job-skills'),
-              'cta' => __('Browse roles', 'webmakerr'),
-          ),
-          array(
-              'title' => __('Build a learning plan', 'webmakerr'),
-              'description' => __('Answer a few questions and get a tailored learning playlist.', 'webmakerr'),
-              'image' => 'course-data-analytics.svg',
-              'url' => home_url('/learning-plan'),
-              'cta' => __('Start now', 'webmakerr'),
-          ),
-      );
+              return '';
+          }
+      }
+
+      if (! function_exists('webmakerr_get_trending_meta_icon')) {
+          function webmakerr_get_trending_meta_icon($icon)
+          {
+              switch ($icon) {
+                  case 'users':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M7 9a3 3 0 110-6 3 3 0 010 6zm6 0a3 3 0 110-6 3 3 0 010 6zM4.5 11A2.5 2.5 0 002 13.5V15a1 1 0 001 1h6v-2.5A2.5 2.5 0 006.5 11h-2zm7.5 1a3 3 0 013 3V16h3a1 1 0 001-1v-1.5A2.5 2.5 0 0015.5 11h-1z"/></svg>';
+                  case 'clock':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 4a1 1 0 10-2 0v3.382a1 1 0 00.293.707l2.121 2.121a1 1 0 101.414-1.414L11 9.586V6z"/></svg>';
+                  case 'spark':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 3l1.05 2.9 2.95.22-2.27 1.75.8 2.96L10 9.9l-2.53 1.95.8-2.96-2.27-1.75 2.95-.22L10 3z"/></svg>';
+                  case 'stack':
+                      return '<svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2l7.5 4L10 10 2.5 6 10 2zm7.5 7.5L10 13l-7.5-3.5L10 16l7.5-3.5z"/></svg>';
+              }
+
+              return '';
+          }
+      }
 
       $career_paths = array(
           array(
@@ -337,148 +369,73 @@ get_header();
       </section>
 
       <section class="py-16 sm:py-20 lg:py-24">
-        <div class="mx-auto grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:px-8 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-          <div class="flex flex-col gap-8">
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
-                  <?php esc_html_e('Trending courses', 'webmakerr'); ?>
-                </h2>
-                <p class="mt-2 max-w-2xl text-base leading-7 text-zinc-600">
-                  <?php esc_html_e('Stay ahead with programs updated alongside the fastest-moving AI innovations.', 'webmakerr'); ?>
-                </p>
-              </div>
-              <a class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80 !no-underline" href="<?php echo esc_url(home_url('/courses')); ?>">
-                <?php esc_html_e('View all', 'webmakerr'); ?>
-                <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
-            </div>
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <?php foreach ($trending_courses as $course) : ?>
-                <article class="flex h-full flex-col overflow-hidden rounded-[6px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                  <div class="relative aspect-[5/3] w-full overflow-hidden bg-zinc-100">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl">
+            <h2 class="text-3xl font-semibold text-zinc-950 sm:text-4xl">
+              <?php esc_html_e('Trending courses', 'webmakerr'); ?>
+            </h2>
+            <p class="mt-2 text-base leading-7 text-zinc-600">
+              <?php esc_html_e('Stay ahead with programs updated alongside the fastest-moving AI innovations.', 'webmakerr'); ?>
+            </p>
+          </div>
+          <div class="grid gap-6 lg:grid-cols-3">
+            <?php foreach ($trending_sections as $section) : ?>
+              <div class="flex h-full flex-col gap-6 rounded-2xl border border-[#d9e4ff] bg-[#eef3ff] p-6 shadow-[0_24px_48px_rgba(15,23,42,0.08)]">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full <?php echo esc_attr($section['icon_style']); ?>">
                     <?php
-                    $thumbnail_path = get_template_directory() . '/assets/svg/home/courses/' . $course['thumbnail'];
-                    if (file_exists($thumbnail_path)) {
+                    $section_icon = webmakerr_get_trending_icon_svg($section['icon']);
+                    if (! empty($section_icon)) {
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo file_get_contents($thumbnail_path);
+                        echo $section_icon;
                     }
                     ?>
-                  </div>
-                  <div class="flex flex-1 flex-col gap-5 p-6">
-                    <div class="flex flex-col gap-2">
-                      <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
-                        <?php echo esc_html($course['badge']); ?>
-                      </span>
-                      <h3 class="text-xl font-semibold text-zinc-950">
+                  </span>
+                  <span class="text-sm font-semibold text-zinc-900">
+                    <?php echo esc_html($section['title']); ?>
+                  </span>
+                </div>
+                <div class="flex flex-col gap-4">
+                  <?php foreach ($section['courses'] as $course) : ?>
+                    <article class="flex flex-col gap-4 rounded-2xl border border-white/70 bg-white/95 p-5 shadow-[0_18px_36px_rgba(15,23,42,0.12)] backdrop-blur-sm">
+                      <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                          <span class="flex h-11 w-11 items-center justify-center rounded-full text-sm font-semibold <?php echo esc_attr($course['provider_style']); ?>">
+                            <?php echo esc_html($course['provider_initials']); ?>
+                          </span>
+                          <span class="text-sm font-semibold text-zinc-900">
+                            <?php echo esc_html($course['provider']); ?>
+                          </span>
+                        </div>
+                        <span class="inline-flex items-center gap-1 rounded-full bg-[#eef2ff] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#3730a3]">
+                          <?php echo esc_html($course['badge']); ?>
+                        </span>
+                      </div>
+                      <h3 class="text-lg font-semibold leading-snug text-zinc-950">
                         <?php echo esc_html($course['title']); ?>
                       </h3>
-                      <p class="text-sm leading-6 text-zinc-600">
-                        <?php echo esc_html($course['description']); ?>
-                      </p>
-                    </div>
-                    <div class="flex items-center gap-2 text-sm font-medium text-zinc-500">
-                      <span class="h-2 w-2 rounded-full bg-primary/40"></span>
-                      <?php echo esc_html($course['provider']); ?>
-                    </div>
-                    <?php if (! empty($course['tags'])) : ?>
-                      <div class="flex flex-wrap gap-2">
-                        <?php foreach ($course['tags'] as $tag) : ?>
-                          <span class="inline-flex items-center rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-primary">
-                            <?php echo esc_html($tag); ?>
-                          </span>
-                        <?php endforeach; ?>
-                      </div>
-                    <?php endif; ?>
-                    <div class="mt-auto pt-4">
-                      <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white !no-underline" href="<?php echo esc_url(home_url('/courses')); ?>">
-                        <?php esc_html_e('Start learning', 'webmakerr'); ?>
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              <?php endforeach; ?>
-            </div>
+                      <?php if (! empty($course['meta'])) : ?>
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-zinc-500">
+                          <?php foreach ($course['meta'] as $meta) : ?>
+                            <span class="inline-flex items-center gap-1">
+                              <?php
+                              $meta_icon = webmakerr_get_trending_meta_icon($meta['icon']);
+                              if (! empty($meta_icon)) {
+                                  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                  echo $meta_icon;
+                              }
+                              ?>
+                              <?php echo esc_html($meta['label']); ?>
+                            </span>
+                          <?php endforeach; ?>
+                        </div>
+                      <?php endif; ?>
+                    </article>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            <?php endforeach; ?>
           </div>
-          <aside class="flex flex-col gap-8">
-            <div class="rounded-[6px] border border-zinc-200 bg-white p-6 shadow-sm">
-              <h3 class="text-2xl font-semibold text-zinc-950">
-                <?php esc_html_e('Explore categories', 'webmakerr'); ?>
-              </h3>
-              <p class="mt-3 text-sm leading-6 text-zinc-600">
-                <?php esc_html_e('Browse curated topics to tailor the learning journey for your goals.', 'webmakerr'); ?>
-              </p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <button type="button" class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-                  <?php esc_html_e('All programs', 'webmakerr'); ?>
-                </button>
-                <button type="button" class="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
-                  <?php esc_html_e('Popular', 'webmakerr'); ?>
-                </button>
-                <button type="button" class="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
-                  <?php esc_html_e('Career tracks', 'webmakerr'); ?>
-                </button>
-              </div>
-              <div class="mt-8 grid grid-cols-1 gap-4">
-                <?php foreach ($categories as $category) : ?>
-                  <div class="group flex items-center gap-4 rounded-[6px] border border-transparent bg-zinc-50 p-4 transition hover:border-primary/20 hover:bg-white">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-[5px] bg-white shadow-sm">
-                      <?php
-                      $category_path = get_template_directory() . '/assets/svg/home/categories/' . $category['image'];
-                      if (file_exists($category_path)) {
-                          // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                          echo file_get_contents($category_path);
-                      }
-                      ?>
-                    </div>
-                    <div class="flex flex-col">
-                      <span class="text-lg font-semibold text-zinc-950">
-                        <?php echo esc_html($category['title']); ?>
-                      </span>
-                      <p class="text-sm text-zinc-600">
-                        <?php echo esc_html($category['description']); ?>
-                      </p>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-            </div>
-            <div class="flex flex-col gap-4">
-              <?php foreach ($spotlight_programs as $program) : ?>
-                <a class="group flex flex-col overflow-hidden rounded-[6px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($program['url']); ?>">
-                  <div class="relative h-40 overflow-hidden bg-zinc-100">
-                    <?php
-                    $program_image = get_template_directory() . '/assets/svg/home/courses/' . $program['image'];
-                    if (file_exists($program_image)) {
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo file_get_contents($program_image);
-                    }
-                    ?>
-                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/70 to-transparent"></div>
-                    <span class="absolute left-6 top-6 inline-flex items-center rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-                      <?php esc_html_e('Spotlight', 'webmakerr'); ?>
-                    </span>
-                  </div>
-                  <div class="flex flex-col gap-3 p-6">
-                    <h4 class="text-xl font-semibold text-zinc-950">
-                      <?php echo esc_html($program['title']); ?>
-                    </h4>
-                    <p class="text-sm leading-6 text-zinc-600">
-                      <?php echo esc_html($program['description']); ?>
-                    </p>
-                    <span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:text-primary/80">
-                      <?php echo esc_html($program['cta']); ?>
-                      <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-              <?php endforeach; ?>
-            </div>
-          </aside>
         </div>
       </section>
 
