@@ -7,6 +7,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 if (! function_exists('webseo_render_icon')) {
     function webseo_render_icon($name, $class = 'w-6 h-6 text-primary mb-3')
     {
@@ -44,6 +47,12 @@ if (! function_exists('webseo_render_icon')) {
 get_header();
 ?>
 
+<?php
+$cta_primary_link  = webmakerr_get_popup_link_attributes('#get-webseo', $popup_enabled);
+$cta_upgrade_link  = webmakerr_get_popup_link_attributes('#upgrade-webseo', $popup_enabled);
+$cta_purchase_link = webmakerr_get_popup_link_attributes('#purchase-webseo', $popup_enabled);
+?>
+
 <main id="primary" class="bg-white py-16 sm:py-20 lg:py-24">
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
     <?php while (have_posts()) : the_post(); ?>
@@ -63,7 +72,7 @@ get_header();
                 <?php esc_html_e('WebSEO instantly optimizes your WordPress website for higher rankings — no technical setup, no SEO jargon. Just install, activate, and start ranking.', 'webmakerr'); ?>
               </p>
               <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="#get-webseo" data-popup-trigger>
+                <a class="inline-flex w-full items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($cta_primary_link['href']); ?>"<?php echo $cta_primary_link['attributes']; ?>>
                   <?php esc_html_e('Get WebSEO Now', 'webmakerr'); ?>
                 </a>
                 <a class="inline-flex w-full items-center justify-center rounded-[5px] border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="#demo-webseo">
@@ -286,7 +295,7 @@ get_header();
               ?>
             </ul>
             <div class="mt-6">
-              <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 !no-underline" href="#get-webseo" data-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90 !no-underline" href="<?php echo esc_url($cta_primary_link['href']); ?>"<?php echo $cta_primary_link['attributes']; ?>>
                 <?php esc_html_e('Start with WebSEO Free', 'webmakerr'); ?>
               </a>
             </div>
@@ -367,7 +376,7 @@ get_header();
               <p class="max-w-xs text-sm leading-6 text-zinc-600">
                 <?php esc_html_e('Start free and upgrade when you’re ready for advanced automation, deeper insights, and collaborative workflows.', 'webmakerr'); ?>
               </p>
-              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#upgrade-webseo" data-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($cta_upgrade_link['href']); ?>"<?php echo $cta_upgrade_link['attributes']; ?>>
                 <?php esc_html_e('Upgrade to WebSEO Pro', 'webmakerr'); ?>
               </a>
             </div>
@@ -518,7 +527,7 @@ get_header();
               <?php esc_html_e('Automate SEO. Increase visibility. Save time. WebSEO does the hard work for you — effortlessly.', 'webmakerr'); ?>
             </p>
             <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-6 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="#purchase-webseo" data-popup-trigger>
+              <a class="inline-flex items-center justify-center rounded-[5px] bg-dark px-6 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline" href="<?php echo esc_url($cta_purchase_link['href']); ?>"<?php echo $cta_purchase_link['attributes']; ?>>
                 <?php esc_html_e('Get WebSEO Now', 'webmakerr'); ?>
               </a>
               <a id="demo-webseo" class="inline-flex items-center justify-center rounded-[5px] border border-zinc-200 px-6 py-2 text-sm font-semibold text-zinc-950 transition hover:border-primary hover:text-primary !no-underline" href="#demo">
@@ -533,25 +542,6 @@ get_header();
 </main>
 
 <?php
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();

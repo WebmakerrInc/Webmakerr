@@ -10,6 +10,9 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 get_header();
 ?>
 
@@ -54,12 +57,15 @@ get_header();
         }
     }
 
-    $intro            = trim((string) get_post_meta(get_the_ID(), '_webmakerr_theme_intro', true));
-    $intro_default    = __('Webmakerr is the 100% free Tailwind WordPress theme built to launch high-converting sites at top speed with effortless customization.', 'webmakerr');
-    $primary_cta_url  = get_post_meta(get_the_ID(), '_webmakerr_theme_cta_primary_url', true) ?: home_url('/download');
-    $primary_cta_text = get_post_meta(get_the_ID(), '_webmakerr_theme_cta_primary_label', true) ?: __('Download Webmakerr Free', 'webmakerr');
+    $intro              = trim((string) get_post_meta(get_the_ID(), '_webmakerr_theme_intro', true));
+    $intro_default      = __('Webmakerr is the 100% free Tailwind WordPress theme built to launch high-converting sites at top speed with effortless customization.', 'webmakerr');
+    $primary_cta_url    = get_post_meta(get_the_ID(), '_webmakerr_theme_cta_primary_url', true) ?: home_url('/download');
+    $primary_cta_text   = get_post_meta(get_the_ID(), '_webmakerr_theme_cta_primary_label', true) ?: __('Download Webmakerr Free', 'webmakerr');
     $secondary_cta_url  = get_post_meta(get_the_ID(), '_webmakerr_theme_cta_secondary_url', true) ?: home_url('/docs');
     $secondary_cta_text = get_post_meta(get_the_ID(), '_webmakerr_theme_cta_secondary_label', true) ?: __('Build with Webmakerr', 'webmakerr');
+
+    $primary_cta_link   = webmakerr_get_popup_link_attributes($primary_cta_url, $popup_enabled);
+    $secondary_cta_link = webmakerr_get_popup_link_attributes($secondary_cta_url, $popup_enabled);
 
     $feature_cards = array(
       array(
@@ -148,10 +154,10 @@ get_header();
                 <?php echo esc_html($intro ?: $intro_default); ?>
               </p>
               <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($primary_cta_url); ?>" data-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline sm:w-auto" href="<?php echo esc_url($primary_cta_link['href']); ?>"<?php echo $primary_cta_link['attributes']; ?>>
                   <?php echo esc_html($primary_cta_text); ?>
                 </a>
-                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($secondary_cta_url); ?>" data-popup-trigger>
+                <a class="inline-flex w-full justify-center rounded border border-zinc-200 px-4 py-1.5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline sm:w-auto" href="<?php echo esc_url($secondary_cta_link['href']); ?>"<?php echo $secondary_cta_link['attributes']; ?>>
                   <?php echo esc_html($secondary_cta_text); ?>
                 </a>
               </div>
@@ -375,10 +381,10 @@ get_header();
           <h2 class="text-3xl font-semibold text-white sm:text-4xl"><?php esc_html_e('Launch a performance-first site with Webmakerr', 'webmakerr'); ?></h2>
           <p class="max-w-2xl text-base leading-7 text-white/80 sm:text-lg"><?php esc_html_e('Download the free theme, benefit from regular updates, and ship blazing-fast pages optimized for search, accessibility, and growth.', 'webmakerr'); ?></p>
           <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($primary_cta_url); ?>" data-popup-trigger>
+            <a class="inline-flex items-center justify-center rounded border border-transparent bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 !no-underline" href="<?php echo esc_url($primary_cta_link['href']); ?>"<?php echo $primary_cta_link['attributes']; ?>>
               <?php echo esc_html($primary_cta_text); ?>
             </a>
-            <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($secondary_cta_url); ?>" data-popup-trigger>
+            <a class="inline-flex items-center justify-center rounded border border-white/70 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline" href="<?php echo esc_url($secondary_cta_link['href']); ?>"<?php echo $secondary_cta_link['attributes']; ?>>
               <?php esc_html_e('Preview the components', 'webmakerr'); ?>
             </a>
           </div>
@@ -389,25 +395,6 @@ get_header();
 </main>
 
 <?php
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();

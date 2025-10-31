@@ -8,9 +8,14 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+$popup_settings = webmakerr_get_template_popup_settings(__FILE__);
+$popup_enabled  = (bool) ($popup_settings['enabled'] ?? false);
+
 get_header();
 
 $page_id = get_queried_object_id();
+$contact_cta_url = home_url('/contact');
+$contact_cta_link = webmakerr_get_popup_link_attributes($contact_cta_url, $popup_enabled);
 $hero_title = get_the_title($page_id);
 $hero_intro = '';
 
@@ -335,7 +340,7 @@ $tags = get_tags(
           <p class="mt-2 text-sm leading-6 text-zinc-600">
             <?php esc_html_e('Subscribe to get the latest product drops, guides, and strategies delivered weekly.', 'webmakerr'); ?>
           </p>
-          <a class="mt-4 inline-flex items-center gap-2 rounded-[5px] bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-primary/90 !no-underline" href="<?php echo esc_url(home_url('/contact')); ?>" data-popup-trigger>
+          <a class="mt-4 inline-flex items-center gap-2 rounded-[5px] bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-primary/90 !no-underline" href="<?php echo esc_url($contact_cta_link['href']); ?>"<?php echo $contact_cta_link['attributes']; ?>>
             <?php esc_html_e('Join our newsletter', 'webmakerr'); ?>
           </a>
         </div>
@@ -347,25 +352,6 @@ $tags = get_tags(
 <?php
 wp_reset_postdata();
 
-$form_id         = 0;
-$popup_headline  = '';
-$popup_config    = get_template_directory() . '/templates/config/popup-content.php';
-$template_handle = basename(__FILE__);
-
-if (is_readable($popup_config)) {
-    $popup_settings = include $popup_config;
-    if (is_array($popup_settings) && isset($popup_settings[$template_handle]) && is_array($popup_settings[$template_handle])) {
-        $template_settings = $popup_settings[$template_handle];
-        $form_id           = isset($template_settings['form_id']) ? absint($template_settings['form_id']) : 0;
-        $popup_headline    = isset($template_settings['headline']) ? (string) $template_settings['headline'] : '';
-    }
-}
-
-if ($form_id > 0) {
-    $popup_partial = get_template_directory() . '/partials/fluentform-popup.php';
-    if (is_readable($popup_partial)) {
-        include $popup_partial;
-    }
-}
+webmakerr_render_template_popup($popup_settings);
 
 get_footer();
