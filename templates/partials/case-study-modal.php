@@ -187,7 +187,7 @@ if (! defined('ABSPATH')) {
   });
 
   modal.addEventListener('click', function(event) {
-    if (event.target === modal || event.target === backdrop) {
+    if (!dialog.contains(event.target)) {
       closeModal();
     }
   });
