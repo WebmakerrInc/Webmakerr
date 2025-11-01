@@ -207,7 +207,7 @@
                             wp_nav_menu([
                                 'container_id'    => 'primary-menu',
                                 'container_class' => '',
-                                'menu_class'      => 'md:flex md:items-center md:space-x-8 space-y-3 md:space-y-0 [&_a]:!no-underline [&_a]:border [&_a]:border-transparent [&_a]:rounded-[5px] [&_a]:transition-colors [&_a]:duration-200 [&_a]:ease-out [&_a:hover]:border-zinc-200',
+                                'menu_class'      => 'md:flex md:items-center md:space-x-8 space-y-3 md:space-y-0 [&_a]:!no-underline [&_a]:border [&_a]:border-transparent [&_a]:rounded-[5px] [&_a]:transition-colors [&_a]:duration-200 [&_a]:ease-out [&_a:hover]:border-blue-500',
                                 'theme_location'  => 'primary',
                                 'li_class'        => '',
                                 'fallback_cb'     => false,
