@@ -51,7 +51,7 @@
                     <?php endif; ?>
 
                     <a
-                        class="inline-flex items-center justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline md:hidden"
+                        class="inline-flex items-center justify-center rounded bg-dark p-[5px] text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline hover:no-underline md:hidden"
                         href="<?php echo esc_url(home_url('/contact')); ?>"
                         aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
                     >
@@ -64,7 +64,7 @@
                         <div class="md:mx-4" data-solutions>
                             <button
                                 type="button"
-                                class="flex items-center gap-2 text-sm font-medium text-dark transition-colors hover:text-dark/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                                class="flex items-center gap-2 rounded-[5px] border border-zinc-200 p-[5px] text-sm font-medium text-dark transition-colors hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                                 aria-haspopup="true"
                                 aria-expanded="false"
                                 aria-controls="solutions-menu"
@@ -78,21 +78,19 @@
 
                             <div
                                 id="solutions-menu"
-                                class="hidden mt-4 w-full rounded-lg border border-light bg-white p-4 shadow-lg md:absolute md:top-full md:left-0 md:right-0 md:mt-6 md:w-auto md:p-6 md:shadow-xl md:z-50"
+                                class="hidden mt-4 w-full max-h-[80vh] overflow-y-auto rounded-[5px] border border-zinc-200 bg-white p-[10px] shadow-lg md:absolute md:left-1/2 md:top-full md:z-50 md:mt-6 md:w-[min(960px,calc(100vw-3rem))] md:-translate-x-1/2 md:max-h-none md:overflow-visible md:p-[15px] md:shadow-xl"
                                 data-solutions-menu
                                 aria-hidden="true"
                             >
-                                <section class="flex flex-col gap-6 md:flex-row md:gap-8">
-                                    <div class="flex-1 space-y-3">
-                                        <div class="flex items-center justify-between">
-                                            <div class="uppercase tracking-wide text-[0.7rem] font-semibold text-zinc-500">
-                                                <?php esc_html_e('By team size', 'webmakerr'); ?>
-                                            </div>
-                                        </div>
+                                <section class="flex flex-col gap-[15px] md:flex-row md:gap-[20px]">
+                                    <div class="flex-1 space-y-[10px]">
+                                        <h3 class="text-[0.7rem] font-semibold uppercase tracking-wide text-zinc-500">
+                                            <?php esc_html_e('By team size', 'webmakerr'); ?>
+                                        </h3>
 
-                                        <div class="space-y-2">
-                                            <a href="#" class="flex items-start gap-3 rounded border border-light bg-white px-3 py-3 no-underline transition hover:border-dark/10 hover:bg-zinc-50">
-                                                <span class="flex h-8 w-8 items-center justify-center rounded bg-zinc-100">
+                                        <div class="space-y-[10px]">
+                                            <a href="#" class="flex items-start gap-3 rounded-[5px] border border-zinc-200 bg-white p-[5px] no-underline transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white hover:no-underline">
+                                                <span class="flex h-8 w-8 items-center justify-center rounded-[5px] bg-zinc-100">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A3 3 0 017 17h10a3 3 0 011.879.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     </svg>
@@ -103,8 +101,8 @@
                                                 </span>
                                             </a>
 
-                                            <a href="#" class="flex items-start gap-3 rounded border border-blue-500/40 bg-blue-50 px-3 py-3 no-underline transition hover:border-blue-500/60">
-                                                <span class="flex h-8 w-8 items-center justify-center rounded bg-zinc-100">
+                                            <a href="#" class="flex items-start gap-3 rounded-[5px] border border-blue-500/40 bg-blue-50 p-[5px] no-underline transition hover:border-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white hover:no-underline">
+                                                <span class="flex h-8 w-8 items-center justify-center rounded-[5px] bg-zinc-100">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5-2.236M2 20h5v-2a3 3 0 00-5-2.236M9 12a3 3 0 106 0 3 3 0 00-6 0z" />
                                                     </svg>
@@ -115,8 +113,8 @@
                                                 </span>
                                             </a>
 
-                                            <a href="#" class="flex items-start gap-3 rounded border border-light bg-white px-3 py-3 no-underline transition hover:border-dark/10 hover:bg-zinc-50">
-                                                <span class="flex h-8 w-8 items-center justify-center rounded bg-zinc-100">
+                                            <a href="#" class="flex items-start gap-3 rounded-[5px] border border-zinc-200 bg-white p-[5px] no-underline transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white hover:no-underline">
+                                                <span class="flex h-8 w-8 items-center justify-center rounded-[5px] bg-zinc-100">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z" />
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z" />
@@ -128,8 +126,8 @@
                                                 </span>
                                             </a>
 
-                                            <a href="#" class="flex items-start gap-3 rounded border border-light bg-white px-3 py-3 no-underline transition hover:border-dark/10 hover:bg-zinc-50">
-                                                <span class="flex h-8 w-8 items-center justify-center rounded bg-zinc-100">
+                                            <a href="#" class="flex items-start gap-3 rounded-[5px] border border-zinc-200 bg-white p-[5px] no-underline transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white hover:no-underline">
+                                                <span class="flex h-8 w-8 items-center justify-center rounded-[5px] bg-zinc-100">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197 3.197a4 4 0 01-5.656-5.656l3.197-3.197m4.242 0a4 4 0 015.656 5.656l-3.197 3.197" />
                                                     </svg>
@@ -143,11 +141,11 @@
                                     </div>
 
                                     <div class="flex-1">
-                                        <div class="uppercase tracking-wide text-[0.7rem] font-semibold text-zinc-500">
+                                        <h3 class="text-[0.7rem] font-semibold uppercase tracking-wide text-zinc-500">
                                             <?php esc_html_e('By use case', 'webmakerr'); ?>
-                                        </div>
+                                        </h3>
 
-                                        <div class="mt-3 grid grid-cols-2 gap-2">
+                                        <div class="mt-[10px] grid grid-cols-2 gap-[10px] sm:grid-cols-3">
                                             <?php
                                             $use_cases = [
                                                 __('Recruiting', 'webmakerr'),
@@ -162,7 +160,7 @@
 
                                             foreach ($use_cases as $use_case):
                                                 ?>
-                                                <a href="#" class="rounded border border-light bg-white px-3 py-2 text-sm font-medium text-dark no-underline transition hover:border-dark/10 hover:bg-zinc-50">
+                                                <a href="#" class="rounded-[5px] border border-zinc-200 bg-white p-[5px] text-sm font-medium text-dark no-underline transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white hover:no-underline">
                                                     <?php echo esc_html($use_case); ?>
                                                 </a>
                                                 <?php
@@ -171,8 +169,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex w-full flex-col justify-between overflow-hidden rounded-lg bg-gradient-to-br from-black via-zinc-900 to-zinc-950 p-6 text-white md:max-w-[220px]">
-                                        <span class="self-start rounded-full bg-white/20 px-3 py-1 text-xs font-semibold tracking-wide text-white/90">
+                                    <div class="flex w-full flex-col justify-between overflow-hidden rounded-[5px] bg-gradient-to-br from-black via-neutral-800 to-neutral-900 p-[15px] text-white md:max-w-[220px]">
+                                        <span class="self-start rounded-full bg-white/20 px-[10px] py-[5px] text-xs font-semibold tracking-wide text-white/90">
                                             <?php esc_html_e('Try Webmakerr', 'webmakerr'); ?>
                                         </span>
                                         <div class="mt-8">
@@ -181,7 +179,7 @@
                                                 <?php esc_html_e('Supercharged scheduling with AI-powered calls', 'webmakerr'); ?>
                                             </p>
                                         </div>
-                                        <a href="<?php echo esc_url(home_url('/contact')); ?>" class="mt-8 inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-xs font-semibold text-dark no-underline transition hover:bg-white/90">
+                                        <a href="<?php echo esc_url(home_url('/contact')); ?>" class="mt-8 inline-flex items-center justify-center rounded-[5px] bg-white p-[5px] text-xs font-semibold text-dark no-underline transition hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/20 focus-visible:ring-offset-2 focus-visible:ring-offset-white hover:no-underline">
                                             <?php esc_html_e('Contact Sales', 'webmakerr'); ?>
                                         </a>
                                     </div>
@@ -207,7 +205,7 @@
                     <div class="inline-block mt-4 md:mt-0"><?php get_search_form(); ?></div>
 
                     <a
-                        class="hidden md:inline-flex md:w-auto justify-center rounded bg-dark px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline"
+                        class="hidden md:inline-flex md:w-auto justify-center rounded bg-dark p-[5px] text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline hover:no-underline"
                         href="<?php echo esc_url(home_url('/contact')); ?>"
                         aria-label="<?php esc_attr_e('Contact Us', 'webmakerr'); ?>"
                     >
