@@ -43,7 +43,13 @@
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3 md:hidden">
                     <?php if (has_nav_menu('primary')): ?>
-                        <button type="button" aria-label="Toggle navigation" id="primary-menu-toggle">
+                        <button
+                            type="button"
+                            aria-label="Toggle navigation"
+                            id="primary-menu-toggle"
+                            aria-controls="primary-navigation"
+                            aria-expanded="false"
+                        >
                             <svg xmlns="https://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
@@ -59,7 +65,12 @@
                     </a>
                 </div>
 
-                <div id="primary-navigation" class="hidden flex flex-col gap-6 items-stretch border border-light rounded p-4 md:flex md:flex-row md:items-center md:border-none md:bg-transparent md:p-0">
+                <div
+                    id="primary-navigation"
+                    class="absolute left-0 right-0 top-full mx-4 mt-3 hidden max-h-[calc(100vh-6rem)] flex-col items-stretch gap-6 overflow-y-auto rounded-[5px] border border-light bg-white p-4 opacity-0 shadow-lg transition-all duration-200 ease-out pointer-events-none -translate-y-2 md:static md:mx-0 md:mt-0 md:flex md:max-h-none md:flex-row md:items-center md:gap-6 md:overflow-visible md:border-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none md:translate-y-0 md:pointer-events-auto md:transition-none"
+                    aria-hidden="true"
+                    data-mobile-nav
+                >
                     <nav>
                         <div class="md:mx-4" data-solutions>
                             <button
@@ -78,7 +89,7 @@
 
                             <div
                                 id="solutions-menu"
-                                class="hidden mt-4 w-full max-h-[80vh] overflow-y-auto rounded-[5px] border border-zinc-200 bg-white p-[10px] shadow-lg md:absolute md:left-1/2 md:top-full md:z-50 md:mt-6 md:w-[min(960px,calc(100vw-3rem))] md:-translate-x-1/2 md:max-h-none md:overflow-visible md:p-[15px] md:shadow-xl"
+                                class="hidden mt-4 w-full max-h-[80vh] overflow-y-auto rounded-[5px] border border-zinc-200 bg-white p-[10px] shadow-lg transition md:absolute md:left-1/2 md:top-full md:z-50 md:mt-6 md:w-[min(960px,calc(100vw-3rem))] md:-translate-x-1/2 md:max-h-none md:overflow-visible md:p-[15px] md:shadow-xl [&_a]:!no-underline [&_a]:decoration-transparent [&_a:hover]:!no-underline [&_a:hover]:decoration-transparent [&_a:focus-visible]:!no-underline [&_a:focus-visible]:decoration-transparent"
                                 data-solutions-menu
                                 aria-hidden="true"
                             >
