@@ -21,7 +21,10 @@
     <?php do_action('webmakerr_header'); ?>
 
     <header class="sticky top-0 z-50 bg-white shadow-md">
-        <div class="container mx-auto py-4 flex items-center justify-between gap-6 relative" data-header-container>
+        <div
+            class="mx-auto w-full max-w-6xl px-6 py-4 lg:px-8 flex items-center justify-between gap-6 relative"
+            data-header-container
+        >
             <div class="flex items-center gap-4 md:gap-6">
                 <?php if (has_custom_logo()): ?>
                     <div class="site-logo">
@@ -40,7 +43,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 md:flex-1 md:justify-end">
                 <div class="flex items-center gap-3 md:hidden">
                     <?php if (has_nav_menu('primary')): ?>
                         <button
@@ -67,11 +70,11 @@
 
                 <div
                     id="primary-navigation"
-                    class="absolute left-0 right-0 top-full mx-4 mt-3 hidden max-h-[calc(100vh-6rem)] flex-col items-stretch gap-6 overflow-y-auto rounded-[5px] border border-light bg-white p-4 opacity-0 shadow-lg transition-all duration-200 ease-out pointer-events-none -translate-y-2 md:static md:mx-0 md:mt-0 md:flex md:max-h-none md:flex-row md:items-center md:gap-6 md:overflow-visible md:border-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none md:translate-y-0 md:pointer-events-auto md:transition-none"
+                    class="absolute left-0 right-0 top-full mx-4 mt-3 hidden max-h-[calc(100vh-6rem)] flex-col items-stretch gap-6 overflow-y-auto rounded-[5px] border border-light bg-white p-4 opacity-0 shadow-lg transition-all duration-200 ease-out pointer-events-none -translate-y-2 md:static md:mx-0 md:mt-0 md:flex md:w-full md:max-w-none md:flex-row md:items-center md:justify-between md:gap-6 md:overflow-visible md:border-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none md:translate-y-0 md:pointer-events-auto md:transition-none"
                     aria-hidden="true"
                     data-mobile-nav
                 >
-                    <nav>
+                    <nav class="md:flex md:flex-1 md:items-center md:gap-6">
                         <div class="md:mx-4" data-solutions>
                             <button
                                 type="button"
@@ -213,7 +216,7 @@
                         <?php endif; ?>
                     </nav>
 
-                    <div class="inline-block mt-4 md:mt-0"><?php get_search_form(); ?></div>
+                    <div class="inline-block mt-4 md:mt-0 md:ml-auto"><?php get_search_form(); ?></div>
 
                     <a
                         class="hidden md:inline-flex md:w-auto justify-center rounded bg-dark p-[5px] text-sm font-semibold text-white transition hover:bg-dark/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark !no-underline hover:no-underline"
