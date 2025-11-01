@@ -104,17 +104,17 @@ get_header();
                 <span class="h-2 w-2 rounded-full bg-[#7fe6ff]"></span>
                 <?php esc_html_e('Future-ready learning', 'webmakerr'); ?>
               </span>
-              <h1 class="mt-6 font-serif text-4xl font-semibold tracking-tight [text-wrap:balance] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+              <h1 class="mt-6 text-4xl font-medium tracking-tight [text-wrap:balance] text-white sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
                 <?php esc_html_e('Gain essential AI skills to enhance your career', 'webmakerr'); ?>
               </h1>
-              <p class="mt-4 max-w-xl text-base leading-7 text-white/80 sm:text-lg">
+              <p class="mt-4 max-w-xl text-base leading-7 text-white/75 sm:text-lg">
                 <?php esc_html_e('Build job-ready expertise with courses and credentials created alongside the world’s leading universities and companies.', 'webmakerr'); ?>
               </p>
               <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a class="inline-flex w-full items-center justify-center rounded-md bg-[#7fe6ff] px-6 py-3 text-sm font-semibold text-[#062364] shadow-lg shadow-[#03133f]/30 transition hover:bg-[#a4f3ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:ring-white/70 sm:w-auto !no-underline" href="<?php echo esc_url(home_url('/programs')); ?>">
+                <a class="inline-flex w-full justify-center rounded bg-white px-4 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto !no-underline" href="<?php echo esc_url(home_url('/programs')); ?>">
                   <?php esc_html_e('Explore programs', 'webmakerr'); ?>
                 </a>
-                <a class="inline-flex w-full items-center justify-center rounded-md border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto !no-underline" href="<?php echo esc_url(home_url('/business')); ?>">
+                <a class="inline-flex w-full justify-center rounded border border-white/60 bg-transparent px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto !no-underline" href="<?php echo esc_url(home_url('/business')); ?>">
                   <?php esc_html_e('Try Webmakerr for Business', 'webmakerr'); ?>
                 </a>
               </div>
@@ -140,7 +140,7 @@ get_header();
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
             <?php foreach ($discover_tiles as $tile) : ?>
-            <a class="group flex h-full flex-col gap-5 rounded-[6px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($tile['url']); ?>">
+            <a class="group flex h-full flex-col gap-5 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($tile['url']); ?>">
               <span class="inline-flex h-12 w-12 items-center justify-center rounded-[5px] bg-primary/10 text-primary">
                 <?php
                 $icon_path = get_template_directory() . '/assets/svg/home/icons/' . $tile['icon'];
@@ -170,110 +170,119 @@ get_header();
         </div>
       </section>
 
-      <section class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <h2 class="text-2xl font-semibold text-gray-900 mb-8">Trending courses</h2>
+      <section class="bg-light py-20">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 class="mb-10 text-3xl font-semibold text-zinc-950 sm:text-4xl">Trending courses</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 
             <!-- Column 1 -->
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Most popular</h3>
-                <a href="#" class="text-blue-600 text-sm font-medium">→</a>
+            <div class="flex h-full flex-col gap-5 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Most popular</span>
+                  <h3 class="mt-2 text-lg font-semibold text-zinc-950">Featured picks</h3>
+                </div>
+                <a href="#" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200 text-sm font-semibold text-zinc-500 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline">→</a>
               </div>
 
-              <div class="space-y-4">
+              <div class="space-y-3">
                 <!-- Course -->
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Google" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Google Digital Marketing &amp; E-commerce</h4>
-                    <p class="text-xs text-gray-500">Professional Certificate • ⭐ 4.8</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Google" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Google Digital Marketing &amp; E-commerce</h4>
+                    <p class="text-xs text-zinc-500">Professional Certificate • ⭐ 4.8</p>
                   </div>
                 </div>
 
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Google" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Google Project Management</h4>
-                    <p class="text-xs text-gray-500">Professional Certificate • ⭐ 4.8</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Google" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Google Project Management</h4>
+                    <p class="text-xs text-zinc-500">Professional Certificate • ⭐ 4.8</p>
                   </div>
                 </div>
 
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Meta" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Meta Full Stack Developer: Front-End &amp; Back-End</h4>
-                    <p class="text-xs text-gray-500">Specialization • ⭐ 4.7</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Meta" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Meta Full Stack Developer: Front-End &amp; Back-End</h4>
+                    <p class="text-xs text-zinc-500">Specialization • ⭐ 4.7</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Column 2 -->
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Weekly spotlight</h3>
-                <a href="#" class="text-blue-600 text-sm font-medium">→</a>
+            <div class="flex h-full flex-col gap-5 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Weekly spotlight</span>
+                  <h3 class="mt-2 text-lg font-semibold text-zinc-950">Fresh this week</h3>
+                </div>
+                <a href="#" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200 text-sm font-semibold text-zinc-500 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline">→</a>
               </div>
 
-              <div class="space-y-4">
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="DeepLearning.AI" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">PyTorch for Deep Learning</h4>
-                    <p class="text-xs text-gray-500">Professional Certificate • ⭐ 4.8</p>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="DeepLearning.AI" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">PyTorch for Deep Learning</h4>
+                    <p class="text-xs text-zinc-500">Professional Certificate • ⭐ 4.8</p>
                   </div>
                 </div>
 
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Meta" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Meta Social Media Marketing</h4>
-                    <p class="text-xs text-gray-500">Professional Certificate • ⭐ 4.8</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Meta" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Meta Social Media Marketing</h4>
+                    <p class="text-xs text-zinc-500">Professional Certificate • ⭐ 4.8</p>
                   </div>
                 </div>
 
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Macquarie" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Excel Skills for Business</h4>
-                    <p class="text-xs text-gray-500">Specialization • ⭐ 4.9</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Macquarie" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Excel Skills for Business</h4>
+                    <p class="text-xs text-zinc-500">Specialization • ⭐ 4.9</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Column 3 -->
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">In-demand AI skills</h3>
-                <a href="#" class="text-blue-600 text-sm font-medium">→</a>
+            <div class="flex h-full flex-col gap-5 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">In-demand AI skills</span>
+                  <h3 class="mt-2 text-lg font-semibold text-zinc-950">Build AI fluency</h3>
+                </div>
+                <a href="#" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200 text-sm font-semibold text-zinc-500 transition hover:border-zinc-300 hover:text-zinc-950 !no-underline">→</a>
               </div>
 
-              <div class="space-y-4">
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Vanderbilt" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Prompt Engineering</h4>
-                    <p class="text-xs text-gray-500">Specialization • ⭐ 4.8</p>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Vanderbilt" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Prompt Engineering</h4>
+                    <p class="text-xs text-zinc-500">Specialization • ⭐ 4.8</p>
                   </div>
                 </div>
 
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="Google" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Google AI Essentials</h4>
-                    <p class="text-xs text-gray-500">Specialization • ⭐ 4.8</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="Google" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Google AI Essentials</h4>
+                    <p class="text-xs text-zinc-500">Specialization • ⭐ 4.8</p>
                   </div>
                 </div>
 
-                <div class="flex items-center bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition">
-                  <img src="https://via.placeholder.com/48x48" alt="IBM" class="w-12 h-12 rounded-md">
-                  <div class="ml-3">
-                    <h4 class="text-sm font-medium text-gray-900">Building AI Agents and Agentic Workflows</h4>
-                    <p class="text-xs text-gray-500">Specialization • ⭐ 4.8</p>
+                <div class="flex items-center gap-3 rounded-[5px] border border-zinc-100 bg-light p-3 transition hover:border-zinc-200">
+                  <img src="https://via.placeholder.com/48x48" alt="IBM" class="h-12 w-12 rounded-[5px]">
+                  <div>
+                    <h4 class="text-sm font-medium text-zinc-900">Building AI Agents and Agentic Workflows</h4>
+                    <p class="text-xs text-zinc-500">Specialization • ⭐ 4.8</p>
                   </div>
                 </div>
               </div>
@@ -283,155 +292,155 @@ get_header();
         </div>
       </section>
 
-      <section class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <h2 class="text-2xl font-semibold text-gray-900 mb-6">Explore categories</h2>
+      <section class="bg-white py-20">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 class="mb-6 text-3xl font-semibold text-zinc-950 sm:text-4xl">Explore categories</h2>
 
-          <div class="flex gap-3 mb-10 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full flex items-center gap-2 cursor-pointer hover:bg-blue-100 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="mb-10 flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+            <span class="flex-none snap-start inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M9 21h6M4 10l1.89 9.45A2 2 0 007.85 21h8.3a2 2 0 001.96-1.55L20 10M12 3v7" />
               </svg>
               Business
             </span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Artificial Intelligence</span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Data Science</span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Computer Science</span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Information Technology</span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Personal Development</span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Healthcare</span>
-            <span class="flex-none snap-start px-4 py-2 bg-blue-50 text-gray-800 text-sm font-medium rounded-full cursor-pointer hover:bg-blue-100 transition">Language Learning</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Artificial Intelligence</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Data Science</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Computer Science</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Information Technology</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Personal Development</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Healthcare</span>
+            <span class="flex-none snap-start inline-flex items-center rounded-full border border-zinc-200 bg-light px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950">Language Learning</span>
           </div>
 
-          <div class="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
-            <div class="flex-none snap-start w-72 bg-gradient-to-r from-blue-600 to-blue-400 text-white p-8 rounded-2xl flex flex-col justify-center items-start">
-              <h3 class="text-xl font-semibold mb-4">Hot new releases</h3>
-              <a href="#" class="inline-flex items-center gap-2 bg-white text-blue-600 font-medium px-4 py-2 rounded-md hover:bg-blue-50 transition">
+          <div class="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-4">
+            <div class="flex-none snap-start w-72 rounded-[12px] border border-zinc-200 bg-gradient-to-br from-primary/10 via-white to-light p-8 text-left shadow-sm md:w-auto">
+              <h3 class="text-xl font-semibold text-zinc-950">Hot new releases</h3>
+              <p class="mt-3 text-sm text-zinc-600">Stay ahead with programs launching this month from top partners.</p>
+              <a href="#" class="mt-6 inline-flex items-center gap-2 rounded border border-transparent bg-dark px-4 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline">
                 Explore courses
-                <span class="text-lg">→</span>
+                <span class="text-base">→</span>
               </a>
             </div>
 
-            <div class="flex-none snap-start w-72 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition overflow-hidden">
-              <img src="https://via.placeholder.com/400x200" alt="Google Course" class="w-full h-40 object-cover">
+            <div class="flex-none snap-start w-72 overflow-hidden rounded-[12px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
+              <img src="https://via.placeholder.com/400x200" alt="Google Course" class="h-40 w-full object-cover">
               <div class="p-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <img src="https://via.placeholder.com/20x20" alt="Google" class="w-5 h-5 rounded-full">
-                  <span class="text-sm text-gray-600 font-medium">Google</span>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://via.placeholder.com/20x20" alt="Google" class="h-5 w-5 rounded-full">
+                  <span class="text-sm font-medium text-zinc-600">Google</span>
                 </div>
-                <h4 class="text-base font-semibold text-gray-900 mb-1">Google People Management Essentials</h4>
-                <p class="text-sm text-gray-500">Specialization</p>
-                <p class="text-sm text-gray-500 mt-1">⭐ 4.8</p>
+                <h4 class="text-base font-semibold text-zinc-950">Google People Management Essentials</h4>
+                <p class="mt-1 text-sm text-zinc-500">Specialization • ⭐ 4.8</p>
               </div>
             </div>
 
-            <div class="flex-none snap-start w-72 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition overflow-hidden">
-              <img src="https://via.placeholder.com/400x200" alt="Google Data Analysis" class="w-full h-40 object-cover">
+            <div class="flex-none snap-start w-72 overflow-hidden rounded-[12px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
+              <img src="https://via.placeholder.com/400x200" alt="Google Data Analysis" class="h-40 w-full object-cover">
               <div class="p-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <img src="https://via.placeholder.com/20x20" alt="Google" class="w-5 h-5 rounded-full">
-                  <span class="text-sm text-gray-600 font-medium">Google</span>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://via.placeholder.com/20x20" alt="Google" class="h-5 w-5 rounded-full">
+                  <span class="text-sm font-medium text-zinc-600">Google</span>
                 </div>
-                <h4 class="text-base font-semibold text-gray-900 mb-1">Google Data Analysis with Python</h4>
-                <p class="text-sm text-gray-500">Specialization</p>
-                <p class="text-sm text-gray-500 mt-1">⭐ 4.8</p>
+                <h4 class="text-base font-semibold text-zinc-950">Google Data Analysis with Python</h4>
+                <p class="mt-1 text-sm text-zinc-500">Specialization • ⭐ 4.8</p>
               </div>
             </div>
 
-            <div class="flex-none snap-start w-72 bg-white rounded-xl border-4 border-green-300 shadow-sm hover:shadow-md transition overflow-hidden">
-              <img src="https://via.placeholder.com/400x200" alt="Google Stakeholder Management" class="w-full h-40 object-cover">
+            <div class="flex-none snap-start w-72 overflow-hidden rounded-[12px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
+              <img src="https://via.placeholder.com/400x200" alt="Google Stakeholder Management" class="h-40 w-full object-cover">
               <div class="p-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <img src="https://via.placeholder.com/20x20" alt="Google" class="w-5 h-5 rounded-full">
-                  <span class="text-sm text-gray-600 font-medium">Google</span>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://via.placeholder.com/20x20" alt="Google" class="h-5 w-5 rounded-full">
+                  <span class="text-sm font-medium text-zinc-600">Google</span>
                 </div>
-                <h4 class="text-base font-semibold text-gray-900 mb-1">Google Stakeholder Management</h4>
-                <p class="text-sm text-gray-500">Specialization</p>
-                <p class="text-sm text-gray-500 mt-1">⭐ 4.6</p>
+                <h4 class="text-base font-semibold text-zinc-950">Google Stakeholder Management</h4>
+                <p class="mt-1 text-sm text-zinc-500">Specialization • ⭐ 4.6</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <div class="grid md:grid-cols-2 gap-6">
+      <section class="bg-white py-20">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="grid gap-6 md:grid-cols-2">
 
-            <div class="bg-blue-700 text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden">
+            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[12px] border border-zinc-200 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 p-8 text-white shadow-sm">
               <div>
-                <p class="text-sm uppercase font-semibold mb-2">coursera <span class="font-bold">plus</span></p>
-                <h2 class="text-xl font-semibold mb-4 leading-snug">
-                  Unlock access to 10,000+ courses<br>with a subscription
+                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-white/60">Coursera <span class="text-white">Plus</span></p>
+                <h2 class="mt-4 text-2xl font-semibold leading-snug text-white">
+                  Unlock access to 10,000+ courses with a subscription
                 </h2>
-                <a href="#" class="inline-flex items-center text-white font-medium bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-md transition">
-                  Start 7-day free trial →
+                <p class="mt-3 text-sm text-white/70">Start exploring the entire catalog and learn at your own pace.</p>
+                <a href="#" class="mt-6 inline-flex w-fit items-center justify-center gap-2 rounded border border-white/70 bg-transparent px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline">
+                  Start 7-day free trial
+                  <span aria-hidden="true">→</span>
                 </a>
               </div>
-              <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="absolute right-4 bottom-4 rounded-xl">
+              <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="pointer-events-none absolute -right-6 bottom-0 h-40 w-40 opacity-80">
             </div>
 
-            <div class="bg-blue-900 text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden">
+            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[12px] border border-zinc-200 bg-light p-8 text-left shadow-sm">
               <div>
-                <p class="text-sm uppercase font-semibold mb-2">
-                  coursera <span class="font-normal">for business</span>
-                </p>
-                <h2 class="text-xl font-semibold mb-4 leading-snug">
+                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Coursera for business</p>
+                <h2 class="mt-4 text-2xl font-semibold leading-snug text-zinc-950">
                   Drive your business forward and empower your teams
                 </h2>
-                <a href="#" class="inline-flex items-center text-blue-900 font-medium bg-white hover:bg-gray-100 px-4 py-2 rounded-md transition">
-                  Try Coursera for Business →
+                <p class="mt-3 text-sm text-zinc-600">Upskill your workforce with curated AI and leadership programs.</p>
+                <a href="#" class="mt-6 inline-flex w-fit items-center justify-center gap-2 rounded border border-transparent bg-dark px-4 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline">
+                  Try Coursera for Business
+                  <span aria-hidden="true">→</span>
                 </a>
               </div>
-              <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="absolute right-4 bottom-4 rounded-xl">
+              <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="pointer-events-none absolute -right-4 bottom-0 h-40 w-40 opacity-90">
             </div>
 
           </div>
         </div>
       </section>
 
-      <section class="pb-20 bg-white">
-        <div class="container mx-auto px-6">
-          <h2 class="text-xl md:text-2xl font-semibold text-gray-900 mb-8">Why people choose Coursera</h2>
+      <section class="bg-light py-20">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 class="mb-10 text-3xl font-semibold text-zinc-950 sm:text-4xl">Why people choose Coursera</h2>
 
-          <div class="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2">
+          <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-4">
 
-            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
-              <div class="flex items-center gap-3 mb-3">
-                <img src="https://via.placeholder.com/60x60" alt="Sarah" class="w-12 h-12 rounded-full">
-                <h4 class="font-semibold text-gray-900 text-sm">Sarah W.</h4>
+            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div class="flex items-center gap-3">
+                <img src="https://via.placeholder.com/60x60" alt="Sarah" class="h-12 w-12 rounded-full">
+                <h4 class="text-sm font-semibold text-zinc-950">Sarah W.</h4>
               </div>
-              <p class="text-sm text-gray-600 leading-relaxed">
+              <p class="text-sm leading-relaxed text-zinc-600">
                 "Coursera's reputation for high-quality content, paired with its flexible structure, made it possible for me to dive into data analytics while managing family, health, and everyday life."
               </p>
             </div>
 
-            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
-              <div class="flex items-center gap-3 mb-3">
-                <img src="https://via.placeholder.com/60x60" alt="Noeris" class="w-12 h-12 rounded-full">
-                <h4 class="font-semibold text-gray-900 text-sm">Noeris B.</h4>
+            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div class="flex items-center gap-3">
+                <img src="https://via.placeholder.com/60x60" alt="Noeris" class="h-12 w-12 rounded-full">
+                <h4 class="text-sm font-semibold text-zinc-950">Noeris B.</h4>
               </div>
-              <p class="text-sm text-gray-600 leading-relaxed">
+              <p class="text-sm leading-relaxed text-zinc-600">
                 "Coursera rebuilt my confidence and showed me I could dream bigger. It wasn't just about gaining knowledge—it was about believing in my potential again."
               </p>
             </div>
 
-            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
-              <div class="flex items-center gap-3 mb-3">
-                <img src="https://via.placeholder.com/60x60" alt="Abdullahi" class="w-12 h-12 rounded-full">
-                <h4 class="font-semibold text-gray-900 text-sm">Abdullahi M.</h4>
+            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div class="flex items-center gap-3">
+                <img src="https://via.placeholder.com/60x60" alt="Abdullahi" class="h-12 w-12 rounded-full">
+                <h4 class="text-sm font-semibold text-zinc-950">Abdullahi M.</h4>
               </div>
-              <p class="text-sm text-gray-600 leading-relaxed">
+              <p class="text-sm leading-relaxed text-zinc-600">
                 "I now feel more prepared to take on leadership roles and have already started mentoring some of my colleagues."
               </p>
             </div>
 
-            <div class="flex-none snap-start w-72 md:w-auto border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition">
-              <div class="flex items-center gap-3 mb-3">
-                <img src="https://via.placeholder.com/60x60" alt="Anas" class="w-12 h-12 rounded-full">
-                <h4 class="font-semibold text-gray-900 text-sm">Anas A.</h4>
+            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div class="flex items-center gap-3">
+                <img src="https://via.placeholder.com/60x60" alt="Anas" class="h-12 w-12 rounded-full">
+                <h4 class="text-sm font-semibold text-zinc-950">Anas A.</h4>
               </div>
-              <p class="text-sm text-gray-600 leading-relaxed">
+              <p class="text-sm leading-relaxed text-zinc-600">
                 "Learning with Coursera has expanded my professional expertise by giving me access to cutting-edge research, practical tools, and global perspectives."
               </p>
             </div>
@@ -451,14 +460,12 @@ get_header();
           </div>
           <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             <?php foreach ($content_highlights as $content) : ?>
-              <a class="group relative flex h-full flex-col gap-6 overflow-hidden rounded-[18px] border border-white/60 bg-gradient-to-br <?php echo esc_attr($content['background']); ?> p-6 shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.12)] !no-underline" href="<?php echo esc_url($content['url']); ?>">
-                <div class="absolute -right-12 top-12 h-24 w-24 rounded-full bg-white/20 blur-3xl transition group-hover:bg-white/30"></div>
-                <div class="absolute -left-16 -bottom-10 h-28 w-28 rounded-full bg-white/30 blur-3xl transition group-hover:bg-white/40"></div>
-                <span class="relative inline-flex w-fit items-center gap-2 rounded-full border border-white/70 bg-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-700 shadow-sm">
+              <a class="group flex h-full flex-col gap-6 rounded-[12px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($content['url']); ?>">
+                <span class="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                   <?php echo esc_html($content['tag']); ?>
                 </span>
-                <div class="relative flex items-center gap-4">
-                  <div class="flex h-14 w-14 items-center justify-center rounded-[12px] bg-white/70 shadow-inner shadow-white/40">
+                <div class="flex items-center gap-4">
+                  <div class="flex h-14 w-14 items-center justify-center rounded-[12px] border border-zinc-100 bg-light">
                     <?php
                     $content_icon = get_template_directory() . '/assets/svg/home/content/' . $content['icon'];
                     if (file_exists($content_icon)) {
@@ -476,7 +483,7 @@ get_header();
                     </p>
                   </div>
                 </div>
-                <span class="relative mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:text-primary/80">
+                <span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:text-primary/80">
                   <?php esc_html_e('Browse now', 'webmakerr'); ?>
                   <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.5 3.5L10.5 8L5.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -505,10 +512,10 @@ get_header();
             </p>
           </div>
           <div class="relative flex flex-col gap-4 sm:flex-row">
-            <a class="inline-flex items-center justify-center gap-2 rounded-[6px] border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-sm transition hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 !no-underline" href="<?php echo esc_url(home_url('/learn')); ?>">
+            <a class="inline-flex items-center justify-center gap-2 rounded border border-zinc-200 bg-white px-5 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 !no-underline" href="<?php echo esc_url(home_url('/learn')); ?>">
               <?php esc_html_e('I want to learn new skills', 'webmakerr'); ?>
             </a>
-            <a class="inline-flex items-center justify-center gap-2 rounded-[6px] border border-transparent bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white !no-underline" href="<?php echo esc_url(home_url('/business-solutions')); ?>">
+            <a class="inline-flex items-center justify-center gap-2 rounded border border-transparent bg-primary px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white !no-underline" href="<?php echo esc_url(home_url('/business-solutions')); ?>">
               <?php esc_html_e("I'm exploring for my business", 'webmakerr'); ?>
             </a>
           </div>
