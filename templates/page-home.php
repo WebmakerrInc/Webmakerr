@@ -26,6 +26,15 @@ get_header();
   body.page-template-page-home {
     overflow-x: hidden;
   }
+
+  @media (max-width: 768px) {
+    .home-review-card {
+      width: min(60vw, 320px);
+      min-width: min(60vw, 320px);
+      max-width: min(60vw, 320px);
+      min-height: 200px;
+    }
+  }
 </style>
 
 <main id="primary" class="bg-[#f5f7ff]">
@@ -122,7 +131,7 @@ get_header();
             <div class="relative mx-auto w-full max-w-md">
               <div class="absolute -right-6 -top-6 h-16 w-16 rounded-full bg-white/30 blur-xl"></div>
               <div class="absolute -bottom-10 left-12 h-20 w-20 rounded-full bg-[#ff6bd6]/40 blur-2xl"></div>
-              <div class="relative overflow-hidden rounded-3xl border border-white/20 bg-white/5 p-10 shadow-[0_24px_60px_rgba(3,19,63,0.35)] backdrop-blur">
+              <div class="relative overflow-hidden rounded-[5px] border border-white/20 bg-white/5 p-10 shadow-[0_24px_60px_rgba(3,19,63,0.35)] backdrop-blur">
                 <?php
                 $hero_path = get_template_directory() . '/assets/svg/home/hero-illustration.svg';
                 if (file_exists($hero_path)) {
@@ -313,7 +322,7 @@ get_header();
           </div>
 
           <div class="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-4">
-            <div class="flex-none snap-start w-72 rounded-[12px] border border-zinc-200 bg-gradient-to-br from-primary/10 via-white to-light p-8 text-left shadow-sm md:w-auto">
+            <div class="flex-none snap-start w-72 rounded-[5px] border border-zinc-200 bg-gradient-to-br from-primary/10 via-white to-light p-8 text-left shadow-sm md:w-auto">
               <h3 class="text-xl font-semibold text-zinc-950">Hot new releases</h3>
               <p class="mt-3 text-sm text-zinc-600">Stay ahead with programs launching this month from top partners.</p>
               <a href="#" class="mt-6 inline-flex items-center gap-2 rounded border border-transparent bg-dark px-4 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline">
@@ -322,7 +331,7 @@ get_header();
               </a>
             </div>
 
-            <div class="flex-none snap-start w-72 overflow-hidden rounded-[12px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
+            <div class="flex-none snap-start w-72 overflow-hidden rounded-[5px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
               <img src="https://via.placeholder.com/400x200" alt="Google Course" class="h-40 w-full object-cover">
               <div class="p-4">
                 <div class="mb-2 flex items-center gap-2">
@@ -334,7 +343,7 @@ get_header();
               </div>
             </div>
 
-            <div class="flex-none snap-start w-72 overflow-hidden rounded-[12px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
+            <div class="flex-none snap-start w-72 overflow-hidden rounded-[5px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
               <img src="https://via.placeholder.com/400x200" alt="Google Data Analysis" class="h-40 w-full object-cover">
               <div class="p-4">
                 <div class="mb-2 flex items-center gap-2">
@@ -346,7 +355,7 @@ get_header();
               </div>
             </div>
 
-            <div class="flex-none snap-start w-72 overflow-hidden rounded-[12px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
+            <div class="flex-none snap-start w-72 overflow-hidden rounded-[5px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg md:w-auto">
               <img src="https://via.placeholder.com/400x200" alt="Google Stakeholder Management" class="h-40 w-full object-cover">
               <div class="p-4">
                 <div class="mb-2 flex items-center gap-2">
@@ -365,7 +374,7 @@ get_header();
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="grid gap-6 md:grid-cols-2">
 
-            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[12px] border border-zinc-200 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 p-8 text-white shadow-sm">
+            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[5px] border border-zinc-200 bg-gradient-to-br from-[#0f172a] via-[#0b1221] to-[#050a16] p-8 text-white shadow-sm">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.26em] text-white/60">Coursera <span class="text-white">Plus</span></p>
                 <h2 class="mt-4 text-2xl font-semibold leading-snug text-white">
@@ -380,7 +389,7 @@ get_header();
               <img src="https://via.placeholder.com/180x180" alt="Promo illustration" class="pointer-events-none absolute -right-6 bottom-0 h-40 w-40 opacity-80">
             </div>
 
-            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[12px] border border-zinc-200 bg-light p-8 text-left shadow-sm">
+            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[5px] border border-zinc-200 bg-light p-8 text-left shadow-sm">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Coursera for business</p>
                 <h2 class="mt-4 text-2xl font-semibold leading-snug text-zinc-950">
@@ -405,7 +414,7 @@ get_header();
 
           <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-4">
 
-            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div class="home-review-card flex h-full flex-none snap-start flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
               <div class="flex items-center gap-3">
                 <img src="https://via.placeholder.com/60x60" alt="Sarah" class="h-12 w-12 rounded-full">
                 <h4 class="text-sm font-semibold text-zinc-950">Sarah W.</h4>
@@ -415,7 +424,7 @@ get_header();
               </p>
             </div>
 
-            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div class="home-review-card flex h-full flex-none snap-start flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
               <div class="flex items-center gap-3">
                 <img src="https://via.placeholder.com/60x60" alt="Noeris" class="h-12 w-12 rounded-full">
                 <h4 class="text-sm font-semibold text-zinc-950">Noeris B.</h4>
@@ -425,7 +434,7 @@ get_header();
               </p>
             </div>
 
-            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div class="home-review-card flex h-full flex-none snap-start flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
               <div class="flex items-center gap-3">
                 <img src="https://via.placeholder.com/60x60" alt="Abdullahi" class="h-12 w-12 rounded-full">
                 <h4 class="text-sm font-semibold text-zinc-950">Abdullahi M.</h4>
@@ -435,7 +444,7 @@ get_header();
               </p>
             </div>
 
-            <div class="flex h-full flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div class="home-review-card flex h-full flex-none snap-start flex-col gap-3 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
               <div class="flex items-center gap-3">
                 <img src="https://via.placeholder.com/60x60" alt="Anas" class="h-12 w-12 rounded-full">
                 <h4 class="text-sm font-semibold text-zinc-950">Anas A.</h4>
@@ -460,12 +469,12 @@ get_header();
           </div>
           <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             <?php foreach ($content_highlights as $content) : ?>
-              <a class="group flex h-full flex-col gap-6 rounded-[12px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($content['url']); ?>">
+              <a class="group flex h-full flex-col gap-6 rounded-[5px] border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg !no-underline" href="<?php echo esc_url($content['url']); ?>">
                 <span class="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                   <?php echo esc_html($content['tag']); ?>
                 </span>
                 <div class="flex items-center gap-4">
-                  <div class="flex h-14 w-14 items-center justify-center rounded-[12px] border border-zinc-100 bg-light">
+                  <div class="flex h-14 w-14 items-center justify-center rounded-[5px] border border-zinc-100 bg-light">
                     <?php
                     $content_icon = get_template_directory() . '/assets/svg/home/content/' . $content['icon'];
                     if (file_exists($content_icon)) {
@@ -497,7 +506,7 @@ get_header();
 
       <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24">
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/20 to-transparent"></div>
-        <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 overflow-hidden rounded-[24px] border border-zinc-200 bg-white px-6 py-14 text-center shadow-lg shadow-primary/10 sm:px-10">
+        <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 overflow-hidden rounded-[5px] border border-zinc-200 bg-white px-6 py-14 text-center shadow-lg shadow-primary/10 sm:px-10">
           <div class="absolute -right-14 -top-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl"></div>
           <div class="absolute -left-12 bottom-0 h-36 w-36 rounded-full bg-primary/5 blur-3xl"></div>
           <div class="relative">
