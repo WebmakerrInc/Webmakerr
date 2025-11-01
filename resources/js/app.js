@@ -9,6 +9,75 @@ window.addEventListener('load', function () {
         })
     }
 
+    const solutionsToggle = document.querySelector('[data-solutions-toggle]')
+    const solutionsMenu = document.querySelector('[data-solutions-menu]')
+
+    if (solutionsToggle && solutionsMenu) {
+        const solutionsIcon = solutionsToggle.querySelector('[data-solutions-icon]')
+
+        let isSolutionsOpen = false
+
+        const documentClickHandler = function (event) {
+            if (!solutionsMenu.contains(event.target) && !solutionsToggle.contains(event.target)) {
+                closeSolutions()
+            }
+        }
+
+        const documentKeyHandler = function (event) {
+            if (event.key === 'Escape') {
+                closeSolutions()
+            }
+        }
+
+        const openSolutions = function () {
+            if (isSolutionsOpen) {
+                return
+            }
+
+            isSolutionsOpen = true
+
+            solutionsMenu.classList.remove('hidden')
+            solutionsMenu.setAttribute('aria-hidden', 'false')
+            solutionsToggle.setAttribute('aria-expanded', 'true')
+
+            if (solutionsIcon) {
+                solutionsIcon.classList.add('rotate-180')
+            }
+
+            document.addEventListener('click', documentClickHandler)
+            document.addEventListener('keydown', documentKeyHandler)
+        }
+
+        const closeSolutions = function () {
+            if (!isSolutionsOpen) {
+                return
+            }
+
+            isSolutionsOpen = false
+
+            solutionsMenu.classList.add('hidden')
+            solutionsMenu.setAttribute('aria-hidden', 'true')
+            solutionsToggle.setAttribute('aria-expanded', 'false')
+
+            if (solutionsIcon) {
+                solutionsIcon.classList.remove('rotate-180')
+            }
+
+            document.removeEventListener('click', documentClickHandler)
+            document.removeEventListener('keydown', documentKeyHandler)
+        }
+
+        solutionsToggle.addEventListener('click', function (event) {
+            event.preventDefault()
+
+            if (isSolutionsOpen) {
+                closeSolutions()
+            } else {
+                openSolutions()
+            }
+        })
+    }
+
     const footerAccordions = document.querySelectorAll('[data-footer-accordion-item]')
 
     if (footerAccordions.length) {
