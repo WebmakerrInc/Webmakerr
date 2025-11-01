@@ -78,7 +78,7 @@
                         <div class="md:mx-4" data-solutions>
                             <button
                                 type="button"
-                                class="flex items-center gap-2 rounded-[5px] border border-zinc-200 p-[5px] text-sm font-medium text-dark transition-colors hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                                class="flex items-center gap-2 rounded-[5px] border border-zinc-200 p-[5px] text-sm font-medium text-dark transition-colors hover:border-blue-500/40 hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                                 aria-haspopup="true"
                                 aria-expanded="false"
                                 aria-controls="solutions-menu"
@@ -207,7 +207,7 @@
                             wp_nav_menu([
                                 'container_id'    => 'primary-menu',
                                 'container_class' => '',
-                                'menu_class'      => 'md:flex md:items-center md:space-x-8 space-y-3 md:space-y-0 [&_a]:!no-underline [&_a]:border [&_a]:border-transparent [&_a]:rounded-[5px] [&_a]:transition-colors [&_a]:duration-200 [&_a]:ease-out [&_a:hover]:border-blue-500',
+                                'menu_class'      => 'md:flex md:items-center md:space-x-8 space-y-3 md:space-y-0 [&_a]:!no-underline [&_a]:border [&_a]:border-transparent [&_a]:rounded-[5px] [&_a]:transition-colors [&_a]:duration-200 [&_a]:ease-out [&_a:hover]:border-blue-500/40',
                                 'theme_location'  => 'primary',
                                 'li_class'        => '',
                                 'fallback_cb'     => false,
