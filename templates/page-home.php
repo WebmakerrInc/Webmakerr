@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Home Page
- * Description: Coursera-inspired AI skills landing page for Webmakerr.
+ * Description: Webmakerr-inspired AI skills landing page for Webmakerr.
  *
  * @package Webmakerr
  */
@@ -32,7 +32,14 @@ get_header();
       width: min(60vw, 320px);
       min-width: min(60vw, 320px);
       max-width: min(60vw, 320px);
-      min-height: 200px;
+      min-height: 220px;
+    }
+
+    .home-review-card p {
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 </style>
@@ -374,14 +381,14 @@ get_header();
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="grid gap-6 md:grid-cols-2">
 
-            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[5px] border border-zinc-200 bg-gradient-to-br from-[#0f172a] via-[#0b1221] to-[#050a16] p-8 text-white shadow-sm">
+            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[5px] border border-zinc-200 bg-gradient-to-br from-primary/10 via-white to-light p-8 text-left text-zinc-950 shadow-sm">
               <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-white/60">Coursera <span class="text-white">Plus</span></p>
-                <h2 class="mt-4 text-2xl font-semibold leading-snug text-white">
+                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Webmakerr <span class="text-zinc-950">Plus</span></p>
+                <h2 class="mt-4 text-2xl font-semibold leading-snug text-zinc-950">
                   Unlock access to 10,000+ courses with a subscription
                 </h2>
-                <p class="mt-3 text-sm text-white/70">Start exploring the entire catalog and learn at your own pace.</p>
-                <a href="#" class="mt-6 inline-flex w-fit items-center justify-center gap-2 rounded border border-white/70 bg-transparent px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 !no-underline">
+                <p class="mt-3 text-sm text-zinc-600">Start exploring the entire catalog and learn at your own pace.</p>
+                <a href="#" class="mt-6 inline-flex w-fit items-center justify-center gap-2 rounded border border-transparent bg-dark px-4 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline">
                   Start 7-day free trial
                   <span aria-hidden="true">→</span>
                 </a>
@@ -391,13 +398,13 @@ get_header();
 
             <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[5px] border border-zinc-200 bg-light p-8 text-left shadow-sm">
               <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Coursera for business</p>
+                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-primary">Webmakerr for business</p>
                 <h2 class="mt-4 text-2xl font-semibold leading-snug text-zinc-950">
                   Drive your business forward and empower your teams
                 </h2>
                 <p class="mt-3 text-sm text-zinc-600">Upskill your workforce with curated AI and leadership programs.</p>
                 <a href="#" class="mt-6 inline-flex w-fit items-center justify-center gap-2 rounded border border-transparent bg-dark px-4 py-2 text-sm font-semibold text-white transition hover:bg-dark/90 !no-underline">
-                  Try Coursera for Business
+                  Try Webmakerr for Business
                   <span aria-hidden="true">→</span>
                 </a>
               </div>
@@ -410,7 +417,7 @@ get_header();
 
       <section class="bg-light py-20">
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 class="mb-10 text-3xl font-semibold text-zinc-950 sm:text-4xl">Why people choose Coursera</h2>
+          <h2 class="mb-10 text-3xl font-semibold text-zinc-950 sm:text-4xl">Why people choose Webmakerr</h2>
 
           <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-4">
 
@@ -420,7 +427,7 @@ get_header();
                 <h4 class="text-sm font-semibold text-zinc-950">Sarah W.</h4>
               </div>
               <p class="text-sm leading-relaxed text-zinc-600">
-                "Coursera's reputation for high-quality content, paired with its flexible structure, made it possible for me to dive into data analytics while managing family, health, and everyday life."
+                "Webmakerr's reputation for high-quality content, paired with its flexible structure, made it possible for me to dive into data analytics while managing family, health, and everyday life."
               </p>
             </div>
 
@@ -430,7 +437,7 @@ get_header();
                 <h4 class="text-sm font-semibold text-zinc-950">Noeris B.</h4>
               </div>
               <p class="text-sm leading-relaxed text-zinc-600">
-                "Coursera rebuilt my confidence and showed me I could dream bigger. It wasn't just about gaining knowledge—it was about believing in my potential again."
+                "Webmakerr rebuilt my confidence and showed me I could dream bigger. It wasn't just about gaining knowledge—it was about believing in my potential again."
               </p>
             </div>
 
@@ -450,7 +457,7 @@ get_header();
                 <h4 class="text-sm font-semibold text-zinc-950">Anas A.</h4>
               </div>
               <p class="text-sm leading-relaxed text-zinc-600">
-                "Learning with Coursera has expanded my professional expertise by giving me access to cutting-edge research, practical tools, and global perspectives."
+                "Learning with Webmakerr has expanded my professional expertise by giving me access to cutting-edge research, practical tools, and global perspectives."
               </p>
             </div>
           </div>
