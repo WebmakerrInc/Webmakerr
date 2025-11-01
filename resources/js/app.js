@@ -3,10 +3,133 @@ window.addEventListener('load', function () {
     const mainNavigationToggle = document.getElementById('primary-menu-toggle')
 
     if (mainNavigation && mainNavigationToggle) {
+        const breakpoint = window.matchMedia('(min-width: 768px)')
+        const openClasses = ['opacity-100', 'translate-y-0', 'pointer-events-auto']
+        const closedClasses = ['opacity-0', '-translate-y-2', 'pointer-events-none']
+        let isMobileNavOpen = false
+
+        const addClasses = function (target, classes) {
+            classes.forEach(function (className) {
+                target.classList.add(className)
+            })
+        }
+
+        const removeClasses = function (target, classes) {
+            classes.forEach(function (className) {
+                target.classList.remove(className)
+            })
+        }
+
+        const documentClickHandler = function (event) {
+            if (mainNavigation.contains(event.target) || mainNavigationToggle.contains(event.target)) {
+                return
+            }
+
+            closeMobileNav()
+        }
+
+        const documentKeyHandler = function (event) {
+            if (event.key === 'Escape') {
+                closeMobileNav()
+            }
+        }
+
+        const openMobileNav = function () {
+            if (isMobileNavOpen || breakpoint.matches) {
+                return
+            }
+
+            isMobileNavOpen = true
+
+            mainNavigation.classList.remove('hidden')
+            mainNavigation.classList.add('flex')
+
+            requestAnimationFrame(function () {
+                removeClasses(mainNavigation, closedClasses)
+                addClasses(mainNavigation, openClasses)
+            })
+
+            mainNavigation.setAttribute('aria-hidden', 'false')
+            mainNavigationToggle.setAttribute('aria-expanded', 'true')
+
+            document.addEventListener('click', documentClickHandler)
+            document.addEventListener('keydown', documentKeyHandler)
+        }
+
+        const closeMobileNav = function (options) {
+            options = options || {}
+
+            if (!isMobileNavOpen && !options.immediate && !breakpoint.matches) {
+                return
+            }
+
+            isMobileNavOpen = false
+
+            removeClasses(mainNavigation, openClasses)
+            addClasses(mainNavigation, closedClasses)
+
+            mainNavigation.setAttribute('aria-hidden', 'true')
+            mainNavigationToggle.setAttribute('aria-expanded', 'false')
+
+            document.removeEventListener('click', documentClickHandler)
+            document.removeEventListener('keydown', documentKeyHandler)
+
+            const finalize = function () {
+                if (!breakpoint.matches) {
+                    mainNavigation.classList.add('hidden')
+                    mainNavigation.classList.remove('flex')
+                }
+            }
+
+            if (options.immediate || breakpoint.matches) {
+                finalize()
+                return
+            }
+
+            const handleTransitionEnd = function () {
+                finalize()
+                mainNavigation.removeEventListener('transitionend', handleTransitionEnd)
+            }
+
+            mainNavigation.addEventListener('transitionend', handleTransitionEnd, { once: true })
+
+            window.setTimeout(function () {
+                finalize()
+            }, 250)
+        }
+
+        const syncNavigationState = function () {
+            if (breakpoint.matches) {
+                mainNavigation.classList.remove('hidden')
+                removeClasses(mainNavigation, closedClasses)
+                mainNavigation.classList.remove('flex')
+                mainNavigation.setAttribute('aria-hidden', 'false')
+                mainNavigationToggle.setAttribute('aria-expanded', 'false')
+                document.removeEventListener('click', documentClickHandler)
+                document.removeEventListener('keydown', documentKeyHandler)
+                isMobileNavOpen = false
+            } else {
+                closeMobileNav({ immediate: true })
+            }
+        }
+
         mainNavigationToggle.addEventListener('click', function (event) {
             event.preventDefault()
-            mainNavigation.classList.toggle('hidden')
+
+            if (isMobileNavOpen) {
+                closeMobileNav()
+            } else {
+                openMobileNav()
+            }
         })
+
+        if (typeof breakpoint.addEventListener === 'function') {
+            breakpoint.addEventListener('change', syncNavigationState)
+        } else if (typeof breakpoint.addListener === 'function') {
+            breakpoint.addListener(syncNavigationState)
+        }
+
+        syncNavigationState()
     }
 
     const solutionsToggle = document.querySelector('[data-solutions-toggle]')
