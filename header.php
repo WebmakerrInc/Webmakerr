@@ -204,9 +204,9 @@
                             wp_nav_menu([
                                 'container_id'    => 'primary-menu',
                                 'container_class' => '',
-                                'menu_class'      => 'md:flex md:-mx-4 [&_a]:!no-underline',
+                                'menu_class'      => 'md:flex md:items-center md:space-x-8 space-y-3 md:space-y-0 [&_a]:!no-underline',
                                 'theme_location'  => 'primary',
-                                'li_class'        => 'md:mx-4',
+                                'li_class'        => '',
                                 'fallback_cb'     => false,
                             ]);
                             ?>
